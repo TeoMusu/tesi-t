@@ -1,6 +1,17 @@
+%% TODO list:
+
+%% DEFINISCI:
+% parola ridotta
+% row reading
+% inline notation
+% content
+
+
 \documentclass[11pt,leqno]{report}
 
 % Include Packages
+
+% Template Packages
 \usepackage[italian]{babel}
 \usepackage[colorlinks,allcolors=blue]{hyperref}
 \usepackage{amsfonts}
@@ -12,8 +23,50 @@
 \usepackage{chngcntr}
 \counterwithin{figure}{section}
 
+% Personal Packages
+\usepackage[T1]{fontenc}                % Font encoding
+\usepackage{ytableau}                   % Young tableaux
+\usepackage{stmaryrd}                   % for \llbracket -> [[
+\usepackage{mathtools}                  % for \coloneq -> :=
+\ytableausetup{aligntableaux = bottom}
+
+% Personal operator definitions
+\DeclareMathOperator{\rowreading}{rr}
+\DeclareMathOperator{\wt}{wt}
+\DeclareMathOperator{\type}{wt}
+\DeclareMathOperator{\shape}{sh}
+\DeclareMathOperator{\len}{\ell}
+\DeclareMathOperator{\cont}{con}
+\newcommand{\redtab}{\operatorname{\mathcal{RT}}}
+\newcommand{\rw}{\operatorname{\mathcal{R}}}
+\newcommand{\incrfact}{\operatorname{\mathcal{W}}}
+\newcommand{\ssyt}{\operatorname{SSYT}}
+
+% Personal custom definitions
+\newcommand{\sym}{S}
+\newcommand{\w}{w}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\stan}{F}
+\newcommand{\zero}{\mathbf{0}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ytableaunumber}[1]{
+    \ytableausetup{centerboxes}
+    \ytableaushort{#1}
+    \ytableausetup{baseline}
+}
+
+\newenvironment{ytableaubig}{
+        \ytableausetup{boxsize=1.7em}
+        \begin{ytableau}
+    } {
+        \end{ytableau}
+        \ytableausetup{boxsize=normal}
+}
 
 
+% Templete theorem envs
 \theoremstyle{definition}
 \newtheorem{theorem}{Teorema}[section]
 \newtheorem{corollary}[theorem]{Corollario}
@@ -76,103 +129,107 @@
 
 \newpage
 
-\chapter*{Introduzione}
-\addcontentsline{toc}{chapter}{Introduzione}
+% \chapter*{Introduzione}
+% \addcontentsline{toc}{chapter}{Introduzione}
+% 
+% Un'introduzione scritta bene, esplicativa. \\Un esempio di nota a piè di pagina\footnote{Ringrazio Alessio Sgubin per la pagina di frontespizio.}.
+% 
+% \chapter{Alcune nozioni preliminari}
+% 
+% Una referenza generale: \cite[Capitolo~3]{Artin_AlgebraBook}.\\
+% Una referenza a un risultato di un articolo: \cite[Proposition~3.5]{Carlsson-Mellit-ShuffleConj-2018}.
+% 
+% \section{Numeri primi} 
+% 
+% Un esempio di teorema con dimostrazione:
+% 
+% \begin{theorem}[Fermat] \label{thm:piccolo_fermat}
+% 	Per ogni primo $p$ e per ogni intero $a$ vale \[a^p\equiv a\quad (\mathrm{mod}\ p).\]
+% \end{theorem}
+% 
+% \noindent Una citazione del Teorema~\ref{thm:piccolo_fermat}.
+% 
+% \noindent Un esempio di dimostrazione:
+% \begin{proof}[Dimostrazione del Teorema~\ref{thm:piccolo_fermat}]
+% 	Segue dal teorema di Lagrange.
+% \end{proof}
+% 
+% \section{Esempi}
+% 
+% \noindent Un esempio di figura, fatta col package tikz:
+% 
+% \begin{figure}[ht]
+% 	\centering
+% 	\begin{tikzpicture}[main node/.style={shape=circle, inner sep=1.3pt, fill=black,draw},scale=0.6]
+% 		\draw[gray!60, thin] (0,0) grid (10,2);
+% 		\draw[thick] (0,0) -- (10,0);	
+% 		
+% 		
+% 		\node[main node]  (1) at (0,0) {};
+% 		\node[main node]  (2) at (1,1) {};
+% 		\node[main node]  (3) at (2,2) {};
+% 		\node[main node]  (4) at (4,2) {};
+% 		\node[main node]  (5) at (5,1) {};
+% 		\node[main node]  (6) at (6,2) {};
+% 		\node[main node]  (7) at (7,1) {};
+% 		\node[main node]  (8) at (9,1) {};
+% 		\node[main node]  (9) at (10,0) {};
+% 		
+% 		\path[line width = 1.2pt]
+% 		(1) edge[blue!80] node {} (2)
+% 		(2) edge[blue!80] node {} (3)
+% 		(3) edge[blue!80] node {} (4)
+% 		(4) edge[blue!80] node {} (5)
+% 		(5) edge[blue!80] node {} (6)
+% 		(6) edge[blue!80] node {} (7)
+% 		(7) edge[blue!80] node {} (8)
+% 		(8) edge[blue!80] node {} (9);
+% 	\end{tikzpicture}
+% 	\caption{Un cammino di Schr\"{o}der.}
+% 	\label{fig:Schroeder_path}
+% \end{figure} 
+% 
+% \noindent Una citazione della Figura~\ref{fig:Schroeder_path}.
+% 
+% \noindent Un esempio di definizione:
+% 
+% \begin{definition}
+% 	Un intero positivo $p$ si dice \emph{primo} se $p\geq 2$ e $p$ ha come divisori positivi solo $1$ e $p$.
+% \end{definition}
+% 
+% \noindent Un esempio di osservazione:
+% \begin{remark}
+% 	L'unico primo pari \`e $2$.
+% \end{remark}
+% 	
+% \noindent Un esempio di esempio:
+% \begin{example}
+% 	Un esempio di primo $p$ congruo a $1$ modulo $4$ \`e $p=13$.
+% \end{example}
+% 
+% \noindent Un esempio di equazione numerata:
+% 
+% \begin{equation}\label{eq:due_piu_due}  2+2=4 \end{equation}
+% 
+% \noindent Una citazione dell'Equazione~\eqref{eq:due_piu_due}.
+% 
+% \noindent Un esempio di equazione lunga:
+% \begin{align*}
+% 	(a+b)^2 & =(a+b)\cdot (a+b)\\
+% 	& =a^2+a\cdot b+b\cdot a+b^2\\
+% 	& =a^2+2ab+b^2\\
+% 	(\text{usando }a^2+b^2\geq 0) & \geq 2ab
+% \end{align*}
 
-Un'introduzione scritta bene, esplicativa. \\Un esempio di nota a piè di pagina\footnote{Ringrazio Alessio Sgubin per la pagina di frontespizio.}.
 
-\chapter{Alcune nozioni preliminari}
+\include{capitoli/basi_e_coxeter}
+\include{capitoli/cristalli}
+\include{capitoli/fattorizzazioni_crescenti}
+\include{capitoli/edelman_greene}
 
-Una referenza generale: \cite[Capitolo~3]{Artin_AlgebraBook}.\\
-Una referenza a un risultato di un articolo: \cite[Proposition~3.5]{Carlsson-Mellit-ShuffleConj-2018}.
-
-\section{Numeri primi} 
-
-Un esempio di teorema con dimostrazione:
-
-\begin{theorem}[Fermat] \label{thm:piccolo_fermat}
-	Per ogni primo $p$ e per ogni intero $a$ vale \[a^p\equiv a\quad (\mathrm{mod}\ p).\]
-\end{theorem}
-
-\noindent Una citazione del Teorema~\ref{thm:piccolo_fermat}.
-
-\noindent Un esempio di dimostrazione:
-\begin{proof}[Dimostrazione del Teorema~\ref{thm:piccolo_fermat}]
-	Segue dal teorema di Lagrange.
-\end{proof}
-
-\section{Esempi}
-
-\noindent Un esempio di figura, fatta col package tikz:
-
-\begin{figure}[ht]
-	\centering
-	\begin{tikzpicture}[main node/.style={shape=circle, inner sep=1.3pt, fill=black,draw},scale=0.6]
-		\draw[gray!60, thin] (0,0) grid (10,2);
-		\draw[thick] (0,0) -- (10,0);	
-		
-		
-		\node[main node]  (1) at (0,0) {};
-		\node[main node]  (2) at (1,1) {};
-		\node[main node]  (3) at (2,2) {};
-		\node[main node]  (4) at (4,2) {};
-		\node[main node]  (5) at (5,1) {};
-		\node[main node]  (6) at (6,2) {};
-		\node[main node]  (7) at (7,1) {};
-		\node[main node]  (8) at (9,1) {};
-		\node[main node]  (9) at (10,0) {};
-		
-		\path[line width = 1.2pt]
-		(1) edge[blue!80] node {} (2)
-		(2) edge[blue!80] node {} (3)
-		(3) edge[blue!80] node {} (4)
-		(4) edge[blue!80] node {} (5)
-		(5) edge[blue!80] node {} (6)
-		(6) edge[blue!80] node {} (7)
-		(7) edge[blue!80] node {} (8)
-		(8) edge[blue!80] node {} (9);
-	\end{tikzpicture}
-	\caption{Un cammino di Schr\"{o}der.}
-	\label{fig:Schroeder_path}
-\end{figure} 
-
-\noindent Una citazione della Figura~\ref{fig:Schroeder_path}.
-
-\noindent Un esempio di definizione:
-
-\begin{definition}
-	Un intero positivo $p$ si dice \emph{primo} se $p\geq 2$ e $p$ ha come divisori positivi solo $1$ e $p$.
-\end{definition}
-
-\noindent Un esempio di osservazione:
-\begin{remark}
-	L'unico primo pari \`e $2$.
-\end{remark}
-	
-\noindent Un esempio di esempio:
-\begin{example}
-	Un esempio di primo $p$ congruo a $1$ modulo $4$ \`e $p=13$.
-\end{example}
-
-\noindent Un esempio di equazione numerata:
-
-\begin{equation}\label{eq:due_piu_due}  2+2=4 \end{equation}
-
-\noindent Una citazione dell'Equazione~\eqref{eq:due_piu_due}.
-
-\noindent Un esempio di equazione lunga:
-\begin{align*}
-	(a+b)^2 & =(a+b)\cdot (a+b)\\
-	& =a^2+a\cdot b+b\cdot a+b^2\\
-	& =a^2+2ab+b^2\\
-	(\text{usando }a^2+b^2\geq 0) & \geq 2ab
-\end{align*}
 
 \bibliographystyle{amsalpha}
 \bibliography{biblio}
-
-
-
 
 
 

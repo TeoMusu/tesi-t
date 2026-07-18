@@ -1,0 +1,347 @@
+%! TeX root = ../tesi.tex
+
+\chapter{Funzioni simmetriche di Stanley e cristallo sulle fattorizzazioni crescenti}
+\label{ch:stanley_symm}
+
+In questo capitolo introduciamo le funzioni simmetriche di Stanley,
+introdotte da Stanley in \cite{stanley-84} per studiare il numero di parole ridotte
+di un elemento in un gruppo di Coxeter.
+
+Successivamente, seguendo \cite[Section~3]{morse-schilling-15}, definiamo il cristallo
+sulle fattorizzazioni crescenti.
+
+\section{Fattorizzazioni crescenti}
+
+Iniziamo definendo le fattorizzazioni crescenti.
+
+
+\begin{definition}[Fattorizzazione crescente]
+    Data una permutazione $\w \in \sym_n$ e una diciamo che la $\ell$-upla 
+    $( v^1, v^2 , \dots , v^\ell )$ \`e una \emph{fattorizzazione crescente} di 
+    $\w$ se ciascun $v^i$ \`e una parola crescente nell'alfabeto
+    $\{ 1, 2, \dots , n-1 \}$ e la loro concatenazione $v = v^1 v^2 \cdots v^\ell$
+    \`e una parola ridotta per $\w$.
+
+    Le parole crescenti $v^i$ prendono il nome di \emph{fattori} e possono anche 
+    essere la parola vuota.
+
+    Se non c'\`e ambiguit\`a sulla suddivisione in fattori, scriveremo
+    $v = v^1 v^2 \cdots v^\ell$ per riferirci sia alla fattorizzazione crescente, 
+    sia alla parola ridotta ottenuta concatenando i fattori.
+
+    Chiamiamo $\incrfact(\w)$ l'insieme (infinito) delle fattorizzazioni
+    crescenti di $\w$ ottenute lasciando tendere a infinito il numero $\ell$ di fattori.
+
+\end{definition}
+
+\begin{definition}
+    \label{def:peso_if}
+    Per ogni fattorizzazione crescente $v = v^1 v^2 \cdots v^\ell$, definiamo
+    il suo \emph{peso} $\wt(v)$ come il vettore $\lambda \in \NN^\ell$ la cui
+    componente $i$-esima $\lambda_i$ \`e la lunghezza del fattore $v^i$.
+
+    Chiamiamo $\incrfact_\lambda(\w)$ l'insieme (questa volta finito) delle fattorizzazioni
+    crescenti di $\w$ con peso $\lambda$.
+\end{definition}
+
+Dato che una parola crescente \`e ridotta, la condizione 
+che $v$ sia una parola ridotta \`e equivalente a:
+\[
+    \len(\w) = \len(v^1) + \len(v^2) + \cdots + \len(v^\ell) = \lvert \wt(v) \rvert.
+\]
+
+\begin{example}
+    Per esempio, 
+    $v = (2\,3)(2)()(1\,2)(3)$ \`e una fattorizzazione crescente di 
+    $\w = s_2 s_3 s_2 s_1 s_2 s_3 = 4321 \in \sym_4$, con peso
+    $\lambda = (2, 1, 0, 2, 1)$, in quanto 
+    $\len(\w) = 6 $.
+\end{example}
+
+
+\section{Funzioni quasi-simmetriche di Stanley}
+
+
+Siano $\xx = (x_1, x_2, \dots)$ infinite variabili. 
+
+\begin{definition}
+    Sia $f(\xx) \in \QQ \llbracket x_1, x_2 , \dots \rrbracket $ una serie
+    formale in infinite variabili i cui monomi hanno grado (uniformemente) limitato.
+
+    Diciamo che $f(\xx)$ \`e \emph{quasi-simmetrica} se, per ogni composition
+    $\alpha = (\alpha_1, \dots, \alpha_k)$, i monomi nella forma
+    $x_{i_1}^{\alpha_1} x_{i_2}^{\alpha_2} \cdots x_{i_k}^{\alpha_k}$
+    per qualche $i_1 < i_2 < \cdots < i_k$
+    hanno tutti lo stesso coefficiente.
+\end{definition}
+
+\begin{example}
+    Le funzioni quasi-simmetriche monomiali, definite da
+    \[
+        M_\alpha \coloneq \sum_{i_1 < i_2 < \cdots < i_k}
+        x_{i_1}^{\alpha_1} x_{i_2}^{\alpha_2} \cdots  x_{i_k}^{\alpha_k}
+    \]
+    al variare di $\alpha = (\alpha_1, \alpha_2, \dots , \alpha_k)$ tra le compositions,
+    sono una base dello spazio vettoriale delle funzioni quasi-simmetriche.
+\end{example}
+
+Ricordiamo che, per ogni weak composition 
+$\alpha = (\alpha_1, \alpha_2, \dots \alpha_k) \in \NN^k$,
+utiliziamo la notazione
+\[
+    \xx^\alpha = x_1^{\alpha_1} x_2^{\alpha_2} \cdots x_k^{\alpha_k}.
+\]
+
+Introduciamo ora le funzioni quasi-simmetriche di Stanley, che successivamente dimostreremo
+essere funzioni simmetriche.
+
+Sono state definite%
+\footnote{La definizione in \cite{stanley-84} si ottiene da quella diffusa
+oggi (e che diamo qui) sostituendo $\w$ con $\w^{-1}$.}
+per la prima volta da Stanley in \cite{stanley-84}
+proprio con lo scopo di studiare le parole ridotte di $\w \in \sym_n$.
+
+Successivamente sono state ritrovate in altri ambiti, si veda per esempio 
+\cite{billey-93}.
+
+\begin{definition}[Funzione quasi-simmetrica di Stanley]
+    Per ogni permutazione $\w \in \sym_n$, definisco la funzione quasi-simmetrica
+    di Stanley associata a $\w^{-1}$ come 
+    \[ 
+        \stan_{\w^{-1}}
+        \coloneq \sum_{ v \in \incrfact(\w) } \xx^{\wt(v)}.
+    \]
+\end{definition}
+
+Si noti che nella definizione compare $\w^{-1}$. 
+Avremmo potuto eliminare questa inversione descrivendo le funzioni quasi-simmetriche
+di Stanley in termini di fattorizzazioni \emph{decrescenti},
+tuttavia quelle crescenti si comportano meglio nella corrispondenza EG, che
+approfondiremo nel Capitolo~\ref{ch:edelman_greene}.
+
+\begin{remark}
+    Ogni parola ridotta pu\`o essere interpretata in un solo modo come una
+    fattorizzazione in cui tutti i fattori hanno una sola lettera.
+    Questo significa che il numero di parole ridotte di $\w$ \`e il coefficiente
+    del monomio $x_1 x_2 \cdots x_\ell$, dove $\ell = \len(\w)$ \`e la 
+    lunghezza delle parole ridotte.
+    In simboli
+    \[ 
+        \lvert \rw(\w) \rvert = [ x_1 x_2 \cdots x_\ell ] \, \stan_{\w^{-1}} (\xx).
+    \]
+\end{remark}
+
+
+Se $\ell$ \`e la lunghezza di $\w$, la funzione quasi-simmetrica di Stanley
+ha grado $\ell$.
+
+
+\section{Cristallo sulle fattorizzazioni crescenti}
+
+Fissiamo $\ell$ intero positivo.
+Indichiamo con $\incrfact^\ell(\w)$ l'insieme delle fattorizzazioni crescenti di
+$\w$ con $\ell$ fattori.
+
+In questa sezione definiamo una struttura di cristallo di tipo $A_{\ell-1}$ su
+$\incrfact^\ell(\w)$.
+
+Siano, come nei capitoli precedenti, al variare di $i \in 
+\{ 1, 2, \dots, \ell-1 \} $,
+$\alpha_i$ le radici semplici, $f_i$ e $e_i$ gli operatori di Kashiwara,
+$\Lambda = \ZZ^\ell$ la lattice dei pesi.
+
+Per ogni $v = v^1 v^2 \cdots v^\ell \in \incrfact^\ell(\w)$ la funzione peso \`e esattamente
+quella della Definizione~\ref{def:peso_if}:
+\[
+    \wt(v) = ( \len(v^1), \len(v^2), \dots, \len(v^\ell) ).
+\]
+Per l'assioma 
+% TODO inserire nome assioma
+% \ref{}
+deve valere
+\[
+    \wt(f_i v) = \wt(v) - \alpha_i,
+\]
+ovvero $f_i$ deve spostare una lettera dal fattore $v^i$ al fattore $v^{i+1}$.
+
+Gli operatori $f_i$ ed $e_i$ che definiremo pi\`u avanti hanno la propriet\`a di
+agire solo sui fattori $v^i$ e $v^{i+1}$, ovvero di lasciare invariati tutti gli
+altri fattori.
+Inoltre, l'azione su $v^i v^{i+1}$ non dipende da tutti gli altri fattori, 
+n\'e dall'indice $i$ (a parte per la scelta dei fattori su cui agire).
+In simboli:
+\begin{align*}
+    f_i ( v^1 \cdots v^\ell ) &= v^1 \cdots f_1( v^i v^{i+1} ) \cdots v^\ell, \\
+    e_i ( v^1 \cdots v^\ell ) &= v^1 \cdots e_1( v^i v^{i+1} ) \cdots v^\ell.
+\end{align*}
+    
+
+
+% Per definire $\varphi_i$ ed $\varepsilon_i$,
+Descriviamo ora un algoritmo di bracketing
+sulle lettere dei fattori $v^i$ e $v^{i+1}$.
+
+\begin{definition}[$i$-pairing]
+    Descriviamo l'accoppiamento con un esempio.
+
+    Siano i fattori $v^i$ e  $v^{i+1}$ come sotto:
+    \[
+        v^i \, v^{i+1} = 
+        ( 1, 2, 3, 9, 11, 12, 13, 14, 18 ) \,
+        ( 1, 5, 8, 12, 13, 15, 16).
+    \]
+
+    Ogni lettera $b$ in $v^{i+1}$, partendo dalla pi\`u alta e procedendo verso sinistra,
+    viene accoppiata con la pi\`u \emph{piccola} lettera $a$ in $v^{i}$ che \`e 
+    \emph{maggiore} di $b$ e che non era gi\`a accoppiata.
+    Se nessuna tale lettera $a$ esiste, dico che $b$ \`e spaiata.
+    Le lettere spaiate di $v^i$, invece, sono quelle che rimangono non accoppiate dopo
+    che ho esaurito le lettere in $v^{i+1}$.
+
+    Nell'esempio, indicando con lo stesso pedice le lettere accoppiate 
+    e in grassetto quelle spaiate, ottengo:
+    \[
+        v^i \, v^{i+1} = 
+        ( \mathbf{1}, 2_6, \mathbf{3}, 9_4, 11_5, \mathbf{12}, 13_3, 14_2, 18_1 ) \,
+        ( 1_6, 5_5, 8_4, 12_3, 13_2, \mathbf{15}, 16_1).
+    \]
+
+    Definisco inoltre gli insiemi delle di lettere spaiate rispetto a questo pairing:
+    \begin{gather*}
+        L_i(v) = \{ a \in \cont(v^i) \mid \text{$a$ \`e spaiata
+        nel pairing tra i fattori $v^i$ e $v^{i+1}$} \},  \\
+        R_i(v) = \{ b \in \cont(v^{i+1}) \mid \text{$b$ \`e spaiata
+        nel pairing tra i fattori $v^i$ e $v^{i+1}$} \}.
+    \end{gather*}
+
+    Nell'esempio vale $L_i(v) = \{ 1, 3, 12 \}$ e $R_i(v) = \{ 15 \}$.
+
+\end{definition}
+
+\begin{definition}
+    Per ogni fattorizzazione crescente $v = v^1 \cdots v^\ell$ e per ogni 
+    $i \in [\ell -1]$ definisco 
+    $\varphi_i (v) = \lvert L_i(v) \rvert$ ed
+    $ \varepsilon_i (v) = \lvert R_i(v) \rvert $.
+
+\end{definition}
+
+Vediamo alcune ulteriori propriet\`a di questo bracketing, che serviranno
+per definire l'operatore di $f_i$ di Kashiwara.
+
+\begin{definition}
+    \label{def:a_s}
+    Solo ai fini di questa sezione, per $i$ fissato, definisco
+    $a$ come il pi\`u grande elemento in $v^i$ spaiato.
+    Nell'esempio vale $a = 12$.
+
+    Definisco inoltre $s$ come il numero di cifre \emph{consecutive} che seguono $a$ in $v^i$, 
+    ovvero $s$ \`e il minimo intero non-negativo tale che $a+s+1 \notin \cont(v^i)$.
+    Nell'esempio vale $s = 2$ in quanto $12$ \`e seguito da $13$ e $14$, ma non $15$.
+\end{definition}
+
+\begin{lemma}
+    I fattori $v^i$ e $ v^{i+1}$ possono essere divisi ciascuno in 3 pezzi nel seguente
+    modo:
+    % \begin{align*}
+    %     v^i &= u^i_l \mid  a, a+1, \dots, a+s  \mid u^i_r ,  \\
+    %     v^{i+1} &= u^{i+1}_l \mid  a, a+1, \dots, a+s-1  \mid u^{i+1}_r.
+    % \end{align*}
+    % NOTE: \textbf{\em a} è un po' sus, ponderare.
+    \[
+        \begin{array}{c@{\;}c@{\;}c@{\;}c@{\;}c@{\;}c@{\;}c}
+            v^i &=& u^i_l &\mid&  \textbf{\em a}, a+1, \dots, a+s  &\mid& u^i_r ,  \\
+            v^{i+1} &=& u^{i+1}_l &\mid&  a, a+1, \dots, a+s-1  &\mid& u^{i+1}_r.
+        \end{array}
+    \]
+
+    Per esempio, per l'esempio sopra abbiamo:
+    \[
+        \begin{array}{c@{\;}c@{\;}c@{\;}c@{\;}c@{\;}c@{\;}c}
+            v^i &=   &  \mathbf{1}, 2_6, \mathbf{3}, 9_4, 11_5
+                &\mid& \mathbf{12}, 13_3, 14_2
+                &\mid& 18_1 , \\
+            v^{i+1} &=   & 1_6, 5_5, 8_4
+                    &\mid& 12_3, 13_2
+                    &\mid& \mathbf{15}, 16_1.
+        \end{array}
+    \]
+
+    Inoltre, questa suddivisione soddisfa le seguenti propriet\`a:
+    \begin{itemize}
+        \item $ a+s+1 $ non compare in $v^i$;
+        \item $ a-1 $ non compare in $v^{i+1}$;
+        \item $ a+s $ non compare in $v^{i+1}$;
+        \item tutte le lettere in $u^i_r$ sono appaiate con lettere in $u^{i+1}_r$;
+        \item tutte le lettere in $u^{i+1}_l$ sono appaiate con lettere in $u^{i}_l$.
+    \end{itemize}
+        
+\end{lemma}
+
+\begin{proof}
+    Se $a+1$ compare in $v^i$, allora deve essere appaiata, perch\'e $a$ \`e definita come la 
+    pi\`u grande lettera non appaiata.
+    $a+1$ in $v^i$ deve essere appaiata per forza con $a \in v^{i+1}$, 
+    perch\'e ogni lettera pi\`u piccola sarebbe stata appaiata con $a$ o con un'altra 
+    lettera pi\`u piccola.
+
+    Iterando questo ragionamento per $a+1, a+2, \dots, a+s \in v^i$, dimostriamo che 
+    $a, a+1, \dots, a+s-1 \in v^{i+1}$.
+
+    Il primo punto deriva dalla definizione di $s$.
+    
+    Per il secondo punto: se fosse $a-1 \in v^{i+1}$, allora sarebbe appaiato con $a$,
+    che \`e spaiato per definizione.
+
+    Per il terzo punto: se fosse $a+s \in v^{i+1}$, allora $v^i v^{i+1}$ non sarebbe
+    una parola ridotta. 
+    Infatti i punti precedenti implicano che il blocco centrale commuta con 
+    $u^i_r$ e con $u^{i+1}_l$ (tramite operazioni di Coxeter), ottenendo come sotto-parola
+    \[
+        a, a+1, \dots, a+s, a, a+1, \dots, a+s,
+    \]
+    che non \`e mai ridotta.
+    Il caso generale \`e analogo al seguente esempio per $a= 2$ e $s = 2$:
+    % \[
+    %     2 3 4 5 2 3 4 5 \sim 
+    %     \underline{2 3 2} 4 3 5 4 5 \sim
+    %     3 2 \underline{3 4 3} 5 4 5 \sim
+    %     3 2 4 3 \underline{4 5 4} 5 \sim
+    %     3 2 4 3 5 4 5 5,
+    % \]
+    \[
+        2 3 \underline{4 2} 3 4 \sim
+        \underline{2 3 2} 4 3 4 \sim
+        3 2 \underline{3 4 3} 4 \sim
+        3 2 4 3 4 4,
+    \]
+    che non \`e ridotta.
+
+    Il quarto punto deriva dal fatto che $a$ \`e la pi\`u grande lettera non appaiata.
+
+    Per il quinto punto: una lettera in $u^{i+1}_l$ \`e minore di $a$, quindi se
+    non \`e appaiata con $a$ deve essere perch\'e c'era una lettera in pi\`u piccola 
+    in $v^i$ con cui \`e stata appaiata.
+
+\end{proof}
+
+Possiamo finalmente definire l'azione dell'operatore di Kashiwara $f_i$.
+
+\begin{definition}
+    Per ogni fattorizzazione crescente $v = v^1 \cdots v^\ell$ l'operatore di 
+    Kashiwara $f_i$ rimuove $a$ dal fattore $v^i$ e aggiunge $a+s$ al fattore $v^{i+1}$.
+
+    Pi\`u formalmente,  se $\varphi_i (v) = 0$, allora $f_i (v) = \zero$, altrimenti
+    \[
+        f_i (v) = v^1 \cdots \tilde{v}^i \tilde{v}^{i+1} \cdots v^\ell,
+    \]
+    dove $\tilde{v}^i$ e $ \tilde{v}^{i+1} $ sono tali che 
+    \begin{align*}
+        \cont ( \tilde{v}^i ) &= \cont (v^i) \setminus \{ a \}, \\
+        \cont ( \tilde{v}^{i+1}) &= \cont (v^{i+1}) \sqcup \{ a + s \},
+    \end{align*}
+    con $a$ e $s$ come da Definizione~\ref{def:a_s}.
+
+
+\end{definition}
+

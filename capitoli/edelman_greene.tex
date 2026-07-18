@@ -1,0 +1,575 @@
+%! TeX root = ../tesi.tex
+
+\chapter{Corrispondenza di Edelman-Greene}
+\label{ch:edelman_greene}
+
+Consideriamo ancora il gruppo simmetrico $S_n$ come generato dalle trasposizioni di
+elementi adiacenti $s_1, s_2, \dots, s_{n-1}$, dove $s_i = (i , i+1)$.
+
+Ricordiamo che una parola $v = v_1 v_2 \cdots v_k$ nell'alfabeto $\{1, 2, \dots, n-1 \}$
+\`e associata alla permutazione $\w = s_{v_1} s_{v_2} \cdots s_{v_k}$ in $\sym_n$.
+
+Inoltre, la parola $v$ si dice \emph{ridotta} se la sua lunghezza $k$ \`e la minima
+possibile tra tutte le parole associate a $\w$, ovvero il numero di inversioni
+di $\w$, che chiamiamo \emph{lunghezza} di $\w$ e denotiamo con $\len(\w)$.
+
+Per ogni permutazione $\w \in \sym_n$, chiamo $\rw(\w)$ l'insieme delle 
+parole ridotte di $\w$.
+
+\begin{definition}
+    Un tableau semistandard si dice \emph{ridotto} se $\rowreading(T)$ \`e una
+    parola ridotta.
+\end{definition}
+
+Per ogni permutazione $\w \in \sym_n$, chiamo $\redtab(\w)$ l'insieme dei 
+tableaux $T$ (ridotti) tali che $\rowreading(T) \in \rw(\w)$.
+% TODO usa questa notazione
+
+% TODO aggiungi esempio
+TODO: aggiungi un esempio
+
+Chiaramente, un tableau ridotto ha anche le righe \emph{strettamente} crescenti,
+oltre che le colonne.
+
+
+In questo capitolo descriviamo la corrispondenza di Edelman e Greene (EG), descritta
+per la prima volta in \cite[Section~6]{edelman-greene-87}.
+
+% TODO aggiungi cose su EG e RSK
+
+
+\section{Algoritmo di inserimento EG}
+
+Proprio come nella corrispondenza RSK, la corrispondenza EG \`e ottenuta iterando 
+un algoritmo di inserimento, che descriviamo in questa sezione.
+
+% L'algoritmo di inserimento EG associa a ogni parola ridotta $v$ un tableau 
+% ridotto $P(v)$ tale che $v$ e $\rowreading(P(v))$ sono parole ridotte per lo stesso
+% elemento nel gruppo simmetrico.
+
+Siano $T$ un tableau ridotto e $k$ una lettera tale che $\rowreading(T)k$ sia una
+parola ridotta per un qualche $\w \in \sym_n$.
+
+Voglio definire $T \leftarrow k$, ovvero l'inserimento di $k$ dentro $T$, in modo
+che $\rowreading(T \leftarrow k)$ sia una parola ridotta per lo stesso $\w$.
+
+Guardiamo prima il caso in cui $T$ ha una sola riga e siano 
+$i_1 < i_2 < \cdots < i_s$ le sue lettere.
+
+% \[
+%     T = \ytableaushort{ {i_1}  {i_2}  \cdots  {i_s}  }
+% \]
+
+Si possono verificare tre situazioni:
+\begin{enumerate}
+    \item \label{item:eg_ins1}
+        se vale $i_s < k$ (o se $T=\varnothing$, ovvero $T$ \`e il tableau vuoto),
+        allora aggiungo una casella con $k$ alla riga di $T$:
+        \[
+            \begin{ytableau}
+                i_1 & i_2 & \cdots & i_s & k
+            \end{ytableau};
+        \]
+    \item \label{item:eg_ins2} 
+        altrimenti, se $k$ \emph{non} compare nella riga: sia $u$ il più piccolo
+        intero positivo tale che $i_u > k$, allora $k$ prende il posto di $i_u$ e
+        $i_u$ viene ``spinto'' (bumped) nella riga successiva. Il risultato è il seguente:
+        \[
+            \begin{ytableaubig}
+i_u \\
+                i_1 & i_2 & \cdots & k & \scriptstyle i_{u+1} & \cdots & i_s 
+            \end{ytableaubig};
+        \]
+    \item \label{item:eg_ins3}
+        altrimenti, se $k$ compare nella riga, necessariamente deve comparire anche 
+        $k+1$, altrimenti $\rowreading(T)k$ non sarebbe una parola ridotta.
+        In questo caso la riga rimane invariata, ma viene ``spinto'' nella riga successiva
+        $k+1$. Il risultato \`e il seguente:
+        \[
+            \begin{ytableaubig}
+                \scriptstyle k+1 \\
+                i_1 & i_2 & \cdots & k & \scriptstyle k+1 & \cdots & i_s 
+            \end{ytableaubig}.
+        \]
+
+\end{enumerate}
+
+\begin{remark} \label{rmk:coxeter_righe}
+    Almeno nel caso in cui $T$ ha una sola riga \`e facile vedere che 
+    $\rowreading(T \leftarrow k)$ si ottiene da $\rowreading(T)k$ tramite operazioni
+    di Coxeter:
+    \begin{itemize}
+        \item nel caso~\ref{item:eg_ins2}, $k$ commuta con tutti gli $i_j$ a destra di $i_u$,
+            arrivando alla parola intermedia
+            \[
+                i_1 i_2 \cdots i_u k i_{u+1} \cdots i_s.
+            \]
+            Poi $i_u$ commuta con tutti gli $i_j$
+            alla sua sinistra, in quanto tutti minori di $k$ ottenendo
+            \[
+                i_u i_1 \cdots i_{u-1} k i_{u+1} \cdots i_s.
+            \]
+        \item nel caso~\ref{item:eg_ins3}, come prima $k$ commuta con tutti gli $i_j$
+            a destra di $k+1$, arrivando alla parola
+            \[
+                i_1 i_2 \cdots k (k+1) k \cdots i_s.
+            \]
+            Ora applico la braid relation per ottenere
+            \[
+                i_1 i_2 \cdots  (k+1) k (k+1) \cdots i_s.
+            \]
+            Infine $k+1$ commuta con tutti gli $i_j$ alla sua sinistra in quanto minori
+            di $k$, ottenendo
+            \[
+                (k+1) i_1 i_2 \cdots k (k+1) \cdots i_s.
+            \]
+    \end{itemize}
+\end{remark}
+
+Nel caso in cui $T$ ha pi\`u di una riga, si ripete l'algoritmo per inserire $k$
+nella prima riga di $T$, ma ora l'eventuale lettera ``spinta'' viene inserita
+nella riga successiva con lo stesso algoritmo e cos\`i via fino a che non si verifica
+il caso~\ref{item:eg_ins1}, ovvero l'inserimento
+non ``spinge'' nessuna lettera, oppure la lettera ``spinta'' viene aggiunta a 
+una riga precedentemente vuota.
+
+% TODO ponderare se qui vogliamo mettere che sto implicitamente usando l'osservazione
+% per dire che le cose giuste rimangono ridotte...
+
+% L'Osservazione~\ref{rmk:coxeter_righe} ci garantisce che in ogni step di questo processo
+% sia verificata l'ipotesi che 
+
+\begin{remark}
+    L'algoritmo di inserimento EG \`e identico a quello per l'inserimento RSK, 
+    tranne per il caso in cui la lettera da inserire compare già nella riga.
+    In quel caso l'unica differenza \`e che la riga in questione rimane invariata.
+\end{remark}
+
+\begin{example}
+    \label{ex:inserimento_eg}
+    Consideriamo per esempio $k = 3$ e $T$ come sotto:
+    \[
+        \ytableausetup{aligntableaux=center}
+        T = 
+        \ytableaunumber{4, 3 4 5, 1 2 4 6 }
+        \ytableausetup{aligntableaux=bottom}.
+    \]
+    Si verifica che $\rowreading(T)k = 434512463$ \`e una parola ridotta per 
+    $\w = s_4 s_3 s_4 s_5 s_1 s_2 s_4 s_6 s_3 = 2561473 \in \sym_7$.
+
+    Calcoliamo ora $T \leftarrow k$:
+    \[ 
+        \ytableaunumber{4, 3 4 5, 1 2 4 6 \none {\none[\leftarrow 3]}}
+        \qquad
+        \ytableaunumber{4, 3 4 5 \none {\none[\leftarrow 4]}, 1 2 {*(green) 3} 6 }
+        \qquad
+        \ytableaunumber{4 \none {\none[\leftarrow 5]}, 3 {*(green) 4} 5 , 1 2 {*(green) 3} 6 }
+        \qquad
+        \ytableaunumber{4 {*(green) 5}, 3 {*(green) 4} 5 , 1 2 {*(green) 3} 6 }.
+    \]
+    
+    Per ogni riga ho colorato la casella in cui si \`e inserita la nuova lettera
+    (o quella in cui era gi\`a scritta).
+    Queste caselle prendono il nome di \emph{percorso di inserimento}.
+\end{example}
+
+
+
+\begin{proposition}
+    Siano $T$ un tableau ridotto e $k$ una lettera tale che $v = \rowreading(T)k$ sia una 
+    parola ridotta per un qualche $\w \in \sym_n$.
+    Allora:
+    \begin{enumerate}
+        \item il tableau $T \leftarrow k$ \`e semistandard;
+        \item il percorso di inserimento si muove debolmente verso sinistra;
+        \item il tableau $T \leftarrow k$ \`e ridotto 
+            e $v' = \rowreading(T\leftarrow k)$ \`e una parola ridotta per lo stesso $\w$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Vediamo prima che $T \leftarrow k$ rimane semistandard.
+
+    La crescenza delle righe segue immediatamente dalla definizione; verifichiamo la crescenza
+    delle colonne.
+
+    Immaginiamo di stare inserendo $a$ in una riga di $T$. Sia $b$ il primo elemento di 
+    quella riga che \`e maggiore o uguale ad $a$. La situazione \`e la seguente:
+    \[
+        \ytableaushort 
+        { \none \none {\scriptstyle >b}, 
+        {\scriptstyle <a} {\scriptstyle <a} b \none \none \none {\none[\leftarrow a]}}
+        * {4,5} 
+        \quad;
+    \]
+    che, dopo l'inserimento, diventa:
+    \[
+        \ytableausetup{aligntableaux=center}
+        \begin{array}{ll}
+            \ytableaushort 
+            { \none \none {\scriptstyle >a} \none \none {\none[\leftarrow a+1]}, 
+            {\scriptstyle <a} {\scriptstyle <a} {*(green) a}  }
+            * {4,5}
+            &\text{ se $a=b$; } 
+            \\[2em]
+            \ytableaushort 
+            { \none \none {\scriptstyle >b} \none \none {\none[\leftarrow b]}, 
+            {\scriptstyle <a} {\scriptstyle <a} {*(green) a}  }
+            * {4,5}
+            &\text{ se $a < b$.}
+        \end{array}
+        \ytableausetup{aligntableaux=bottom}
+    \]
+
+    In entrambi i casi l'inserimento nella riga successiva avverr\`a in una casella
+    debolmente a sinistra della casella contenente $a$, ovvero l'inserimento
+    perserver\`a la crescenza delle colonne e il percorso di inserimento
+    si muover\`a debolmente a sinistra.
+
+    % Vediamo ora che $v' = \rowreading(T\leftarrow k)$ si ottiene da $v = \rowreading(T)k$
+    % con una serie di relazioni di Coxeter, e quindi rappresentano lo stesso $\w$.
+    % TODO
+    TODO: dire qualcosa su questo punto, anche se segue rapidamente dall'osservazione
+\end{proof}
+
+Enunciamo e dimostriamo due lemmi che saranno utili in seguito.
+
+\begin{lemma} \label{lem:percorsi_strict}
+    Sia $T$ un tableau ridotto e siano $a, b$ due lettere con $a < b$ e tali che 
+    $\rowreading(T)ab$ sia una parola ridotta.
+    Allora inserendo $a$ dentro $T$ e poi $b$ dentro $T \leftarrow a$, ovvero
+    calcolando $T \leftarrow a \leftarrow b$, il percorso di inserimento di $a$ \`e 
+    \emph{strettamente} a sinistra di quello di $b$.
+\end{lemma}
+
+\begin{proof}
+    % TODO
+    TODO
+\end{proof}
+
+\begin{lemma} \label{lem:strip}
+    Nelle stesse ipotesi del lemma precedente, la casella aggiunta inserendo $b$ \`e
+    strettamente a destra e debolmente sotto quella aggiunta inserendo $a$.
+\end{lemma}
+
+\begin{proof}
+    % TODO
+    TODO
+\end{proof}
+
+\section{Corrispondenza EG per parole ridotte}
+
+Possiamo adesso definire il $P$-tableau della corrispondenza EG, ottenuto iterando 
+l'algoritmo definito sopra.
+
+\begin{definition}[$P$-tableau EG]
+    Sia $\w$ una permutazione in $\sym_n$ e sia $v=v_1 v_2 \cdots v_s$ una sua
+    parola ridotta. 
+    Definisco $P(v)$, ovvero il $P$-tableau EG associato a $v$, come il tableau
+    ridotto ottenuto partendo dal tableau vuoto e inserendo in successione 
+    le lettere di $v$ da sinistra a destra.
+    In simboli:
+    \[
+        P(v) = \varnothing \leftarrow v_1 \leftarrow v_2 \leftarrow
+        \cdots \leftarrow v_s.
+    \]
+\end{definition}
+
+\begin{example} \label{ex:p_tab1}
+    Sia $v = 232123$, parola ridotta di $\w = s_2 s_3 s_2 s_1 s_2 s_3 = 4321 \in \sym_4$.
+    Calcoliamo $P(v)$ inserendo una lettera alla volta:
+    \[
+        \ytableaunumber{2}
+        \xrightarrow{\leftarrow 3}
+        \ytableaunumber{2 3}
+        \xrightarrow{\leftarrow 2}
+        \ytableaunumber{3, 2 3}
+        \xrightarrow{\leftarrow 1}
+        \ytableaunumber{3, 2, 1 3}
+        \xrightarrow{\leftarrow 2}
+        \ytableaunumber{3, 2 3, 1 2}
+        \xrightarrow{\leftarrow 3}
+        \ytableaunumber{3, 2 3, 1 2 3}
+        = P(v).
+    \]
+
+    Si verifica anche che $\rowreading(P(v)) = 323123$ \`e una parola ridotta per $\w$.
+
+\end{example}
+
+Dimostriamo alcune propriet\`a del $P$-tableau EG che useremo.
+
+\begin{proposition}[Propriet\`a del $P$-tableau EG]
+    La mappa $P$ di EG soddisfa le seguenti propriet\`a:
+    \begin{enumerate}
+        \item $P(v)$ \`e ridotto;
+        \item $v$ e $\rowreading(P(v))$ sono parole ridotte per lo stesso elemento in $\sym_n$.
+    \end{enumerate}
+    % TODO
+\end{proposition}
+
+In completa analogia con la corrispondenza RSK, definiamo il $Q$-tableau EG, o
+\emph{recording} tableau EG, che tiene traccia di dove vengono aggiunte le caselle 
+e permette di invertire il processo.
+
+\begin{definition}[$Q$-tableau EG]
+    Sia $v = v_1 v_2 \cdots v_s$ una parola ridotta. 
+    Definisco $Q(v)$, ovvero il $Q$-tableau EG associato a $v$, come il tableau di Young
+    con la stessa forma di $P(v)$ nelle cui caselle \`e segnato l'ordine in cui sono state
+    aggiunte durante la costruzione del $P$-tableau.
+
+    Pi\`u formalmente, definisco la successione dei $P$-tableaux intermedi
+    $P^{(0)}$, $P^{(1)}$, \dots, $P^{(s)}$, dove
+    \begin{align*}
+        P^{(0)} &= \varnothing, \\
+        P^{(k)} &= P^{(k-1)} \leftarrow v_k \qquad \text{se $k>0$};
+    \end{align*}
+    da cui $P(v) = P^{(s)}$.
+    Se $(i,j)$ \`e la casella di $P^{(k)} \setminus P^{(k-1)}$, allora scrivo $k$ nella 
+    casella $(i,j)$ di $Q(v)$.
+    
+\end{definition}
+
+\begin{example} \label{ex:q_tab1}
+    Continuando l'Esempio~\ref{ex:p_tab1}, in cui avevamo scelto $v = 232123$,
+    il $Q$-tableau \`e ottenuto nel seguente modo:
+    \[
+        \ytableaunumber{1}
+        \longrightarrow
+        \ytableaunumber{1 2}
+        \longrightarrow
+        \ytableaunumber{3, 1 2}
+        \longrightarrow
+        \ytableaunumber{4, 3, 1 2}
+        \longrightarrow
+        \ytableaunumber{4, 3 5, 1 2}
+        \longrightarrow
+        \ytableaunumber{4, 3 5, 1 2 6}
+        =Q(v).
+    \]
+\end{example}
+
+\begin{remark}
+    Il $Q$-tableau \`e un tableau \emph{standard}.
+\end{remark}
+
+\begin{theorem}[{\cite[Theorem~6.25]{edelman-greene-87}}]
+    \label{thm:eg1}
+    Fissata una permutazione $\w \in \sym_n$, la corrispondenza EG definita da
+    \[
+        \varphi_{\mathrm{EG}} \colon v \mapsto (P(v), Q(v))
+    \]
+    \`e una bigezione tra:
+    \begin{itemize}
+        \item l'insieme $\rw(\w)$ delle parole ridotte di $\w$;
+        \item l'insieme delle coppie $(P,Q)$ di tableaux di Young con la stessa forma,
+            tali che $P$ sta in $\redtab(\w)$
+            e $Q$ \`e standard.
+    \end{itemize}
+    
+\end{theorem}
+
+\begin{proof}
+    Basta mostrare che, conoscendo la posizione dell'ultima casella
+    inserita, l'algoritmo di inserimento EG pu\`o sempre essere invertito in modo univoco.
+    % TODO dim EG
+
+    Sia $k$ la lettera che \`e stata ``spinta'' che vogliamo riposizionare nella riga
+    sottostante. 
+    Si possono verificare due casi:
+    \begin{itemize}
+        \item se $k$ \emph{non} compare nella riga sottostante, allora $k$ era stata 
+            ``spinta'' da un inserimento di tipo~\ref{item:eg_ins2} e quindi occupava la 
+            casella della pi\`u grande lettera minore di $k$;
+        \item se $k$ compare nella riga sottostante, allora deve comparire anche $k-1$
+            (altrimenti il row-reading non sarebbe una parola ridotta), e quindi
+            $k$ era stata ``spinta'' da un inserimento di tipo~\ref{item:eg_ins3}.
+    \end{itemize}
+
+\end{proof}
+
+\begin{example}
+    % TODO forse mettere un esempio
+\end{example}
+    
+
+\section{Estensione a fattorizzazioni crescenti}
+    
+In questa sezione estenderemo la corrispondenza EG a fattorizzazioni crescenti.
+
+Ricordiamo che, dato $\w \in \sym_n$, $v = v^1 v^2 \cdots v^s$ \`e una 
+\emph{fattorizzazione crescente} di $\w$ se $v$ \`e una parola ridotta per $\w$ e 
+i fattori $v^i$ sono parole crescenti.
+
+I singoli fattori $v^i$ possono anche essere la parola vuota.
+
+Chiamiamo $\incrfact(\w)$ l'insieme (infinito) delle fattorizzazioni crescenti di $\w$.
+
+Per ogni fattorizzazione crescente $v = v^1 v^2 \cdots v^s$ definisco il suo \emph{peso}
+$\wt(v)$ come il vettore $\lambda$ che ha nella componente $i$-esima $\lambda_i$ la lunghezza
+del fattore $v^i$.
+
+Chiamo $\incrfact_\lambda(\w)$ l'insieme (questa volta finito) delle fattorizzazioni
+crescenti di $\w$ con peso $\lambda$.
+
+\begin{example}
+    Per esempio, $v = 23|2||12|3$ \`e una fattorizzazione crescente di 
+    $\w = s_2 s_3 s_2 s_1 s_2 s_3 = 4321 \in \sym_4$, con peso
+    $\lambda = (2, 1, 0, 2, 1)$.
+\end{example}
+
+Il $P$-tableau di $v$ \`e ottenuto nello stesso modo, ovvero inserendo le lettere
+di $v$ ignorando la suddivisione in fattori.
+
+Invece, per ottenere il $Q$-tableau, scrivo $k$ in tutte le caselle ottenute dall'inserimento
+delle lettere del fattore $v^k$ nel $P$-tableau.
+
+Pi\`u formalmente, posso definire (in analogia a quanto definito prima) i $P$-tableaux 
+intermedi $P^{(0)}$, $P^{(1)}$, \dots, $P^{(s)}$ come
+\begin{align*}
+    P^{(0)} &= \varnothing, \\
+    P^{(k)} &= P^{(k-1)} \leftarrow v^k \qquad \text{se $k>0$};
+\end{align*}
+dove con $T \leftarrow v^k$ intendo il tableau ottenuto inserendo tutte le lettere di $v^k$
+dentro $T$ una alla volta da sinistra a destra.
+
+Come prima $P(v) = P^{(s)}$.
+Come prima, se $( i, j)$ \`e una casella di $P^{(k)} \setminus P{(k-1)}$, allora scrivo
+$k$ nella casella $(i,j)$ di $Q(v)$.
+
+\begin{example}
+    Se, come prima, $v = 23|2||12|3$, allora $P(v)$ e $Q(v)$ si ottengono come riportato:
+    \begin{gather*}
+        \ytableaunumber{2}
+        \xrightarrow{\leftarrow 3}
+        \ytableaunumber{2 3}
+        \xrightarrow{\leftarrow 2}
+        \ytableaunumber{3, 2 3}
+        \xrightarrow{\leftarrow 1}
+        \ytableaunumber{3, 2, 1 3}
+        \xrightarrow{\leftarrow 2}
+        \ytableaunumber{3, 2 3, 1 2}
+        \xrightarrow{\leftarrow 3}
+        \ytableaunumber{3, 2 3, 1 2 3}
+        = P(v);
+        \\
+        \ytableaunumber{1}
+        \longrightarrow
+        \ytableaunumber{1 1}
+        \longrightarrow
+        \ytableaunumber{2, 1 1}
+        \longrightarrow
+        \ytableaunumber{4, 2, 1 1}
+        \longrightarrow
+        \ytableaunumber{4, 2 4, 1 1}
+        \longrightarrow
+        \ytableaunumber{4, 2 4, 1 1 5}
+        =Q(v).
+    \end{gather*}
+    % TODO sistemare questo disegno
+\end{example}
+
+\begin{proposition}
+    Per ogni una fattorizzazione crescente $v$, il tableau $Q(v)$ definito sopra \`e un 
+    tableau semistandard.
+\end{proposition}
+
+\begin{proof}
+    Basta verificare che $P^{(k)} \setminus P^{(k-1)}$ sia una \emph{striscia orizzontale}, 
+    ovvero che non abbia due caselle sulla stessa colonna.
+    Ma questo segue direttamente dalla crescenza del fattore $v^k$ e dal Lemma~\ref{lem:strip} 
+    sull'inserimento consecutivo di lettere crescenti.
+\end{proof}
+
+\begin{remark}
+    Questa corrispondenza pi\`u generale per fattorizzazioni crescenti si riduce a quella
+    vista in precedenza per parole ridotte scegliendo una fattorizzazione in cui ogni
+    fattore ha una sola lettera.
+
+    Per esempio, scegliendo $v = 2|3|2|1|2|3$, ritroviamo il $Q$-tableau calcolato
+    nell'Esempio~\ref{ex:q_tab1}.
+\end{remark}
+
+\begin{theorem}
+    \label{thm:eg2}
+    % TODO definisci la roba in sto teorema
+    Fissata una permutazione $\w \in \sym_n$ e un peso $\lambda \vDash \len(\w)$,
+    la corrispondenza EG definita da
+    \[
+        \varphi_{\mathrm{EG}} \colon v \mapsto (P(v), Q(v))
+    \]
+    \`e una bigezione tra:
+    \begin{itemize}
+        \item l'insieme $\incrfact_\lambda(\w)$ delle fattorizzazioni crescenti
+            di $\w$ con peso $\lambda$;
+        \item l'insieme delle coppie $(P,Q)$ di tableaux di Young con la stessa forma,
+            tali che $P$ sta in $\redtab(\w)$ e
+            $Q$ \`e semistandard di tipo $\lambda$.
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    \`E vero per costruzione che $\wt(v) = \type(Q(v))$.
+
+    Basta quindi verificare che l'algoritmo si pu\`o invertire, nonostante 
+    $Q$ sia semistandard anzich\'e standard.
+    Ma so gi\`a che le lettere di ogni fattore sono state inserite in ordine 
+    crescente, quindi per il Lemma~\ref{lem:strip} le caselle corrispondenti
+    a quel fattore sono state aggiunte da quella pi\`u sinistra a quella pi\`u a destra.
+    
+    Allora, per invertire l'inserimento, si guarda la lettera pi\`u alta tra quelle che compaiono
+    in $Q$ e tra le caselle in cui compare si sceglie quella pi\`u a destra, 
+    Che \`e quella aggiunta per ultima.
+    Poi si procede come nella dimostrazione del Teorema~\ref{thm:eg1}
+    partendo da quella casella.
+    Alla fine si suddivide la parola ottenuta in fattori, rispettando il tipo di $Q$.
+\end{proof}
+
+\begin{remark}
+    % TODO o si toglie o si scrive
+    Sostanzialmente sto standardizzando $Q$.
+\end{remark}
+
+Questo teorema \`e sufficiente per dare una scrittura delle funzioni simmetriche
+di Stanley nella base delle funzioni simmetriche di Schur.
+
+Ricordiamo che:
+\begin{gather*}
+    \stan_{\w^{-1}} = \sum_{ v \in \incrfact(\w) } x^{\wt(v)}, \\
+    s_\lambda = \sum_{ T \in \ssyt(\lambda) } x^{\type(T)}.
+\end{gather*}
+
+\begin{corollary}
+    Sia $\w \in \sym_n$ e sia $\stan_{\w^{-1}}$ la funzione simmetrica di Stanley associata
+    a $\w^{-1}$.
+    Allora vale:
+    % \[
+    %     \stan_{\w^{-1}} = \sum_{T \in \redtab(w)} s_{\shape(T)},
+    % \]
+    % o, equivalentemente:
+    \[
+        \stan_{\w^{-1}} = \sum_{\lambda} a_\w^\lambda \, s_\lambda,
+    \]
+    dove $a_\w^\lambda$ \`e il numero di tableaux semistandard il cui row-reading
+    \`e una parola ridotta per $\w$.
+    In simboli:
+    \[
+        a_\w^\lambda = \lvert \left\{ 
+            T \in \redtab(\w) \mid \shape(T) = \lambda
+        \right\} \rvert .
+    \]
+    
+\end{corollary}
+
+\begin{proof}
+    % TODO fai proof (solo conti)
+\end{proof}
+
+
+\section{Struttura di cristallo}
+
+In questa sezione vediamo come la corrispondenza di Edelman-Greene sia anche
+un isomorfismo di cristalli, ovvero la struttura di cristallo sulle fattorizzazioni
+crescenti definita nel capitolo~\ref{ch:stanley_symm} viene mappata nella struttura 
+di cristallo sui tableaux semistandard definita del capitolo~\ref{ch:crystals}.
+
