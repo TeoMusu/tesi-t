@@ -7,8 +7,9 @@ In questo capitolo introduciamo le funzioni simmetriche di Stanley,
 introdotte da Stanley in \cite{stanley-84} per studiare il numero di parole ridotte
 di un elemento in un gruppo di Coxeter.
 
-Successivamente, seguendo \cite[Section~3]{morse-schilling-15}, definiamo il cristallo
-sulle fattorizzazioni crescenti.
+Successivamente, definiamo lo strettamente correlato cristallo sulle 
+fattorizzazioni crescenti, introdotto da Morse e Schilling in
+\cite[Section~3]{morse-schilling-15}.
 
 \section{Fattorizzazioni crescenti}
 
@@ -103,6 +104,7 @@ proprio con lo scopo di studiare le parole ridotte di $\w \in \sym_n$.
 
 Successivamente sono state ritrovate in altri ambiti, si veda per esempio 
 \cite{billey-93}.
+% TODO questo è fuori contesto: specificare meglio o togliere
 
 \begin{definition}[Funzione quasi-simmetrica di Stanley]
     Per ogni permutazione $\w \in \sym_n$, definisco la funzione quasi-simmetrica
@@ -133,7 +135,7 @@ approfondiremo nel Capitolo~\ref{ch:edelman_greene}.
 
 
 Se $\ell$ \`e la lunghezza di $\w$, la funzione quasi-simmetrica di Stanley
-ha grado $\ell$.
+\`e omogenea di grado $\ell$.
 
 
 \section{Cristallo sulle fattorizzazioni crescenti}
@@ -283,7 +285,7 @@ per definire l'operatore di $f_i$ di Kashiwara.
     pi\`u grande lettera non appaiata.
     $a+1$ in $v^i$ deve essere appaiata per forza con $a \in v^{i+1}$, 
     perch\'e ogni lettera pi\`u piccola sarebbe stata appaiata con $a$ o con un'altra 
-    lettera pi\`u piccola.
+    lettera pi\`u piccola, piuttosto.
 
     Iterando questo ragionamento per $a+1, a+2, \dots, a+s \in v^i$, dimostriamo che 
     $a, a+1, \dots, a+s-1 \in v^{i+1}$.
@@ -298,24 +300,28 @@ per definire l'operatore di $f_i$ di Kashiwara.
     Infatti i punti precedenti implicano che il blocco centrale commuta con 
     $u^i_r$ e con $u^{i+1}_l$ (tramite operazioni di Coxeter), ottenendo come sotto-parola
     \[
-        a, a+1, \dots, a+s, a, a+1, \dots, a+s,
+        a, a+1, \dots, a+s, a, a+1, \dots, a+s-1, a+s,
     \]
-    che non \`e mai ridotta.
-    Il caso generale \`e analogo al seguente esempio per $a= 2$ e $s = 2$:
-    % \[
-    %     2 3 4 5 2 3 4 5 \sim 
-    %     \underline{2 3 2} 4 3 5 4 5 \sim
-    %     3 2 \underline{3 4 3} 5 4 5 \sim
-    %     3 2 4 3 \underline{4 5 4} 5 \sim
-    %     3 2 4 3 5 4 5 5,
-    % \]
+    che, applicando il Lemma~\ref{lem:parole_equiv}, \`e Coxeter-equivalente a
     \[
-        2 3 \underline{4 2} 3 4 \sim
-        \underline{2 3 2} 4 3 4 \sim
-        3 2 \underline{3 4 3} 4 \sim
-        3 2 4 3 4 4,
+        a+1, \dots, a+s, a, a+1, \dots, a+s-1, a+s, a+s,
     \]
     che non \`e ridotta.
+%     Il caso generale \`e analogo al seguente esempio per $a= 2$ e $s = 2$:
+%     % \[
+%     %     2 3 4 5 2 3 4 5 \sim 
+%     %     \underline{2 3 2} 4 3 5 4 5 \sim
+%     %     3 2 \underline{3 4 3} 5 4 5 \sim
+%     %     3 2 4 3 \underline{4 5 4} 5 \sim
+%     %     3 2 4 3 5 4 5 5,
+%     % \]
+%     \[
+%         2 3 \underline{4 2} 3 4 \sim
+%         \underline{2 3 2} 4 3 4 \sim
+%         3 2 \underline{3 4 3} 4 \sim
+%         3 2 4 3 4 4,
+%     \]
+%     che non \`e ridotta.
 
     Il quarto punto deriva dal fatto che $a$ \`e la pi\`u grande lettera non appaiata.
 
@@ -345,3 +351,31 @@ Possiamo finalmente definire l'azione dell'operatore di Kashiwara $f_i$.
 
 \end{definition}
 
+\begin{example}
+    Per esempio, se
+    \[
+        v = v^1  v^2 = 
+        ( \mathbf{1}, 2_6, \mathbf{3}, 9_4, 11_5, \mathbf{12}, 13_3, 14_2, 18_1 ) \,
+        ( 1_6, 5_5, 8_4, 12_3, 13_2, \mathbf{15}, 16_1),
+    \]
+    allora
+    \[
+        f_1 (v) = 
+        ( \mathbf{1}, 2_6, \mathbf{3}, 9_4, 11_5, 13_3, 14_2, 18_1 ) \,
+        ( 1_6, 5_5, 8_4, 12_3, 13_2, \mathbf{14}, \mathbf{15}, 16_1).
+    \]
+
+
+\end{example}
+
+Bisogna ancora verificare che $f_i$ sia ben definito.
+
+\begin{proposition}
+    Per ogni fattorizzazione crescente $v \in \incrfact(\w)$ tale che $f_i (v) \neq \zero $, 
+    anche $f_i v$ \`e una parola ridotta per lo stesso $\w$.
+\end{proposition}
+
+\begin{proof}
+    Mostriamo come ottenere $f_i$ da $v$ tramite operazioni di Coxeter.
+    TODO
+\end{proof}

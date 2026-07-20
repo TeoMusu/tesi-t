@@ -2,3 +2,32 @@
 
 \chapter{Nozioni preliminari}
 \label{ch:basics}
+
+La seguente equivalenza, verificata con un semplice conto, verr\`a usata nei prossimi
+capitoli, ma la enunciamo qui.
+
+\begin{lemma}
+    \label{lem:parole_equiv}
+    Per ogni $k \in [n-1]$, le seguenti parole ridotte sono Coxeter-equivalenti:
+    \begin{gather*}
+        1 \, 2  \cdots (k-1) \, k \, 1 \cdots (k-1) \\
+        \sim \\
+        2 \cdots (k-1) \, k \, 1 \cdots (k-1) \, k.
+    \end{gather*}
+
+\end{lemma}
+
+\begin{proof}
+    Mostriamo come ottenere la seconda dalla prima tramite operazioni di Coxeter
+    nel caso in cui $k = 4$.
+    Il caso generale segue nello stesso modo.
+    \[
+        \begin{array}{lcl}
+            123\underline{41}23 & \qquad &  2132\underline{343} \\
+            12\underline{31}423 & \qquad &  2\underline{13}2434 \\
+            1213\underline{42}3 & \qquad &  231\underline{24}34 \\
+            \underline{121}3243 & \qquad &  23\underline{14}234 \\
+            21\underline{232}43 & \qquad &  2341234.
+        \end{array}
+    \]
+\end{proof}
