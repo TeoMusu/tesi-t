@@ -2,3 +2,548 @@
 
 \chapter{Cristalli di Kashiwara}
 \label{ch:crystals}
+
+\section{Definizioni}
+
+\begin{definition}[Cristallo di Kashiwara semi-normale]
+    \label{def:seminormal_crystal}
+    Fissato un sistema di radici $\Phi$ con radici semplici $\{ \alpha_i \}_{i\in I}$
+    e un reticolo dei pesi $\Lambda$, un cristallo (di Kashiwara) semi-normale \`e un insieme
+    non vuoto $B$ dotato di mappe
+    \begin{align*}
+        f_i, e_i &\colon B \to B \sqcup \{ \zero \} ,   \\
+        \varphi_i, \varepsilon_i &\colon B \to \NN  ,     \\
+        \wt &\colon B \to \Lambda ,
+    \end{align*}
+    dove $\zero \notin B$ \`e un simbolo ausiliario, che 
+    soddisfano i seguenti assiomi per ogni $i \in I$:
+    \begin{enumerate}
+        \item[A1.] \label{item:axiom_1}
+            le mappe $f_i$ ed $e_i$ sono una l'inversa dell'altra, a meno
+            che qualcosa non venga mandato in $\zero$.
+            Pi\`u formalmente, per ogni $x \in B$ vale:
+            \begin{align*}
+                e_i ( f_i (x))  &= x    && \text{se $ f_i ( x) \neq \zero$,}   \\
+                f_i ( e_i (x))  &= x    && \text{se $ e_i (x ) \neq \zero$;}
+            \end{align*}
+            
+        \item[A2.] \label{item:axiom_2}
+            agire con $f_i$ diminuisce il peso di $\alpha_i$.
+            In simboli, per ogni $x \in B$ vale:
+            \begin{align*}
+                \wt (f_i (x)) &= \wt (x) - \alpha_i && \text{se $f_i (x) \neq \zero$,} \\
+                \wt (e_i (x)) &= \wt (x) + \alpha_i && \text{se $e_i (x) \neq \zero$;}
+            \end{align*}
+
+        \item[A3.] \label{item:axiom_3}
+            le statistiche $\varphi_i$ e $\varepsilon_i$ contano quante volte 
+            bisogna agire con $f_i$ e con $e_i$ prima di arrivare a $\zero$.
+            Pi\`u formalmente, per ogni $x \in B$ vale:
+            \begin{subequations}
+                \begin{align*}
+                    \varphi_i (x) &= \max \{ k \in \NN \mid f_i^k(x) \neq \zero \} , \\
+                    \varepsilon_i (x) &= \max \{ k \in \NN \mid e_i^k(x) \neq \zero \};
+                \end{align*}
+            \end{subequations}
+            % NOTE ponderare se mettere questa parte.
+            in particolare:
+            \begin{align*}
+                \varphi_i( f_i(x)) &= \varphi_i(x) -1,   &
+                \varepsilon_i (f_i (x)) &= \varepsilon_i(x) +1 ,
+                                        && \text{se $f_i(x) \neq \zero$,} \\
+                \varphi_i( e_i(x)) &= \varphi_i(x) +1 ,  &
+                \varepsilon_i (e_i (x)) &= \varepsilon_i(x) -1,
+                                        && \text{se $e_i(x) \neq \zero$;}
+            \end{align*}
+
+        \item[A4.] \label{item:axiom_4}
+            per ogni $x \in B$ vale:
+            \[
+                \varphi_i(x) - \varepsilon_i(x) = 
+                \bigl\langle \wt(x), \alpha_i^\vee \bigr\rangle,
+            \]
+            ricordando che la coradice $\alpha_i^\vee$ \`e definita come segue:
+            \[
+                \alpha_i^\vee = \frac{2 \alpha_i}{ \langle \alpha_i, \alpha_i \rangle }.
+            \]
+
+    \end{enumerate}
+
+\end{definition}
+
+% TODO remark che accenna alla definizione di non seminormale
+% TODO remark che ti fa calcolare il peso?
+
+\begin{definition}[Grafo cristallo]
+    Per ogni cristallo $B$, possiamo definire il suo \emph{grafo cristallo} come il grafo
+    orientato con archi etichettati con colori in $I$ che ha come vertici gli elementi di 
+    $B$ e in cui c'\`e un arco da $x \in B$ a $y \in B$ con etichetta $i \in I$ 
+    se e solo se $y = f_i (x)$.
+
+\end{definition}
+
+Noi considereremo solo cristalli di tipo $A$.
+In particolare, fissato un intero $\ell$ maggiore o uguale a $2$,
+scegliamo:
+\begin{itemize}
+    \item $I = [\ell-1]$ come insieme di indici;
+    \item $\Phi = A_{\ell-1}$ come sistema di radici, definito nel capitolo precedente;
+    \item $\alpha_i = \ee_i - \ee_{i+1} $ per ogni $i\in I$ come radici semplici;
+    \item $\Lambda = \ZZ^\ell$ come reticolo dei pesi.
+\end{itemize}
+
+\begin{remark}
+    Sarebbe pi\`u corretto scegliere come reticolo dei pesi la proiezione di $\ZZ^\ell$
+    sull'iperpiano di $\RR^\ell$ ortogonale al vettore $(1, 1, \dots, 1)$,
+    che \`e anche lo $\RR$-span delle radici.
+
+    Per comodit\`a scriveremo sempre i pesi come elementi di $\ZZ^\ell$, tuttavia 
+    potr\`a succedere di considerare \emph{uguali} due pesi che differiscono solo per 
+    un multiplo del vettore $(1, 1, \dots, 1)$.
+\end{remark}
+
+\section{Esempi}
+
+
+\begin{example}[Cristalli di tipo $A_1$]
+    \label{ex:crys_Bk_A1}
+    Fissato un intero positivo $k$, si consideri il seguente grafo cristallo di tipo $A_1$,
+    che denotiamo con $B(k)$:
+    % \[
+    %     v_k \xrightarrow{1} v_{k-2} \xrightarrow{1} \cdots
+    %     \xrightarrow{1} v_{-k+2} \xrightarrow{1} v_{-k} \,.
+    % \]
+    \[
+        \begin{tikzpicture}[node distance=5em ]
+            \node (n1) {$v_k$};
+            \node (n2) [right of=n1] {$v_{k-1}$};
+            \node (n3) [right of=n2] {$v_{k-2}$};
+            \node (np) [right of=n3] {$\cdots$};
+            \node (nl) [right of=np] {$v_0$};
+
+            \draw[->] (n1) -- node[above] {$1$} (n2);
+            \draw[->] (n2) -- node[above] {$1$} (n3);
+            \draw[->] (n3) -- node[above] {$1$} (np);
+            \draw[->] (np) -- node[above] {$1$} (nl);
+        \end{tikzpicture};
+    \]
+    dove definisco, per ogni $j \in [k]$,
+    \begin{align*}
+        \wt(v_j) &= (j, k-j) \in \ZZ^2, \\
+        \varphi_1(v_j) &= j, \\
+        \varepsilon_1(v_j) &= k-j.
+    \end{align*}
+
+    Sar\`a utile pensare agli elementi di questo cristallo come stringhe di parentesi
+    aperte e chiuse nel seguente modo:
+    poniamo, per ogni $ j \in [k]$:
+    \[
+        v_j 
+        {}={}
+        )^j \lparen^{k-j} 
+        {}={} 
+        \underbrace{)) \cdots ))}_j
+        \underbrace{\lparen\lparen \cdots \lparen\lparen}_{k-j}
+        \,;
+    \]
+    allora $f_1$ agisce sulle stringhe cambiando l'\emph{ultima} parentesi
+    chiusa ``)'' in una parentesi aperta ``\lparen''.
+    Similmente $e_1$ cambia la \emph{prima} parentesi aperta in una parentesi
+    chiusa.
+    % NOTE ponderare se vogliamo ``)'' oppure ``$)$'' che lascia pi\`u spazio.
+    % TODO aggiungere disegno 
+\end{example}
+
+\begin{remark}
+    Per l'Assioma~\ref{item:axiom_1}, se si prende un grafo cristallo e si dimenticano
+    tutti gli archi tranne quelli con etichetta $i$, per qualche $i \in I$ fissata,
+    si ottiene un'unione disgiunta di cammini diretti, che possiamo vedere come 
+    cristalli di tipo $A_1$ con la struttura dell'Esempio~\ref{ex:crys_Bk_A1}.
+\end{remark}
+
+\begin{example}[Cristallo standard $\BB$]
+    Per ogni intero positivo $\ell$, definiamo il cristallo standard $\BB$ di tipo $A_{\ell-1}$
+    come in figura:
+    % \[
+    %     \ytableaunumber{1} \xrightarrow{1}
+    %     \ytableaunumber{2} \xrightarrow{2}
+    %     \ytableaunumber{3} \xrightarrow{3}
+    %     \cdots \xrightarrow{\ell-1}
+    %     \ytableaunumber{\ell} .
+    % \]
+    \[
+        \begin{tikzpicture}[node distance=5em ]
+            \node (n1) {\ytableaunumber 1};
+            \node (n2) [right of=n1] {\ytableaunumber 2};
+            \node (n3) [right of=n2] {\ytableaunumber 3};
+            \node (np) [right of=n3] {$\cdots$};
+            \node (nl) [right of=np] {\ytableaunumber \ell};
+
+            \draw[->] (n1) -- node[above] {$1$} (n2);
+            \draw[->] (n2) -- node[above] {$2$} (n3);
+            \draw[->] (n3) -- node[above] {$3$} (np);
+            \draw[->] (np) -- node[above] {$\ell-1$} (nl);
+        \end{tikzpicture},
+    \]
+    dove il peso dell'elemento 
+    % \raisebox{-0.5em}{\ytableaushort{i}}
+    $\boxed{\,i\,}$
+    \`e lo $i$-esimo vettore della base canonica $\ee_i$.
+
+\end{example}
+
+\begin{example}[Cristallo di parole]
+    Definiamo un cristallo di tipo $A_\ell$ sull'insieme delle parole
+    con $k$ lettere nell'alfabeto $[\ell]$, che indicheremo con $B(1)^k$,
+    oppure con $\BB^{\otimes k}$.
+
+    Definiamo il peso di una parola $b$ come il suo contenuto, ovvero 
+    \[
+        \wt(b) = (\beta_1, \beta_2, \dots, \beta_\ell) \in \ZZ^\ell,
+    \]
+    dove $\beta_i$ \`e il numero di volte che la lettera $i$ compare nella parola $b$.
+
+    $f_i$ agisce sulla parola $b$ cambiando una lettera $i$ in una lettera $i+1$.
+    Per determinare quale posizione viene modificata da $f_i$ si procede nel seguente modo:
+    \begin{itemize}
+        \item si trascurano tutte le lettere di $b$ tranne le lettere $i$ e le lettere $i+1$;
+        \item nella posizione di ogni lettera $i$ scrivo una parentesi chiusa ``)'' e 
+            nelle posizioni delle lettere $i+1$ scrivo una parentesi aperta ``\lparen'';
+        \item ricorsivamente elimino tutte le parentesi appaiate, ovvero elimino coppie
+            di parentesi adiacenti ``()'' finch\'e non ce ne sono pi\`u;
+        \item la stringa che rimane \`e della forma 
+            \[
+                )^\varphi \lparen^\varepsilon 
+                {}={}
+                \underbrace{)) \cdots ))}_\varphi
+                \underbrace{\lparen\lparen \cdots \lparen\lparen}_\varepsilon
+            \]
+            e definisco $\varphi_i(b) = \varphi$ e $\varepsilon_i(b) = \varepsilon$;
+        \item $f_i$ agisce sulla lettera $i$ corrispondente all'\emph{ultima} parentesi
+            chiusa ``)'' spaiata, cambiandola in $i+1$.
+            Similmente $e_i$ agisce sulla lettera $i+1$ corrispondente alla \emph{prima}
+            parentesi aperta ``\lparen'' spaiata, cambiandola in una lettera $i$.
+    \end{itemize}
+
+    Si nota facilmente che l'azione di $f_i$ e di $e_i$ preserva le coppie di parentesi
+    appaiate.
+
+\end{example}
+
+\begin{example}
+    Si consideri la parola $b$ come sotto.
+    In questo esempio mostriamo come applicare $f_2$ ed $e_2$ a $b$.
+    Le lettere in grassetto sono quelle spaiate e
+    le lettere riquadrate sono quelle modificate da $f_2$ e da $e_2$.
+
+    \[
+        \begin{array}{r c *{20}{c}}
+            b & = & 1 & \mathbf{2} & 4 & 3 & 3 & 1 & 2 & 3 & 2 & 1 & 2 & 4 & 
+            \mathbf{2} & \mathbf{2} & 3 & 1 & 2 & \mathbf{3} & 4 & \mathbf{3} \\
+              & & & \mathbf{)} & & ( & ( & & ) & ( & ) & & ) & & 
+            \mathbf{)} & \mathbf{)} & ( & & ) & \mathbf{\lparen} & & \mathbf{\lparen} \\
+              & & & ) & & & & & & & & & & & 
+            ) & ) & & & & \lparen & & \lparen \\
+            f_2(b) & = & 1 & 2 & 4 & 3 & 3 & 1 & 2 & 3 & 2 & 1 & 2 & 4 & 
+            2 & \boxed{3} & 3 & 1 & 2 & 3 & 4 & 3 \\
+            e_2(b) & = & 1 & 2 & 4 & 3 & 3 & 1 & 2 & 3 & 2 & 1 & 2 & 4 & 
+            2 & 2 & 3 & 1 & 2 & \boxed{2} & 4 & 3
+        \end{array}
+    \]
+
+\end{example}
+
+\begin{example}
+    Qui sotto \`e rappresentato il grafo cristallo $B(1)^2$ di tipo $A_2$
+    delle parole di due lettere nell'alfabeto $\{1, 2, 3\}$.
+
+    \[
+        \begin{tikzcd}
+            11 & 12 & 13 \\
+            21 & 22 & 23 \\
+            31 & 32 & 33
+            \arrow["1", from=1-1, to=1-2]
+            \arrow["2", from=1-2, to=1-3, color=blue]
+            \arrow["1"', from=1-2, to=2-2]
+            \arrow["1", from=1-3, to=2-3]
+            \arrow["2"', from=2-1, to=3-1, color=blue]
+            \arrow["2"', from=2-2, to=2-3, color=blue]
+            \arrow["2", from=2-3, to=3-3, color=blue]
+            \arrow["1"', from=3-1, to=3-2]
+        \end{tikzcd}
+    \]
+\end{example}
+
+\section{Cristalli di tableaux}
+
+In questa sezione vogliamo definire,
+per ogni coppia di partizioni $\mu \subseteq \lambda$,
+una struttura di cristallo sull'insieme
+$\ssyt(\lambda / \mu)$ dei semistandard Young tableaux di forma skew $\lambda / \mu$.
+
+Ricordiamo che, dato un tableau di Young $T$, il suo row-reading $\rowreading(T)$ \`e la parola 
+ottenuta concatenando le sue righe, dall'ultima alla prima.
+Per esempio se
+\begin{align*}
+    T = 
+    \ytableausetup{aligntableaux=center}
+    \ytableaunumber{
+        2 3 4,
+        \none 1 2 4 5,
+        \none \none 1 3 4 
+    },
+    \ytableausetup{aligntableaux=bottom}
+    &&
+    \text{allora $\rowreading(T) = 234 \, 1245 \, 134$.}
+\end{align*}
+
+Il row-reading definisce una iniezione dai tableaux semistandard con una data forma
+nelle parole con $k$ lettere, dove $k$ \`e la taglia dei tableaux, che preserva il peso.
+
+Successivamente verificheremo la buona definizione dei cristalli di tableaux.
+
+\begin{definition}
+    Definiamo il cristallo di tableaux $B(\lambda / \mu)$ di tipo $A_{\ell-1}$,
+    per $\ell$ sufficientemente grande (baster\`a $\ell > \ell(\lambda)$).
+    Come insieme prendiamo i semistandard Young tableaux di forma $\lambda / \mu$,
+    con lettere nell'alfabeto $[\ell]$.
+
+    Come operatori di Kashiwara, scelgiamo quelli dati dall'inclusione che il
+    row-reading d\`a dentro $B(1)^k$, dove $ k = \lvert \lambda \rvert - 
+    \lvert \mu \rvert$.
+
+    In simboli, per un tableaux $T \in B(\lambda / \mu)$, definiamo $f_i(T)$ come
+    il tableaux di forma $\lambda / \mu$ tale che 
+    \[
+        \rowreading(f_i ( T)) = f_i ( \rowreading ( T)).
+    \]
+
+    Operativamente, 
+    % TODO descrivi
+
+\end{definition}
+
+\begin{example}
+    % TODO esempio facile
+\end{example}
+\begin{example}
+    % TODO esempio B(2,1) con disegno
+\end{example}
+
+\begin{lemma}
+    \label{lem:chiusura_rowreading}
+    L'insieme dei row-reading di tableaux in $B(\lambda / \mu )$ \`e chiuso per azioni
+    di $f_i$ e di $e_i$.
+    
+    In altre parole, applicare $f_i$ ed $e_i$ a un tableaux semistandard, restituisce un
+    tableaux ancora semistandard.
+\end{lemma}
+
+\begin{proof}
+    Sia $T$ il tableaux semistandard a cui vogliamo applicare $f_i$.
+    Consideriamo solo le caselle di $T$ che contengono $i$ o $i+1$.
+    Otteniamo una striscia alta al pi\`u due caselle in ogni colonna fatta nel seguente
+    modo:
+    \[
+        \ytableaushort{
+            {i} {\scriptstyle i+1} {\scriptstyle i+1} {\scriptstyle i+1},
+            \none \none {i} {i},
+            \none \none \none \none {i} {i} {\scriptstyle i+1} {\scriptstyle i+1},
+            \none \none \none \none \none \none \none {i} {\scriptstyle i+1} {\scriptstyle i+1}
+        }.
+    \]
+
+    Le colonne con due caselle contengono lettere appaiate, infatti ogni blocco della forma
+    \[
+        \ytableaushort{
+            {\scriptstyle i+1} {\scriptstyle i+1} {\scriptstyle i+1} {\scriptstyle i+1},
+            {i} {i} {i} {i}
+        }
+    \]
+    corrisponde a una stringa di parentesi della forma ``(((())))'', in cui tutte le parentesi
+    sono appaiate.
+
+    Consideriamo la casella pi\`u a destra che contiene una lettera $i$ spaiata.
+    La casella immediatamente sopra non pu\`o contenere $i+1$, altrimenti per quanto detto
+    prima la lettera $i$ sarebbe appaiata.
+    La casella immediatamente a destra non pu\`o contenere $i$, altrimenti anche quella
+    $i$ sarebbe spaiata, e la $i$ che avevamo considerato originariamente non era quella
+    pi\`u a destra.
+
+    Quando si applica $f_i$ al tableau $T$, quella lettera $i$ diventa un $i+1$ e,
+    per quanto detto sopra sulle lettere nelle caselle subito sopra e subito a destra,
+    il tableau ottenuto \`e ancora semistandard.
+\end{proof}
+
+\begin{remark}
+    % NOTE forse riscrivi questo in 2 periodi.
+    Ripercorrendo la dimostrazione del Lemma~\ref{lem:chiusura_rowreading}, \`e facile 
+    verificare che la stessa struttura di cristallo si sarebbe ottenuta 
+    se, al posto di usare il row-reading, avessimo usato la lettura delle lettere del tableaux
+    in un qualsiasi ordine fissato che estende la relazione d'ordine parziale data da 
+    ``essere debolmente pi\`u in basso e pi\`u a destra''.
+\end{remark}
+
+% NOTE qui puoi mettere che B(`l) ha un unico highest weight e che sono connessi...
+% poi puoi mettere prodotto tensore etc, ma viene lunghissimo
+
+\section{Operatori riflessione di Kashiwara}
+
+Ricordiamo che sul reticolo dei pesi $\Lambda$ agisce il gruppo di Weyl, generato dalle
+riflessioni semplici $s_i$, per ogni $i \in I$, definite da
+\[
+    s_i (\mu) = \mu - \langle \mu , \alpha_i^\vee \rangle \alpha_i
+\]
+per ogni $\mu \in \Lambda$.
+
+Ricordiamo anche che un cristallo $B$ si pu\`o vedere come unione disgiunta delle sue
+$i$-stringhe.
+
+Vogliamo definire, per ogni $i\in I$, la bigezione $\sigma_i$ dal cristallo in s\'e 
+stesso che inverte ogni $i$-stringa.
+
+% NOTE ponderare se usare x o b.
+\begin{definition}
+    Sia $B$ un cristallo seminormale e sia $b \in B$ un suo elemento.
+    Sia inoltre 
+    $k = \langle \wt(b) , \alpha_i^\vee \rangle = \varphi_i(b) - \varepsilon_i(b)$.
+    Definisco
+    \[
+        \sigma_i(b) = \begin{cases}
+            f_i^k (b) & \text{se $k>0$}, \\
+            b         & \text{se $k=0$}, \\
+            e_i^{-k} (b) & \text{se $k<0$}.
+        \end{cases}
+    \]
+\end{definition}
+
+\begin{proposition}
+    \label{prop:sigma_involuzione}
+    La mappa $\sigma_i \colon B \to B$ \`e ben definita, \`e una bigezione, inverte
+    ogni $i$-stringa e vale 
+    \[
+        \wt(\sigma_i(b)) = s_i (\wt(b)).
+    \]
+\end{proposition}
+
+\begin{proof}
+    % NOTE finire qui
+    Se $k>0$, allora
+    \[
+        \wt(\sigma_i(b)) 
+        = \wt\bigl(f_i^k (b)\bigr)
+        = \wt(b) - k \, \alpha_i
+        = s_i(\wt(b)).
+    \]
+    Per gli altri casi si conclude in modo analogo.
+\end{proof}
+
+\section{Carattere di un cristallo}
+
+In questa sezione definiamo il carattere di un cristallo, come elemento in un opportuno
+anello, che ora definiamo.
+
+\begin{definition}
+    Definiamo $\ZZ[ \Lambda ]$ come l'anello che,
+    come gruppo abeliano, \`e il gruppo abeliano libero sul reticolo
+    dei pesi $\Lambda$, con elementi di base $\xx^\mu$ al variare di $\mu \in \Lambda$,
+    e con struttura moltiplicativa data da
+    \[
+        \xx^\lambda \cdot \xx^\mu = \xx^{\lambda+\mu},
+    \]
+    al variare di $\lambda$ e $\mu$ in $\Lambda$.
+
+\end{definition}
+
+Per cristalli di tipo $A$, possiamo scegliere $\Lambda = \ZZ^\ell$ e, introducendo le
+variabili $x_1, x_2, \dots, x_\ell$, possiamo identificare
+\[
+    \xx^\mu = x_1^{\mu_1} x_2^{\mu_2} \cdots x_\ell^{\mu_\ell}.
+\]
+Allora $\ZZ[\Lambda]$ si pu\`o vedere come l'anello dei polinomi di Laurent (ovvero
+polinomi in cui possono comparire anche esponenti negativi) nelle variabili 
+$x_1, x_2, \dots, x_\ell$.
+Tuttavia, in tutti gli esempi che faremo i pesi avranno entrate non-negative e quindi
+otterremo polinomi.
+
+\begin{remark}
+    L'azione del gruppo di Weyl $W$ sul reticolo dei pasi $\Lambda$ si estende 
+    all'anello $\ZZ[\Lambda]$ nel seguente modo:
+    \[
+        \w(\xx^\mu) = \xx^{\w(\mu)}
+    \]
+    per ogni $\w \in W$ e per ogni peso $\mu \in \Lambda$.
+\end{remark}
+
+
+
+\begin{definition}
+    Per ogni cristallo $B$, con reticolo dei pesi $\Lambda$, definiamo il suo carattere
+    $\chi_B(\xx) \in \ZZ[\Lambda]$ (oppure $\chi_B$ per brevit\`a) come segue:
+    \[
+        \chi_B(\xx) = \sum_{b \in B} \xx^{\wt(b)}.
+    \]
+\end{definition}
+
+\begin{proposition}
+    Il carattere di un cristallo \`e invariante per l'azione del gruppo di Weyl $W$.
+    In simboli, per ogni cristallo $B$ e per ogni elemento $\w \in W$ vale:
+    \[
+        \w( \chi_B ) = \chi_B.
+    \]
+\end{proposition}
+
+\begin{proof}
+    Utilizzando la Proposizione~\ref{prop:sigma_involuzione} sulle 
+    propriet\`a dell'involuzione $\sigma_i$, un generatore $s_i$ del gruppo di Weyl 
+agisce sul carattere $\chi_B$ nel seguente modo:
+    \[
+        s_i ( \chi_B(\xx)) 
+        = \sum_{b \in B} \xx^{s_i (\wt(b)) }
+        = \sum_{b \in B} \xx^{\wt(\sigma_i (b))}
+        = \sum_{b \in B} \xx^{\wt(b)}
+        = \chi_B(\xx).
+        % NOTE ponderare
+        % \qedhere
+    \]
+\end{proof}
+
+Per cristalli di tipo $A_{\ell-1}$, il gruppo di Weyl \`e il gruppo simmetrico $\sym_\ell$,
+che agisce su $\ZZ[\Lambda]$, che ricordiamo essere l'anello dei 
+polinomi (di Laurent) in $\ell$ variabili, permutando le variabili.
+
+Da questo segue immediatamente il seguente corollario.
+
+\begin{corollary}
+    \label{cor:caratteri_simmetrici}
+    Il carattere di un cristallo di tipo $A$ \`e un polinomio (di Laurent) \emph{simmetrico}.
+\end{corollary}
+
+Otteniamo anche che le funzionin di Schur definite in ?? sono effettivamente
+funzioni simmetriche.
+
+\begin{proposition}
+    Le funzioni di Schur $s_\lambda$, al variare di $\lambda$ tra le partizioni,
+    sono funzioni simmetriche.
+\end{proposition}
+
+\begin{proof}
+    Per ogni intero positivo $\ell$ possiamo considerare il \emph{polinomio di Schur}
+    $s_\lambda (x_1, \dots, x_\ell)$, ottenuto fissando a zero tutte le altre variabili
+    in $s_\lambda$.
+
+    Confrontando le rispettive definizioni, \`e immediato verificare che il polinomio
+    di Schur \`e proprio il carattere del cristallo di tableaux $B(\lambda)$ di tipo $A_{\ell-1}$,
+    e quindi \`e un polinomio simmetrico per il Corollario~\ref{cor:caratteri_simmetrici}.
+
+    In simboli:
+    \[
+        s_\lambda(x_1, \dots, x_\ell) = \chi_{B(\lambda)} (x_1, \dots, x_\ell).
+    \]
+
+    Facendo tendere $\ell$ a infinito, otteniamo che $s_\lambda$ \`e una funzione simmetrica.
+\end{proof}
+
+% TODO ponderare se aggiungere questa sezione
+% \section{Cristalli normali}
+

@@ -61,6 +61,7 @@ che $v$ sia una parola ridotta \`e equivalente a:
 
 
 \section{Funzioni quasi-simmetriche di Stanley}
+\label{sec:funzioni_stanley}
 
 
 Siano $\xx = (x_1, x_2, \dots)$ infinite variabili. 
@@ -96,10 +97,10 @@ utiliziamo la notazione
 Introduciamo ora le funzioni quasi-simmetriche di Stanley, che successivamente dimostreremo
 essere funzioni simmetriche.
 
-Sono state definite%
+Sono state definite
+per la prima volta da Stanley in \cite{stanley-84}%
 \footnote{La definizione in \cite{stanley-84} si ottiene da quella diffusa
 oggi (e che diamo qui) sostituendo $\w$ con $\w^{-1}$.}
-per la prima volta da Stanley in \cite{stanley-84}
 proprio con lo scopo di studiare le parole ridotte di $\w \in \sym_n$.
 
 Successivamente sono state ritrovate in altri ambiti, si veda per esempio 
@@ -110,7 +111,7 @@ Successivamente sono state ritrovate in altri ambiti, si veda per esempio
     Per ogni permutazione $\w \in \sym_n$, definisco la funzione quasi-simmetrica
     di Stanley associata a $\w^{-1}$ come 
     \[ 
-        \stan_{\w^{-1}}
+        \stan_{\w^{-1}}(\xx)
         \coloneq \sum_{ v \in \incrfact(\w) } \xx^{\wt(v)}.
     \]
 \end{definition}
@@ -162,8 +163,9 @@ Per l'assioma
 % \ref{}
 deve valere
 \[
-    \wt(f_i v) = \wt(v) - \alpha_i,
+    \wt(f_i v) = \wt(v) - \alpha_i = \wt(v) - \ee_i + \ee_{i+1},
 \]
+% TODO definisci \ee
 ovvero $f_i$ deve spostare una lettera dal fattore $v^i$ al fattore $v^{i+1}$.
 
 Gli operatori $f_i$ ed $e_i$ che definiremo pi\`u avanti hanno la propriet\`a di
@@ -228,6 +230,20 @@ sulle lettere dei fattori $v^i$ e $v^{i+1}$.
 
 \end{definition}
 
+\begin{remark}
+    Si verifica facilmente che questa definizione delle statistiche 
+    $\varphi_i$ e $\varepsilon_i$ soddisfano l'assioma ??, infatti:
+    \[
+        \begin{split}
+            \bigl\langle \wt(v) , \alpha_i^\vee \bigr\rangle
+        &= \wt(v)_i - \wt(v)_{i+1}                       \\
+        &= \len\bigl(v^i\bigr) - \len\bigl(v_{i+1}\bigr)  \\
+        &= \lvert L_i(v) \rvert - \lvert R_i(v) \rvert   \\
+        &= \varphi_i (v) - \varepsilon_i (v).
+        \end{split}
+    \]
+\end{remark}
+
 Vediamo alcune ulteriori propriet\`a di questo bracketing, che serviranno
 per definire l'operatore di $f_i$ di Kashiwara.
 
@@ -243,20 +259,22 @@ per definire l'operatore di $f_i$ di Kashiwara.
 \end{definition}
 
 \begin{lemma}
+    \label{lem:divisione_in_3}
     I fattori $v^i$ e $ v^{i+1}$ possono essere divisi ciascuno in 3 pezzi nel seguente
     modo:
     % \begin{align*}
     %     v^i &= u^i_l \mid  a, a+1, \dots, a+s  \mid u^i_r ,  \\
     %     v^{i+1} &= u^{i+1}_l \mid  a, a+1, \dots, a+s-1  \mid u^{i+1}_r.
     % \end{align*}
-    % NOTE: \textbf{\em a} è un po' sus, ponderare.
+    % NOTE: \textbf{\em a} è un po' sus, ponderare. ponderare vigole
     \[
         \begin{array}{c@{\;}c@{\;}c@{\;}c@{\;}c@{\;}c@{\;}c}
             v^i &=& u^i_l &\mid&  \textbf{\em a}, a+1, \dots, a+s  &\mid& u^i_r ,  \\
-            v^{i+1} &=& u^{i+1}_l &\mid&  a, a+1, \dots, a+s-1  &\mid& u^{i+1}_r.
+    v^{i+1} &=& u^{i+1}_l &\mid&  a, a+1, \dots, a+s-1  &\mid& u^{i+1}_r.
         \end{array}
     \]
 
+    % NOTE: ponderare di mettere l'esempio sperarato e dopo.
     Per esempio, per l'esempio sopra abbiamo:
     \[
         \begin{array}{c@{\;}c@{\;}c@{\;}c@{\;}c@{\;}c@{\;}c}
@@ -271,9 +289,9 @@ per definire l'operatore di $f_i$ di Kashiwara.
 
     Inoltre, questa suddivisione soddisfa le seguenti propriet\`a:
     \begin{itemize}
-        \item $ a+s+1 $ non compare in $v^i$;
-        \item $ a-1 $ non compare in $v^{i+1}$;
-        \item $ a+s $ non compare in $v^{i+1}$;
+        \item $ a+s+1 $ non compare in $u^i_r$;
+        \item $ a-1 $ non compare in $u^{i+1}_l$;
+        \item $ a+s $ non compare in $u^{i+1}_r$;
         \item tutte le lettere in $u^i_r$ sono appaiate con lettere in $u^{i+1}_r$;
         \item tutte le lettere in $u^{i+1}_l$ sono appaiate con lettere in $u^{i}_l$.
     \end{itemize}
@@ -299,6 +317,10 @@ per definire l'operatore di $f_i$ di Kashiwara.
     una parola ridotta. 
     Infatti i punti precedenti implicano che il blocco centrale commuta con 
     $u^i_r$ e con $u^{i+1}_l$ (tramite operazioni di Coxeter), ottenendo come sotto-parola
+    % NOTE ponderare se indicare le parole ridotte con la virgola o senza
+    % \[
+    %     a (a+1) \dots (a+s) a (a+1) \dots (a+s-1)( a+s),
+    % \]
     \[
         a, a+1, \dots, a+s, a, a+1, \dots, a+s-1, a+s,
     \]
@@ -328,7 +350,6 @@ per definire l'operatore di $f_i$ di Kashiwara.
     Per il quinto punto: una lettera in $u^{i+1}_l$ \`e minore di $a$, quindi se
     non \`e appaiata con $a$ deve essere perch\'e c'era una lettera in pi\`u piccola 
     in $v^i$ con cui \`e stata appaiata.
-
 \end{proof}
 
 Possiamo finalmente definire l'azione dell'operatore di Kashiwara $f_i$.
@@ -337,7 +358,7 @@ Possiamo finalmente definire l'azione dell'operatore di Kashiwara $f_i$.
     Per ogni fattorizzazione crescente $v = v^1 \cdots v^\ell$ l'operatore di 
     Kashiwara $f_i$ rimuove $a$ dal fattore $v^i$ e aggiunge $a+s$ al fattore $v^{i+1}$.
 
-    Pi\`u formalmente,  se $\varphi_i (v) = 0$, allora $f_i (v) = \zero$, altrimenti
+    Pi\`u formalmente,  se $\varphi_i (v) = 0$, allora $f_i (v) = \zero$, altrimenti vale
     \[
         f_i (v) = v^1 \cdots \tilde{v}^i \tilde{v}^{i+1} \cdots v^\ell,
     \]
@@ -370,12 +391,241 @@ Possiamo finalmente definire l'azione dell'operatore di Kashiwara $f_i$.
 
 Bisogna ancora verificare che $f_i$ sia ben definito.
 
+% NOTE ponderare se scrivere sempre f_i(v) o anche f_i \, v.
 \begin{proposition}
     Per ogni fattorizzazione crescente $v \in \incrfact(\w)$ tale che $f_i (v) \neq \zero $, 
     anche $f_i v$ \`e una parola ridotta per lo stesso $\w$.
 \end{proposition}
 
 \begin{proof}
-    Mostriamo come ottenere $f_i$ da $v$ tramite operazioni di Coxeter.
-    TODO
+    Mostriamo come ottenere $f_i v$ da $v$ tramite operazioni di Coxeter.
+
+    Mostriamo come ottenere i fattori $\tilde{v}^i  \tilde{v}^{i+1}$ di $f_i v$ dai
+    fattori $v^i  v^{i+1}$ di $v$ tramite operazioni di Coxeter.
+
+    Per il Lemma~\ref{lem:divisione_in_3}, i blocchi centrali dei
+    fattori $v^i$ e $v^{i+1}$ commutano con 
+    $u^i_r$ e $u^{i+1}_l$, ottenendo
+    \[
+        v^i \, v^{i+1} \sim 
+        u^i_l \, u^i_r \,
+        ( a, a+1, \dots , a+s ) \,
+        (a, a+1, \dots, a+s-1 )
+        \, u^{i+1}_l \, u^{i+1}_r.
+    \]
+    A questo punto, applicando il Lemma~\ref{lem:parole_equiv},
+    otteniamo
+    \[
+        u^i_l \, u^i_r \,
+        ( a+1, \dots , a+s ) \,
+        (a, a+1, \dots, a+s-1, a+s )
+        \, u^{i+1}_l \, u^{i+1}_r,
+    \]
+    e, facendo commutare ancora i blocchi centrali, otteniamo proprio
+    i fattori $\tilde{v}^i  \tilde{v}^{i+1}$.
 \end{proof}
+
+\begin{proposition}
+    Per ogni fattorizzazione crescente $v \in \incrfact(\w)$ tale che $f_i v \neq \zero$,
+    $f_i$ preserva le coppie di lettere appaiate tra i fattori $v^i$ e $v^{i+1}$.
+    Inoltre
+    \[
+        L_i (f_i v) = L_i ( v) \setminus \{ a \}, \qquad 
+        R_i (f_i v) = R_i (v ) \sqcup \{ a + s \},
+    \]
+    da cui
+    \[
+        \varphi_i (f_i v) = \varphi_i (v) -1, \qquad
+        \varepsilon_i (f_i v) = \varepsilon_i (v) +1,
+    \]
+    come richiesto dagli assiomi di cristallo.
+
+\end{proposition}
+
+\begin{proof}
+    Percorriamo l'accoppiamento in $f_i v$ utilizzando la divisione in blocchi del
+    Lemma~\ref{lem:divisione_in_3}.
+
+    I blocchi $u^i_r$ e $u^{i+1}_r$ non vengono modificati, quindi le coppie appaiate
+    tra di loro rimangono tali.
+
+    $a+s$ in $\tilde{v}^{i+1}$ \`e spaiato perch\'e tutte le lettere in $u^i_r$ sono 
+    gi\`a appaiate.
+
+    Le lettere tra $a$ e $a+s-1$ in $\tilde{v}^{i+1}$ rimangono appaiate con le lettere 
+    tra $a+1$ e $a+s$ in $\tilde{v}^i$.
+
+    Infine, poich\'e nemmeno i blocchi $u^i_l$ e $u^{i+1}_l$ vengono modificati e 
+    nessuna lettera in $u^{i+1}_l$ era accoppiata con $a$, anche le coppie appaiate tra
+    questi due fattori vengono preservate da $f_i$.
+\end{proof}
+
+Quanto fatto per definire $f_i$, pu\`o essere ripetuto, con piccole variazioni, per definire
+$e_i$.
+
+\begin{definition}
+    \label{def:b_t}
+    Solo ai fini di questa sezione, per $i$ fissato, definisco $b$ come il pi\`u 
+    piccolo elemento in $v^{i+1}$ spaiato,
+    ovvero $b = \min R_i (v)$.
+
+    Definisco inoltre $t$ come il numero di cifre \emph{consecutive} che 
+    precedono $b$ in $v^{i+1}$, ovvero $t$ \`e il minimo intero non-negativo tale che
+    $ b-t-1 \notin \cont(v^{i+1})$.
+\end{definition}
+
+% TODO regolare dimensioni parentesi
+
+Vale un analogo del Lemma~\ref{lem:divisione_in_3}, che non dimostreremo.
+
+\begin{lemma}
+    \label{lem:divisione_in_3_pt2}
+    I fattori $v^i$ e $v^{i+1}$ possono essere divisi ciascuno in 3 pezzi nel seguente
+    modo:
+    \[
+        \begin{array}{c@{\;}c@{\;}c@{\;}c@{\;}c@{\;}c@{\;}c}
+            v^i &=& u^i_l &\mid&  b-t+1,  \dots, b-1, b  &\mid& u^i_r ,  \\
+            v^{i+1} &=& u^{i+1}_l &\mid&  b-t, \dots, b-1, \textbf{\em b} &\mid& u^{i+1}_r.
+        \end{array}
+    \]
+
+    Inoltre, questa suddivisione soddisfa le seguenti propriet\`a:
+    \begin{itemize}
+        \item $b-t-1$ non compare in $u^{i+1}_l$;
+        \item $b+1$ non compare in $u^i_r$;
+        \item $b-t$ non compare in $u^i_l$;
+        \item tutte le lettere in $u^i_r$ sono appaite con lettere in $u^{i+1}_r$;
+        \item tutte le lettere in $u^{i+1}_l$ sono appaiate con lettere in $u^i_l$.
+    \end{itemize}
+\end{lemma}
+
+% TODO forse aggiungi esempio qui
+
+\begin{remark}
+    La suddivisione data dal Lemma~\ref{lem:divisione_in_3} \`e di $v$ \`e sostanzialmente
+    la stessa suddivisione che il Lemma~\ref{lem:divisione_in_3_pt2} d\`a di $f_i  (v)$.
+
+    Questo succede principalmente perch\'e $f_i$ \`e costruito in modo da mandare
+    il pi\`u grande elemento di $L_i(v)$ nel pi\`u piccolo elemento di $R_i(f_i ( v))$.
+\end{remark}
+    
+
+\begin{definition}
+    Per ogni fattorizzazione crescente $v = v^1 \dots v^\ell$ l'operatore di Kashiwara
+    $e_i$ rimuove $b$ dal fattore $v^{i+1}$ e aggiunge $b-t$ al fattore $v^i$.
+
+    Pi\`u formalmente, se $\varepsilon_i(v) = 0$, allora $e_i (v) = \zero$, 
+    altrimenti vale 
+    \[
+        e_i (v) = v^1 \cdots \tilde{v}^i \tilde{v}^{i+1} \cdots v^\ell,
+    \]
+    dove $\tilde{v}^i$ e $ \tilde{v}^{i+1} $ sono tali che 
+    \begin{align*}
+        \cont ( \tilde{v}^i ) &= \cont (v^i) \sqcup \{ b -t \}, \\
+        \cont ( \tilde{v}^{i+1}) &= \cont (v^{i+1}) \setminus \{ b \},
+    \end{align*}
+    con $b$ e $t$ come da Definizione~\ref{def:b_t}.
+\end{definition}
+
+\begin{example}
+    Per esempio, se come prima
+    \[
+        v = v^1  v^2 = 
+        ( \mathbf{1}, 2_6, \mathbf{3}, 9_4, 11_5, \mathbf{12}, 13_3, 14_2, 18_1 ) \,
+        ( 1_6, 5_5, 8_4, 12_3, 13_2, \mathbf{15}, 16_1),
+    \]
+    allora vale
+    \[
+        e_1(v) = 
+        ( \mathbf{1}, 2_6, \mathbf{3}, 9_4, 11_5, \mathbf{12}, 13_3, 14_2, \mathbf{15}, 18_1 ) \,
+        ( 1_6, 5_5, 8_4, 12_3, 13_2, 16_1).
+    \]
+\end{example}
+
+    
+Mettendo assieme i risultati di questa sezione, si dimostra che 
+quanto definito  \`e effettivamente una struttura di cristallo 
+semi-normale.
+
+\begin{theorem}
+    \label{thm:cristallo_ms}
+    Per ogni permutazione $\w \in \sym_n$,
+    le funzioni $\wt$, $f_i$, $e_i$, $\varphi_i$, $\varepsilon_i$ definite in questa
+    sezione definiscono sull'insieme $\incrfact ^\ell ( \w )$
+    delle fattorizzazioni crescenti di $\w$ con $\ell$ fattori
+    una struttura di cristallo semi-normale
+    di tipo $A_{\ell-1}$.
+\end{theorem}
+
+% TODO ponderare bello forte su cos'è un cristallo di tipo A e se lo vogliamo davvero sapere.
+\begin{definition}
+    Per ogni permutazione $\w \in \sym_n$,
+    definiamo il \emph{cristallo di Morse-Schilling} $B(\w)$ come il cristallo di 
+    tipo $A$ sull'insieme $\incrfact(\w)$ delle fattorizzazioni crescenti di $\w$,
+    la cui buona definizione \`e garantita dal Teorema~\ref{thm:cristallo_ms},
+    per qualche $\ell$ sufficientemente grande.
+
+    Quando vogliamo specificare il numero di fattori $\ell$, specificheremo il tipo $A_{\ell-1}$.
+
+\end{definition}
+
+\begin{example}
+    Sia $\w = 321 \in \sym_3$.
+    Allora il grafo cristallo di tipo $A_2$ del  $B( \w )$ \`e rappresentato in figura.
+    % TODO mettere figura
+\end{example}
+
+\section{Prime conseguenze}
+
+\`E facile verificare che il carattere del cristallo $B(\w)$ definito nella sezione
+precedente \`e proprio la funzione quasi-simmetrica di Stanley $\stan_{\w^{-1}}$ 
+definita nella Sezione~\ref{sec:funzioni_stanley}.
+
+\begin{proposition}
+    Il carattere $\chi_{B(\w)}$ del cristallo di tipo $A_{\ell-1}$ $B(\w)$ 
+    \`e la funzione quasi-simmetrica di Stanley $\stan_{\w^{-1}}$ ristretta alle prime
+    $\ell$ variabili:
+    \[
+        \chi_{B(\w)} (x_1, \dots, x_\ell) = \stan_{\w^{-1}} (x_1, \dots, x_\ell).
+    \]
+    Facendo tendere $\ell$ a infinito, otteniamo
+    \[
+        \chi_{B(\w)} (\xx) = \stan_{\w^{-1}} (\xx).
+    \]
+\end{proposition}
+
+\begin{theorem}
+    Le funzioni quasi-simmetriche di Stanley sono funzioni simmetriche.
+\end{theorem}
+
+\begin{proof}
+    Il teorema segue immediatamente dall'interpretazione delle funzioni
+    di Stanley come caratteri di cristalli di tipo $A$ e dal Lemma ?? che dice che 
+    i caratteri di cristalli di tipo $A$ sono funzioni simmetriche.
+\end{proof}
+
+% NOTE forse qui mettere subsection?
+In \cite[Appendix~A]{morse-schilling-15}, Morse e Schilling hanno dimostrato anche che 
+il cristallo $B(\w)$ soddisfa gli assiomi locali di Stembridge, 
+% TODO forse qui referenza
+che implicano che $B(\w)$ \`e normale, ovvero \`e una unione disgiunta di cristalli di tableaux 
+(descritti nel Capitolo~\ref{ch:crystals}):
+\begin{equation}
+    \label{eq:crystal_iso_eg_1}
+    B(\w) \cong \bigoplus_{\lambda} B(\lambda)^{\oplus a_w^\lambda},
+\end{equation}
+dove $\lambda$ varia fra le permutazioni e $a_\w^\lambda$ sono interi non negativi
+che contano gli elementi di $B(\w)$ highest-weight di peso $\lambda$:
+\[
+    a_\w^\lambda = \lvert \{ v \in \incrfact_\lambda(\w) \mid
+        \forall i \in [\ell-1],
+    e_i(v) = \zero \} \rvert.
+\]
+
+Nel capitolo successivo daremo un'interpretazione combinatoria ai coefficienti
+$a_\w^\lambda$ ed espliciteremo l'isomorfismo in \eqref{eq:crystal_iso_eg_1}
+tramite una variante della corrispondenza RSK dovuta a Edelman e Greene in 
+\cite{edelman-greene-87}.
+
+
+

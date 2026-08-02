@@ -29,9 +29,10 @@
 % Personal Packages
 \usepackage[T1]{fontenc}                % Font encoding
 \usepackage{ytableau}                   % Young tableaux
+\ytableausetup{aligntableaux = bottom}
 \usepackage{stmaryrd}                   % for \llbracket -> [[
 \usepackage{mathtools}                  % for \coloneq -> :=
-\ytableausetup{aligntableaux = bottom}
+\usepackage{tikz-cd}
 
 % Personal operator definitions
 \DeclareMathOperator{\rowreading}{rr}
@@ -49,11 +50,14 @@
 \newcommand{\sym}{S}
 \newcommand{\w}{w}
 \newcommand{\xx}{\mathbf{x}}
+\newcommand{\ee}{\mathbf{e}}
 \newcommand{\stan}{F}
 \newcommand{\zero}{\mathbf{0}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\BB}{\mathbb{B}}
 \newcommand{\ytableaunumber}[1]{
     \ytableausetup{centerboxes}
     \ytableaushort{#1}
