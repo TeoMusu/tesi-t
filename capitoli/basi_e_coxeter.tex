@@ -3,6 +3,121 @@
 \chapter{Nozioni preliminari}
 \label{ch:basics}
 
+\section{Gruppi di Coxeter}
+
+
+Sia $W$ un gruppo con identit\`a $1$ 
+e sia $S = \{ s_1, s_2 \dots, s_n \}$ un suo insieme di 
+generatori \emph{di ordine due}, ovvero tali che $s_i^2 = 1$ per ogni $i$ e $1 \notin S$.
+
+Sia inoltre $m_{ij}$ l'ordine (eventualmente infinito) di $s_i s_j$.
+Allora abbiamo $m_{ii} = 1$ e $m_{ij} \geq 2$ per $i \neq j$.
+
+\begin{definition}[Sistema di Coxeter]
+    % Sia $W$ un gruppo e sia $S = \{ s_1, s_2 \dots, s_n \}$ un suo insieme di 
+    % generatori \emph{di ordine due}.
+    % Sia inoltre $m_{ij}$ l'ordine (eventualmente infinito) di $s_i s_j$,
+    % con $m_{ii} = 1$ e $m_{ij} \geq 2$ per $i \neq j$.
+
+    % Diciamo che $(W, S)$ \`e un \emph{sistema di Coxeter} se 
+    Con la notazione introdotta precedentemente, diciamo che $(W, S)$ \`e un
+    \emph{sistema di Coxeter} se
+    \[
+        \bigl\langle s_1, s_2, \dots, s_n \mid (s_i s_j)^{m_{ij}} = 1 \bigr\rangle
+    \]
+    \`e una presentazione per $W$, dove $i$ e $j$ variano fra tutti gli indici
+    tali che $m_{ij} \neq \infty$.
+    
+    In tal caso diciamo che $W$ \`e un \emph{gruppo di Coxeter}.
+\end{definition}
+
+\begin{example}[Gruppo diedrale]
+    Il gruppo diedrale $D_n$ di ordine $2n$ \`e un gruppo di Coxeter scegliendo
+    come generatori due riflessioni ``vicine'', il cui prodotto \`e la rotazione di
+    ordine $n$.
+
+    Infatti si pu\`o verificare che 
+    \[
+        \bigl\langle s_1, s_2 \mid s_1^2 = s_2^2 = {(s_1 s_2)}^n = 1 \bigr\rangle
+    \]
+    \`e una presentazione del gruppo diedrale $D_n$.
+\end{example}
+
+\begin{definition}
+    Per ogni elemento $\w$ in un gruppo di Coxeter $W$ definisco la sua \emph{lunghezza},
+    che denoto con $\len(\w)$, come la lunghezza della pi\`u corta scrittura
+    di $\w$ come prodotto di generatori in $S$.
+    % NOTE forse qui metti espressione / parola ridotta
+\end{definition}
+
+\subsection{Il gruppo simmetrico}
+
+Sia $\sym_n$ il gruppo simmetrico, ovvero il gruppo delle permutazioni dell'insieme $[n]$.
+
+Il gruppo simmetrico $\sym_n$ pu\`o essere visto come generato dalle trasposizioni
+di elementi adiacenti.
+
+Nel seguito indico con $s_i$ la trasposizione $(i, i+1)$,
+per ogni $i \in I = [n-1]$.
+
+\begin{proposition}
+    Le trasposizioni di elementi adiacenti $s_1, s_2, \dots, s_{n-1}$
+    generano $\sym_n$. Inoltre soddisfano le seguenti relazioni:
+    \begin{align*}
+        s_i^2 &= 1  && \text{per ogni $i\in I$;} \\
+        s_i s_j &= s_j s_i && \text{se $\lvert i - j \rvert \geq 2$;} \\
+        s_i s_j s_i &= s_j s_i s_j && \text{se $\lvert i - j \rvert = 1$.}
+    \end{align*}
+\end{proposition}
+
+A ogni parola $v = v_1 v_2 \cdots v_k$ nell'alfabeto $I = [n-1]$ associo la permutazione
+$\perm(v) \in \sym_n$, con
+\[
+    \perm(v) = s_{v_1} s_{v_2} \cdots s_{v_k} 
+\]
+
+\begin{definition}
+    Due parole nell'alfabeto $I = [n-1]$ si dicono \emph{Coxeter-equivalenti}
+    (e lo indico con $\sim$), se
+    si possono ottenere una dall'altra tramite una serie di operazioni
+    di Coxeter, ovvero sostituizioni della forma
+    \begin{align*}
+        xx &\leftrightarrow \varepsilon \\ 
+        xy &\leftrightarrow yx && \text{se $\lvert x - y \rvert \geq 2$,} \\
+        x (x+1) x &\leftrightarrow (x+1) x (x+1) 
+    \end{align*}
+    dove $\varepsilon$ \`e la stringa vuota.
+\end{definition}
+
+Chiaramente parole Coxeter-equivalenti rappresentano la stessa permutazione 
+in $\sym_n$.
+
+
+
+\begin{proposition}
+    Per ogni permutazione $\w \in \sym_n$, la sua lunghezza $\len(\w)$, ovvero
+    la lunghezza della pi\`u corta scrittura di $\w$ come prodotto di trasposizioni
+    di elementi adiacenti $s_i$,
+    \`e uguale al suo numero di inversioni $\inv(\w)$, dove
+    \[
+        \inv(\w) \coloneq \lvert \{
+            (i, j) \mid i<j \text{ e } \w(i) > \w(j)
+        \} \rvert.
+    \]
+\end{proposition}
+
+\begin{definition}[Parola ridotta]
+    Per ogni permutazione $\w \in \sym_n$, diciamo che la parola
+    $v = v_1 v_2 \cdots v_k$ di lunghezza $k$ nell'alfabeto $I = [n-1]$
+    \`e una \emph{parola ridotta} per $\w$ se $\perm(v) = \w$ e $k = \len(\w)$.
+
+    Inoltre indico con $\rw(\w)$ l'insieme delle parole ridotte per $\w$.
+\end{definition}
+
+
+
+
+
 La seguente equivalenza, verificata con un semplice conto, verr\`a usata nei prossimi
 capitoli, ma la enunciamo qui.
 
@@ -20,7 +135,6 @@ capitoli, ma la enunciamo qui.
 \begin{proof}
     Mostriamo come ottenere la seconda dalla prima tramite operazioni di Coxeter
     nel caso in cui $k = 4$.
-    Il caso generale segue nello stesso modo.
     \[
         \begin{array}{lcl}
             123\underline{41}23 & \qquad &  2132\underline{343} \\
@@ -30,4 +144,116 @@ capitoli, ma la enunciamo qui.
             21\underline{232}43 & \qquad &  2341234.
         \end{array}
     \]
+
+    Il caso generale segue nello stesso modo.
 \end{proof}
+
+\section{Sistemi di radici}
+
+Sia $V$ uno spazio euclideo, ovvero uno spazio vettoriale reale dotato di un
+prodotto scalare $\langle \,\cdot \, , \cdot \,\rangle$ definito positivo.
+
+Per ogni vettore non-nullo $\alpha \in V$, definisco $r_\alpha$
+come la riflessione rispetto all'iperpiano ortogonale a $\alpha$,
+che si pu\`o scrivere come segue:
+\[
+    r_\alpha(x) = x - \langle x, \alpha^\vee \rangle \alpha, 
+    \qquad \text{dove} \quad \alpha^\vee = \frac{2\alpha}{\langle \alpha, \alpha\rangle}.
+\]
+
+\begin{remark}
+    Il prodotto scalare permette di identificare $V$ con il suo spazio duale $V^*$.
+    Tuttavia, sarebbe meglio pensare ad $\alpha^\vee$ come al funzionale dato da
+    \[
+        \alpha^\vee =
+        2 \frac{\langle \alpha, \cdot \, \rangle}{\langle\alpha,\alpha\rangle}
+        \in V^*,
+    \]
+    e al prodotto $\langle x, \alpha^\vee \rangle$ come all'applicazione del funzionale
+    $\alpha^\vee$ al vettore $x$.
+\end{remark}
+
+\begin{definition}[Sistema di radici]
+    Un \emph{sistema di radici} $\Phi$ in $V$ \`e un sottoinsieme non-vuoto finito di $V$ 
+    tale che:
+    \begin{enumerate}
+        \item $r_\alpha(\Phi) = \Phi$ per ogni $\alpha \in \Phi$;
+        \item $\langle \alpha, \beta^\vee \rangle \in \ZZ$ per ogni $\alpha, \beta \in \Phi$;
+        \item $\RR \alpha \cap \Phi = \{ \alpha, -\alpha \}$ per ogni $\alpha \in \Phi$.
+            % NOTE RR-span, come si scrive?
+    \end{enumerate}
+
+    Gli elementi di $\Phi$ si dicono \emph{radici}, 
+    mentre gli elementi di 
+    \[
+        \Phi^\vee = \{ \alpha^\vee \mid \alpha \in \Phi \}
+    \]
+    si dicono \emph{coradici}.
+\end{definition}
+
+\begin{remark}
+    \label{rmk:root_lattice}
+    La condizione ??(2) implica che lo $\ZZ$-span delle radici \`e un reticolo,
+    ovvero un sottogruppo addittivo \emph{discreto} di $V$.
+    % TODO dimostra
+\end{remark}
+
+Anche in vista dell'Osservazione~\ref{rmk:root_lattice}, definisco 
+il reticolo delle radici $\Lambda_\mathrm{root}$
+come il reticolo generato dalle radici.
+
+Diciamo inoltre che un reticolo $\Lambda$ \`e un \emph{reticolo dei pesi} per il sistema
+di radici $\Phi$ se $\Lambda_\mathrm{root} \subseteq \Lambda$ e vale
+\[
+    \langle \mu , \alpha^\vee \rangle \in \ZZ ,
+    \qquad \text{per ogni $\mu \in \Lambda$ e $\alpha \in \Phi$.}
+\]
+
+Fissiamo un iperpiano in $V$ che non contiene alcuna radice in $\Phi$ e chiamiamo le radici
+da un lato dell'iperpiano \emph{positive} e quelle dall'altro lato \emph{negative}.
+Siano $\Phi^+$ l'insieme delle radici positive e $\Phi^-$ quello delle radici negative.
+
+Una radice positiva si dice \emph{semplice} se non si pu\`o scrivere come somma
+di altre radici positive.
+Sia $\Sigma$ l'insieme delle radici semplici.
+Sia inoltre $I$ un insieme che indicizza le radici semplici.
+Quindi possiamo scrivere
+$\Sigma = \{ \alpha_i \mid i \in I \}$.
+
+
+\begin{proposition}
+    L'insieme $\Sigma$ delle radici semplici del sistema di radici $\Phi$ 
+    soddisfa le seguenti propriet\`a.
+    \begin{enumerate}
+        \item Gli elementi di $\Sigma$ sono linearmente indipendenti.
+        \item Se $\alpha \in \Sigma$ e $\beta \in \Phi^+$, allora $\beta = \alpha$
+            oppure $r_\alpha (\beta) \in \Phi^+$; ovvero $r_\alpha$ permuta
+            $\Phi^+ \setminus \{ \alpha \} $.
+        \item Se $\alpha$, $\beta$ sono radici distinte in $\Sigma$, allora
+            $\langle \alpha, \beta^\vee \rangle \leq 0 $.
+        \item Ogni radice positiva si pu\`o scrivere come combinazione lineare a coefficienti
+            interi non-negativi di elementi di $\Sigma$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Si veda \cite[Proposition~20.1]{Bump2013LieGroups}.
+\end{proof}
+
+\begin{definition}
+    Per ogni sistema di radici $\Phi$, definisco il suo \emph{gruppo di Weyl} $W$ come il
+    gruppo generato da $r_\alpha$ al variare di $\alpha \in \Phi$.
+\end{definition}
+
+\begin{proposition}
+    Il gruppo di Weyl $W$ \`e un gruppo di Coxeter generato dalle riflessioni
+    semplici $r_{\alpha_i}$ per $i \in I$.
+\end{proposition}
+
+\begin{proof}
+    Si veda \cite[Theorem~25.1]{Bump2013LieGroups}.
+\end{proof}
+
+
+
+

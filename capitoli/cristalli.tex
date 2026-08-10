@@ -65,7 +65,7 @@
             ricordando che la coradice $\alpha_i^\vee$ \`e definita come segue:
             \[
                 \alpha_i^\vee = \frac{2 \alpha_i}{ \langle \alpha_i, \alpha_i \rangle }.
-            \]
+        \]
 
     \end{enumerate}
 
@@ -121,10 +121,10 @@ scegliamo:
             \node (np) [right of=n3] {$\cdots$};
             \node (nl) [right of=np] {$v_0$};
 
-            \draw[->] (n1) -- node[above] {$1$} (n2);
-            \draw[->] (n2) -- node[above] {$1$} (n3);
-            \draw[->] (n3) -- node[above] {$1$} (np);
-            \draw[->] (np) -- node[above] {$1$} (nl);
+            \draw[->] (n1) -- node[above] {$\scriptstyle 1$} (n2);
+            \draw[->] (n2) -- node[above] {$\scriptstyle 1$} (n3);
+            \draw[->] (n3) -- node[above] {$\scriptstyle 1$} (np);
+            \draw[->] (np) -- node[above] {$\scriptstyle 1$} (nl);
         \end{tikzpicture};
     \]
     dove definisco, per ogni $j \in [k]$,
@@ -151,7 +151,24 @@ scegliamo:
     Similmente $e_1$ cambia la \emph{prima} parentesi aperta in una parentesi
     chiusa.
     % NOTE ponderare se vogliamo ``)'' oppure ``$)$'' che lascia pi\`u spazio.
-    % TODO aggiungere disegno 
+
+    Con questa interpretazione, il grafo cristallo $B(4)$ di tipo $A_1$
+    \`e il seguente:
+    \[
+        \begin{tikzpicture}[node distance=5em]
+            \node (n1) {))))};
+            \node (n2) [right of=n1] {)))\lparen};
+            \node (n3) [right of=n2] {))\lparen\lparen};
+            \node (n4) [right of=n3] {)\lparen\lparen\lparen};
+            \node (n5) [right of=np] {\lparen\lparen\lparen\lparen};
+
+            \draw[->] (n1) -- node[above] {$\scriptstyle 1$} (n2);
+            \draw[->] (n2) -- node[above] {$\scriptstyle 1$} (n3);
+            \draw[->] (n3) -- node[above] {$\scriptstyle 1$} (n4);
+            \draw[->] (n4) -- node[above] {$\scriptstyle 1$} (n5);
+        \end{tikzpicture}.
+    \]
+
 \end{example}
 
 \begin{remark}
@@ -179,10 +196,10 @@ scegliamo:
             \node (np) [right of=n3] {$\cdots$};
             \node (nl) [right of=np] {\ytableaunumber \ell};
 
-            \draw[->] (n1) -- node[above] {$1$} (n2);
-            \draw[->] (n2) -- node[above] {$2$} (n3);
-            \draw[->] (n3) -- node[above] {$3$} (np);
-            \draw[->] (np) -- node[above] {$\ell-1$} (nl);
+            \draw[->] (n1) -- node[above] {$\scriptstyle 1$} (n2);
+            \draw[->] (n2) -- node[above] {$\scriptstyle 2$} (n3);
+            \draw[->] (n3) -- node[above] {$\scriptstyle 3$} (np);
+            \draw[->] (np) -- node[above] {$\scriptstyle \ell-1$} (nl);
         \end{tikzpicture},
     \]
     dove il peso dell'elemento 
@@ -225,7 +242,7 @@ scegliamo:
             parentesi aperta ``\lparen'' spaiata, cambiandola in una lettera $i$.
     \end{itemize}
 
-    Si nota facilmente che l'azione di $f_i$ e di $e_i$ preserva le coppie di parentesi
+    Si verifica facilmente che l'azione di $f_i$ e di $e_i$ preserva le coppie di parentesi
     appaiate.
 
 \end{example}
@@ -254,6 +271,7 @@ scegliamo:
 \end{example}
 
 \begin{example}
+    \label{ex:crys_B1to2}
     Qui sotto \`e rappresentato il grafo cristallo $B(1)^2$ di tipo $A_2$
     delle parole di due lettere nell'alfabeto $\{1, 2, 3\}$.
 
@@ -386,6 +404,61 @@ Successivamente verificheremo la buona definizione dei cristalli di tableaux.
 
 % NOTE qui puoi mettere che B(`l) ha un unico highest weight e che sono connessi...
 % poi puoi mettere prodotto tensore etc, ma viene lunghissimo
+
+\section{Componenti connesse e Morfismi}
+
+Si noti che l'unione disgiunta di due cristalli $B$ e $B'$ \`e ancora un cristallo,
+che indichiamo con $B \oplus B'$ e che chiamiamo la loro \emph{somma diretta}.
+
+\begin{example}
+    Per esempio, il cristallo $B(1)^2$ descritto nell'Esempio~\ref{ex:crys_B1to2} \`e 
+    la somma diretta di due cristalli di tableaux:
+    \[
+        B(1)^2 = B(2) \oplus B(1,1).
+    \]
+\end{example}
+
+\begin{definition}
+    Un cristallo $B$ si dice \emph{connesso} se il suo grafo cristallo \`e
+    (debolmente) connesso,
+    ovvero se da qualsiasi elemento $x \in B$ si pu\`o raggiungere qualsiasi elemento
+    $y \in B$ applicando gli operatori di Kashiwara $f_i$ ed $e_i$ per ogni $i \in I$.
+\end{definition}
+
+Si noti che le componenti connesse di un cristallo sono ancora cristalli, con la struttura
+di cristallo indotta dall'inclusione.
+Per questo, ogni cristallo si pu\`o scrive come somma dirette delle proprie componenti connesse.
+
+\begin{definition}
+    Dati due cristalli $B$ e $B'$, una mappa $\Psi \colon B \to B'$ \`e un 
+    \emph{morfismo di cristalli} se commuta con gli operatori di Kashiwara $f_i$ ed $e_i$
+    e preserva il peso.
+    In simboli, per ogni $x \in B$ e per ogni $i \in I$ deve valere:
+    \begin{align*}
+        \Psi (f_i(x)) &= f_i ( \Psi(x)), \\
+        \Psi (e_i(x)) &= e_i ( \Psi(x)), \\
+        \wt( \Psi (x)) &= \wt (x);
+    \end{align*}
+    dove per convenzione $\Psi(\zero) = \zero$.
+
+    Un morfismo di cristalli $\Psi$ si dice \emph{isomorfismo} se $\Psi$ \`e invertibile
+    e l'inversa \`e ancora un morfismo di cristalli.
+\end{definition}
+
+\begin{remark}
+    I morfismi di cristalli preservano anche le statistiche $\varphi_i$ e $\varepsilon_i$
+    per ogni $i \in I$.
+\end{remark}
+
+Esiste anche una nozione pi\`u debole di morfismo di cristalli, che per\`o non useremo,
+in cui $\Psi(x)$ pu\`o essere $\zero$ e in cui posso avere
+$\Psi (f_i(x)) \neq f_i ( \Psi(x))$ se uno dei due termini \`e zero.
+
+\begin{proposition}
+    Morfismi di cristalli mandano componenti connesse in componenti connesse.
+    Inoltre, la restrizione a ogni componente connessa \`e un isomorfismo con l'immagine.
+\end{proposition}
+
 
 \section{Operatori riflessione di Kashiwara}
 
