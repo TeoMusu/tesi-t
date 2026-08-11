@@ -1,4 +1,4 @@
-%! TeX root = ../tesi.tex
+% !TeX root = ../tesi.tex
 
 \chapter{Corrispondenza di Edelman-Greene}
 \label{ch:edelman_greene}
@@ -28,9 +28,14 @@ tableaux $T$ (ridotti) tali che $\rowreading(T) \in \rw(\w)$.
 % TODO aggiungi esempio
 TODO: aggiungi un esempio
 
-Chiaramente, un tableau ridotto ha anche le righe \emph{strettamente} crescenti,
-oltre che le colonne.
-
+\begin{remark}
+    \label{rmk:tab_ridotto_crescenza}
+    % NOTE ponderare il emph
+    Un tableau ridotto, oltre che avere le colonne \emph{strettamente} crescenti, 
+    in quanto semistandard, ha anche le righe \emph{strettamente} crescenti.
+    Infatti, altrimenti il suo row-reading avrebbe due lettere consecutive.
+\end{remark}
+    
 
 In questo capitolo descriviamo la corrispondenza di Edelman e Greene (EG), descritta
 per la prima volta in \cite[Section~6]{edelman-greene-87}.
@@ -392,6 +397,124 @@ e permette di invertire il processo.
     % TODO forse mettere un esempio
 \end{example}
     
+Questa bigezione permette gi\`a di dare una risposta parziale alla domanda originale,
+ovvero quante siano le parole ridotte di una permutazione $\w$.
+
+\begin{definition}
+    Per ogni permutazione $\w \in \sym_n$ e partizione 
+    $\lambda \vdash \len(\w)$,
+    definiamo $a_\w^\lambda$ come il numero di tableaux semistandard il cui row-reading
+    \`e una parola ridotta per $\w$.
+    In simboli:
+    \[
+        % \label{eq:def_a_w_lambda}
+        a_\w^\lambda \coloneq \lvert \left\{ 
+            T \in \redtab(\w) \mid \shape(T) = \lambda
+        \right\} \rvert .
+    \]
+
+    Definiamo inoltre $f^\lambda$ come il numero di tableaux standard di forma $\lambda$.
+\end{definition}
+
+\begin{corollary}
+    Per ogni permutazione $\w \in \sym_n$, vale
+    \begin{equation}
+        \lvert \rw(\w) \rvert = \sum_{\lambda} a_\w^\lambda f^\lambda,
+    \end{equation}
+    con $a_\w^\lambda$ e $f^\lambda$ come definiti subito sopra.
+\end{corollary}
+
+In generale, non \`e facile calcolare i valori di $a_\w^\lambda$.
+In \cite{stanley-84}[Section~4], Stanley ha dato alcune condizioni su $\lambda$ 
+necessarie affich\'e $a_\w^\lambda$ sia diverso da zero.
+
+In alcuni casi particolari, invece, \`e possibile dare una risposta pi\`u precisa.
+Il seguente teorema, sempre dovuto a Stanley, risolve il problema per la 
+permutazione con la lunghezza pi\`u lunga.
+
+\begin{theorem}[{\cite[Corollary~4.3]{stanley-84}}]
+    Sia $\w_0$ la permutazione in $\sym_n$ che inverte l'ordine di $[n]$, ovvero
+    $\w_0 = n, n-1, \dots , 1 $ in one-line notation.
+    Allora vale
+    \[
+        \lvert \rw(\w_0) \rvert = f^{\lambda_0},
+    \]
+    dove $\lambda_0 = (n-1, n-2, \dots, 1)$ \`e la partizione il cui diagramma di
+    Young \`e una ``scala'' con $\binom{n}{2}$ blocchi.
+\end{theorem}
+
+\begin{proof}
+    Si verifica che il tableau $T_0$
+    rappresentato in Figura~\ref{fig:tableau_scala} \`e un tableau ridotto per $\w_0$.
+    Basta allora verificare che non ce ne siano altri, ovvero che se
+    $T$ \`e un tableaux ridotto per $\w_0$, allora $T = T_0$.
+    \begin{figure}[htbp]
+        \centering
+        \[
+            % TODO fixa l'allineamento verticale qui
+            T_0 = 
+            \ytableaunumber{
+                5,
+                45,
+                345,
+                2345,
+                12345
+            }
+        \]
+        \caption{
+            Il tableau ridotto $T_0$ per $\w_0$, nel caso in cui $n = 6$.
+            La costruzione si generalizza per ogni $n$.
+        }
+        \label{fig:tableau_scala}
+    \end{figure}
+
+    Per ogni casella di $T$, consideriamo un percorso che parte dalla casella pi\`u
+    in basso a sinistra e arriva a quella casella, muovendosi solo di una casella alla
+    volta verso destra o verso l'alto.
+    Ricordando l'Osservazione~\ref{rmk:tab_ridotto_crescenza},
+    i numeri lungo questo percorso sono strettamente crescenti.
+
+    Siccome $T$ contiene solo numeri da $1$ a $n-1$, il percorso sar\`a lungo al pi\`u
+    $n-1$ caselle, da cui ogni casella di $T$ ha una distanza di Manhattan dalla 
+    casella pi\`u in basso a sinistra minore o uguale a $n-1$.
+
+    Le possibili caselle a distanza minore o uguale a $n-1$ sono esattamente 
+    $\binom n 2$, ovvero quelle che compongono il diagramma ``a scala''.
+
+    Poich\'e $\len(\w_0) = \binom n 2$, $T$ deve contenere $\binom n 2$ caselle,
+    ovvero \emph{tutte} quelle a distanza minore o uguale a $n-1$, da cui 
+    $\shape(T) = \lambda_0$.
+
+    Per concludere che $T = T_0$, basta osservare che $T_0$ \`e l'unico tableau 
+    di quella forma con righe e colonne strettamente crescenti,
+    che usa solo numeri da $1$ a $n-1$.
+\end{proof}
+
+
+    % Poich\'e $\len(\w_0) = \binom n 2$, $T$ deve contenere $\binom n 2$ caselle
+    % a distanza minore o uguale a $n-1$, ovvero \emph{tutte}
+    % quindi la sua forma \`e proprio quella ``a scala''.
+
+    % Ricordiamo che Osservazione~\ref{rmk:tab_ridotto_crescenza} affermava che
+    % righe e colonne di un tableau ridotto sono strettamente crescenti.
+    % Usando questo fatto, ogni percorso come quello rappresentato sotto che si muove
+    % solo verso destra e verso l'alto contiene numeri strettamente crescenti.
+    % \[
+    %     \ytableausetup{smalltableaux}
+    %     \ytableaushort{
+    %         \none,
+    %         \none,
+    %         \none      \none      {*(green)},
+    %         \none      {*(green)} {*(green)},
+    %         \none      {*(green)},
+    %         {*(green)} {*(green)},
+    %         {*(green)}
+    %     }
+    %     *{1,2,3,4,5,6,7}
+    %     \ytableausetup{nosmalltableaux}
+    % \]
+    
+
 
 \section{Estensione a fattorizzazioni crescenti}
     
@@ -553,11 +676,12 @@ Ricordiamo che:
     dove $a_\w^\lambda$ \`e il numero di tableaux semistandard il cui row-reading
     \`e una parola ridotta per $\w$.
     In simboli:
-    \[
-        a_\w^\lambda = \lvert \left\{ 
+    \begin{equation}
+        \label{eq:def_a_w_lambda}
+        a_\w^\lambda \coloneq \lvert \left\{ 
             T \in \redtab(\w) \mid \shape(T) = \lambda
         \right\} \rvert .
-    \]
+    \end{equation}
     
 \end{corollary}
 
@@ -573,3 +697,46 @@ un isomorfismo di cristalli, ovvero la struttura di cristallo sulle fattorizzazi
 crescenti definita nel capitolo~\ref{ch:stanley_symm} viene mappata nella struttura 
 di cristallo sui tableaux semistandard definita del capitolo~\ref{ch:crystals}.
 
+Fissata una permutazione $\w \in \sym_n$, e un intero positivo $\ell$ che 
+assumeremo essere ``sufficientemente grande'',
+la corrispondenza di Edelman-Greene pu\`o
+essere vista come un bigezione tra l'insieme $\incrfact^\ell(\w)$ delle
+fattorizzazioni crescenti di $\w$ con $\ell$ fattori e
+l'unione disgiunta di opportuni insiemi di tableaux semistandard,
+indicizzata dai tableaux ridotti  di $\w$.
+
+Pi\`u precisamente:
+\[
+    \varphi_\mathrm{EG} \colon 
+    \incrfact^\ell(\w) \to
+    \bigsqcup_{P \in \redtab(\w)}
+    % \!\!\! NOTE pondere se mettere meno spazio
+    \ssyt^\ell\bigl(\shape(P)\bigr),
+\]
+dove per ogni partizione $\lambda$,
+$\ssyt^\ell(\lambda)$ \`e l'insieme dei tableaux semistandard di forma $\lambda$ in 
+cui compaiono solo lettere da $1$ a $\ell$.
+
+Ricordiamo che nel Capitolo~\ref{ch:stanley_symm}
+abbiamo definito una struttura di cristallo $B(\w)$ sull'insieme 
+$\incrfact^\ell(\w)$.
+
+Ricordiamo anche che nella Sezione~\ref{sec:crys_tableaux} abbiamo definito
+una struttura di cristallo $B(\lambda)$ sull'insieme $\ssyt^\ell(\lambda)$,
+quindi possiamo vedere il codominio come la somma diretta di questi cristalli:
+\[
+    \bigoplus_{P \in \redtab(\w)} B\bigl(\shape(P)\bigr)
+    =
+    \bigoplus_\lambda B(\lambda)^{\oplus a_\w^\lambda},
+\]
+dove $a_\w^\lambda$, definito in \eqref{eq:def_a_w_lambda}, \`e il numero di 
+tableaux semistandard il cui row-reading \`e una parola ridotta per $\w$.
+
+Il fatto sorprendente \`e che la corrispondenza EG tra questi due insiemi, oltre a
+essere una bigezione che preserva il peso, \`e anche un isomorfismo di cristalli.
+
+\begin{theorem}[{\cite[Theorem~4.11]{morse-schilling-15}}]
+    Per ogni permutazione $\w \in \sym_n$, la mappa 
+
+
+\end{theorem}
