@@ -140,6 +140,7 @@ Se $\ell$ \`e la lunghezza di $\w$, la funzione quasi-simmetrica di Stanley
 
 
 \section{Cristallo sulle fattorizzazioni crescenti}
+\label{sec:cristallo_morse_schilling}
 
 Fissiamo $\ell$ intero positivo.
 Indichiamo con $\incrfact^\ell(\w)$ l'insieme delle fattorizzazioni crescenti di
@@ -186,6 +187,7 @@ Descriviamo ora un algoritmo di bracketing
 sulle lettere dei fattori $v^i$ e $v^{i+1}$.
 
 \begin{definition}[$i$-pairing]
+    \label{def:ms_i_pairing}
     Descriviamo l'accoppiamento con un esempio.
 
     Siano i fattori $v^i$ e  $v^{i+1}$ come sotto:
@@ -373,6 +375,7 @@ Possiamo finalmente definire l'azione dell'operatore di Kashiwara $f_i$.
 \end{definition}
 
 \begin{example}
+    \label{ex:f_agisce_su_incrfact}
     Per esempio, se
     \[
         v = v^1  v^2 = 
@@ -393,6 +396,7 @@ Bisogna ancora verificare che $f_i$ sia ben definito.
 
 % NOTE ponderare se scrivere sempre f_i(v) o anche f_i \, v.
 \begin{proposition}
+    \label{prop:ms_f_coxeter_equivalenza}
     Per ogni fattorizzazione crescente $v \in \incrfact(\w)$ tale che $f_i (v) \neq \zero $, 
     anche $f_i v$ \`e una parola ridotta per lo stesso $\w$.
 \end{proposition}

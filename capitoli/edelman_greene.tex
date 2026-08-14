@@ -453,17 +453,24 @@ permutazione con la lunghezza pi\`u lunga.
         \[
             % TODO fixa l'allineamento verticale qui
             T_0 = 
-            \ytableaunumber{
-                5,
-                45,
-                345,
-                2345,
-                12345
+            \ytableaushort{
+                {\scriptstyle n-1},
+                {\scriptstyle n-2}{\scriptstyle n-1},
+                {}{}{},
+                3{}{}{},
+                23{}{}{\scriptstyle n-1},
+                123{}{\scriptstyle n-2}{\scriptstyle n-1}
+                % 5,
+                % 45,
+                % 345,
+                % 2345,
+                % 12345
             }
         \]
         \caption{
-            Il tableau ridotto $T_0$ per $\w_0$, nel caso in cui $n = 6$.
-            La costruzione si generalizza per ogni $n$.
+            % Il tableau ridotto $T_0$ per $\w_0$, nel caso in cui $n = 6$.
+            % La costruzione si generalizza per ogni $n$.
+            Il tableau ridotto $T_0$ per la permutazione $\w_0 \in \sym_n$.
         }
         \label{fig:tableau_scala}
     \end{figure}
@@ -485,7 +492,7 @@ permutazione con la lunghezza pi\`u lunga.
     ovvero \emph{tutte} quelle a distanza minore o uguale a $n-1$, da cui 
     $\shape(T) = \lambda_0$.
 
-    Per concludere che $T = T_0$, basta osservare che $T_0$ \`e l'unico tableau 
+    Per concludere che $T$ \`e uguale a $T_0$, basta osservare che $T_0$ \`e l'unico tableau 
     di quella forma con righe e colonne strettamente crescenti,
     che usa solo numeri da $1$ a $n-1$.
 \end{proof}
@@ -735,8 +742,175 @@ tableaux semistandard il cui row-reading \`e una parola ridotta per $\w$.
 Il fatto sorprendente \`e che la corrispondenza EG tra questi due insiemi, oltre a
 essere una bigezione che preserva il peso, \`e anche un isomorfismo di cristalli.
 
-\begin{theorem}[{\cite[Theorem~4.11]{morse-schilling-15}}]
-    Per ogni permutazione $\w \in \sym_n$, la mappa 
+\begin{theorem}
+    [{\cite[Theorem~4.11]{morse-schilling-15}}]
+    \label{thm:eg_isomorfismo}
+    Per ogni permutazione $\w \in \sym_n$, la mappa di Edelman-Greene
+    \[
+        \varphi_\mathrm{EG} \colon 
+        B(\w) \to 
+        \bigoplus_\lambda B(\lambda)^{\oplus a_\w^\lambda}
+    \]
+    \`e un isomorfismo di cristalli.
+
+    In particolare:
+    \begin{enumerate}
+        \item l'azione di $f_i$ ed $e_i$ sulla fattorizzazione crescente $v$, se definita,
+            non cambia il suo $P$-tableau, ovvero
+            \begin{align*}
+                P(f_i(v)) &= P(v) && \text{se $f_i(v) \neq \zero$,} \\
+                P(e_i(v)) &= P(v) && \text{se $e_i(v) \neq \zero$;}
+            \end{align*}
+        \item l'azione di $f_i$ ed $e_i$ sulla fattorizzazione crescente $v$ commuta
+            con quella sul suo $Q$-tableau, ovvero
+            \begin{align*}
+                Q(f_i(v)) = f_i(Q(v)), \\
+                Q(e_i(v)) = e_i(Q(v)).
+            \end{align*}
+    \end{enumerate}
+
+
+
 
 
 \end{theorem}
+
+Prima di dimostrare questo teorema, introduciamo la nozione di
+\emph{Coxeter-Knuth equivalenza}, un raffinamento della Coxeter equivalenza introdotto
+da Edelman e Greene in \cite[Definition~6.19]{edelman-greene-87}.
+
+\begin{definition}
+    Due parole ridotte $v$ e $v'$ si dicono \emph{Coxeter-Knuth equivalenti}
+    (e lo scrivo $v \approx v'$) se si possono ottenere
+    una dall'altra tramite una serie di operazioni di Coxeter-Knuth, ovvero
+    sostituzioni della forma
+    \begin{align*}
+        x(x+1)x &\leftrightarrow (x+1)x(x+1),  \\
+        y x z  &\leftrightarrow y z x  && \text{se $x<y<z$ e $\lvert x-z \rvert \geq 2$, } \\
+        x z y  &\leftrightarrow z x y  && \text{se $x<y<z$ e $\lvert x-z \rvert \geq 2$. }
+    \end{align*}
+\end{definition}
+
+In sostanza, posso scambiare due lettere che commutano $x$ e $z$ solo se,
+da uno dei due lati, c'\`e una lettera $y$ numericamente compresa tra le due.
+
+\begin{lemma}[{\cite[Lemma~6.23]{edelman-greene-87}}]
+    \label{lem:ptab_ck_equiv}
+    Ogni parola ridotta $v$ \`e Coxeter-Knuth equivalente al row-reading del suo
+    $P$-tableau, in simboli:
+    \[
+        v \approx \rowreading(P(v)).
+    \]
+\end{lemma}
+
+\begin{proof}
+    Ripercorrendo i passaggi dell'Osservazione~\ref{rmk:coxeter_righe}, si osserva
+    che tutte le operazioni di Coxeter utilizzate sono gi\`a operazioni di Coxeter-Knuth.
+\end{proof}
+
+\begin{lemma}
+    [{\cite[Theorem~6.24]{edelman-greene-87}}]
+    \label{lem:ptab_ck_equiv_doppia_freccia}
+    Due parole ridotte $v$ e $v'$ sono Coxeter-Knuth equivalenti se e solo se
+    i loro $P$-tableaux sono uguali. In simboli:
+    \[
+        v \approx v' \iff P(v) = P(v').
+    \]
+\end{lemma}
+
+\begin{proof}
+    Se $P(v) = P(v')$, allora, per il Lemma~\ref{lem:ptab_ck_equiv},
+    \[
+        v \approx P(v) = P(v') \approx v'.
+    \]
+
+    Per l'altra implicazione, che si riconduce a una lunga casistica,
+    rimandiamo alla dimostrazione di Edelman e Greene in
+    \cite[Theorem~6.4]{edelman-greene-87}.
+\end{proof}
+
+Ritorniamo ora al cristallo di Morse e Schilling $B(\w)$ per ogni $\w \in \sym_n$.
+
+\begin{lemma}
+    \label{lem:ms_f_ck_equivalenza}
+    Per ogni $i \in I$ e per ogni fattorizzazione crescente $v \in B(\w)$
+    tale che $f_i(v) \neq \zero$,
+    le parole ridotte associate a $v$ e a $f_i(v)$ sono Coxeter-Knuth equivalenti.
+\end{lemma}
+
+\begin{proof}
+    Ripercorriamo la dimostrazione della
+    Proposizione~\ref{prop:ms_f_coxeter_equivalenza}, che dimostrava la
+    Coxeter equivalenza tra $v$ e $f_i(v)$.
+    Si osserva, anche grazie al Lemma~\ref{lem:divisione_in_3}, che tutte le operazioni
+    di Coxeter utilizzate sono gi\`a operazioni di Coxeter-Knuth.
+
+    Per le propriet\`a dell'operatore $f_i$ descritte nella
+    Sezione~\ref{sec:cristallo_morse_schilling}, basta guardare il caso con due fattori.
+    Utilizziamo inoltre il pairing della Definizione~\ref{def:ms_i_pairing} e la suddivisione
+    del Lemma~\ref{lem:divisione_in_3}.
+    
+    Mostriamo come ottenere $f_1(v)$ da $v = v^1v^2$, utilizzando come esempio la parola
+    ridotta dell'Esempio~\ref{ex:f_agisce_su_incrfact}:
+    \[
+        v = v^1  v^2 = 
+        ( \mathbf{1}, 2, \mathbf{3}, 9, 11 \mid \mathbf{12}, 13, 14 \mid 18 ) \,
+        ( 1, 5, 8 \mid 12, 13 \mid \mathbf{15}, 16).
+    \]
+
+    % TODO: tutto sbagliato, rifare
+    Per prima cosa sposto a sinistra le lettere del primo blocco del
+    secondo fattore.
+    La sua lettera pi\`u piccola \`e minore della pi\`u piccola lettera 
+    appaiata del primo fattore (altrimenti quest'ultima non sarebbe appaiata), 
+    quindi si pu\`o muovere verso sinistra fino a raggiungerla. 
+    Nel nostro esempio otteniamo:
+    \[
+        ( \mathbf{1}, 2 \text{-} 1, \mathbf{3}, 9, 11 \mid \mathbf{12}, 13, 14 \mid 18 ) \,
+        ( 5, 8 \mid 12, 13 \mid \mathbf{15}, 16).
+    \]
+    Un simile ragionamento pu\`o essere ripetuto per le successive lettere,
+    trascurando le coppie che si sono gi\`a avvicinate (come $2$ e $1$ nell'esempio).
+    Allora, nell'esempio, $5$ si muove fino a $9$ e $8$ si muove fino a $11$, ottenendo:
+    \[
+        ( \mathbf{1}, 2 \text{-} 1, \mathbf{3}, 9 \text{-} 5,
+        11 \text{-} 8\mid \mathbf{12}, 13, 14 \mid 18 ) \,
+        ( 12, 13 \mid \mathbf{15}, 16).
+    \]
+    Nello stesso modo le lettere del terzo blocco del primo fattore si muovono a destra:
+    \[
+        ( \mathbf{1}, 2 \text{-} 1, \mathbf{3}, 9 \text{-} 5,
+        11 \text{-} 8\mid \mathbf{12}, 13, 14  ) \,
+        ( 12, 13 \mid \mathbf{15}, 18 \text{-} 16).
+    \]
+    Si verifica che tutte le operazioni di Coxeter richieste dal Lemma~\ref{lem:parole_equiv}
+    sono gi\`a operazioni di Coxeter-Knuth, ottendo
+    \[
+        ( \mathbf{1}, 2 \text{-} 1, \mathbf{3}, 9 \text{-} 5,
+        11 \text{-} 8\mid  13, 14  ) \,
+        ( 12, 13, \mathbf{14} \mid \mathbf{15}, 18 \text{-} 16).
+    \]
+    Alla fine, tutte le lettere spostate possono ritornare alle loro posizioni originali,
+    ottenendo
+    \[
+        f_1(v) = 
+        ( \mathbf{1}, 2, \mathbf{3}, 9, 11 \mid 13, 14 \mid 18 ) \,
+        ( 1, 5, 8 \mid 12, 13, \mathbf{14} \mid \mathbf{15}, 16).
+        \qedhere
+    \]
+\end{proof}
+
+Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}.
+
+\begin{proof}
+    % [Dimostrazione del Teorema~\ref{thm:eg_isomorfismo}]
+    Prima dimostriamo il punto~??1.
+    Per il Lemma~\ref{lem:ms_f_ck_equivalenza}, le parole ridotte $v$ e $f_i(v)$ sono 
+    Coxeter-Knuth equivalenti e, per il Lemma~\ref{lem:ptab_ck_equiv_doppia_freccia},
+    parole Coxeter-Knuth equivalenti hanno lo stesso $P$-tableau.
+
+    Per dimostrare il punto~??2 
+
+
+\end{proof}
+

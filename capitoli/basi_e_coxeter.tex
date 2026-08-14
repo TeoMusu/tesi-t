@@ -133,19 +133,53 @@ capitoli, ma la enunciamo qui.
 \end{lemma}
 
 \begin{proof}
-    Mostriamo come ottenere la seconda dalla prima tramite operazioni di Coxeter
-    nel caso in cui $k = 4$.
-    \[
-        \begin{array}{lcl}
-            123\underline{41}23 & \qquad &  2132\underline{343} \\
-            12\underline{31}423 & \qquad &  2\underline{13}2434 \\
-            1213\underline{42}3 & \qquad &  231\underline{24}34 \\
-            \underline{121}3243 & \qquad &  23\underline{14}234 \\
-            21\underline{232}43 & \qquad &  2341234.
-        \end{array}
-    \]
+    Mostriamo come ottenere la seconda dalla prima tramite operazioni di Coxeter,
+    mostrando come esempio il caso in cui $k = 4$.
 
-    Il caso generale segue nello stesso modo.
+    Per prima cosa, sposto ogni lettera della seconda met\`a pi\`u a sinistra possibile:
+    \[
+        123\underline{41}23
+        \sim
+        12\underline{31}423
+        \sim
+        1213\underline{42}3
+        \sim
+        1213243.
+    \]
+    Poi, cominciando da sinistra, applico ripetutamente la braid relation:
+    \[
+        \underline{121}3243
+        \sim
+        21\underline{232}43
+        \sim
+        2132\underline{343}
+        \sim
+        2132434.
+    \]
+    Infine, trovo la parola desiderata spostando a sinistra le lettere in
+    posizione dispari:
+    \[
+        2\underline{13}2434
+        \sim
+        231\underline{24}34
+        \sim
+        23\underline{14}234
+        \sim
+        2341234.
+        \qedhere
+    \]
+    %
+    % \[
+    %     \begin{array}{lcl}
+    %         123\underline{41}23 & \qquad &  2132\underline{343} \\
+    %         12\underline{31}423 & \qquad &  2\underline{13}2434 \\
+    %         1213\underline{42}3 & \qquad &  231\underline{24}34 \\
+    %         \underline{121}3243 & \qquad &  23\underline{14}234 \\
+    %         21\underline{232}43 & \qquad &  2341234.            
+    %     \end{array}
+    % \]
+    %
+    % Il caso generale segue nello stesso modo.
 \end{proof}
 
 \section{Sistemi di radici}
