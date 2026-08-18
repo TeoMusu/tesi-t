@@ -224,6 +224,23 @@ sulle lettere dei fattori $v^i$ e $v^{i+1}$.
 
 \end{definition}
 
+\begin{lemma}
+    \label{lem:lett_appaiate_ordinate}
+    Siano $x_1 < x_2 < \cdots < x_r$ le lettere appaiate in $v^i$ in ordine e siano
+    $y_1 < y_2 < \cdots < y_r$ le lettere appaiate in $v^{i+1}$ in ordine.
+    Allora vale
+    \[
+        x_i > y_i, \qquad \text{per ogni $i = 1, \dots, r$.}
+    \]
+\end{lemma}
+
+\begin{proof}
+    Ipotizziamo per assurdo che, per qualche $i$, $x_i \leq y_i$.
+    Allora, le $i$ lettere in $\{x_1, \dots , x_i\}$ possono essere appaiate
+    solo con lettere in $\{y_1, \dots, y_{i-1}\}$, che sono troppo poche, assurdo.
+\end{proof}
+
+
 \begin{definition}
     Per ogni fattorizzazione crescente $v = v^1 \cdots v^\ell$ e per ogni 
     $i \in [\ell -1]$ definisco 
@@ -354,6 +371,43 @@ per definire l'operatore di $f_i$ di Kashiwara.
     in $v^i$ con cui \`e stata appaiata.
 \end{proof}
 
+\begin{lemma}
+    \label{lem:divisione_sgravo_comparativo}
+    La suddivisione del Lemma~\ref{lem:divisione_in_3} soddisfa anche le seguenti 
+    propriet\`a.
+    \begin{itemize}
+        \item Se $k^i_l$ \`e la lunghezza di $u^i_l$ e $k^{i+1}_l$ \`e la lunghezza
+            di $u^{i+1}_l$, allora le ultime $k^{i+1}_l$ lettere di $u^i_l$ sono
+            ordinatamente maggiori delle lettere di $u^{i+1}_l$.
+            In simboli:
+            \[
+                \bigl(u^i_l\bigr)_{k^i_l - j} > \bigl(u^{i+1}_l\bigr)_{k^{i+1}_l -j}, \qquad 
+                \text{per ogni $j=0, 1, \dots, k^{i+1}_l -1$.}
+            \]
+        \item Se $k^i_r$ \`e la lunghezza di $u^i_r$ e $k^{i+1}_r$ \`e la lunghezza
+            di $u^{i+1}_r$, allora le prime $k^i_r$ lettere di $u^{i+1}_r$ sono
+            ordinatamente minori delle lettere di $u^i_r$.
+            In simboli:
+            \[
+                \bigl(u^i_r\bigr)_{j} > \bigl(u^{i+1}_r\bigr)_{j}, \qquad 
+                \text{per ogni $j=1, 2, \dots, k^i_r$.}
+            \]
+    \end{itemize}
+\end{lemma}
+
+Per esempio, per l'esempio sopra (??) otteniamo
+$3>1$, $9>5$, $11>8$ e $18>15$.
+
+\begin{proof}
+    La $j$-esima lettera di $u_l^{i+1}$ \`e minore della 
+    $j$-esima lettera appaiata di $u_l^i$ per 
+    il Lemma~\ref{lem:lett_appaiate_ordinate}, che \`e minore o uguale alla
+    $j$-esima lettera fra le ultime $k_l^{i+1}$ perch\'e $u_l^i$ ha $k_l^{i+1}$
+    lettere appaiate.
+
+    L'altra proposizione si dimostra in modo analogo.
+\end{proof}
+
 Possiamo finalmente definire l'azione dell'operatore di Kashiwara $f_i$.
 
 \begin{definition}
@@ -376,17 +430,29 @@ Possiamo finalmente definire l'azione dell'operatore di Kashiwara $f_i$.
 
 \begin{example}
     \label{ex:f_agisce_su_incrfact}
+    % Per esempio, se
+    % \[
+    %     v = v^1  v^2 = 
+    %     ( \mathbf{1}, 2_6, \mathbf{3}, 9_4, 11_5, \mathbf{12}, 13_3, 14_2, 18_1 ) \,
+    %     ( 1_6, 5_5, 8_4, 12_3, 13_2, \mathbf{15}, 16_1),
+    % \]
+    % allora
+    % \[
+    %     f_1 (v) = 
+    %     ( \mathbf{1}, 2_6, \mathbf{3}, 9_4, 11_5, 13_3, 14_2, 18_1 ) \,
+    %     ( 1_6, 5_5, 8_4, 12_3, 13_2, \mathbf{14}, \mathbf{15}, 16_1).
+    % \]
     Per esempio, se
     \[
         v = v^1  v^2 = 
-        ( \mathbf{1}, 2_6, \mathbf{3}, 9_4, 11_5, \mathbf{12}, 13_3, 14_2, 18_1 ) \,
-        ( 1_6, 5_5, 8_4, 12_3, 13_2, \mathbf{15}, 16_1),
+        ( \mathbf{1}, 2, \mathbf{3}, 9, 11, \mathbf{12}, 13, 14, 18 ) \,
+        ( 1, 5, 8, 12, 13, \mathbf{15}, 16),
     \]
     allora
     \[
         f_1 (v) = 
-        ( \mathbf{1}, 2_6, \mathbf{3}, 9_4, 11_5, 13_3, 14_2, 18_1 ) \,
-        ( 1_6, 5_5, 8_4, 12_3, 13_2, \mathbf{14}, \mathbf{15}, 16_1).
+        ( \mathbf{1}, 2, \mathbf{3}, 9, 11, 13, 14, 18 ) \,
+        ( 1, 5, 8, 12, 13, \mathbf{14}, \mathbf{15}, 16).
     \]
 
 
@@ -535,14 +601,14 @@ Vale un analogo del Lemma~\ref{lem:divisione_in_3}, che non dimostreremo.
     Per esempio, se come prima
     \[
         v = v^1  v^2 = 
-        ( \mathbf{1}, 2_6, \mathbf{3}, 9_4, 11_5, \mathbf{12}, 13_3, 14_2, 18_1 ) \,
-        ( 1_6, 5_5, 8_4, 12_3, 13_2, \mathbf{15}, 16_1),
+        ( \mathbf{1}, 2, \mathbf{3}, 9, 11, \mathbf{12}, 13, 14, 18 ) \,
+        ( 1, 5, 8, 12, 13, \mathbf{15}, 16),
     \]
     allora vale
     \[
         e_1(v) = 
-        ( \mathbf{1}, 2_6, \mathbf{3}, 9_4, 11_5, \mathbf{12}, 13_3, 14_2, \mathbf{15}, 18_1 ) \,
-        ( 1_6, 5_5, 8_4, 12_3, 13_2, 16_1).
+        ( \mathbf{1}, 2, \mathbf{3}, 9, 11, \mathbf{12}, 13, 14, \mathbf{15}, 18 ) \,
+        ( 1, 5, 8, 12, 13, 16).
     \]
 \end{example}
 

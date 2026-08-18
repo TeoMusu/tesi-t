@@ -243,17 +243,10 @@ Enunciamo e dimostriamo due lemmi che saranno utili in seguito.
     Sia $T$ un tableau ridotto e siano $a, b$ due lettere con $a < b$ e tali che 
     $\rowreading(T)ab$ sia una parola ridotta.
     Allora inserendo $a$ dentro $T$ e poi $b$ dentro $T \leftarrow a$, ovvero
-    calcolando $T \leftarrow a \leftarrow b$, il percorso di inserimento di $a$ \`e 
-    \emph{strettamente} a sinistra di quello di $b$.
-\end{lemma}
+    calcolando $T \leftarrow a \leftarrow b$, il percorso di inserimento di $b$ \`e 
+    \emph{strettamente} a destra di quello di $a$.
 
-\begin{proof}
-    % TODO
-    TODO
-\end{proof}
-
-\begin{lemma} \label{lem:strip}
-    Nelle stesse ipotesi del lemma precedente, la casella aggiunta inserendo $b$ \`e
+    Inoltre, la casella aggiunta alla forma del tableau inserendo $b$ \`e
     strettamente a destra e debolmente sotto quella aggiunta inserendo $a$.
 \end{lemma}
 
@@ -261,6 +254,29 @@ Enunciamo e dimostriamo due lemmi che saranno utili in seguito.
     % TODO
     TODO
 \end{proof}
+
+\begin{lemma} \label{lem:percorsi_weak}
+    Sia $T$ un tableau ridotto e siano $a, b$ due lettere questa volta con $a > b$
+    e tali che $\rowreading(T)ab$ sia una parola ridotta.
+    Allora inserendo $a$ dentro $T$ e poi $b$ dentro $T \leftarrow a$, ovvero
+    calcolando $T \leftarrow a \leftarrow b$, il percorso di inserimento di $b$ \`e 
+    \emph{debolmente} a sinistra di quello di $a$.
+
+    Inoltre, la casella aggiunta alla forma del tableau inserendo $b$ \`e
+    debolmente a sinistra e strettamente sopra quella aggiunta inserendo $a$.
+\end{lemma}
+
+\begin{proof}
+    % TODO
+\end{proof}
+
+% \begin{lemma} \label{lem:strip}
+%     Nelle stesse ipotesi del lemma precedente, la casella aggiunta inserendo $b$ \`e
+%     strettamente a destra e debolmente sotto quella aggiunta inserendo $a$.
+% \end{lemma}
+% 
+% \begin{proof}
+% \end{proof}
 
 \section{Corrispondenza EG per parole ridotte}
 
@@ -607,7 +623,8 @@ $k$ nella casella $(i,j)$ di $Q(v)$.
 \begin{proof}
     Basta verificare che $P^{(k)} \setminus P^{(k-1)}$ sia una \emph{striscia orizzontale}, 
     ovvero che non abbia due caselle sulla stessa colonna.
-    Ma questo segue direttamente dalla crescenza del fattore $v^k$ e dal Lemma~\ref{lem:strip} 
+    Ma questo segue direttamente dalla crescenza del fattore $v^k$ e dal
+    Lemma~\ref{lem:percorsi_strict} 
     sull'inserimento consecutivo di lettere crescenti.
 \end{proof}
 
@@ -644,7 +661,7 @@ $k$ nella casella $(i,j)$ di $Q(v)$.
     Basta quindi verificare che l'algoritmo si pu\`o invertire, nonostante 
     $Q$ sia semistandard anzich\'e standard.
     Ma so gi\`a che le lettere di ogni fattore sono state inserite in ordine 
-    crescente, quindi per il Lemma~\ref{lem:strip} le caselle corrispondenti
+    crescente, quindi per il Lemma~\ref{lem:percorsi_strict} le caselle corrispondenti
     a quel fattore sono state aggiunte da quella pi\`u sinistra a quella pi\`u a destra.
     
     Allora, per invertire l'inserimento, si guarda la lettera pi\`u alta tra quelle che compaiono
@@ -784,11 +801,16 @@ da Edelman e Greene in \cite[Definition~6.19]{edelman-greene-87}.
     (e lo scrivo $v \approx v'$) se si possono ottenere
     una dall'altra tramite una serie di operazioni di Coxeter-Knuth, ovvero
     sostituzioni della forma
-    \begin{align*}
-        x(x+1)x &\leftrightarrow (x+1)x(x+1),  \\
-        y x z  &\leftrightarrow y z x  && \text{se $x<y<z$ e $\lvert x-z \rvert \geq 2$, } \\
-        x z y  &\leftrightarrow z x y  && \text{se $x<y<z$ e $\lvert x-z \rvert \geq 2$. }
-    \end{align*}
+    \begin{subequations}
+        \begin{align}
+            \label{subeq:ck_braid}
+            x(x+1)x &\leftrightarrow (x+1)x(x+1),  \\
+            \label{subeq:ck_sx}
+            y x z  &\leftrightarrow y z x  && \text{se $x<y<z$ e $\lvert x-z \rvert \geq 2$, } \\
+            \label{subeq:ck_dx}
+            x z y  &\leftrightarrow z x y  && \text{se $x<y<z$ e $\lvert x-z \rvert \geq 2$. }
+        \end{align}
+    \end{subequations}
 \end{definition}
 
 In sostanza, posso scambiare due lettere che commutano $x$ e $z$ solo se,
@@ -851,47 +873,50 @@ Ritorniamo ora al cristallo di Morse e Schilling $B(\w)$ per ogni $\w \in \sym_n
     del Lemma~\ref{lem:divisione_in_3}.
     
     Mostriamo come ottenere $f_1(v)$ da $v = v^1v^2$, utilizzando come esempio la parola
-    ridotta dell'Esempio~\ref{ex:f_agisce_su_incrfact}:
+    ridotta dell'Esempio~\ref{ex:f_agisce_su_incrfact}, dove le lettere in 
+    grassetto sono quelle non appaiate:
     \[
         v = v^1  v^2 = 
         ( \mathbf{1}, 2, \mathbf{3}, 9, 11 \mid \mathbf{12}, 13, 14 \mid 18 ) \,
         ( 1, 5, 8 \mid 12, 13 \mid \mathbf{15}, 16).
     \]
 
-    % TODO: tutto sbagliato, rifare
+    % TODO: emoji del teschio + rifai con lem:divisione_sgravo_comparativo
+    
     Per prima cosa sposto a sinistra le lettere del primo blocco del
     secondo fattore.
-    La sua lettera pi\`u piccola \`e minore della pi\`u piccola lettera 
-    appaiata del primo fattore (altrimenti quest'ultima non sarebbe appaiata), 
-    quindi si pu\`o muovere verso sinistra fino a raggiungerla. 
-    Nel nostro esempio otteniamo:
-    \[
-        ( \mathbf{1}, 2 \text{-} 1, \mathbf{3}, 9, 11 \mid \mathbf{12}, 13, 14 \mid 18 ) \,
-        ( 5, 8 \mid 12, 13 \mid \mathbf{15}, 16).
-    \]
-    Un simile ragionamento pu\`o essere ripetuto per le successive lettere,
-    trascurando le coppie che si sono gi\`a avvicinate (come $2$ e $1$ nell'esempio).
-    Allora, nell'esempio, $5$ si muove fino a $9$ e $8$ si muove fino a $11$, ottenendo:
+    Per il Lemma~\ref{lem:lett_appaiate_ordinate}, queste lettere
+    sono ordinatamente minori delle lettere appaiate nel primo blocco del primo
+    fattore.
+    Allora posso muoverle (una alla volta) verso sinistra fino a raggiungere
+    ciascuna la propria lettera corrispondente (che pu\`o anche non essere quella
+    con cui erano appaiate), ottenendo:
     \[
         ( \mathbf{1}, 2 \text{-} 1, \mathbf{3}, 9 \text{-} 5,
         11 \text{-} 8\mid \mathbf{12}, 13, 14 \mid 18 ) \,
         ( 12, 13 \mid \mathbf{15}, 16).
     \]
-    Nello stesso modo le lettere del terzo blocco del primo fattore si muovono a destra:
+    Per ogni lettera, la prima operazione di Coxeter-Knuth \`e della forma in
+    \eqref{subeq:ck_dx}, tutte le successive sono della forma in 
+    \eqref{subeq:ck_sx}.
+
+    Nello stesso modo, tutte le lettere del terzo blocco del primo fattore si
+    possono spostare a destra, fino alla lettera ordinatamente corrispondente tra
+    quelle appaiate, ottenendo:
     \[
         ( \mathbf{1}, 2 \text{-} 1, \mathbf{3}, 9 \text{-} 5,
         11 \text{-} 8\mid \mathbf{12}, 13, 14  ) \,
         ( 12, 13 \mid \mathbf{15}, 18 \text{-} 16).
     \]
     Si verifica che tutte le operazioni di Coxeter richieste dal Lemma~\ref{lem:parole_equiv}
-    sono gi\`a operazioni di Coxeter-Knuth, ottendo
+    sono gi\`a operazioni di Coxeter-Knuth, quindi ottengo:
     \[
         ( \mathbf{1}, 2 \text{-} 1, \mathbf{3}, 9 \text{-} 5,
         11 \text{-} 8\mid  13, 14  ) \,
         ( 12, 13, \mathbf{14} \mid \mathbf{15}, 18 \text{-} 16).
     \]
-    Alla fine, tutte le lettere spostate possono ritornare alle loro posizioni originali,
-    ottenendo
+    Alla fine, tutte le lettere spostate durante i primi step
+    possono ritornare alle loro posizioni originali, ottenendo
     \[
         f_1(v) = 
         ( \mathbf{1}, 2, \mathbf{3}, 9, 11 \mid 13, 14 \mid 18 ) \,
@@ -907,9 +932,205 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     Prima dimostriamo il punto~??1.
     Per il Lemma~\ref{lem:ms_f_ck_equivalenza}, le parole ridotte $v$ e $f_i(v)$ sono 
     Coxeter-Knuth equivalenti e, per il Lemma~\ref{lem:ptab_ck_equiv_doppia_freccia},
-    parole Coxeter-Knuth equivalenti hanno lo stesso $P$-tableau.
+    parole Coxeter-Knuth equivalenti hanno lo stesso $P$-tableau e questo conclude
+    il punto~??1.
 
-    Per dimostrare il punto~??2 
+    Prima di dimostrare il punto~??2, introduciamo un po' di notazione.
+
+    Denotiamo le lettere dello $i$-esimo e dello $i+1$-esimo fattore di $v$ con
+    \begin{align*}
+        v^i &= x_1 x_2 \cdots x_{\alpha_i}, \\
+        v^{i+1} &= y_1 y_2 \cdots y_{\alpha_{i+1}}.
+    \end{align*}
+    Sia inoltre $x_j$ l'ultima lettera non appaiata di $v^i$, ovvero quella 
+    che verr\`a rimossa dall'azione di $f_i$ e sostituita con un'opportuna lettera
+    in $v^{i+1}$.
+    Sia inoltre $y_k$ la pi\`u grande lettera di $v^{i+1}$ minore di $x_j$,
+    ovvero l'ultima lettera del primo blocco secondo la suddivisione del 
+    Lemma~\ref{lem:divisione_in_3}.
+
+
+    In questa dimostrazione useremo pi\`u volte il Lemma~\ref{lem:percorsi_weak}
+    con maggiore generalit\`a.
+    Infatti il lemma rimane valido anche se la seconda lettera non \`e la lettera
+    inserita immediatamente dopo, a patto che il percorso d'inserimento della prima
+    lettera non sia stato ``toccato'' dall'inserimento di altre lettere intermedie.
+
+    Mostriamo subito questo ragionamento in azione.
+    
+    \begin{lemma}
+        \label{lem:thm_trascuro_inizio}
+        I percorsi di inserimento delle lettere $y_1, \dots, y_k$ sono tutti strettamente
+        a sinistra del percorso di inserimento di $x_j$.
+    \end{lemma}
+
+    \begin{proof}[Dimostrazione del lemma]
+        Per il Lemma~\ref{lem:divisione_sgravo_comparativo}, la lettera $y_1$
+        \`e minore della lettera $x_{j-k}$.
+        I percorsi d'inserimento delle lettere di $v^i$ a destra di $x_{j-k}$ sono strettamente
+        a destra del percorso di $x_{j-k}$ per il Lemma~\ref{lem:percorsi_strict},
+        quindi non lo hanno ``toccato'' e il percorso di inserimento di $y_1$ sar\`a
+        debolmente a sinistra di quello di $x_{j-k}$.
+
+        Successivamente, devo inserire la lettera $y_2 $, che per lo stesso lemma
+        \`e minore della lettera $x_{j-k+1}$.
+        Il percorso d'inserimento di $x_{j-k+1}$ non pu\`o essere stato ``toccato'' n\'e dalle
+        successive lettere di $v^i$, n\'e da $y_1$, in quanto il suo percorso \`e a sinistra
+        di quello di $x_{j-k}$.
+        Allora concludo che il percorso d'inserimento di $y_2$ \`e debolmente a sinistra
+        di quello di $x_{j-k+1}$.
+
+        Lo stesso ragionamento va rifatto per ogni lettera fino a $y_k$, il cui percorso
+        d'inserimento sar\`a debolmente a sinistra di quello di $x_{j-1}$.
+        Ma allora tutti i percorsi sono, in particolare, strettamente a sinistra
+        del percorso di $x_j$.
+        % TODO ponderare se mettere esempio qui.
+    \end{proof}
+
+    Studiamo ora i percorsi di inserimento delle lettere di $v^i$ e come cambiano
+    rimuovendo $x_j$.
+
+    Per il Lemma~\ref{lem:percorsi_strict}, per ogni $r = 1, \dots, \alpha_i$
+    il percorso di inserimento di $x_{r+1}$ \`e disgiunto e strettamente
+    a destra del percorso di $x_r$.
+
+    Rimuovendo $x_j$, chiaramente i percorsi di $x_1, \dots, x_{j-1}$ non cambiano.
+    Inserendo $x_{j+1}$ senza aver inserito $x_j$, ci sono due situazioni possibili:
+    \begin{itemize}
+        \item la lettera $a$ che avrebbe spinto $x_j$ \`e anche maggiore di $x_{j+1}$,
+            allora $x_{j+1}$ spinge $a$ e devia proseguendo lungo tutto il percorso
+            di inserimento originario di $x_j$;
+        \item la lettera $a$ \`e troppo piccola per essere spinta da $x_{j+1}$,
+            allora $x_{j+1}$ spinge la stessa lettera che avrebbe spinto se ci fosse stato
+            $x_j$ e fa un passo lungo il proprio percorso di inserimento originale.
+    \end{itemize}
+    Inoltre, finch\'e non si verifica la prima situazione,
+    lo stesso confronto tra le lettere spinte nei due percorsi di inserimento originali
+    si ripete ad ogni riga.
+    Alla fine, il nuovo percorso di inserimento di $x_{j+1}$ \`e composto alla
+    base da un pezzo del proprio percorso originale fino a un punto in cui (eventualmente)
+    devia sul percorso originale di $x_j$.
+
+    Inserendo $x_{j+2}$ (e analogamente le lettere successive), il percorso prosegue
+    sul vecchio tragitto finch\'e $x_{j+1}$ non \`e ancora stato deviato,
+    poi incontra lo stesso confronto descritto sopra che determiner\`a se
+    il percorso prosegue sul vecchio tragitto o se devia sul tragitto originale
+    di $x_{j+1}$, da lui non pi\`u utilizzato.
+
+    In figura ?? mostriamo l'inserimento nel tableau $T$ delle lettere
+    \[
+        x_1 x_2 x_3 x_4 = 4, 6, 10, 16
+    \]
+    e successivamente l'inserimento escludendo 
+    la lettara $x_1$.
+
+    Vogliamo studiare pi\`u precisamente dove avviene la deviazione sul percorso alla
+    sinistra.
+
+    \begin{lemma}
+        Chiamiamo $a_1, a_2, \dots$ le lettere che leggiamo lungo il percorso di inserimento
+        di $x_j$ e similmente chiamiamo $b_1, b_2, \dots$ le lettere lungo il percorso di $x_{j+1}$,
+        dove per convezione $a_r = \infty$ se il percorso non raggiunge la riga $r$.
+        Allora la deviazione avviene alla prima riga $r$ in cui $a_{r+1} > b_r$.
+    \end{lemma}
+
+    \begin{proof}[Dimostrazione del lemma]
+        Prima di ogni inserimento, la lettera $a_{r+1}$ si trova nella riga $r$
+        assieme a $b_{r+1}$.
+        Quando inserisco $x_{j+1}$ senza aver prima inserito $x_j$, la lettera $b_r$, che
+        avrebbe altrimenti spinto $b_{r+1}$, spinger\`a invece $a_{r+1}$ in quanto
+        % Quando non viene inserito $x_j$, la lettera $a_{r+1}$ si trova nella riga $r$.
+        % Allora, la lettera $b_r$ che aveva spinto $b_{r+1}$ spinger\`a invece
+        % $a_{r+1}$ in quanto
+        \[
+            b_r < a_{r+1} < b_{r+1}.
+        \]
+        Questo assumendo non avvengano inserimenti speciali.
+
+        % Pu\`o succedere, per via dell'inserimento speciale, che la lettera inserita
+        % in una riga sia la lettera che leggiamo nel percorso \emph{meno uno}.
+        % Questo non crea problemi in quanto rimane la disuguaglianza tra le lettere
+        % spinte, ovvero la lettera spinta da $a_r$ \`e minore della lettera spinta
+        % da $b_r$.
+        % sia uno in meno della lettera 
+    \end{proof}
+
+    \[
+        T = \ytableaunumber{
+            { 8} {15} {19},
+            { 6} {13} {14} {18} {22},
+            { 2} { 3} { 9} {15} {16} {17} {24},
+            { 1} { 2} { 5} { 7} { 8} {12} {13} {18}
+        }
+    \]
+
+    
+    \begin{figure}[htbp]
+        \centering
+        \begin{tikzpicture}[remember picture]
+            \node (T1) {
+                    \ytableaunumber{
+                        {\tmn{A51}{15}} {\tmn{A52}{19}},
+                        {\tmn{A41}{ 8}} {\tmn{A42}{13}} {\tmn{A43}{18}} {\tmn{A44}{22}},
+                        {\tmn{A31}{ 6}} {\tmn{A32}{ 9}} {\tmn{A33}{14}} {\tmn{A34}{15}} {\tmn{A35}{16}} {\tmn{A36}{24}},
+                        {\tmn{A21}{ 2}} {\tmn{A22}{ 3}} {\tmn{A23}{ 5}} {\tmn{A24}{ 7}} {\tmn{A25}{12}} {\tmn{A26}{17}} {\tmn{A27}{18}},
+                        {\tmn{A11}{ 1}} {\tmn{A12}{ 2}} {\tmn{A13}{ 4}} {\tmn{A14}{ 6}} {\tmn{A15}{ 8}} {\tmn{A16}{10}} {\tmn{A17}{13}} {\tmn{A18}{16}}
+                    }
+                };
+            \node (T2) at (6,0) {
+                    \ytableaunumber{
+                        {\tmn{B51}{15}} {\tmn{B52}{19}},
+                        {\tmn{B41}{ 8}} {\tmn{B42}{13}} {\tmn{B43}{18}} {\none[\bullet]},
+                        {\tmn{B31}{ 6}} {\tmn{B32}{ 9}} {\tmn{B33}{14}} {\tmn{B34}{15}} {\tmn{B35}{22}} {\tmn{B36}{14}},
+                        {\tmn{B21}{ 2}} {\tmn{B22}{ 3}} {\tmn{B23}{ 7}} {\tmn{B24}{12}} {\tmn{B25}{16}} {\tmn{B26}{17}} {\tmn{B27}{18}},
+                        {\tmn{B11}{ 1}} {\tmn{B12}{ 2}} {\tmn{B13}{ 5}} {\tmn{B14}{ 6}} {\tmn{B15}{ 8}} {\tmn{B16}{10}} {\tmn{B17}{13}} {\tmn{B18}{16}}
+                    }
+                };
+
+            \begin{scope}[on background layer, overlay]
+                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                    (A13.center) to
+                    (A23.center) to
+                    (A32.center) to
+                    (A42.center) to
+                    (A51.center);
+                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                    (A14.center) to
+                    (A24.center) to
+                    (A34.center) to
+                    (A43.center) to
+                    (A52.center);
+                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                    (A16.center) to
+                    (A25.center) to
+                    (A35.center) to
+                    (A44.center);
+                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                    (A18.center) to
+                    (A27.center) to
+                    (A36.center);
+
+                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                    (B14.center) to
+                    (B23.center) to
+                    (B32.center) to
+                    (B42.center) to
+                    (B51.center);
+                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                    (B16.center) to
+                    (B24.center) to
+                    (B34.center) to
+                    (B43.center) to
+                    (B52.center);
+                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                    (B18.center) to
+                    (B27.center) to
+                    (B36.center);
+
+
+            \end{scope}
+        \end{tikzpicture}
+    \end{figure}
 
 
 \end{proof}

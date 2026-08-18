@@ -33,6 +33,8 @@
 \usepackage{stmaryrd}                   % for \llbracket -> [[
 \usepackage{mathtools}                  % for \coloneq -> :=
 \usepackage{tikz-cd}
+\usetikzlibrary{tikzmark}               % for overlay tikz paths
+\usetikzlibrary{backgrounds}
 
 % Personal operator definitions
 \DeclareMathOperator{\rowreading}{rr}
@@ -61,12 +63,21 @@
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\BB}{\mathbb{B}}
 \newcommand{\EG}{\mathrm{EG}}
-\newcommand{\ytableaunumber}[1]{
+
+% Personal commands
+\newcommand{\ytableaudefault}{%
+    \ytableausetup{aligntableaux = bottom}
+}
+\newcommand{\ytableaunumber}[1]{%
     \ytableausetup{centerboxes}
     \ytableaushort{#1}
     \ytableausetup{baseline}
 }
+\newcommand{\tmn}[2]{%
+    \tikzmarknode{#1}{#2}%
+}
 
+% Personal envs
 \newenvironment{ytableaubig}{
         \ytableausetup{boxsize=1.7em}
         \begin{ytableau}
