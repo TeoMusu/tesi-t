@@ -168,13 +168,15 @@ una riga precedentemente vuota.
         \qquad
         \ytableaunumber{4, 3 4 5 \none {\none[\leftarrow 4]}, 1 2 {*(green) 3} 6 }
         \qquad
-        \ytableaunumber{4 \none {\none[\leftarrow 5]}, 3 {*(green) 4} 5 , 1 2 {*(green) 3} 6 }
+        \ytableaunumber{4 \none {\none[\leftarrow 5]}, 3  4 {*(green) 5}, 1 2 {*(green) 3} 6 }
         \qquad
-        \ytableaunumber{4 {*(green) 5}, 3 {*(green) 4} 5 , 1 2 {*(green) 3} 6 }.
+        \ytableaunumber{4 {*(green) 5}, 3 4 {*(green) 5} , 1 2 {*(green) 3} 6 }.
     \]
     
-    Per ogni riga ho colorato la casella in cui si \`e inserita la nuova lettera
-    (o quella in cui era gi\`a scritta).
+    Per ogni riga ho colorato la casella che conteneva la lettera che \`e
+    stata spinta nella riga successiva.
+    In particolare, quando avviene un inserimento speciale, coloro la casella
+    di $k+1$.
     Queste caselle prendono il nome di \emph{percorso di inserimento}.
 \end{example}
 
@@ -1062,42 +1064,51 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
                     }
                 };
 
-            \begin{scope}[on background layer, overlay]
-                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+            \begin{scope}[
+                on background layer,
+                overlay,
+                bpath/.style={
+                    green,
+                    opacity=0.7,
+                    line width=11pt,
+                    line cap=round,
+                    line join=round
+                } ]
+                \draw[bpath] 
                     (A13.center) to
                     (A23.center) to
                     (A32.center) to
                     (A42.center) to
                     (A51.center);
-                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                \draw[bpath] 
                     (A14.center) to
                     (A24.center) to
                     (A34.center) to
                     (A43.center) to
                     (A52.center);
-                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                \draw[bpath] 
                     (A16.center) to
                     (A25.center) to
                     (A35.center) to
                     (A44.center);
-                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                \draw[bpath] 
                     (A18.center) to
                     (A27.center) to
                     (A36.center);
-
-                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                %
+                \draw[bpath] 
                     (B14.center) to
                     (B23.center) to
                     (B32.center) to
                     (B42.center) to
                     (B51.center);
-                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                \draw[bpath] 
                     (B16.center) to
                     (B24.center) to
                     (B34.center) to
                     (B43.center) to
                     (B52.center);
-                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                \draw[bpath] 
                     (B18.center) to
                     (B27.center) to
                     (B36.center);
@@ -1298,21 +1309,263 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
 
     Anche per il Lemma~\ref{lem:divisione_sgravo_comparativo}, abbiamo che 
     $x_j \leq y_{k+1} < x_{j+1}$.
+    % Vediamo prima il caso in cui $x_j < y_{k+1}$ e studiamo a parte 
+    % il caso in cui $x_j = y_{k+1}$.
+    %
     Nel seguito voglio dimostrare che:
     \begin{itemize}
         \item se c'\`e una buca tra i percorsi di $x_j$ e di $x_{j+1}$, allora il percorso
             di $y_{k+1}$ scavalca quello di $x_j$ e finisce alla sua sinistra;
         \item se non c'\`e alcuna buca tra i due percorsi, allora il percorso di
-            $y_{k+1}$ rimane strettamente a destra di quello di $x_j$.
+            $y_{k+1}$ rimane 
+            debolmente
+            % strettamente
+            a destra di quello di $x_j$.
     \end{itemize}
 
     Per il Lemma~\ref{lem:percorsi_weak}, il percorso di $y_{k+1}$ rimane debolmente
     a sinistra di quello di $x_{j+1}$.
 
+    % NOTE forse qui induzione scritta bene
+    Studiamo prima l'inserimento senza una buca. La situazione \`e la seguente, con
+    $a_2 \leq b$.
+    \[
+        % TODO aggiungi i path
+        \ytableaushort{
+            {a_2},
+            \none {a_1} {c_1} {c_2} {\cdots} {b} \none {\none[\leftarrow d]}
+        }
+    \]
+    Sia inoltre $\tilde{a}_1$ la lettera il cui inserimento nella riga ha fatto
+    passare il percorso di $x_j$ per la casella di $a_1$, ovvero $\tilde{a}_1 = a_1$
+    se l'inserimento era regolare, oppure $\tilde{a}_1 = a_1 -1$ se l'inserimento
+    \`e stato speciale.
+    Definiamo similmente $\tilde{a}_2$.
 
+    Se l'inserimento di $y_{k+1}$ non ha incontrato buche precedentemente, possiamo
+    ragionare induttivamente e ipotizzare che $\tilde{a}_1 \leq d $ (che vale al primo
+    step perch\'e $x_j \leq y_{k+1}$).
 
+    Siccome prima dell'inserimento di $x_j$ e $x_{j+1}$ la casella di
+    $a_1$ era occupata da $\tilde{a}_2$, abbiamo che 
+    $\tilde{a}_2 \leq c_1 < c_2 < \cdots$.
+    Abbiamo anche che $\tilde{a}_2 \leq a_2 \leq b$.
+
+    Dividiamo in casi:
+    \begin{itemize}
+        \item se $\tilde{a}_1 = a_1$, la lettera $d$ spinge una $c$ oppure $b$,
+            che in ogni caso \`e maggiore o uguale a $\tilde{a}_2$;
+        \item se $\tilde{a}_1 = a_1 -1$, allora $\tilde{a}_2 = a_1$, da cui 
+            $d \geq \tilde{a}_1$ spinge $a_1$, una $c$ o $b$, che in ogni caso \`e maggiore o uguale
+            ad $\tilde{a}_2 = a_1$.
+    \end{itemize}
+
+    In ogni caso il nuovo percorso si posiziona debolmente a destra di quello di $x_j$
+    e la disuguaglianza tra le due lettere spinte continua a valere alla riga successiva.
     
-    
+    Vediamo ora cosa succede alla prima buca che si incontra. La situazione \`e la
+    seguente, con $b< a_2$ e, come prima, $\tilde{a}_1 \leq d$.
+    \[
+        \centering
+        \begin{tikzpicture}[remember picture]
+            \node (esempi) {
+                    \ytableaushort{
+                        {\none[\tmn{A14}{}]},
+                        {\tmn{A13}{a_2}} {\none[\cdots]} \none {\none[\tmn{B13}{}]},
+                        \none \none {\tmn{A12}{a_1}} {\tmn{B12}{b}} \none {\none[\leftarrow d]},
+                        \none \none {\none[\tmn{A11}{}]} {\none[\tmn{B11}{}]}
+                    }
+                    \qquad
+                    \qquad
+                    \ytableaushort{
+                        \none {\none[\tmn{A24}{}]},
+                        {\tmn{C23}{b}} {\tmn{A23}{a_2}} {\none[\cdots]} \none {\none[\tmn{B23}{}]},
+                        \none \none \none {\tmn{A22}{a_1}} {\tmn{B22}{d}},
+                        \none \none \none {\none[\tmn{A21}{}]} {\none[\tmn{B21}{}]}
+                    }
 
+                };
+            %
+            \begin{scope}[
+                on background layer,
+                overlay,
+                grPath/.style={
+                    green,
+                    opacity=0.7,
+                    line width=11pt,
+                    line cap=round,
+                    line join=round
+                }]
+                \draw[grPath] 
+                    (A11.center) to
+                    (A12.center) to
+                    (A13.center) to
+                    (A14.center);
+                \draw[grPath]
+                    (B11.center) to
+                    (B12.center) to
+                    (B13.center);
+                \draw[grPath]
+                    (A21.center) to
+                    (A22.center) to
+                    (A23.center) to
+                    (A24.center);
+                \draw[grPath]
+                    (B21.center) to
+                    (B22.center) to
+                    (B23.center);
+                % \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+                %     (bucaA1) at (A13.center) {};
+                % \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+                %     (bucaB1) at (B12.center) {};
+                % \draw[blue, opacity=0.7, ultra thick]
+                %     (bucaA1) to (bucaB1);
+                    % TODO inserisci percorso blu
+            \end{scope}
+        \end{tikzpicture}
+    \]
+
+    Come visto sopra, se $\tilde{a}_1 = a_1 -1$, allora vale $\tilde{a}_2 = a_1$,
+    che \`e assurdo, infatti vale
+    \[
+        a_1 +1 \leq b < a_2 \leq \tilde{a}_2 +1 = a_1 + 1.
+    \]
+    Allora $\tilde{a}_1 = a_1$ e $d$ non pu\`o spingere $a_1$.
+
+    Ricordando che il percorso di $y_{k+1}$ deve rimanere debolmente a sinistra
+    del percorso di $x_{j+1}$, deve succedere che $d$ spinge $b$, il quale,
+    essendo minore di $a_2$, si sposta debolmente a sinistra del percorso di $x_j$.
+    Inoltre, il nuovo percorso rimarr\`a definitivamente a sinistra di quello di $x_j$ per 
+    il Lemma~\ref{lem:percorsi_weak}.
+
+    La Figura~\ref{fig:tab_con_intertionp_v2} continua l'Esempio~\ref{ex:thm_tab_con_inspath}
+    mostrando l'inserimento delle ulteriori lettere
+    \[
+        y_1 y_2 y_3 y_4 = 5, 7, 12, 15.
+    \]
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[remember picture]
+            \node (T1) {
+                    \ytableaunumber{
+                        {\tmn{A61}{15}} {\tmn{A62}{19}},
+                        {\tmn{A51}{13}} {\tmn{A52}{18}},
+                        {\tmn{A41}{ 8}} {\tmn{A42}{ 9}} {\tmn{A43}{14}} {\tmn{A44}{22}} {\tmn{A45}{24}},
+                        {\tmn{A31}{ 6}} {\tmn{A32}{ 7}} {\tmn{A33}{12}} {\tmn{A34}{15}} {\tmn{A35}{16}} {\tmn{A36}{17}} {\tmn{A47}{18}},
+                        {\tmn{A21}{ 2}} {\tmn{A22}{ 3}} {\tmn{A23}{ 5}} {\tmn{A24}{ 6}} {\tmn{A25}{ 8}} {\tmn{A26}{13}} {\tmn{A27}{16}},
+                        {\tmn{A11}{ 1}} {\tmn{A12}{ 2}} {\tmn{A13}{ 4}} {\tmn{A14}{ 5}} {\tmn{A15}{ 7}} {\tmn{A16}{10}} {\tmn{A17}{13}} {\tmn{A18}{15}}
+                    }
+                };
+
+            \begin{scope}[
+                on background layer,
+                overlay,
+                grPath/.style={
+                    green,
+                    opacity=0.7,
+                    line width=11pt,
+                    line cap=round,
+                    line join=round
+                } ]
+                \draw[grPath] 
+                    (A13.center) to
+                    (A23.center) to
+                    (A32.center) to
+                    (A42.center) to
+                    (A51.center);
+                \draw[grPath] 
+                    (A14.center) to
+                    (A24.center) to
+                    (A34.center) to
+                    (A43.center) to
+                    (A52.center);
+                \draw[grPath] 
+                    (A16.center) to
+                    (A25.center) to
+                    (A35.center) to
+                    (A44.center);
+                \draw[grPath] 
+                    (A18.center) to
+                    (A27.center) to
+                    (A36.center);
+            \end{scope}
+        \end{tikzpicture}
+        % TODO cambia il tableau e aggiungi i percorsi.
+        \caption{L'inserimento del tableau della Figura~\ref{fig:tab_con_insertionp}
+        delle ulteriori lettere $5$, $7$, $12$ e $15$.}
+        \label{fig:tab_con_intertionp_v2}
+    \end{figure}
+    
+    Abbiamo dunque dimostrato che il percorso di inserimento di $y_{k+1}$
+    scavalca quello di $x_j$ alla propria sinistra esattamente in corrispondeza
+    della buca tra $x_j$ e $x_{j+1}$ e che, se non c\`e alcuna buca, non lo scavalca.
+
+    Se, lo scavalca, la stessa dimostrazione si pu\`o adattare per il percorso
+    successivo ed eventualmente quelli dopo.
+    Guardiamo per esempio il percorso di $y_{k+2}$.
+
+    Come prima, poich\'e $y_{k+2}< x_{j+2}$ e il percorso di $x_{j+2}$ non \`e stato toccato 
+    dagli inserimenti precedenti, il percorso di $y_{k+2}$ sar\`a debolmente
+    a sinistra di quello di $x_{j+2}$.
+
+    Per non intersecare il percorso di $y_{k+1}$, quello di $y_{k+2}$ deve passare
+    a \emph{destra} della buca tra $x_j$ e $x_{j+1}$.
+    Da quel punto in poi, invece, ci si ritrova nella stessa identica situazione del
+    percorso di $y_{k+1}$, per cui si dimostra che il percorso di $y_{k+2}$ scavalca
+    quello di $x_{k+1}$ se e solo se c'\`e una buca.
+
+    Per concludere la dimostrazione, scriviamo una parentesi chiusa ``$)$'' alle estremit\`a
+    dei percorsi di inserimento delle lettere del fattore $v^i$ e una parentesi
+    aperta ``$\lparen$'' a quelle del fattore $v^{i+1}$ e leggiamo da sinistra a destra
+    e dall'alto al basso la parola ottenuta.
+    Come preannunciato, bisogna dimostrare che l'ultima parentesi chiusa
+    non appaiata si trova in corrispondeza dell'ultimo percorso che devia, ovvero
+    l'ultimo ad avere una buca immediatamente alla propria sinistra.
+    Sia $x_{j+s}$ la lettera a cui corrisponde questo percorso.
+
+    Per esempio, la stringa di parentesi che si legge dal tableau in
+    Figura~\ref{fig:tab_con_intertionp_v2} \`e:
+    \[
+        (\,(\,)\,)\,\underline{)}\,\lparen\,),
+    \]
+    in cui l'ultima ``$)$'' non appaiata \`e quella sottolineata.
+    Si verifica, confrontando la Figura~\ref{fig:tab_con_insertionp}, che corrisponde
+    proprio alla casella che viene rimossa quando non si inserisce $x_j = x_1$.
+
+
+    Verifichiamo che tutte le parentesi aperte corrispondenti a $y_1, \dots, y_k$
+    sono appaiate con parentesi corrispondenti ad alcune tra $x_1, \dots, x_{j-1}$.
+    Questo segue rapidamente dalla dimostrazione del Lemma~\ref{lem:thm_trascuro_inizio},
+    in cui dimostro che la ``$\lparen$'' di $y_{r}$ compare prima della
+    ``$)$'' di $x_{j-k+r-1}$ per ogni $r = 1, \dots , k$.
+
+    Successivamente abbiamo dimostrato che, per ogni $r = 1, \dots, s$, dato
+    che c'\`e una buca tra i percorsi di $x_{j+r-1}$ e $x_{j+r}$, il percorso
+    di $y_{k+r}$ scavalca e quindi la sua parentesi aperta compare prima di quella
+    chiusa di $x_{j+r-1}$, da cui anche tutte quelle sono appaiate.
+
+    Poich\'e non ci sono buche tra il percorso di $x_{j+s}$ e quello di
+    $x_{j+s+1}$, il percorso di $y_{k+s+1}$ \emph{non} scavalca quello di $x_{j+s}$.
+    Tutte le parentesi aperte inserite prima di $y_{k+s+1}$ sono appaiate per quanto
+    detto prima e tutte quelle che verranno inserite dopo saranno comunque a destra
+    di quella di $y_{k+s+1}$.
+    Allora la parentesi chiusa associata a $x_{j+s}$ \emph{non} \`e appaiata.
+
+    Verifichiamo infine che tutte le parentesi chiuse corrispondenti
+    $x_{j+s+1}, \dots, x_{\alpha_i}$ sono appaiate con parentesi chiuse tra quelle
+    di $y_{k+s+1}, \dots, y_{\alpha_{i+1}}$.
+    Per ogni $r = s+1, \dots, \alpha_i - j$, per il Lemma~\ref{lem:divisione_sgravo_comparativo}
+    vale $ y_{k+r} < x_{j+r} $, da cui prima di ogni parentesi chiusa di $x_{j+r}$
+    compare dopo quella aperta di $y_{k+r}$.
+
+    Questo dimostra che l'ultima parentesi chiusa non appaiata \`e proprio quella
+    di $x_{j+s}$, dimostrando che l'operatore $f_i$ di Kashiwara commuta con
+    la mappa $Q$ di Edelman e Greene.
+
+    Per dimostrare il teorema, bisognerebbe ripetere il tutto per dimostrare
+    che anche l'operatore $e_i$ commuta, ma qui non lo faremo.
 \end{proof}
+
+
 
