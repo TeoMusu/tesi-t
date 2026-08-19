@@ -951,13 +951,13 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
 
 
     In questa dimostrazione useremo pi\`u volte il Lemma~\ref{lem:percorsi_weak}
-    con maggiore generalit\`a.
+    con maggiore generalit\`a di quella dell'enunciato originale.
     Infatti il lemma rimane valido anche se la seconda lettera non \`e la lettera
     inserita immediatamente dopo, a patto che il percorso d'inserimento della prima
     lettera non sia stato ``toccato'' dall'inserimento di altre lettere intermedie.
 
     Mostriamo subito questo ragionamento in azione.
-    
+
     \begin{lemma}
         \label{lem:thm_trascuro_inizio}
         I percorsi di inserimento delle lettere $y_1, \dots, y_k$ sono tutti strettamente
@@ -1017,56 +1017,31 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     il percorso prosegue sul vecchio tragitto o se devia sul tragitto originale
     di $x_{j+1}$, da lui non pi\`u utilizzato.
 
-    In figura ?? mostriamo l'inserimento nel tableau $T$ delle lettere
-    \[
-        x_1 x_2 x_3 x_4 = 4, 6, 10, 16
-    \]
-    e successivamente l'inserimento escludendo 
-    la lettara $x_1$.
-
-    Vogliamo studiare pi\`u precisamente dove avviene la deviazione sul percorso alla
-    sinistra.
-
-    \begin{lemma}
-        Chiamiamo $a_1, a_2, \dots$ le lettere che leggiamo lungo il percorso di inserimento
-        di $x_j$ e similmente chiamiamo $b_1, b_2, \dots$ le lettere lungo il percorso di $x_{j+1}$,
-        dove per convezione $a_r = \infty$ se il percorso non raggiunge la riga $r$.
-        Allora la deviazione avviene alla prima riga $r$ in cui $a_{r+1} > b_r$.
-    \end{lemma}
-
-    \begin{proof}[Dimostrazione del lemma]
-        Prima di ogni inserimento, la lettera $a_{r+1}$ si trova nella riga $r$
-        assieme a $b_{r+1}$.
-        Quando inserisco $x_{j+1}$ senza aver prima inserito $x_j$, la lettera $b_r$, che
-        avrebbe altrimenti spinto $b_{r+1}$, spinger\`a invece $a_{r+1}$ in quanto
-        % Quando non viene inserito $x_j$, la lettera $a_{r+1}$ si trova nella riga $r$.
-        % Allora, la lettera $b_r$ che aveva spinto $b_{r+1}$ spinger\`a invece
-        % $a_{r+1}$ in quanto
+    \begin{example}
+        \label{ex:thm_tab_con_inspath}
+        In Figura~\ref{fig:tab_con_insertionp} mostriamo l'inserimento nel tableau $T$ delle lettere
         \[
-            b_r < a_{r+1} < b_{r+1}.
+            x_1 x_2 x_3 x_4 = 4, 6, 10, 16
         \]
-        Questo assumendo non avvengano inserimenti speciali.
+        e successivamente l'inserimento escludendo 
+        la lettara $x_1$.
+    \end{example}
 
-        % Pu\`o succedere, per via dell'inserimento speciale, che la lettera inserita
-        % in una riga sia la lettera che leggiamo nel percorso \emph{meno uno}.
-        % Questo non crea problemi in quanto rimane la disuguaglianza tra le lettere
-        % spinte, ovvero la lettera spinta da $a_r$ \`e minore della lettera spinta
-        % da $b_r$.
-        % sia uno in meno della lettera 
-    \end{proof}
 
-    \[
-        T = \ytableaunumber{
-            { 8} {15} {19},
-            { 6} {13} {14} {18} {22},
-            { 2} { 3} { 9} {15} {16} {17} {24},
-            { 1} { 2} { 5} { 7} { 8} {12} {13} {18}
-        }
-    \]
-
-    
+    % TODO pondera dove mettere la figura.
     \begin{figure}[htbp]
         \centering
+        \[
+            \ytableausetup{aligntableaux=center}
+            T = \ytableaunumber{
+                { 8} {15} {19},
+                { 6} {13} {14} {18} {22},
+                { 2} { 3} { 9} {15} {16} {17} {24},
+                { 1} { 2} { 5} { 7} { 8} {12} {13} {18}
+            }
+            \ytableausetup{aligntableaux=bottom}
+        \]
+
         \begin{tikzpicture}[remember picture]
             \node (T1) {
                     \ytableaunumber{
@@ -1127,11 +1102,217 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
                     (B27.center) to
                     (B36.center);
 
+                % \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+                %     (bucaA1) at (A32.center) {};
+                % \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+                %     (bucaB1) at (A24.center) {};
+                % \draw[blue, opacity=0.7, ultra thick]
+                %     (bucaA1) to (bucaB1);
+                % \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+                %     (bucaA1) at (A34.center) {};
+                % \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+                %     (bucaB1) at (A25.center) {};
+                % \draw[blue, opacity=0.7, ultra thick]
+                %     (bucaA1) to (bucaB1);
 
             \end{scope}
         \end{tikzpicture}
+        \caption{L'inserimento nel tableau $T$ prima delle lettere $4$, $6$, $10$, $16$,
+            poi solo delle lettere $6$, $10$, $16$.
+            I percorsi di inserimento sono evidenziati.
+        }
+        \label{fig:tab_con_insertionp}
     \end{figure}
 
+    Con quanto detto abbiamo dimostrato che, rimuovendo $x_j$, i percorsi di inserimento
+    di $x_{j+1}, \dots, x_{\alpha_i}$ o deviano a un certo punto sul percorso alla propria
+    sinistra, oppure proseguono sul proprio vecchio percorso.
+
+    Questo significa che la forma del $P$-tableau $P^{(i)}(f_i(v))$
+    (quello senza $x_j$) si ottiene da quella di $P^{(i)}(v)$ (quello con $x_j$)
+    rimuovendo una casella, in particolare la punta originale dell'ultimo percorso
+    deviato.
+    La casella rimossa \`e indicata con un pallino nella Figura~\ref{fig:tab_con_insertionp}.
+
+    Poich\'e, per la prima parte del teorema, il $P$-tableau finale deve essere uguale,
+    la casella rimossa deve venire aggiunta dal fattore $v^{i+1}$ e il $Q$-tableau
+    di $f_i(v)$ si ottiene da quello di $v$ cambiando da $i$ a $i+1$ la lettera 
+    nella casella mancante, ovvero la punta originale dell'ultimo percorso che devia.
+    Il resto della dimostrazione serve per verificare che la lettera $i$ che viene
+    cambiata in $i+1$ sia proprio l'\emph{ultima} lettera $i$ \emph{spaiata} nel 
+    row-reading del $Q$-tableau in cui le lettere $i$ sono sostituite da perentesi
+    chiuse ``$)$'' e le lettere $i+1$ da parentesi aperte ``$\lparen$'',
+    come richiesto dalla definizione di cristallo di tableaux data nella 
+    Sezione~\ref{sec:crys_tableaux}.
+
+    Studiamo allora pi\`u precisamente dove avviene la deviazione sul percorso alla
+    sinistra.
+
+    Chiamiamo $a_1, a_2, \dots$ le lettere che leggiamo lungo il percorso di inserimento
+    di $x_j$ e similmente chiamiamo $b_1, b_2, \dots$ le lettere lungo il percorso di $x_{j+1}$,
+    dove per convezione $a_r = \infty$ se il percorso non raggiunge la riga $r$.
+
+    Nel seguito dimostriamo che la deviazione avviene 
+    alla prima riga $r$ in cui $a_{r+1} > b_r$.
+
+    Assumiamo prima che non avvengano inserimenti speciali.
+    Prima degli inserimenti, la lettera $a_{r+1}$ si trovava nella riga $r$
+    assieme a $b_{r+1}$.
+    Quando inserisco $x_{j+1}$ senza aver prima inserito $x_j$, la lettera $b_r$, che
+    avrebbe altrimenti spinto $b_{r+1}$, spinger\`a invece $a_{r+1}$ in quanto
+    % Quando non viene inserito $x_j$, la lettera $a_{r+1}$ si trova nella riga $r$.
+    % Allora, la lettera $b_r$ che aveva spinto $b_{r+1}$ spinger\`a invece
+    % $a_{r+1}$ in quanto
+    \[
+        b_r < a_{r+1} < b_{r+1}.
+    \]
+
+    Per via degli inserimenti speciali, pu\`o succedere che la lettera inserita
+    in una riga sia la lettera che leggiamo nel percorso \emph{diminuita di uno}.
+    Bisogna quindi ripetere il ragionamento sostituendo alcune delle lettere
+    con $b_r-1$, $a_{r+1}-1$ o $b_{r+1}-1$.
+    i vari casi portano allo stesso risultato oppure ad assurdi.
+
+    Anche per mostrare il viceversa, (ovvero se $a_{r+1} \leq b_r$ allora
+    non c'\`e deviazione), le eventuali diminuzioni delle lettere non causano
+    problemi nella dimostrazione (che \`e immediata nel caso senza inserimenti
+    speciali).
+    % NOTE boia, questo proprio non \`e stato dimostrato. Pondera se aggiungere
+    % un esempio,  :,(
+
+    Chiaramente lo stesso discorso si pu\`o applicare anche per 
+    i percorsi di inserimento successivi a quello di $x_{j+1}$ e quindi caratterizza
+    tutti i punti in cui un percorso devia sul precedente.
+    Per il resto della dimostrazione, mi riferisco a questi punti di deviazione come
+    \emph{buche}.
+
+    Nella Figura~\ref{fig:buche_esempi} sono raffigurate le due buche 
+    dell'Esempio~\ref{ex:thm_tab_con_inspath}, le lettere cerchiate sono quelle
+    tra cui si deve verificare la disuguaglianza.
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[remember picture]
+            \node (esempi) {
+                    \ytableaushort{
+                        {\none[\tmn{A14}{}]},
+                        {\tmn{A13}{a_2}} {\none[\cdots]} \none {\none[\tmn{B13}{}]},
+                        \none \none {\tmn{A12}{a_1}} {\tmn{B12}{b}},
+                        \none \none {\none[\tmn{A11}{}]} {\none[\tmn{B11}{}]}
+                    }
+                    \qquad
+                    \qquad
+                    \ytableaunumber{
+                        {\none[\tmn{A24}{}]},
+                        {\tmn{A23}{9}} \none {\none[\tmn{B23}{}]},
+                        \none {\tmn{A22}{5}} {\tmn{B22}{7}},
+                        \none {\none[\tmn{A21}{}]} {\none[\tmn{B21}{}]}
+                    }
+                    \qquad
+                    \qquad
+                    \ytableaunumber{
+                        {\none[\tmn{A34}{}]},
+                        {\tmn{A33}{15}} {\none[\tmn{B33}{}]},
+                        {\tmn{A32}{7}} {\tmn{B32}{12}},
+                        {\none[\tmn{A31}{}]} {\none[\tmn{B31}{}]}
+                    }
+                };
+
+            \begin{scope}[on background layer, overlay]
+                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                    (A11.center) to
+                    (A12.center) to
+                    (A13.center) to
+                    (A14.center);
+                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                    (B11.center) to
+                    (B12.center) to
+                    (B13.center);
+                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                    (A21.center) to
+                    (A22.center) to
+                    (A23.center) to
+                    (A24.center);
+                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                    (B21.center) to
+                    (B22.center) to
+                    (B23.center);
+                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                    (A31.center) to
+                    (A32.center) to
+                    (A33.center) to
+                    (A34.center);
+                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
+                    (B31.center) to
+                    (B32.center) to
+                    (B33.center);
+
+                \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+                    (bucaA1) at (A13.center) {};
+                \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+                    (bucaB1) at (B12.center) {};
+                \draw[blue, opacity=0.7, ultra thick]
+                    (bucaA1) to (bucaB1);
+                \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+                    (bucaA2) at (A23.center) {};
+                \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+                    (bucaB2) at (B22.center) {};
+                \draw[blue, opacity=0.7, ultra thick]
+                    (bucaA2) to (bucaB2);
+                \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+                    (bucaA3) at (A33.center) {};
+                \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+                    (bucaB3) at (B32.center) {};
+                \draw[blue, opacity=0.7, ultra thick]
+                    (bucaA3) to (bucaB3);
+            \end{scope}
+        \end{tikzpicture}
+
+        \caption{La struttura generica di una buca, con $a_2 > b$, e le due
+        buche dell'esempio nella Figura~\ref{fig:tab_con_insertionp}.}
+        \label{fig:buche_esempi}
+    \end{figure}
+
+    % NOTE probabilmente questo non \`e inutile
+    Nel seguito dimostriamo che tutte le buche hanno la struttura descritta
+    nella Figura~\ref{fig:buche_esempi}, ovvero le caselle alla base, contenenti
+    $a_1$ e $b$, sono contigue, cio\`e non ci sono altre caselle in mezzo, e
+    i due cammini di inserimento si toccano in quel punto.
+
+    Se le caselle di $a_1$ e di $b$ non fossero contigue,
+    ci sarebbe una lettera $c$, non toccata dagli inserimenti, con $a_1 < c < b$.
+    Inoltre, poich\'e la casella di $a_1$ era precedentemente occupata da $a_2$
+    (o $a_2-1$), vale anche $a_2 \leq c < b$, che \`e assurdo perch\'e
+    in una buca vale $b < a_2$.
+
+    Ora dobbiamo studiare cosa succede inserendo le lettere 
+    $y_{k+1}, y_{k+2}, \dots, y_{\alpha_{i+1}}$, sempre con l'obbiettivo di mostrare
+    che la casella che viene rimossa quando non si inserisce $x_j$ \`e l'ultima
+    parentesi chiusa non appaiata quando scrivo una ``$)$'' all'estremit\`a dei
+    percorsi d'inserimento di $v^i$ e una ``$\lparen$'' all'estremit\`a di quelli
+    di $v^{i+1}$.
+
+    Il Lemma~\ref{lem:thm_trascuro_inizio} ci assicura che l'inserimento delle precedenti
+    lettere di $v^{i+1}$ non ha mai toccato il percorso di inserimento di $x_j$ e
+    le caselle alla sua destra.
+
+    Anche per il Lemma~\ref{lem:divisione_sgravo_comparativo}, abbiamo che 
+    $x_j \leq y_{k+1} < x_{j+1}$.
+    Nel seguito voglio dimostrare che:
+    \begin{itemize}
+        \item se c'\`e una buca tra i percorsi di $x_j$ e di $x_{j+1}$, allora il percorso
+            di $y_{k+1}$ scavalca quello di $x_j$ e finisce alla sua sinistra;
+        \item se non c'\`e alcuna buca tra i due percorsi, allora il percorso di
+            $y_{k+1}$ rimane strettamente a destra di quello di $x_j$.
+    \end{itemize}
+
+    Per il Lemma~\ref{lem:percorsi_weak}, il percorso di $y_{k+1}$ rimane debolmente
+    a sinistra di quello di $x_{j+1}$.
+
+
+
+    
+    
 
 \end{proof}
 
