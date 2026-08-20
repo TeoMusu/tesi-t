@@ -9,7 +9,7 @@
     \label{def:seminormal_crystal}
     Fissato un sistema di radici $\Phi$ con radici semplici $\{ \alpha_i \}_{i\in I}$
     e un reticolo dei pesi $\Lambda$, un cristallo (di Kashiwara) semi-normale \`e un insieme
-    non vuoto $B$ dotato di mappe
+    finito non vuoto $B$ dotato di mappe
     \begin{align*}
         f_i, e_i &\colon B \to B \sqcup \{ \zero \} ,   \\
         \varphi_i, \varepsilon_i &\colon B \to \NN  ,     \\
@@ -346,6 +346,7 @@ Successivamente verificheremo la buona definizione dei cristalli di tableaux.
     % TODO esempio facile
 \end{example}
 \begin{example}
+    \label{ex:crys_tab_21}
     % TODO esempio B(2,1) con disegno
 \end{example}
 
@@ -618,6 +619,105 @@ funzioni simmetriche.
     Facendo tendere $\ell$ a infinito, otteniamo che $s_\lambda$ \`e una funzione simmetrica.
 \end{proof}
 
-% TODO ponderare se aggiungere questa sezione
-% \section{Cristalli normali}
+\section{Cristalli normali (cenni)}
 
+% TODO forse spostare
+\begin{definition}
+    Un elemento $b$ in un cristallo $B$ si dice \emph{elemento di peso massimo} se,
+    per ogni $i \in I$, vale che $e_i(b) = \zero$, o equivalentemente $\varepsilon_i(b) = 0$,
+    cio\`e $b$ si trova all'inizio di ogni $i$-stringa.
+\end{definition}
+
+\begin{proposition}
+    Ogni componente connessa di un cristallo $B$ ha un elemento di peso massimo,
+    in particolare da ogni $b \in B$ \`e possibile arrivare a un elemento di 
+    peso massimo applicando ripetutamente $e_i$ al variare di $i \in I$.
+\end{proposition}
+
+\begin{proof}
+    Partendo da $b$ e applicando ripetutamente $e_i$ al variare di $i \in I$ non posso
+    ottenere nuovamente $b$.
+    Infatti, se cos\`\i\ fosse, ricordando che agire con $e_i$ somma $\alpha_i$ al peso,
+    otterrei
+    \[
+        \wt(b) = \wt(b) + \sum_{i\in I} k_i \, \alpha_i,
+    \]
+    dove gli $k_i$ sono interi non-negativi che contano quante volte ho applicato $e_i$.
+    Ma questo implica $k_i = 0$ per ogni $i \in I$ per lineare indipendenza delle radici
+    semplici enunciata nella Proposizione~\ref{prop:propriet_radici_semplici}.
+
+    Non potendo entrare in un ciclo, per la finitezza dell'insieme $B$, prima o poi 
+    raggiunger\`o un elemento di peso massimo.
+\end{proof}
+
+I cristalli di tableaux, definiti nella Sezione~\ref{sec:crys_tableaux}, di forma
+non-skew, ovvero $B(\lambda)$, con $\lambda$ partizione, sono connessi.
+
+\begin{proposition}
+    Per ogni partizione $\lambda$, il cristallo di tableaux $B(\lambda)$ ha un unico
+    elemento di peso massimo ed \`e quindi connesso.
+\end{proposition}
+
+\begin{proof}
+    Dimostriamo che un tableau $T$ di peso massimo deve avere la struttura descritta nella
+    Figura~\ref{fig:tab_massimo}, ovvero deve avere solo lettere $k$ nella riga $k$-esima.
+
+    \begin{figure}[htbp]
+        \[
+            T = 
+            \ytableausetup{aligntableaux=center}
+            \ytableaunumber{
+                4,
+                3 3,
+                2 2 2 2,
+                1 1 1 1
+            }
+            \ytableausetup{aligntableaux=bottom}
+        \]
+        \caption{Il tableau di peso massimo nel cristallo $B(\lambda)$, con
+        $\lambda = (4, 4, 2, 1)$. }
+        \label{fig:tab_massimo}
+    \end{figure}
+
+    Nell'applicazione di $e_1$, tutte le lettere $2$ nella prima riga appaiono come parentesi
+    aperte non appaiate (non hanno $1$ alla propria destra),
+    quindi affinch\'e $T$ sia di peso massimo, non devono apparire
+    $2$ nella prima riga.
+    Lo stesso discorso funziona per ogni lettera: se $\varepsilon_i(T) = 0$, allora
+    non compaiono lettere $i+1$ nella prima riga.
+
+    Una volta dimostrato che la prima riga contiene solo $1$, si procede per 
+    induzione sulle righe successive.
+    La seconda riga non contiene $1$, inoltre non contiene $3$ perch\'e non ci sono
+    $2$ nella prima riga con cui potrebbero essere appaiati, e cos\`\i\ via.
+\end{proof}
+
+Non daremo una definizione formale di cristallo \emph{normale}.
+Diremo solo che si tratta di quei cristalli che si possono ottenere a partire da
+opportune rappresentazioni di peso massimo del quantum group $U_q(\frakg)$.
+Corrispondono ai cristalli che Kashiwara spiega in dettaglio in
+\cite{kashiwara1995crystal}.
+Per una visione pi\`u ampia sull'argomento, si veda 
+\cite[Section~5.7]{bump-schilling-17}.
+
+Enunciamo, invece, una caratterizzazione dei cristalli normali di tipo $A$.
+
+\begin{theorem}
+    Un cristallo normale connesso di tipo $A$ \`e isomorfo a un cristallo di tableaux $B(\lambda)$,
+    per qualche partizione $\lambda$.
+
+    Inoltre, i cristalli di tableaux sono normali, da cui un cristallo \`e normale
+    se e solo se \`e somma diretta di cristalli di tableaux di forma non-skew.
+\end{theorem}
+
+Menzioniamo anche che in \cite{stembridge2003}, Stembridge ha fornito 
+alcuni assiomi, che prendono il nome di \emph{assiomi locali di Stembridge},
+che caratterizzano i cristalli normali valida per alcuni tipi, tra cui il tipo $A$ 
+che interessa a noi.
+Per ulteriori informazioni, si veda l'articolo originale oppure
+\cite[Section~4.2]{bump-schilling-17}.
+
+Tutti i cristalli che abbiamo visto e che vedremo pi\`u avanti sono normali.
+Un esempio di cristallo non-normale \`e quello ottenuto ``fondendo'' in uno
+i due elementi con lo stesso peso nel cristallo dell'Esempio~\ref{ex:crys_tab_21}.
+% TODO forse qui figura

@@ -3,15 +3,16 @@
 \chapter{Corrispondenza di Edelman-Greene}
 \label{ch:edelman_greene}
 
-Consideriamo ancora il gruppo simmetrico $S_n$ come generato dalle trasposizioni di
+Iniziamo richiamando alcune nozioni dal Capitolo~\ref{ch:basics}.
+
+Consideriamo  il gruppo simmetrico $S_n$ come generato dalle trasposizioni di
 elementi adiacenti $s_1, s_2, \dots, s_{n-1}$, dove $s_i = (i , i+1)$.
-
-Ricordiamo che una parola $v = v_1 v_2 \cdots v_k$ nell'alfabeto $\{1, 2, \dots, n-1 \}$
+Una parola $v = v_1 v_2 \cdots v_k$ nell'alfabeto $\{1, 2, \dots, n-1 \}$
 \`e associata alla permutazione $\w = s_{v_1} s_{v_2} \cdots s_{v_k}$ in $\sym_n$.
-
 Inoltre, la parola $v$ si dice \emph{ridotta} se la sua lunghezza $k$ \`e la minima
-possibile tra tutte le parole associate a $\w$, ovvero il numero di inversioni
-di $\w$, che chiamiamo \emph{lunghezza} di $\w$ e denotiamo con $\len(\w)$.
+possibile tra tutte le parole associate a $\w$.
+Questa lunghezza minima viene chiamata \emph{lunghezza} di $\w$, denotata con $\len(\w)$.
+si dimostra essere uguale al numero di inversioni di $\w$.
 
 Per ogni permutazione $\w \in \sym_n$, chiamo $\rw(\w)$ l'insieme delle 
 parole ridotte di $\w$.
@@ -23,10 +24,20 @@ parole ridotte di $\w$.
 
 Per ogni permutazione $\w \in \sym_n$, chiamo $\redtab(\w)$ l'insieme dei 
 tableaux $T$ (ridotti) tali che $\rowreading(T) \in \rw(\w)$.
-% TODO usa questa notazione
+% TODO UTILIZZA questa notazione
 
-% TODO aggiungi esempio
-TODO: aggiungi un esempio
+\begin{example}
+    Il tableau $T$ raffigurato sotto \`e ridotto in quanto $\rowreading(T) = 43451246$
+    \`e una parola ridotta per 
+    $\w = s_4 s_3 s_4 s_5 s_1 s_2 s_4 s_6= 2516473 \in \sym_7$.
+
+    \[
+        \ytableausetup{aligntableaux=center}
+        T = 
+        \ytableaunumber{4, 3 4 5, 1 2 4 6 }
+        \ytableausetup{aligntableaux=bottom}
+    \]
+\end{example}
 
 \begin{remark}
     \label{rmk:tab_ridotto_crescenza}
@@ -37,10 +48,18 @@ TODO: aggiungi un esempio
 \end{remark}
     
 
-In questo capitolo descriviamo la corrispondenza di Edelman e Greene (EG), descritta
-per la prima volta in \cite[Section~6]{edelman-greene-87}.
+In questo capitolo descriviamo la corrispondenza di Edelman e Greene (EG), 
+introdotta da loro in \cite[Section~6]{edelman-greene-87} come una variante
+della pi\`u famosa corrispondenza di Robinson, Schensted e Knuth (RSK),
+ma specializzata e adattata all'inserimento di parole ridotte.
 
-% TODO aggiungi cose su EG e RSK
+Cos\`\i\ come la corrispondenza RSK mappa parole in coppie di tableaux con la 
+stessa forma di cui uno semistandard e l'altro standard, la corrispondenza EG
+mappa \emph{parole ridotte} in coppie di tableaux con la stessa forma di
+cui uno \emph{ridotto} e l'altro standard.
+
+
+% TODO aggiungi cose su EG e RSK ma forse basta
 
 
 \section{Algoritmo di inserimento EG}
@@ -89,7 +108,8 @@ i_u \\
         altrimenti, se $k$ compare nella riga, necessariamente deve comparire anche 
         $k+1$, altrimenti $\rowreading(T)k$ non sarebbe una parola ridotta.
         In questo caso la riga rimane invariata, ma viene ``spinto'' nella riga successiva
-        $k+1$. Il risultato \`e il seguente:
+        $k+1$. In questo caso diciamo che \`e avvenuto in inserimento \emph{speciale}.
+        Il risultato \`e il seguente:
         \[
             \begin{ytableaubig}
                 \scriptstyle k+1 \\
@@ -99,7 +119,8 @@ i_u \\
 
 \end{enumerate}
 
-\begin{remark} \label{rmk:coxeter_righe}
+\begin{remark} 
+    \label{rmk:coxeter_righe}
     Almeno nel caso in cui $T$ ha una sola riga \`e facile vedere che 
     $\rowreading(T \leftarrow k)$ si ottiene da $\rowreading(T)k$ tramite operazioni
     di Coxeter:
@@ -138,11 +159,6 @@ il caso~\ref{item:eg_ins1}, ovvero l'inserimento
 non ``spinge'' nessuna lettera, oppure la lettera ``spinta'' viene aggiunta a 
 una riga precedentemente vuota.
 
-% TODO ponderare se qui vogliamo mettere che sto implicitamente usando l'osservazione
-% per dire che le cose giuste rimangono ridotte...
-
-% L'Osservazione~\ref{rmk:coxeter_righe} ci garantisce che in ogni step di questo processo
-% sia verificata l'ipotesi che 
 
 \begin{remark}
     L'algoritmo di inserimento EG \`e identico a quello per l'inserimento RSK, 
@@ -183,6 +199,7 @@ una riga precedentemente vuota.
 
 
 \begin{proposition}
+    \label{prop:propriet_inserimento}
     Siano $T$ un tableau ridotto e $k$ una lettera tale che $v = \rowreading(T)k$ sia una 
     parola ridotta per un qualche $\w \in \sym_n$.
     Allora:
@@ -210,33 +227,34 @@ una riga precedentemente vuota.
         \quad;
     \]
     che, dopo l'inserimento, diventa:
-    \[
+    \begin{align*}
         \ytableausetup{aligntableaux=center}
-        \begin{array}{ll}
-            \ytableaushort 
-            { \none \none {\scriptstyle >a} \none \none {\none[\leftarrow a+1]}, 
-            {\scriptstyle <a} {\scriptstyle <a} {*(green) a}  }
-            * {4,5}
-            &\text{ se $a=b$; } 
-            \\[2em]
-            \ytableaushort 
-            { \none \none {\scriptstyle >b} \none \none {\none[\leftarrow b]}, 
-            {\scriptstyle <a} {\scriptstyle <a} {*(green) a}  }
-            * {4,5}
-            &\text{ se $a < b$.}
-        \end{array}
+        &\ytableaushort 
+        { \none \none \none {
+                % \scriptstyle {> \atop a+1}
+                \substack{> \\ a+1}
+            } \none {\none[\leftarrow a+1]}, 
+        {\scriptstyle <a} {\scriptstyle <a} { a} {*(green) \scriptstyle a+1} }
+        * {4,5}
+        &&\text{ se $a=b$; } 
+        \\[1em]
+        &\ytableaushort 
+        { \none \none {\scriptstyle >b} \none \none {\none[\leftarrow b]}, 
+        {\scriptstyle <a} {\scriptstyle <a} {*(green) a}  }
+        * {4,5}
+        &&\text{ se $a < b$.}
         \ytableausetup{aligntableaux=bottom}
-    \]
+    \end{align*}
 
     In entrambi i casi l'inserimento nella riga successiva avverr\`a in una casella
     debolmente a sinistra della casella contenente $a$, ovvero l'inserimento
     perserver\`a la crescenza delle colonne e il percorso di inserimento
     si muover\`a debolmente a sinistra.
 
-    % Vediamo ora che $v' = \rowreading(T\leftarrow k)$ si ottiene da $v = \rowreading(T)k$
-    % con una serie di relazioni di Coxeter, e quindi rappresentano lo stesso $\w$.
-    % TODO
-    TODO: dire qualcosa su questo punto, anche se segue rapidamente dall'osservazione.
+    Per mostrare che $v' = \rowreading(T \leftarrow k) \in \rw(\w)$, basta iterare
+    per ogni riga l'Osservazione~\ref{rmk:coxeter_righe}.
+    Questo mostra come ottenere $v'$ da $v = \rowreading(T)k$ tramite una serie di 
+    operazioni di Coxeter.
 \end{proof}
 
 Enunciamo e dimostriamo due lemmi che saranno utili in seguito.
@@ -253,8 +271,19 @@ Enunciamo e dimostriamo due lemmi che saranno utili in seguito.
 \end{lemma}
 
 \begin{proof}
-    % TODO
-    TODO
+    Si procede induttivamente, mostrando che in ogni riga l'ordine dei percorsi
+    \`e quello giusto e continua a valere la disuguaglianza fra le lettere eventualmente
+    spinte.
+
+    Se l'inserimento di $a$ \`e regolare, la lettera $a$ spinge una lettera $c > a$ e
+    prende il suo posto.
+    L'inserimento di $b$ spinge una lettera $d > b > a$ che \`e anche maggiore di $c$
+    perch\'e la casella di $a$ era precedentemente occupata da $c$.
+
+    Se l'inserimento di $a$ \`e speciale, la lettera $a$ spinge $c=a+1$ e il percorso di
+    inserimento passa per $a+1$.
+    L'inserimento di $b$ spinge una lettera $d > b \leq a+1$ e il percorso passa per la
+    casella precedentemente occupata da $d$.
 \end{proof}
 
 \begin{lemma} \label{lem:percorsi_weak}
@@ -269,7 +298,13 @@ Enunciamo e dimostriamo due lemmi che saranno utili in seguito.
 \end{lemma}
 
 \begin{proof}
-    % TODO
+    Si procede in modo analogo alla dimostrazione del Lemma~\ref{lem:percorsi_strict}.
+
+    Dopo l'inserimento di $a$, che spinge una lettera $c>a$,
+    la lettera $a > b$ compare nella riga.
+    Allora, l'inserimento di $b$ spinge una lettera $d$ tale che $b < d \leq a$,
+    da cui il percorso passa debolmente a sinistra della casella di $a$ e
+    continua a valere la disuguaglianza $c > d$ tra le lettere spinte.
 \end{proof}
 
 % \begin{lemma} \label{lem:strip}
@@ -320,7 +355,9 @@ l'algoritmo definito sopra.
 
 \end{example}
 
-Dimostriamo alcune propriet\`a del $P$-tableau EG che useremo.
+Enunciamo alcune propriet\`a fondamentali del $P$-tableau EG,
+la cui dimostrazione segue immediatamente dall'iterazione della
+Proposizione~\ref{prop:propriet_inserimento}.
 
 \begin{proposition}[Propriet\`a del $P$-tableau EG]
     La mappa $P$ di EG soddisfa le seguenti propriet\`a:
@@ -328,7 +365,7 @@ Dimostriamo alcune propriet\`a del $P$-tableau EG che useremo.
         \item $P(v)$ \`e ridotto;
         \item $v$ e $\rowreading(P(v))$ sono parole ridotte per lo stesso elemento in $\sym_n$.
     \end{enumerate}
-    % TODO
+    % TODO aggiungere eventuali propriet\`a del P-tableau
 \end{proposition}
 
 In completa analogia con la corrispondenza RSK, definiamo il $Q$-tableau EG, o
@@ -884,6 +921,7 @@ Ritorniamo ora al cristallo di Morse e Schilling $B(\w)$ per ogni $\w \in \sym_n
     \]
 
     % TODO: emoji del teschio + rifai con lem:divisione_sgravo_comparativo
+    % oppure te lo fai andarebene cos\`i
     
     Per prima cosa sposto a sinistra le lettere del primo blocco del
     secondo fattore.
@@ -1030,7 +1068,6 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     \end{example}
 
 
-    % TODO pondera dove mettere la figura.
     \begin{figure}[htbp]
         \centering
         \[
@@ -1206,75 +1243,91 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
         \begin{tikzpicture}[remember picture]
             \node (esempi) {
                     \ytableaushort{
-                        {\none[\tmn{A14}{}]},
                         {\tmn{A13}{a_2}} {\none[\cdots]} \none {\none[\tmn{B13}{}]},
-                        \none \none {\tmn{A12}{a_1}} {\tmn{B12}{b}},
-                        \none \none {\none[\tmn{A11}{}]} {\none[\tmn{B11}{}]}
+                        \none \none {\tmn{A12}{a_1}} {\tmn{B12}{b}}
                     }
                     \qquad
                     \qquad
                     \ytableaunumber{
-                        {\none[\tmn{A24}{}]},
                         {\tmn{A23}{9}} \none {\none[\tmn{B23}{}]},
-                        \none {\tmn{A22}{5}} {\tmn{B22}{7}},
-                        \none {\none[\tmn{A21}{}]} {\none[\tmn{B21}{}]}
+                        \none {\tmn{A22}{5}} {\tmn{B22}{7}}
                     }
                     \qquad
                     \qquad
                     \ytableaunumber{
-                        {\none[\tmn{A34}{}]},
                         {\tmn{A33}{15}} {\none[\tmn{B33}{}]},
-                        {\tmn{A32}{7}} {\tmn{B32}{12}},
-                        {\none[\tmn{A31}{}]} {\none[\tmn{B31}{}]}
+                        {\tmn{A32}{7}} {\tmn{B32}{12}}
                     }
                 };
 
-            \begin{scope}[on background layer, overlay]
-                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
-                    (A11.center) to
+            \begin{scope}[
+                on background layer,
+                overlay,
+                grPath/.style={
+                    green,
+                    opacity=0.7,
+                    line width=11pt,
+                    line cap=round,
+                    line join=round
+                },
+                blNode/.style={
+                    circle,
+                    opacity=0.7,
+                    draw=blue,
+                    ultra thick,
+                    inner sep=5pt
+                },
+                blPath/.style={
+                    blue,
+                    opacity=0.7,
+                    ultra thick
+                } ]
+
+                \draw[grPath]
+                    ([yshift=-7pt]A12.south) to
                     (A12.center) to
                     (A13.center) to
-                    (A14.center);
-                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
-                    (B11.center) to
+                    ([yshift=7pt]A13.north);
+                \draw[grPath]
+                    ([yshift=-7pt]B12.south) to
                     (B12.center) to
-                    (B13.center);
-                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
-                    (A21.center) to
+                    ([yshift=7pt]B12.north);
+                \draw[grPath]
+                    ([yshift=-7pt]A22.south) to
                     (A22.center) to
                     (A23.center) to
-                    (A24.center);
-                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
-                    (B21.center) to
+                    ([yshift=7pt]A23.north);
+                \draw[grPath]
+                    ([yshift=-7pt]B22.south) to
                     (B22.center) to
-                    (B23.center);
-                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
-                    (A31.center) to
+                    ([yshift=7pt]B22.north);
+                \draw[grPath]
+                    ([yshift=-7pt]A32.south) to
                     (A32.center) to
                     (A33.center) to
-                    (A34.center);
-                \draw[green, opacity=0.7, line width=11pt, line cap=round, line join=round] 
-                    (B31.center) to
+                    ([yshift=7pt]A33.north);
+                \draw[grPath]
+                    ([yshift=-7pt]B32.south) to
                     (B32.center) to
-                    (B33.center);
-
-                \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+                    ([yshift=7pt]B32.north);
+                \node[blNode]
                     (bucaA1) at (A13.center) {};
-                \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+
+                \node[blNode]
                     (bucaB1) at (B12.center) {};
-                \draw[blue, opacity=0.7, ultra thick]
+                \draw[blPath]
                     (bucaA1) to (bucaB1);
-                \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+                \node[blNode]
                     (bucaA2) at (A23.center) {};
-                \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+                \node[blNode]
                     (bucaB2) at (B22.center) {};
-                \draw[blue, opacity=0.7, ultra thick]
+                \draw[blPath]
                     (bucaA2) to (bucaB2);
-                \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+                \node[blNode]
                     (bucaA3) at (A33.center) {};
-                \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
+                \node[blNode]
                     (bucaB3) at (B32.center) {};
-                \draw[blue, opacity=0.7, ultra thick]
+                \draw[blPath]
                     (bucaA3) to (bucaB3);
             \end{scope}
         \end{tikzpicture}
@@ -1329,13 +1382,40 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     % NOTE forse qui induzione scritta bene
     Studiamo prima l'inserimento senza una buca. La situazione \`e la seguente, con
     $a_2 \leq b$.
-    \[
-        % TODO aggiungi i path
-        \ytableaushort{
-            {a_2},
-            \none {a_1} {c_1} {c_2} {\cdots} {b} \none {\none[\leftarrow d]}
-        }
-    \]
+    \begin{center}
+        \begin{tikzpicture}[remember picture]
+            \node (esempi) {
+                    \ytableaushort{
+                        {\tmn{A13}{a_2}} ,
+                        \none {\tmn{A12}{a_1}} {c_1} {c_2} {\cdots} {\tmn{B12}{b}}
+                        \none {\none[\leftarrow d]}
+                    }
+                };
+
+            \begin{scope}[
+                on background layer,
+                overlay,
+                grPath/.style={
+                    green,
+                    opacity=0.7,
+                    line width=11pt,
+                    line cap=round,
+                    line join=round
+                } ]
+
+                \draw[grPath]
+                    ([yshift=-7pt]A12.south) to
+                    (A12.center) to
+                    (A13.center) to
+                    ([yshift=7pt]A13.north);
+                \draw[grPath]
+                    ([yshift=-7pt]B12.south) to
+                    (B12.center) to
+                    ([yshift=7pt]B12.north);
+
+            \end{scope}
+        \end{tikzpicture}
+    \end{center}
     Sia inoltre $\tilde{a}_1$ la lettera il cui inserimento nella riga ha fatto
     passare il percorso di $x_j$ per la casella di $a_1$, ovvero $\tilde{a}_1 = a_1$
     se l'inserimento era regolare, oppure $\tilde{a}_1 = a_1 -1$ se l'inserimento
@@ -1365,27 +1445,21 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     
     Vediamo ora cosa succede alla prima buca che si incontra. La situazione \`e la
     seguente, con $b< a_2$ e, come prima, $\tilde{a}_1 \leq d$.
-    \[
-        \centering
+    \begin{center}
         \begin{tikzpicture}[remember picture]
             \node (esempi) {
                     \ytableaushort{
-                        {\none[\tmn{A14}{}]},
-                        {\tmn{A13}{a_2}} {\none[\cdots]} \none {\none[\tmn{B13}{}]},
-                        \none \none {\tmn{A12}{a_1}} {\tmn{B12}{b}} \none {\none[\leftarrow d]},
-                        \none \none {\none[\tmn{A11}{}]} {\none[\tmn{B11}{}]}
+                        {\tmn{A13}{a_2}} {\none[\cdots]},
+                        \none \none {\tmn{A12}{a_1}} {\tmn{B12}{b}} \none {\none[\leftarrow d]}
                     }
                     \qquad
                     \qquad
                     \ytableaushort{
-                        \none {\none[\tmn{A24}{}]},
-                        {\tmn{C23}{b}} {\tmn{A23}{a_2}} {\none[\cdots]} \none {\none[\tmn{B23}{}]},
-                        \none \none \none {\tmn{A22}{a_1}} {\tmn{B22}{d}},
-                        \none \none \none {\none[\tmn{A21}{}]} {\none[\tmn{B21}{}]}
+                        {\tmn{C23}{b}} {\tmn{A23}{a_2}} {\none[\cdots]} ,
+                        \none \none \none {\tmn{A22}{a_1}} {\tmn{B22}{d}}
                     }
-
                 };
-            %
+
             \begin{scope}[
                 on background layer,
                 overlay,
@@ -1395,35 +1469,42 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
                     line width=11pt,
                     line cap=round,
                     line join=round
-                }]
-                \draw[grPath] 
-                    (A11.center) to
+                },
+                blPath/.style={
+                    blue!30,
+                    opacity=1,
+                    line width=7pt,
+                    line cap=round,
+                    line join=round
+                } ]
+
+                \draw[grPath]
+                    ([yshift=-7pt]A12.south) to
                     (A12.center) to
                     (A13.center) to
-                    (A14.center);
+                    ([yshift=7pt]A13.north);
                 \draw[grPath]
-                    (B11.center) to
+                    ([yshift=-7pt,xshift=7pt]B12.south) to
                     (B12.center) to
-                    (B13.center);
+                    ([yshift=7pt]B12.north);
                 \draw[grPath]
-                    (A21.center) to
+                    ([yshift=-7pt]A22.south) to
                     (A22.center) to
                     (A23.center) to
-                    (A24.center);
+                    ([yshift=7pt]A23.north);
                 \draw[grPath]
-                    (B21.center) to
+                    ([yshift=-7pt,xshift=7pt]B22.south) to
                     (B22.center) to
-                    (B23.center);
-                % \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
-                %     (bucaA1) at (A13.center) {};
-                % \node[circle, opacity=0.7, draw=blue, ultra thick, inner sep=5pt]
-                %     (bucaB1) at (B12.center) {};
-                % \draw[blue, opacity=0.7, ultra thick]
-                %     (bucaA1) to (bucaB1);
-                    % TODO inserisci percorso blu
+                    ([yshift=7pt]B22.north);
+                \draw[blPath]
+                    ([yshift=-7pt]B22.south) to
+                    (B22.center) to
+                    (C23.center) to
+                    ([yshift=7pt]C23.north);
+            %
             \end{scope}
         \end{tikzpicture}
-    \]
+    \end{center}
 
     Come visto sopra, se $\tilde{a}_1 = a_1 -1$, allora vale $\tilde{a}_2 = a_1$,
     che \`e assurdo, infatti vale
@@ -1452,7 +1533,7 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
                         {\tmn{A61}{15}} {\tmn{A62}{19}},
                         {\tmn{A51}{13}} {\tmn{A52}{18}},
                         {\tmn{A41}{ 8}} {\tmn{A42}{ 9}} {\tmn{A43}{14}} {\tmn{A44}{22}} {\tmn{A45}{24}},
-                        {\tmn{A31}{ 6}} {\tmn{A32}{ 7}} {\tmn{A33}{12}} {\tmn{A34}{15}} {\tmn{A35}{16}} {\tmn{A36}{17}} {\tmn{A47}{18}},
+                        {\tmn{A31}{ 6}} {\tmn{A32}{ 7}} {\tmn{A33}{12}} {\tmn{A34}{15}} {\tmn{A35}{16}} {\tmn{A36}{17}} {\tmn{A37}{18}},
                         {\tmn{A21}{ 2}} {\tmn{A22}{ 3}} {\tmn{A23}{ 5}} {\tmn{A24}{ 6}} {\tmn{A25}{ 8}} {\tmn{A26}{13}} {\tmn{A27}{16}},
                         {\tmn{A11}{ 1}} {\tmn{A12}{ 2}} {\tmn{A13}{ 4}} {\tmn{A14}{ 5}} {\tmn{A15}{ 7}} {\tmn{A16}{10}} {\tmn{A17}{13}} {\tmn{A18}{15}}
                     }
@@ -1465,6 +1546,13 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
                     green,
                     opacity=0.7,
                     line width=11pt,
+                    line cap=round,
+                    line join=round
+                },
+                blPath/.style={
+                    blue!30,
+                    opacity=1,
+                    line width=7pt,
                     line cap=round,
                     line join=round
                 } ]
@@ -1489,10 +1577,34 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
                     (A18.center) to
                     (A27.center) to
                     (A36.center);
+
+                \draw[blPath] 
+                    (A14.center) to
+                    (A24.center) to
+                    (A32.center) to
+                    (A42.center) to
+                    (A51.center) to
+                    (A61.center);
+                \draw[blPath] 
+                    (A15.center) to
+                    (A25.center) to
+                    (A33.center) to
+                    (A43.center) to
+                    (A52.center) to
+                    (A62.center);
+                \draw[blPath] 
+                    (A17.center) to
+                    (A26.center) to
+                    (A36.center) to
+                    (A45.center);
+                \draw[blPath] 
+                    (A18.center) to
+                    (A27.center) to
+                    (A37.center);
+
             \end{scope}
         \end{tikzpicture}
-        % TODO cambia il tableau e aggiungi i percorsi.
-        \caption{L'inserimento del tableau della Figura~\ref{fig:tab_con_insertionp}
+        \caption{L'inserimento nel tableau della Figura~\ref{fig:tab_con_insertionp}
         delle ulteriori lettere $5$, $7$, $12$ e $15$.}
         \label{fig:tab_con_intertionp_v2}
     \end{figure}
@@ -1527,7 +1639,7 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     Per esempio, la stringa di parentesi che si legge dal tableau in
     Figura~\ref{fig:tab_con_intertionp_v2} \`e:
     \[
-        (\,(\,)\,)\,\underline{)}\,\lparen\,),
+        (\,(\,)\,)\,\underline{)}\,\lparen\,)\,\lparen,
     \]
     in cui l'ultima ``$)$'' non appaiata \`e quella sottolineata.
     Si verifica, confrontando la Figura~\ref{fig:tab_con_insertionp}, che corrisponde
