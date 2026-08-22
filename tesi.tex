@@ -1,14 +1,19 @@
 %% TODO list:
 
 %% DEFINISCI:
-% parola ridotta
 % row reading
 % inline notation
 % content
 % [n]
+% partition
 % composition
 % weak composition
 
+% domande:
+% dimensioni parentesi
+% coloneq si no
+% hyphen si no
+% 
 
 \documentclass[11pt,leqno]{report}
 
@@ -32,12 +37,13 @@
 \ytableausetup{aligntableaux = bottom}
 \usepackage{stmaryrd}                   % for \llbracket -> [[
 \usepackage{mathtools}                  % for \coloneq -> :=
+\usepackage{enumitem}                   % for fancy enum
 \usepackage{tikz-cd}
 \usetikzlibrary{tikzmark}               % for overlay tikz paths
 \usetikzlibrary{backgrounds}
 
 % Personal operator definitions
-\DeclareMathOperator{\rowreading}{rr}
+\DeclareMathOperator{\rowreading}{\rho}
 \DeclareMathOperator{\wt}{wt}
 \DeclareMathOperator{\type}{wt}
 \DeclareMathOperator{\shape}{sh}

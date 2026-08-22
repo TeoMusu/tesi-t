@@ -3,66 +3,60 @@
 \chapter{Cristalli di Kashiwara}
 \label{ch:crystals}
 
+
+% TODO metti introduzione
+
 \section{Definizioni}
 
-\begin{definition}[Cristallo di Kashiwara semi-normale]
+\begin{definition}[Cristallo di Kashiwara]
     \label{def:seminormal_crystal}
     Fissato un sistema di radici $\Phi$ con radici semplici $\{ \alpha_i \}_{i\in I}$
-    e un reticolo dei pesi $\Lambda$, un cristallo (di Kashiwara) semi-normale \`e un insieme
-    finito non vuoto $B$ dotato di mappe
+    e un reticolo dei pesi $\Lambda$, un \emph{cristallo} (di Kashiwara, finito e di
+    tipo finito) \`e un insieme finito non vuoto $B$ dotato di mappe
     \begin{align*}
         f_i, e_i &\colon B \to B \sqcup \{ \zero \} ,   \\
         \varphi_i, \varepsilon_i &\colon B \to \NN  ,     \\
         \wt &\colon B \to \Lambda ,
     \end{align*}
     dove $\zero \notin B$ \`e un simbolo ausiliario, che 
-    soddisfano i seguenti assiomi per ogni $i \in I$:
-    \begin{enumerate}
-        \item[A1.] \label{item:axiom_1}
-            le mappe $f_i$ ed $e_i$ sono una l'inversa dell'altra, a meno
+    soddisfano i seguenti assiomi per ogni $i \in I$.
+    \begin{enumerate}[label=(A\arabic*)]
+        \item \label{item:axiom_1}
+            Le mappe $f_i$ ed $e_i$ sono una l'inversa dell'altra, a meno
             che qualcosa non venga mandato in $\zero$.
             Pi\`u formalmente, per ogni $x \in B$ vale:
             \begin{align*}
                 e_i ( f_i (x))  &= x    && \text{se $ f_i ( x) \neq \zero$,}   \\
-                f_i ( e_i (x))  &= x    && \text{se $ e_i (x ) \neq \zero$;}
+                f_i ( e_i (x))  &= x    && \text{se $ e_i (x ) \neq \zero$.}
             \end{align*}
             
-        \item[A2.] \label{item:axiom_2}
-            agire con $f_i$ diminuisce il peso di $\alpha_i$.
+        \item \label{item:axiom_2}
+            Agire con $f_i$ diminuisce il peso di $\alpha_i$.
             In simboli, per ogni $x \in B$ vale:
             \begin{align*}
                 \wt (f_i (x)) &= \wt (x) - \alpha_i && \text{se $f_i (x) \neq \zero$,} \\
-                \wt (e_i (x)) &= \wt (x) + \alpha_i && \text{se $e_i (x) \neq \zero$;}
+                \wt (e_i (x)) &= \wt (x) + \alpha_i && \text{se $e_i (x) \neq \zero$.}
             \end{align*}
 
-        \item[A3.] \label{item:axiom_3}
-            le statistiche $\varphi_i$ e $\varepsilon_i$ contano quante volte 
-            bisogna agire con $f_i$ e con $e_i$ prima di arrivare a $\zero$.
-            Pi\`u formalmente, per ogni $x \in B$ vale:
-            \begin{subequations}
-                \begin{align*}
-                    \varphi_i (x) &= \max \{ k \in \NN \mid f_i^k(x) \neq \zero \} , \\
-                    \varepsilon_i (x) &= \max \{ k \in \NN \mid e_i^k(x) \neq \zero \};
-                \end{align*}
-            \end{subequations}
-            % NOTE ponderare se mettere questa parte.
-            in particolare:
+        \item \label{item:axiom_3}
+            Le statistiche $\varphi_i$ e $\varepsilon_i$
+            variano con l'azione di $f_i$ ed $e_i$ nel seguente modo:
             \begin{align*}
                 \varphi_i( f_i(x)) &= \varphi_i(x) -1,   &
                 \varepsilon_i (f_i (x)) &= \varepsilon_i(x) +1 ,
                                         && \text{se $f_i(x) \neq \zero$,} \\
                 \varphi_i( e_i(x)) &= \varphi_i(x) +1 ,  &
                 \varepsilon_i (e_i (x)) &= \varepsilon_i(x) -1,
-                                        && \text{se $e_i(x) \neq \zero$;}
+                                        && \text{se $e_i(x) \neq \zero$.}
             \end{align*}
 
-        \item[A4.] \label{item:axiom_4}
-            per ogni $x \in B$ vale:
+        \item \label{item:axiom_4}
+            Per ogni $x \in B$ vale:
             \[
                 \varphi_i(x) - \varepsilon_i(x) = 
                 \bigl\langle \wt(x), \alpha_i^\vee \bigr\rangle,
             \]
-            ricordando che la coradice $\alpha_i^\vee$ \`e definita come segue:
+            dove ricordando che la coradice $\alpha_i^\vee$ \`e definita come segue:
             \[
                 \alpha_i^\vee = \frac{2 \alpha_i}{ \langle \alpha_i, \alpha_i \rangle }.
         \]
@@ -71,36 +65,61 @@
 
 \end{definition}
 
-% TODO remark che accenna alla definizione di non seminormale
-% TODO remark che ti fa calcolare il peso?
+\begin{definition}
+    \label{def:crys_seminormal}
+    Un cristallo si dice \emph{seminormale} se le statistiche $\varphi_i$ e 
+    $\varepsilon_i$ sono interi non-negativi che contano quante volte 
+    bisogna agire con $f_i$ e con $e_i$ prima di arrivare a $\zero$.
+    Pi\`u formalmente, per ogni $x \in B$ vale:
+    \begin{subequations}
+        \label{eq:def_crys_seminormal}
+        \begin{align}
+            \label{subeq:seminorm_phi}
+            \varphi_i (x) &= \max \{ k \in \NN \mid f_i^k(x) \neq \zero \} , \\
+            \label{subeq:seminorm_epsilon}
+            \varepsilon_i (x) &= \max \{ k \in \NN \mid e_i^k(x) \neq \zero \}.
+        \end{align}
+    \end{subequations}
+\end{definition}
+
+Tutti i cristalli che incontriamo sono seminormali, quindi d'ora in poi
+con ``cristallo'' intendiamo \emph{sempre} ``cristallo seminormale''.
+
+
 
 \begin{definition}[Grafo cristallo]
     Per ogni cristallo $B$, possiamo definire il suo \emph{grafo cristallo} come il grafo
     orientato con archi etichettati con colori in $I$ che ha come vertici gli elementi di 
     $B$ e in cui c'\`e un arco da $x \in B$ a $y \in B$ con etichetta $i \in I$ 
     se e solo se $y = f_i (x)$.
-
 \end{definition}
+
+Per esempi di cristalli e di grafi cristallo si veda la sezione successiva.
 
 Noi considereremo solo cristalli di tipo $A$.
 In particolare, fissato un intero $\ell$ maggiore o uguale a $2$,
-scegliamo:
-\begin{itemize}
-    \item $I = [\ell-1]$ come insieme di indici;
-    \item $\Phi = A_{\ell-1}$ come sistema di radici, definito nel capitolo precedente;
-    \item $\alpha_i = \ee_i - \ee_{i+1} $ per ogni $i\in I$ come radici semplici;
-    \item $\Lambda = \ZZ^\ell$ come reticolo dei pesi.
-\end{itemize}
+scegliamo come sistema di radici $\Phi$ quello di tipo $A_{\ell-1}$
+descritto nell'Esempio~\ref{ex:sist_rad_A}.
+In particolare scegliamo $I = [\ell-1]$ come insieme di indici
+e $\alpha_i = \ee_i - \ee_{i+1}$ come radici semplici, dove $\ee_1, \dots, \ee_\ell$
+\`e la base canonica di $\RR^\ell$.
 
-\begin{remark}
-    Sarebbe pi\`u corretto scegliere come reticolo dei pesi la proiezione di $\ZZ^\ell$
-    sull'iperpiano di $\RR^\ell$ ortogonale al vettore $(1, 1, \dots, 1)$,
-    che \`e anche lo $\RR$-span delle radici.
-
-    Per comodit\`a scriveremo sempre i pesi come elementi di $\ZZ^\ell$, tuttavia 
-    potr\`a succedere di considerare \emph{uguali} due pesi che differiscono solo per 
-    un multiplo del vettore $(1, 1, \dots, 1)$.
-\end{remark}
+% \begin{itemize}
+%     \item $I = [\ell-1]$ come insieme di indici;
+%     \item $\Phi = A_{\ell-1}$ come sistema di radici, definito nel capitolo precedente;
+%     \item $\alpha_i = \ee_i - \ee_{i+1} $ per ogni $i\in I$ come radici semplici;
+%     \item $\Lambda = \ZZ^\ell$ come reticolo dei pesi.
+% \end{itemize}
+% 
+% \begin{remark}
+%     Sarebbe pi\`u corretto scegliere come reticolo dei pesi la proiezione di $\ZZ^\ell$
+%     sull'iperpiano di $\RR^\ell$ ortogonale al vettore $(1, 1, \dots, 1)$,
+%     che \`e anche lo $\RR$-span delle radici.
+% 
+%     Per comodit\`a scriveremo sempre i pesi come elementi di $\ZZ^\ell$, tuttavia 
+%     potr\`a succedere di considerare \emph{uguali} due pesi che differiscono solo per 
+%     un multiplo del vettore $(1, 1, \dots, 1)$.
+% \end{remark}
 
 \section{Esempi}
 
@@ -113,7 +132,7 @@ scegliamo:
     %     v_k \xrightarrow{1} v_{k-2} \xrightarrow{1} \cdots
     %     \xrightarrow{1} v_{-k+2} \xrightarrow{1} v_{-k} \,.
     % \]
-    \[
+    \begin{center}
         \begin{tikzpicture}[node distance=5em ]
             \node (n1) {$v_k$};
             \node (n2) [right of=n1] {$v_{k-1}$};
@@ -126,7 +145,7 @@ scegliamo:
             \draw[->] (n3) -- node[above] {$\scriptstyle 1$} (np);
             \draw[->] (np) -- node[above] {$\scriptstyle 1$} (nl);
         \end{tikzpicture};
-    \]
+    \end{center}
     dove definisco, per ogni $j \in [k]$,
     \begin{align*}
         \wt(v_j) &= (j, k-j) \in \ZZ^2, \\
@@ -154,7 +173,7 @@ scegliamo:
 
     Con questa interpretazione, il grafo cristallo $B(4)$ di tipo $A_1$
     \`e il seguente:
-    \[
+    \begin{center}
         \begin{tikzpicture}[node distance=5em]
             \node (n1) {))))};
             \node (n2) [right of=n1] {)))\lparen};
@@ -166,8 +185,8 @@ scegliamo:
             \draw[->] (n2) -- node[above] {$\scriptstyle 1$} (n3);
             \draw[->] (n3) -- node[above] {$\scriptstyle 1$} (n4);
             \draw[->] (n4) -- node[above] {$\scriptstyle 1$} (n5);
-        \end{tikzpicture}.
-    \]
+        \end{tikzpicture}
+    \end{center}
 
 \end{example}
 
@@ -178,8 +197,8 @@ scegliamo:
     cristalli di tipo $A_1$ con la struttura dell'Esempio~\ref{ex:crys_Bk_A1}.
 \end{remark}
 
-\begin{example}[Cristallo standard $\BB$]
-    Per ogni intero positivo $\ell$, definiamo il cristallo standard $\BB$ di tipo $A_{\ell-1}$
+\begin{example}[Cristallo standard $B(1)$]
+    Per ogni intero positivo $\ell$, definiamo il cristallo standard $B(1)$ di tipo $A_{\ell-1}$
     come in figura:
     % \[
     %     \ytableaunumber{1} \xrightarrow{1}
@@ -188,7 +207,7 @@ scegliamo:
     %     \cdots \xrightarrow{\ell-1}
     %     \ytableaunumber{\ell} .
     % \]
-    \[
+    \begin{center}
         \begin{tikzpicture}[node distance=5em ]
             \node (n1) {\ytableaunumber 1};
             \node (n2) [right of=n1] {\ytableaunumber 2};
@@ -201,7 +220,7 @@ scegliamo:
             \draw[->] (n3) -- node[above] {$\scriptstyle 3$} (np);
             \draw[->] (np) -- node[above] {$\scriptstyle \ell-1$} (nl);
         \end{tikzpicture},
-    \]
+    \end{center}
     dove il peso dell'elemento 
     % \raisebox{-0.5em}{\ytableaushort{i}}
     $\boxed{\,i\,}$
@@ -210,9 +229,9 @@ scegliamo:
 \end{example}
 
 \begin{example}[Cristallo di parole]
+    \label{ex:crys_word}
     Definiamo un cristallo di tipo $A_\ell$ sull'insieme delle parole
-    con $k$ lettere nell'alfabeto $[\ell]$, che indicheremo con $B(1)^k$,
-    oppure con $\BB^{\otimes k}$.
+    con $k$ lettere nell'alfabeto $[\ell]$, che indicheremo con $B(1)^k$.
 
     Definiamo il peso di una parola $b$ come il suo contenuto, ovvero 
     \[
@@ -220,7 +239,7 @@ scegliamo:
     \]
     dove $\beta_i$ \`e il numero di volte che la lettera $i$ compare nella parola $b$.
 
-    $f_i$ agisce sulla parola $b$ cambiando una lettera $i$ in una lettera $i+1$.
+    L'operatore $f_i$ agisce sulla parola $b$ cambiando una lettera $i$ in una lettera $i+1$.
     Per determinare quale posizione viene modificata da $f_i$ si procede nel seguente modo:
     \begin{itemize}
         \item si trascurano tutte le lettere di $b$ tranne le lettere $i$ e le lettere $i+1$;
@@ -297,11 +316,11 @@ scegliamo:
 
 In questa sezione vogliamo definire,
 per ogni coppia di partizioni $\mu \subseteq \lambda$,
-una struttura di cristallo sull'insieme
+una struttura di cristallo di tipo $A$ sull'insieme
 $\ssyt(\lambda / \mu)$ dei semistandard Young tableaux di forma skew $\lambda / \mu$.
 
-Ricordiamo che, dato un tableau di Young $T$, il suo row-reading $\rowreading(T)$ \`e la parola 
-ottenuta concatenando le sue righe, dall'ultima alla prima.
+Dato un tableau di Young $T$, definiamo il suo row-reading $\rowreading(T)$
+come  la parola ottenuta concatenando le sue righe, dall'ultima alla prima.
 Per esempio se
 \begin{align*}
     T = 
@@ -316,38 +335,121 @@ Per esempio se
     \text{allora $\rowreading(T) = 234 \, 1245 \, 134$.}
 \end{align*}
 
-Il row-reading definisce una iniezione dai tableaux semistandard con una data forma
-nelle parole con $k$ lettere, dove $k$ \`e la taglia dei tableaux, che preserva il peso.
+Il row-reading si restringe a una mappa iniettiva dall'insieme
+$\ssyt^\ell(\lambda / \mu)$ dei tableaux semistandard di forma $\lambda / \mu$
+in cui compaiono solo le lettere da $1$ a $\ell$, 
+all'insieme delle parole con $k$ lettere tra $1$ e $\ell$, dove $k$ \`e la
+taglia del tableau, ovvero $ k = \lvert \lambda \rvert - \lvert \mu \rvert$.
 
-Successivamente verificheremo la buona definizione dei cristalli di tableaux.
+Definiamo inoltre il peso $\wt(T)$ di un tableau come il peso del 
+suo row-reading $\wt(\rowreading(T))$.
+Se $T$ \`e il tableau nell'esempio sopra, abbiamo 
+\[
+    \wt(T) = (2, 2, 2, 3, 1).
+\]
+
+Definiamo ora i cristalli di tableaux. La loro buona definizione, che non \`e
+scontata, verr\`a verificata nel Lemma~\ref{lem:chiusura_rowreading}.
 
 \begin{definition}
-    Definiamo il cristallo di tableaux $B(\lambda / \mu)$ di tipo $A_{\ell-1}$,
-    per $\ell$ sufficientemente grande (baster\`a $\ell > \ell(\lambda)$).
-    Come insieme prendiamo i semistandard Young tableaux di forma $\lambda / \mu$,
+    Definiamo il \emph{cristallo di tableaux} $B(\lambda / \mu)$ di tipo $A_{\ell-1}$,
+    (per $\ell$ sufficientemente grande) 
+    % (baster\`a $\ell > \ell(\lambda)$).
+    sull'insieme $\ssyt^\ell(\lambda/\mu)$ dei
+    semistandard Young tableaux di forma $\lambda / \mu$
     con lettere nell'alfabeto $[\ell]$.
 
-    Come operatori di Kashiwara, scelgiamo quelli dati dall'inclusione che il
-    row-reading d\`a dentro $B(1)^k$, dove $ k = \lvert \lambda \rvert - 
-    \lvert \mu \rvert$.
+    Come operatori di Kashiwara, scelgiamo quelli che commutano con l'inclusione
+    \[
+        \rowreading \colon \ssyt^\ell(\lambda/\mu) 
+        \hookrightarrow B(1)^k
+    \]
+    che il row-reading fornisce nel cristallo $B(1)^k$ definito 
+    nell'Esempio~\ref{ex:crys_word}.
 
-    In simboli, per un tableaux $T \in B(\lambda / \mu)$, definiamo $f_i(T)$ come
+    In simboli, per ogni tableau $T \in B(\lambda / \mu)$, definiamo $f_i(T)$ come
     il tableaux di forma $\lambda / \mu$ tale che 
     \[
-        \rowreading(f_i ( T)) = f_i ( \rowreading ( T)).
+        \rowreading(f_i ( T)) = f_i ( \rowreading ( T)),
     \]
+    che \`e semistandard per il Lemma~\ref{lem:chiusura_rowreading}.
+    Definiamo analogamente $e_i$.
 
-    Operativamente, 
-    % TODO descrivi
-
+    Operativamente, per applicare $f_i$, trascuro tutte le lettere tranne le $i$
+    e le $i+1$, sostituisco le $i$ con parentesi chiuse ``$)$'' e le $i+1$
+    con parentesi aperte ``$\lparen$''.
+    Poi leggo da sinistra a destra e dall'alto al basso, elimino le parentesi
+    appaiate e cambio la lettera $i$ dell'ultima ``$)$'' non appaiata in una $i+1$.
 \end{definition}
 
 \begin{example}
-    % TODO esempio facile
+    Si osserva che le due componenti connesse nel cristallo dell'Esempio~\ref{ex:crys_B1to2}
+    sono proprio i cristalli di tableaux  $B(2)$ e $B(1,1)$, rappresentati
+    in Figura~\ref{fig:crys_B2_B11}.
+
+    \begin{figure}[htbp]
+        \centering
+        \begin{tikzpicture}[node distance=6.5em ]
+            % \node (n0) {$B(2) \colon$};
+            \node (n1) {\ytableaunumber {11}};
+            \node (n2) [right of=n1] {\ytableaunumber {12}};
+            \node (n3su) [right of=n2, yshift=3em] {\ytableaunumber {22}};
+            \node (n3giu) [right of=n2, yshift=-3em] {\ytableaunumber {13}};
+            \node (n4) [right of=n3su, yshift=-3em] {\ytableaunumber {23}};
+            \node (n5) [right of=n4] {\ytableaunumber {33}};
+
+            \draw[->] (n1) -- node[above] {$\scriptstyle 1$} (n2);
+            \draw[->] (n2) -- node[above] {$\scriptstyle 1$} (n3su);
+            \draw[->] (n3giu) -- node[above] {$\scriptstyle 1$} (n4);
+            \draw[->, blue] (n2) -- node[above] {$\scriptstyle 2$} (n3giu);
+            \draw[->, blue] (n3su) -- node[above] {$\scriptstyle 2$} (n4);
+            \draw[->, blue] (n4) -- node[above] {$\scriptstyle 2$} (n5);
+        \end{tikzpicture}
+        \\[1.5em]
+        \begin{tikzpicture}[node distance=6em ]
+            % \node (n0) {$B(1,1) \colon$};
+            \node (n1) {\ytableaunumber {2,1}};
+            \node (n2) [right of=n1] {\ytableaunumber {3,1}};
+            \node (n3) [right of=n2] {\ytableaunumber {3,2}};
+
+            \draw[blue,->] (n1) -- node[above] {$\scriptstyle 2$} (n2);
+            \draw[->] (n2) -- node[above] {$\scriptstyle 1$} (n3);
+        \end{tikzpicture}
+
+        \caption{I grafi cristallo dei cristalli di tableaux $B(2)$ (sopra) e 
+        $B(1,1)$ (sotto) di tipo $A_2$.}
+        \label{fig:crys_B2_B11}
+    \end{figure}
 \end{example}
+
 \begin{example}
     \label{ex:crys_tab_21}
-    % TODO esempio B(2,1) con disegno
+    La Figura~\ref{fig:crys_B21} mostra il cristallo di tableaux $B(2,1)$.
+    \begin{figure}[htbp]
+        \centering
+        \begin{tikzpicture}[node distance=6.5em ]
+            % \node (n0) {$B(2) \colon$};
+            \node (n2) {\ytableaunumber {2,11}};
+            \node (n3su) [right of=n2, yshift=3em] {\ytableaunumber {2,12}};
+            \node (n3giu) [right of=n2, yshift=-3em] {\ytableaunumber {3,11}};
+            \node (n4su) [right of=n3su] {\ytableaunumber {2,13}};
+            \node (n4giu) [right of=n3giu] {\ytableaunumber {3,12}};
+            \node (n5su) [right of=n4su] {\ytableaunumber {3,13}};
+            \node (n5giu) [right of=n4giu] {\ytableaunumber {3,22}};
+            \node (n6) [right of=n5su, yshift=-3em] {\ytableaunumber {3,23}};
+
+            \draw[->] (n2) -- node[above] {$\scriptstyle 1$} (n3su);
+            \draw[->] (n3giu) -- node[above] {$\scriptstyle 1$} (n4giu);
+            \draw[->] (n4giu) -- node[above] {$\scriptstyle 1$} (n5giu);
+            \draw[->] (n5su) -- node[above] {$\scriptstyle 1$} (n6);
+            \draw[->, blue] (n2) -- node[above] {$\scriptstyle 2$} (n3giu);
+            \draw[->, blue] (n3su) -- node[above] {$\scriptstyle 2$} (n4su);
+            \draw[->, blue] (n4su) -- node[above] {$\scriptstyle 2$} (n5su);
+            \draw[->, blue] (n5giu) -- node[above] {$\scriptstyle 2$} (n6);
+        \end{tikzpicture}
+        \caption{Il grafo cristallo del cristallo di tableaux $B(2,1)$ di tipo $A_2$.}
+        \label{fig:crys_B21}
+    \end{figure}
 \end{example}
 
 \begin{lemma}
@@ -355,12 +457,12 @@ Successivamente verificheremo la buona definizione dei cristalli di tableaux.
     L'insieme dei row-reading di tableaux in $B(\lambda / \mu )$ \`e chiuso per azioni
     di $f_i$ e di $e_i$.
     
-    In altre parole, applicare $f_i$ ed $e_i$ a un tableaux semistandard, restituisce un
-    tableaux ancora semistandard.
+    In altre parole, applicare $f_i$ ed $e_i$ a un tableau semistandard, restituisce un
+    tableau ancora semistandard.
 \end{lemma}
 
 \begin{proof}
-    Sia $T$ il tableaux semistandard a cui vogliamo applicare $f_i$.
+    Sia $T$ il tableau semistandard a cui vogliamo applicare $f_i$.
     Consideriamo solo le caselle di $T$ che contengono $i$ o $i+1$.
     Otteniamo una striscia alta al pi\`u due caselle in ogni colonna fatta nel seguente
     modo:
@@ -407,7 +509,8 @@ Successivamente verificheremo la buona definizione dei cristalli di tableaux.
 % NOTE qui puoi mettere che B(`l) ha un unico highest weight e che sono connessi...
 % poi puoi mettere prodotto tensore etc, ma viene lunghissimo
 
-\section{Componenti connesse e Morfismi}
+\section{Connessione e Morfismi}
+\label{sec:connessione_morfismi}
 
 Si noti che l'unione disgiunta di due cristalli $B$ e $B'$ \`e ancora un cristallo,
 che indichiamo con $B \oplus B'$ e che chiamiamo la loro \emph{somma diretta}.
@@ -431,6 +534,83 @@ Si noti che le componenti connesse di un cristallo sono ancora cristalli, con la
 di cristallo indotta dall'inclusione.
 Per questo, ogni cristallo si pu\`o scrive come somma dirette delle proprie componenti connesse.
 
+Vediamo adesso alcune nozioni che ci porteranno a dimostrare che i cristalli
+di tableax descritti nella Sezioni~\ref{sec:crys_tableaux} sono connessi.
+
+\begin{definition}
+    Un elemento $b$ in un cristallo $B$ si dice \emph{highest-weight}, 
+    o \emph{di peso massimo} se,
+    per ogni $i \in I$, vale che $e_i(b) = \zero$, o equivalentemente $\varepsilon_i(b) = 0$,
+    cio\`e $b$ si trova all'inizio di ogni $i$-stringa.
+\end{definition}
+
+\begin{proposition}
+    Ogni componente connessa di un cristallo $B$ ha un elemento di peso massimo,
+    in particolare da ogni $b \in B$ \`e possibile arrivare a un elemento di 
+    peso massimo applicando ripetutamente $e_i$ al variare di $i \in I$.
+\end{proposition}
+
+\begin{proof}
+    Partendo da $b$ e applicando ripetutamente $e_i$ al variare di $i \in I$ non posso
+    ottenere nuovamente $b$.
+    Infatti, se cos\`\i\ fosse, ricordando che agire con $e_i$ somma $\alpha_i$ al peso,
+    otterrei
+    \[
+        \wt(b) = \wt(b) + \sum_{i\in I} k_i \, \alpha_i,
+    \]
+    dove gli $k_i$ sono interi non-negativi che contano quante volte ho applicato $e_i$.
+    Ma questo implica $k_i = 0$ per ogni $i \in I$ per lineare indipendenza delle radici
+    semplici enunciata nella Proposizione~\ref{prop:propriet_radici_semplici}.
+
+    Non potendo entrare in un ciclo, per la finitezza dell'insieme $B$, prima o poi 
+    raggiunger\`o un elemento di peso massimo.
+\end{proof}
+
+I cristalli di tableaux, definiti nella Sezione~\ref{sec:crys_tableaux}, di forma
+non-skew, ovvero $B(\lambda)$, con $\lambda$ partizione, sono connessi.
+
+\begin{proposition}
+    Per ogni partizione $\lambda$, il cristallo di tableaux $B(\lambda)$ ha un unico
+    elemento di peso massimo ed \`e quindi connesso.
+\end{proposition}
+
+\begin{proof}
+    Dimostriamo che un tableau $T$ di peso massimo deve avere la struttura descritta nella
+    Figura~\ref{fig:tab_massimo}, ovvero deve avere solo lettere $k$ nella riga $k$-esima.
+
+    \begin{figure}[htbp]
+        \[
+            T = 
+            \ytableausetup{aligntableaux=center}
+            \ytableaunumber{
+                4,
+                3 3,
+                2 2 2 2,
+                1 1 1 1
+            }
+            \ytableausetup{aligntableaux=bottom}
+        \]
+        \caption{Il tableau di peso massimo nel cristallo $B(\lambda)$, con
+        $\lambda = (4, 4, 2, 1)$. }
+        \label{fig:tab_massimo}
+    \end{figure}
+
+    Nell'applicazione di $e_1$, tutte le lettere $2$ nella prima riga appaiono come parentesi
+    aperte non appaiate (non hanno $1$ alla propria destra),
+    quindi affinch\'e $T$ sia di peso massimo, non devono apparire
+    $2$ nella prima riga.
+    Lo stesso discorso funziona per ogni lettera: se $\varepsilon_i(T) = 0$, allora
+    non compaiono lettere $i+1$ nella prima riga.
+
+    Una volta dimostrato che la prima riga contiene solo $1$, si procede per 
+    induzione sulle righe successive.
+    La seconda riga non contiene $1$, inoltre non contiene $3$ perch\'e non ci sono
+    $2$ nella prima riga con cui potrebbero essere appaiati, e cos\`\i\ via.
+\end{proof}
+
+Fino alla fine di questa sezione, formalizziamo brevemente le nozioni di 
+morfismo e isomorfismo di cristalli.
+
 \begin{definition}
     Dati due cristalli $B$ e $B'$, una mappa $\Psi \colon B \to B'$ \`e un 
     \emph{morfismo di cristalli} se commuta con gli operatori di Kashiwara $f_i$ ed $e_i$
@@ -448,7 +628,8 @@ Per questo, ogni cristallo si pu\`o scrive come somma dirette delle proprie comp
 \end{definition}
 
 \begin{remark}
-    I morfismi di cristalli preservano anche le statistiche $\varphi_i$ e $\varepsilon_i$
+    Per \eqref{eq:def_crys_seminormal}, i morfismi di cristalli preservano
+    anche le statistiche $\varphi_i$ e $\varepsilon_i$
     per ogni $i \in I$.
 \end{remark}
 
@@ -465,7 +646,7 @@ $\Psi (f_i(x)) \neq f_i ( \Psi(x))$ se uno dei due termini \`e zero.
 \section{Operatori riflessione di Kashiwara}
 
 Ricordiamo che sul reticolo dei pesi $\Lambda$ agisce il gruppo di Weyl, generato dalle
-riflessioni semplici $s_i$, per ogni $i \in I$, definite da
+riflessioni semplici $s_i = r_{\alpha_i}$, per ogni $i \in I$, definite da
 \[
     s_i (\mu) = \mu - \langle \mu , \alpha_i^\vee \rangle \alpha_i
 \]
@@ -477,11 +658,10 @@ $i$-stringhe.
 Vogliamo definire, per ogni $i\in I$, la bigezione $\sigma_i$ dal cristallo in s\'e 
 stesso che inverte ogni $i$-stringa.
 
-% NOTE ponderare se usare x o b.
 \begin{definition}
     Sia $B$ un cristallo seminormale e sia $b \in B$ un suo elemento.
     Sia inoltre 
-    $k = \langle \wt(b) , \alpha_i^\vee \rangle = \varphi_i(b) - \varepsilon_i(b)$.
+    $k =  \varphi_i(b) - \varepsilon_i(b)$.
     Definisco
     \[
         \sigma_i(b) = \begin{cases}
@@ -502,8 +682,15 @@ stesso che inverte ogni $i$-stringa.
 \end{proposition}
 
 \begin{proof}
-    % NOTE finire qui
-    Se $k>0$, allora
+    I primi punti sono chiari dalla definizione di $\varphi_i$ e $\varepsilon_i$
+    in \eqref{eq:def_crys_seminormal} per un cristallo seminormale.
+
+    Per l'uguaglianza tra pesi, ricordiamo che per l'assioma~\ref{item:axiom_4}
+    vale
+    \[
+        k =  \varphi_i(b) - \varepsilon_i(b) = \langle \wt(b) , \alpha_i^\vee \rangle,
+    \]
+    da cui, facendo prima il caso $k>0$, vale
     \[
         \wt(\sigma_i(b)) 
         = \wt\bigl(f_i^k (b)\bigr)
@@ -578,8 +765,7 @@ agisce sul carattere $\chi_B$ nel seguente modo:
         = \sum_{b \in B} \xx^{\wt(\sigma_i (b))}
         = \sum_{b \in B} \xx^{\wt(b)}
         = \chi_B(\xx).
-        % NOTE ponderare
-        % \qedhere
+        \qedhere
     \]
 \end{proof}
 
@@ -594,103 +780,36 @@ Da questo segue immediatamente il seguente corollario.
     Il carattere di un cristallo di tipo $A$ \`e un polinomio (di Laurent) \emph{simmetrico}.
 \end{corollary}
 
-Otteniamo anche che le funzionin di Schur definite in ?? sono effettivamente
+% TODO definisci da qualche parte le schur
+Otteniamo anche che le funzioni di Schur definite in ?? sono effettivamente
 funzioni simmetriche.
 
 \begin{proposition}
-    Le funzioni di Schur $s_\lambda$, al variare di $\lambda$ tra le partizioni,
-    sono funzioni simmetriche.
+    Per ogni partizione $\lambda$, il carattere del cristallo di tableaux $B(\lambda)$
+    \`e il polinomio di Schur $s_\lambda$,
+    da cui $s_\lambda$ \`e un polinomio simmetrico.
 \end{proposition}
 
-\begin{proof}
-    Per ogni intero positivo $\ell$ possiamo considerare il \emph{polinomio di Schur}
-    $s_\lambda (x_1, \dots, x_\ell)$, ottenuto fissando a zero tutte le altre variabili
-    in $s_\lambda$.
-
-    Confrontando le rispettive definizioni, \`e immediato verificare che il polinomio
-    di Schur \`e proprio il carattere del cristallo di tableaux $B(\lambda)$ di tipo $A_{\ell-1}$,
-    e quindi \`e un polinomio simmetrico per il Corollario~\ref{cor:caratteri_simmetrici}.
-
-    In simboli:
-    \[
-        s_\lambda(x_1, \dots, x_\ell) = \chi_{B(\lambda)} (x_1, \dots, x_\ell).
-    \]
-
-    Facendo tendere $\ell$ a infinito, otteniamo che $s_\lambda$ \`e una funzione simmetrica.
-\end{proof}
+% nessuno chiese
+% \begin{proof}
+%     Per ogni intero positivo $\ell$ possiamo considerare il \emph{polinomio di Schur}
+%     $s_\lambda (x_1, \dots, x_\ell)$, ottenuto fissando a zero tutte le altre variabili
+%     in $s_\lambda$.
+% 
+%     Confrontando le rispettive definizioni, \`e immediato verificare che il polinomio
+%     di Schur \`e proprio il carattere del cristallo di tableaux $B(\lambda)$ di tipo $A_{\ell-1}$,
+%     e quindi \`e un polinomio simmetrico per il Corollario~\ref{cor:caratteri_simmetrici}.
+% 
+%     In simboli:
+%     \[
+%         s_\lambda(x_1, \dots, x_\ell) = \chi_{B(\lambda)} (x_1, \dots, x_\ell).
+%     \]
+% 
+%     Facendo tendere $\ell$ a infinito, otteniamo che $s_\lambda$ \`e una funzione simmetrica.
+% \end{proof}
 
 \section{Cristalli normali (cenni)}
-
-% TODO forse spostare
-\begin{definition}
-    Un elemento $b$ in un cristallo $B$ si dice \emph{elemento di peso massimo} se,
-    per ogni $i \in I$, vale che $e_i(b) = \zero$, o equivalentemente $\varepsilon_i(b) = 0$,
-    cio\`e $b$ si trova all'inizio di ogni $i$-stringa.
-\end{definition}
-
-\begin{proposition}
-    Ogni componente connessa di un cristallo $B$ ha un elemento di peso massimo,
-    in particolare da ogni $b \in B$ \`e possibile arrivare a un elemento di 
-    peso massimo applicando ripetutamente $e_i$ al variare di $i \in I$.
-\end{proposition}
-
-\begin{proof}
-    Partendo da $b$ e applicando ripetutamente $e_i$ al variare di $i \in I$ non posso
-    ottenere nuovamente $b$.
-    Infatti, se cos\`\i\ fosse, ricordando che agire con $e_i$ somma $\alpha_i$ al peso,
-    otterrei
-    \[
-        \wt(b) = \wt(b) + \sum_{i\in I} k_i \, \alpha_i,
-    \]
-    dove gli $k_i$ sono interi non-negativi che contano quante volte ho applicato $e_i$.
-    Ma questo implica $k_i = 0$ per ogni $i \in I$ per lineare indipendenza delle radici
-    semplici enunciata nella Proposizione~\ref{prop:propriet_radici_semplici}.
-
-    Non potendo entrare in un ciclo, per la finitezza dell'insieme $B$, prima o poi 
-    raggiunger\`o un elemento di peso massimo.
-\end{proof}
-
-I cristalli di tableaux, definiti nella Sezione~\ref{sec:crys_tableaux}, di forma
-non-skew, ovvero $B(\lambda)$, con $\lambda$ partizione, sono connessi.
-
-\begin{proposition}
-    Per ogni partizione $\lambda$, il cristallo di tableaux $B(\lambda)$ ha un unico
-    elemento di peso massimo ed \`e quindi connesso.
-\end{proposition}
-
-\begin{proof}
-    Dimostriamo che un tableau $T$ di peso massimo deve avere la struttura descritta nella
-    Figura~\ref{fig:tab_massimo}, ovvero deve avere solo lettere $k$ nella riga $k$-esima.
-
-    \begin{figure}[htbp]
-        \[
-            T = 
-            \ytableausetup{aligntableaux=center}
-            \ytableaunumber{
-                4,
-                3 3,
-                2 2 2 2,
-                1 1 1 1
-            }
-            \ytableausetup{aligntableaux=bottom}
-        \]
-        \caption{Il tableau di peso massimo nel cristallo $B(\lambda)$, con
-        $\lambda = (4, 4, 2, 1)$. }
-        \label{fig:tab_massimo}
-    \end{figure}
-
-    Nell'applicazione di $e_1$, tutte le lettere $2$ nella prima riga appaiono come parentesi
-    aperte non appaiate (non hanno $1$ alla propria destra),
-    quindi affinch\'e $T$ sia di peso massimo, non devono apparire
-    $2$ nella prima riga.
-    Lo stesso discorso funziona per ogni lettera: se $\varepsilon_i(T) = 0$, allora
-    non compaiono lettere $i+1$ nella prima riga.
-
-    Una volta dimostrato che la prima riga contiene solo $1$, si procede per 
-    induzione sulle righe successive.
-    La seconda riga non contiene $1$, inoltre non contiene $3$ perch\'e non ci sono
-    $2$ nella prima riga con cui potrebbero essere appaiati, e cos\`\i\ via.
-\end{proof}
+\label{sec:crys_norm}
 
 Non daremo una definizione formale di cristallo \emph{normale}.
 Diremo solo che si tratta di quei cristalli che si possono ottenere a partire da
@@ -703,12 +822,34 @@ Per una visione pi\`u ampia sull'argomento, si veda
 Enunciamo, invece, una caratterizzazione dei cristalli normali di tipo $A$.
 
 \begin{theorem}
-    Un cristallo normale connesso di tipo $A$ \`e isomorfo a un cristallo di tableaux $B(\lambda)$,
-    per qualche partizione $\lambda$.
-
-    Inoltre, i cristalli di tableaux sono normali, da cui un cristallo \`e normale
-    se e solo se \`e somma diretta di cristalli di tableaux di forma non-skew.
+    Un cristallo di tipo $A$ \`e normale se e solo se \`e isomorfo a una somma diretta
+    di cristalli di tableaux di forma non-skew $B(\lambda)$.
+    % 
+    % Un cristallo normale connesso di tipo $A$ \`e isomorfo a un cristallo di tableaux $B(\lambda)$,
+    % per qualche partizione $\lambda$.
+    % 
+    % Inoltre, i cristalli di tableaux sono normali, da cui un cristallo \`e normale
+    % se e solo se \`e isomorfo a una somma diretta di cristalli di tableaux di forma non-skew.
 \end{theorem}
+
+Come visto nella Sezione~\ref{sec:connessione_morfismi}, i cristalli di tableaux
+non-skew hanno un solo
+elemento di peso massimo, e il suo peso determina la forma dei tableaux.
+Allora, in un qualsiasi cristallo normale $B$, le sue componenti connesse
+sono indicizzate dai suoi elementi di peso massimo e il peso di questo
+elemento determina la classe di isomorfismo della propria componente connessa.
+Questo permette di dare una scrittura pi\`u esplicita alla somma diretta del
+teorema precedente.
+
+\begin{theorem}
+    Per ogni cristallo normale $B$ di tipo $A$, vale 
+    \[
+        B \cong \bigoplus_\lambda B(\lambda)^{\oplus a^\lambda_B},
+    \]
+    dove, per ogni partizione $\lambda$, l'intero non-negativo 
+    $a^\lambda_B$ \`e il numero di elementi di peso massimo in $B$ con peso $\lambda$.
+\end{theorem}
+
 
 Menzioniamo anche che in \cite{stembridge2003}, Stembridge ha fornito 
 alcuni assiomi, che prendono il nome di \emph{assiomi locali di Stembridge},
@@ -718,6 +859,25 @@ Per ulteriori informazioni, si veda l'articolo originale oppure
 \cite[Section~4.2]{bump-schilling-17}.
 
 Tutti i cristalli che abbiamo visto e che vedremo pi\`u avanti sono normali.
-Un esempio di cristallo non-normale \`e quello ottenuto ``fondendo'' in uno
+Un esempio di cristallo non-normale \`e quello mostrato in
+Figura~\ref{fig:crys_non_norm}, ottenuto ``fondendo''
 i due elementi con lo stesso peso nel cristallo dell'Esempio~\ref{ex:crys_tab_21}.
-% TODO forse qui figura
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzcd}
+    & \bullet && \bullet & \\
+        \bullet && \bullet && \bullet \\
+                & \bullet && \bullet
+                \arrow[blue, "2", from=1-2, to=2-3]
+                \arrow["1", from=1-4, to=2-5]
+                \arrow["1", from=2-1, to=1-2]
+                \arrow[blue, "2", from=2-1, to=3-2]
+                \arrow[blue, "2", from=2-3, to=1-4]
+                \arrow["1", from=2-3, to=3-4]
+                \arrow["1", from=3-2, to=2-3]
+                \arrow[blue, "2", from=3-4, to=2-5]
+    \end{tikzcd}
+    \caption{Il grafo cristallo di un cristallo non normale.}
+    \label{fig:crys_non_norm}
+\end{figure}
