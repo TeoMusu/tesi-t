@@ -4,9 +4,25 @@
 \label{ch:crystals}
 
 
-% TODO metti introduzione
+I cristalli sono oggetti combinatori la cui invenzione \`e dovuta
+a Kashiwara in \cite{kashiwara1990}
+e \cite{kashiwara1991} e idipententemente a Lusztig in
+\cite{lusztig1990a} e \cite{lusztig1990b}.
+Originariamente sono nati dallo studio delle rappresentazioni del 
+quantum group $U_q(\frakg)$, in particolare nel limite in cui il parametro $q$
+tende a $0$.
+
+Nonostante questo, la loro combinatoria pu\`o essere studiata
+riducendo al minimo la teoria delle rappresentazioni, ed \`e quello che 
+faremo noi.
+
+In questo capitolo seguiremo principalmente il libro \cite{bump-schilling-17},
+ma anche le note di Schimozono \cite{shimozono2005crystals}.
 
 \section{Definizioni}
+
+Iniziamo enunciando gli assiomi di cristallo come in
+\cite[Definition~2.13]{bump-schilling-17}.
 
 \begin{definition}[Cristallo di Kashiwara]
     \label{def:seminormal_crystal}
@@ -15,7 +31,7 @@
     tipo finito) \`e un insieme finito non vuoto $B$ dotato di mappe
     \begin{align*}
         f_i, e_i &\colon B \to B \sqcup \{ \zero \} ,   \\
-        \varphi_i, \varepsilon_i &\colon B \to \NN  ,     \\
+        \varphi_i, \varepsilon_i &\colon B \to \ZZ  ,     \\
         \wt &\colon B \to \Lambda ,
     \end{align*}
     dove $\zero \notin B$ \`e un simbolo ausiliario, che 
@@ -29,7 +45,7 @@
                 e_i ( f_i (x))  &= x    && \text{se $ f_i ( x) \neq \zero$,}   \\
                 f_i ( e_i (x))  &= x    && \text{se $ e_i (x ) \neq \zero$.}
             \end{align*}
-            
+            %
         \item \label{item:axiom_2}
             Agire con $f_i$ diminuisce il peso di $\alpha_i$.
             In simboli, per ogni $x \in B$ vale:
@@ -37,7 +53,7 @@
                 \wt (f_i (x)) &= \wt (x) - \alpha_i && \text{se $f_i (x) \neq \zero$,} \\
                 \wt (e_i (x)) &= \wt (x) + \alpha_i && \text{se $e_i (x) \neq \zero$.}
             \end{align*}
-
+            %
         \item \label{item:axiom_3}
             Le statistiche $\varphi_i$ e $\varepsilon_i$
             variano con l'azione di $f_i$ ed $e_i$ nel seguente modo:
@@ -49,19 +65,21 @@
                 \varepsilon_i (e_i (x)) &= \varepsilon_i(x) -1,
                                         && \text{se $e_i(x) \neq \zero$.}
             \end{align*}
-
+            %
         \item \label{item:axiom_4}
             Per ogni $x \in B$ vale:
             \[
                 \varphi_i(x) - \varepsilon_i(x) = 
                 \bigl\langle \wt(x), \alpha_i^\vee \bigr\rangle,
             \]
-            dove ricordando che la coradice $\alpha_i^\vee$ \`e definita come segue:
+            dove ricordiamo che la coradice $\alpha_i^\vee$ \`e definita come segue:
             \[
                 \alpha_i^\vee = \frac{2 \alpha_i}{ \langle \alpha_i, \alpha_i \rangle }.
         \]
-
     \end{enumerate}
+
+    La mappa $\wt$ viene chiamata \emph{mappa peso} e le mappe
+    $f_i$ ed $e_i$  \emph{operatori di Kashiwara}.
 
 \end{definition}
 
@@ -314,10 +332,14 @@ e $\alpha_i = \ee_i - \ee_{i+1}$ come radici semplici, dove $\ee_1, \dots, \ee_\
 \section{Cristalli di tableaux}
 \label{sec:crys_tableaux}
 
+In tutto il testo useremo la convenzione francese per l'orientamento
+dei tableaux.
+
 In questa sezione vogliamo definire,
 per ogni coppia di partizioni $\mu \subseteq \lambda$,
-una struttura di cristallo di tipo $A$ sull'insieme
-$\ssyt(\lambda / \mu)$ dei semistandard Young tableaux di forma skew $\lambda / \mu$.
+una struttura di cristallo di tipo $A_{\ell-1}$ sull'insieme
+$\ssyt^\ell(\lambda / \mu)$ dei semistandard Young tableaux di forma skew $\lambda / \mu$
+in cui compaiono solo le lettere da $1$ a $\ell$.
 
 Dato un tableau di Young $T$, definiamo il suo row-reading $\rowreading(T)$
 come  la parola ottenuta concatenando le sue righe, dall'ultima alla prima.
@@ -336,8 +358,9 @@ Per esempio se
 \end{align*}
 
 Il row-reading si restringe a una mappa iniettiva dall'insieme
-$\ssyt^\ell(\lambda / \mu)$ dei tableaux semistandard di forma $\lambda / \mu$
-in cui compaiono solo le lettere da $1$ a $\ell$, 
+$\ssyt^\ell(\lambda / \mu)$ definito sopra
+% dei tableaux semistandard di forma $\lambda / \mu$
+% in cui compaiono solo le lettere da $1$ a $\ell$, 
 all'insieme delle parole con $k$ lettere tra $1$ e $\ell$, dove $k$ \`e la
 taglia del tableau, ovvero $ k = \lvert \lambda \rvert - \lvert \mu \rvert$.
 
@@ -359,7 +382,7 @@ scontata, verr\`a verificata nel Lemma~\ref{lem:chiusura_rowreading}.
     semistandard Young tableaux di forma $\lambda / \mu$
     con lettere nell'alfabeto $[\ell]$.
 
-    Come operatori di Kashiwara, scelgiamo quelli che commutano con l'inclusione
+    Come operatori di Kashiwara, scegliamo quelli che commutano con l'inclusione
     \[
         \rowreading \colon \ssyt^\ell(\lambda/\mu) 
         \hookrightarrow B(1)^k
@@ -368,7 +391,7 @@ scontata, verr\`a verificata nel Lemma~\ref{lem:chiusura_rowreading}.
     nell'Esempio~\ref{ex:crys_word}.
 
     In simboli, per ogni tableau $T \in B(\lambda / \mu)$, definiamo $f_i(T)$ come
-    il tableaux di forma $\lambda / \mu$ tale che 
+    il tableau di forma $\lambda / \mu$ tale che 
     \[
         \rowreading(f_i ( T)) = f_i ( \rowreading ( T)),
     \]
@@ -480,7 +503,7 @@ scontata, verr\`a verificata nel Lemma~\ref{lem:chiusura_rowreading}.
         \ytableaushort{
             {\scriptstyle i+1} {\scriptstyle i+1} {\scriptstyle i+1} {\scriptstyle i+1},
             {i} {i} {i} {i}
-        }
+        },
     \]
     corrisponde a una stringa di parentesi della forma ``(((())))'', in cui tutte le parentesi
     sono appaiate.
@@ -501,7 +524,7 @@ scontata, verr\`a verificata nel Lemma~\ref{lem:chiusura_rowreading}.
     % NOTE forse riscrivi questo in 2 periodi.
     Ripercorrendo la dimostrazione del Lemma~\ref{lem:chiusura_rowreading}, \`e facile 
     verificare che la stessa struttura di cristallo si sarebbe ottenuta 
-    se, al posto di usare il row-reading, avessimo usato la lettura delle lettere del tableaux
+    se, al posto di usare il row-reading, avessimo usato la lettura delle lettere del tableau
     in un qualsiasi ordine fissato che estende la relazione d'ordine parziale data da 
     ``essere debolmente pi\`u in basso e pi\`u a destra''.
 \end{remark}
@@ -532,10 +555,10 @@ che indichiamo con $B \oplus B'$ e che chiamiamo la loro \emph{somma diretta}.
 
 Si noti che le componenti connesse di un cristallo sono ancora cristalli, con la struttura
 di cristallo indotta dall'inclusione.
-Per questo, ogni cristallo si pu\`o scrive come somma dirette delle proprie componenti connesse.
+Per questo, ogni cristallo si pu\`o scrive come somma diretta delle proprie componenti connesse.
 
 Vediamo adesso alcune nozioni che ci porteranno a dimostrare che i cristalli
-di tableax descritti nella Sezioni~\ref{sec:crys_tableaux} sono connessi.
+di tableaux descritti nella Sezioni~\ref{sec:crys_tableaux} sono connessi.
 
 \begin{definition}
     Un elemento $b$ in un cristallo $B$ si dice \emph{highest-weight}, 
@@ -729,7 +752,7 @@ Tuttavia, in tutti gli esempi che faremo i pesi avranno entrate non-negative e q
 otterremo polinomi.
 
 \begin{remark}
-    L'azione del gruppo di Weyl $W$ sul reticolo dei pasi $\Lambda$ si estende 
+    L'azione del gruppo di Weyl $W$ sul reticolo dei pesi $\Lambda$ si estende 
     all'anello $\ZZ[\Lambda]$ nel seguente modo:
     \[
         \w(\xx^\mu) = \xx^{\w(\mu)}
@@ -780,15 +803,24 @@ Da questo segue immediatamente il seguente corollario.
     Il carattere di un cristallo di tipo $A$ \`e un polinomio (di Laurent) \emph{simmetrico}.
 \end{corollary}
 
-% TODO definisci da qualche parte le schur
-Otteniamo anche che le funzioni di Schur definite in ?? sono effettivamente
-funzioni simmetriche.
+Diamo una definizione diversa ma equivalente a quella solitamente
+data dei polinomi di Schur.
+Tali polinomi (e le corrispondenti funzioni simmetriche) giocano un ruolo
+in primo piano nella combinatoria algebrica.
 
-\begin{proposition}
-    Per ogni partizione $\lambda$, il carattere del cristallo di tableaux $B(\lambda)$
-    \`e il polinomio di Schur $s_\lambda$,
-    da cui $s_\lambda$ \`e un polinomio simmetrico.
-\end{proposition}
+\begin{definition}
+    \label{def:polinomi_schur}
+    Per ogni partizione $\lambda$, il carattere $\chi_{B(\lambda)}$
+    del cristallo di tableaux $B(\lambda)$  prende il nome di
+    \emph{polinomio di Schur} e si indica con $s_\lambda$.
+    In simboli:
+    \[
+        s_\lambda(x_1, \dots, x_\ell) = 
+        \sum_{T \in \ssyt^\ell(\lambda)} \xx^{\wt(T)}.
+    \]
+    Per il Corollario~\ref{cor:caratteri_simmetrici}, i polinomi di Schur
+    sono polinomi simmetrici.
+\end{definition}
 
 % nessuno chiese
 % \begin{proof}

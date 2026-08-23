@@ -75,7 +75,8 @@ crescenti di $\w$ ottenute lasciando tendere a infinito il numero $\ell$ di fatt
 
 Siano $\xx = (x_1, x_2, \dots)$ infinite variabili. 
 
-Definiamo adesso le funzioni quasi-simmetriche.
+Iniziamo definendo le funzioni quasi-simmetriche e le funzioni
+simmetriche.
 
 \begin{definition}
     Sia $f(\xx) \in \QQ \llbracket x_1, x_2 , \dots \rrbracket $ una serie
@@ -105,7 +106,7 @@ Definiamo adesso le funzioni quasi-simmetriche.
 
 
 \begin{example}
-    Le funzioni quasi-simmetriche monomiali, definite da
+    Le \emph{funzioni quasi-simmetriche monomiali}, definite da
     \[
         M_\alpha \coloneq \sum_{i_1 < i_2 < \cdots < i_k}
         x_{i_1}^{\alpha_1} x_{i_2}^{\alpha_2} \cdots  x_{i_k}^{\alpha_k}
@@ -115,10 +116,26 @@ Definiamo adesso le funzioni quasi-simmetriche.
     sono una base dello spazio vettoriale delle funzioni quasi-simmetriche.
 \end{example}
 
+\begin{example}
+    \label{ex:schur_simmetriche}
+    Sono funzioni simmetriche le \emph{funzioni simmetriche di Schur}, definite
+    per ogni partizione $\lambda$ da
+    \[
+        s_\lambda \coloneq \sum_{T \in \ssyt(\lambda)} \xx^{\wt(T)},
+    \]
+    dove $\ssyt(\lambda)$ \`e l'insieme (infinito) dei tableaux semistandard 
+    di forma $\lambda$.
+
+    Infatti vale che, per ogni $\ell$, mettendo a zero tutte le variabili
+    tranne le prime $\ell$ otteniamo proprio i polinomi simmetrici di Schur
+    della Definizione~\ref{def:polinomi_schur}, e questo basta
+    affinch\'e la serie formale con infinite variabili sia una funzione simmetrica.
+\end{example}
+
 Introduciamo brevemente una notazione compatta per scrivere i monomi:
 per ogni $k$-upla di interi non-negativi
 $\alpha = (\alpha_1, \alpha_2, \dots \alpha_k) \in \NN^k$,
-utiliziamo la notazione
+utilizziamo la notazione
 \[
     \xx^\alpha \coloneq x_1^{\alpha_1} x_2^{\alpha_2} \cdots x_k^{\alpha_k}.
 \]
@@ -137,6 +154,7 @@ proprio con lo scopo di studiare le parole ridotte di $\w \in \sym_n$.
 
 \begin{definition}
     % [Funzione quasi-simmetrica di Stanley]
+    \label{def:stanley_f_qsimm}
     Per ogni permutazione $\w \in \sym_n$, definisco la \emph{funzione quasi-simmetrica
     di Stanley} associata a $\w^{-1}$ come 
     \[ 
@@ -154,7 +172,7 @@ proprio con lo scopo di studiare le parole ridotte di $\w \in \sym_n$.
 Chiaramente le funzioni di Stanley sono quasi-simmetriche perch\'e posso
 liberamente aggiungere o togliere fattori ``vuoti'' a una fattorizzazione 
 crescente, mantenendola tale.
-Questa operazione corrisponde a cambiare i pedici del monomio corrispondete, 
+Questa operazione corrisponde a cambiare i pedici del monomio corrispondente, 
 mantenendone l'ordine.
 
 Si noti che nella definizione compare $\w^{-1}$. 
@@ -224,7 +242,7 @@ con due fattori.
 
 % Per definire $\varphi_i$ ed $\varepsilon_i$,
 Descriviamo ora un algoritmo di ``bracketing''
-sulle lettere dei fattori $v^i$ e $v^{i+1}$, che permette di determiare
+sulle lettere dei fattori $v^i$ e $v^{i+1}$, che permette di determinare
 alcune lettere che non verranno toccate da $f_i$ e da $e_i$.
 
 \begin{definition}[$i$-pairing]
@@ -241,7 +259,7 @@ alcune lettere che non verranno toccate da $f_i$ e da $e_i$.
     Le lettere spaiate di $v^i$, invece, sono quelle che rimangono non appaiate dopo
     aver esaurito le lettere in $v^{i+1}$.
 
-    Definisco inoltre gli insiemi delle di lettere spaiate rispetto a questo pairing:
+    Definisco inoltre gli insiemi di lettere spaiate rispetto a questo pairing:
     \begin{align*}
         L_i(v) &= \{ a \in \cont(v^i) \mid \text{$a$ \`e spaiata
         nel pairing tra i fattori $v^i$ e $v^{i+1}$} \},
@@ -624,7 +642,7 @@ Vale un analogo del Lemma~\ref{lem:divisione_in_3}, che non dimostreremo.
         \item $b-t-1$ non compare in $u^{i+1}_l$;
         \item $b+1$ non compare in $u^i_r$;
         \item $b-t$ non compare in $u^i_l$;
-        \item tutte le lettere in $u^i_r$ sono appaite con lettere in $u^{i+1}_r$;
+        \item tutte le lettere in $u^i_r$ sono appaiate con lettere in $u^{i+1}_r$;
         \item tutte le lettere in $u^{i+1}_l$ sono appaiate con lettere in $u^i_l$.
     \end{itemize}
 \end{lemma}
@@ -733,7 +751,7 @@ semi-normale.
 
 \`E facile verificare che il carattere del cristallo $B(\w)$ definito nella sezione
 precedente \`e proprio 
-il polinomio di Stanley definito
+il polinomio di Stanley 
 % la funzione quasi-simmetrica di Stanley $\stan_{\w^{-1}}$ 
 definito nella Sezione~\ref{sec:funzioni_stanley}.
 
