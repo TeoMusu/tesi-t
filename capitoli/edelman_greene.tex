@@ -1,6 +1,6 @@
 % !TeX root = ../tesi.tex
 
-\chapter{Corrispondenza di Edelman-Greene}
+\chapter{Corrispondenza Edelman--Greene}
 \label{ch:edelman_greene}
 
 Iniziamo richiamando alcune nozioni dal Capitolo~\ref{ch:basics}.
@@ -29,7 +29,7 @@ cui uno \emph{ridotto} e l'altro standard.
 Iniziamo definendo i tableaux ridotti.
 
 \begin{definition}
-    Un tableau semistandard si dice \emph{ridotto} se il suo
+    Un tableau si dice \emph{ridotto} se \`e semistandard e il suo
     row-reading $\rowreading(T)$ \`e una
     parola ridotta.
 
@@ -56,7 +56,7 @@ Iniziamo definendo i tableaux ridotti.
     % NOTE ponderare il emph
     Un tableau ridotto, oltre che avere le colonne \emph{strettamente} crescenti, 
     in quanto semistandard, ha anche le righe \emph{strettamente} crescenti.
-    Infatti, altrimenti il suo row-reading avrebbe due lettere consecutive
+    Infatti, altrimenti, il suo row-reading avrebbe due lettere consecutive
     e non sarebbe una parola ridotta.
 \end{remark}
     
@@ -291,7 +291,7 @@ Enunciamo e dimostriamo due lemmi che saranno utili in seguito.
 
     Se l'inserimento di $a$ \`e speciale, la lettera $a$ spinge $c=a+1$ e il percorso di
     inserimento passa per $a+1$.
-    L'inserimento di $b$ spinge una lettera $d > b \leq a+1$ e il percorso passa per la
+    L'inserimento di $b$ spinge una lettera $d > b \geq a+1$ e il percorso passa per la
     casella precedentemente occupata da $d$.
 \end{proof}
 
@@ -467,8 +467,8 @@ ovvero quante siano le parole ridotte di una permutazione $\w$.
     \label{def:a_w_lambda}
     Per ogni permutazione $\w \in \sym_n$ e partizione 
     $\lambda$, 
-    definiamo $a_\w^\lambda$ come il numero di tableaux semistandard il cui row-reading
-    \`e una parola ridotta per $\w$.
+    definiamo $a_\w^\lambda$ come il numero di tableaux ridotti di forma $\lambda$
+    il cui row-reading \`e una parola ridotta per $\w$.
     In simboli:
     \[
         % \label{eq:def_a_w_lambda}
@@ -542,6 +542,7 @@ permutazione con la lunghezza pi\`u lunga.
         \label{fig:tableau_scala}
     \end{figure}
 
+    % NOTE accorcia...
     Per ogni casella di $T$, consideriamo un percorso che parte dalla casella pi\`u
     in basso a sinistra e arriva a quella casella, muovendosi solo di una casella alla
     volta verso destra o verso l'alto.
@@ -630,7 +631,7 @@ dove con $T \leftarrow v^k$ intendo il tableau ottenuto inserendo tutte le lette
 dentro $T$ una alla volta da sinistra a destra.
 
 Come prima $P(v) = P^{(s)}$.
-Come prima, se $( i, j)$ \`e una casella di $P^{(k)} \setminus P{(k-1)}$, allora scrivo
+Come prima, se $( i, j)$ \`e una casella di $P^{(k)} \setminus P^{(k-1)}$, allora scrivo
 $k$ nella casella $(i,j)$ di $Q(v)$.
 
 \begin{example}
@@ -774,7 +775,7 @@ dall'Esempio~\ref{ex:schur_simmetriche}:
     \end{equation}
     dove $\lambda$ varia fra le partizioni e $a_\w^\lambda$ \`e,
     come da Definizione~\ref{def:a_w_lambda}, il numero
-    di tableaux semistandard il cui row-reading
+    di tableaux ridotti di forma $\lambda$ il cui row-reading
     \`e una parola ridotta per $\w$.
     % In simboli:
     % \begin{equation}
@@ -787,8 +788,9 @@ dall'Esempio~\ref{ex:schur_simmetriche}:
 
 \begin{proof}
     Per ogni intero positivo $\ell$ e per ogni vettore $\mu$ di interi non-negativi in
-    $\NN^\ell$, il coefficiente del monomio $\xx^\mu$ in $\stan_{\w^{-1}}$ \`e il
-    numero di fattorizzazioni crescenti di peso $\mu$.
+    $\NN^\ell$, il coefficiente del monomio $\xx^\mu$ in $\stan_{\w^{-1}}$ \`e
+    $\lvert \incrfact_\mu(\w)\rvert$, ovvero il
+    numero di fattorizzazioni crescenti di $\w$ di peso $\mu$.
     
     Nel termine di destra, $a_\w^\lambda$ conta i tableaux in $\redtab(\w)$ di
     forma $\lambda$ e il coefficiente del monomio $\xx^\mu$ di $s_\lambda$
@@ -802,15 +804,15 @@ dall'Esempio~\ref{ex:schur_simmetriche}:
 
 \section{Struttura di cristallo}
 
-In questa sezione vediamo come la corrispondenza di Edelman-Greene sia anche
+In questa sezione vediamo come la corrispondenza di Edelman--Greene sia anche
 un isomorfismo di cristalli, ovvero la struttura di cristallo di
-Morse-Schilling definita sulle fattorizzazioni
+Morse--Schilling definita sulle fattorizzazioni
 crescenti nella Sezione~\ref{sec:cristallo_morse_schilling} viene mappata nella struttura 
 di cristallo sui tableaux semistandard definita nella Sezione~\ref{sec:crys_tableaux}.
 
 Fissata una permutazione $\w \in \sym_n$, e un intero positivo $\ell$ che 
 assumeremo essere ``sufficientemente grande'',
-la corrispondenza di Edelman-Greene pu\`o
+la corrispondenza Edelman--Greene pu\`o
 essere vista come una bigezione tra l'insieme $\incrfact^\ell(\w)$ delle
 fattorizzazioni crescenti di $\w$ con $\ell$ fattori e
 l'unione disgiunta di opportuni insiemi di tableaux semistandard,
@@ -842,7 +844,7 @@ quindi possiamo vedere il codominio come la somma diretta di questi cristalli:
 \]
 dove $\lambda$ varia tra le partizioni e $a_\w^\lambda$ \`e,
 come nella Definizione~\ref{def:a_w_lambda}, il numero di 
-tableaux semistandard il cui row-reading \`e una parola ridotta per $\w$.
+tableaux ridotti di forma $\lambda$ il cui row-reading \`e una parola ridotta per $\w$.
 
 Il fatto sorprendente \`e che la corrispondenza EG tra questi due insiemi, oltre a
 essere una bigezione che preserva il peso, \`e anche un isomorfismo di cristalli.
@@ -850,7 +852,7 @@ essere una bigezione che preserva il peso, \`e anche un isomorfismo di cristalli
 \begin{theorem}
     [{\cite[Theorem~4.11]{morse-schilling-15}}]
     \label{thm:eg_isomorfismo}
-    Per ogni permutazione $\w \in \sym_n$, la mappa di Edelman-Greene
+    Per ogni permutazione $\w \in \sym_n$, la mappa di Edelman--Greene
     \[
         \varphi_\EG \colon 
         B(\w) \to 
@@ -883,13 +885,13 @@ essere una bigezione che preserva il peso, \`e anche un isomorfismo di cristalli
 \end{theorem}
 
 Prima di dimostrare questo teorema, introduciamo la nozione di
-\emph{Coxeter-Knuth equivalenza}, un raffinamento della Coxeter equivalenza introdotto
+\emph{Coxeter--Knuth equivalenza}, un raffinamento della Coxeter equivalenza introdotto
 da Edelman e Greene in \cite[Definition~6.19]{edelman-greene-87}.
 
 \begin{definition}
-    Due parole ridotte $v$ e $v'$ si dicono \emph{Coxeter-Knuth equivalenti}
+    Due parole ridotte $v$ e $v'$ si dicono \emph{Coxeter--Knuth equivalenti}
     (e lo scrivo $v \approx v'$) se si possono ottenere
-    una dall'altra tramite una serie di operazioni di Coxeter-Knuth, ovvero
+    una dall'altra tramite una serie di operazioni di Coxeter--Knuth, ovvero
     sostituzioni della forma
     \begin{subequations}
         \begin{align}
@@ -908,7 +910,7 @@ da uno dei due lati, c'\`e una lettera $y$ numericamente compresa tra le due.
 
 \begin{lemma}[{\cite[Lemma~6.23]{edelman-greene-87}}]
     \label{lem:ptab_ck_equiv}
-    Ogni parola ridotta $v$ \`e Coxeter-Knuth equivalente al row-reading del suo
+    Ogni parola ridotta $v$ \`e Coxeter--Knuth equivalente al row-reading del suo
     $P$-tableau, in simboli:
     \[
         v \approx \rowreading(P(v)).
@@ -917,13 +919,13 @@ da uno dei due lati, c'\`e una lettera $y$ numericamente compresa tra le due.
 
 \begin{proof}
     Ripercorrendo i passaggi dell'Osservazione~\ref{rmk:coxeter_righe}, si osserva
-    che tutte le operazioni di Coxeter utilizzate sono gi\`a operazioni di Coxeter-Knuth.
+    che tutte le operazioni di Coxeter utilizzate sono gi\`a operazioni di Coxeter--Knuth.
 \end{proof}
 
 \begin{lemma}
     [{\cite[Theorem~6.24]{edelman-greene-87}}]
     \label{lem:ptab_ck_equiv_doppia_freccia}
-    Due parole ridotte $v$ e $v'$ sono Coxeter-Knuth equivalenti se e solo se
+    Due parole ridotte $v$ e $v'$ sono Coxeter--Knuth equivalenti se e solo se
     i loro $P$-tableaux sono uguali. In simboli:
     \[
         v \approx v' \iff P(v) = P(v').
@@ -938,7 +940,7 @@ da uno dei due lati, c'\`e una lettera $y$ numericamente compresa tra le due.
 
     Per l'altra implicazione, che si riconduce a una lunga casistica,
     rimandiamo alla dimostrazione di Edelman e Greene in
-    \cite[Theorem~6.4]{edelman-greene-87}.
+    \cite[Theorem~6.24]{edelman-greene-87}.
 \end{proof}
 
 Ritorniamo ora al cristallo di Morse e Schilling $B(\w)$ per ogni $\w \in \sym_n$.
@@ -947,16 +949,16 @@ Ritorniamo ora al cristallo di Morse e Schilling $B(\w)$ per ogni $\w \in \sym_n
     \label{lem:ms_f_ck_equivalenza}
     Per ogni $i \in I$ e per ogni fattorizzazione crescente $v \in B(\w)$
     tale che $f_i(v) \neq \zero$,
-    le parole ridotte associate a $v$ e a $f_i(v)$ sono Coxeter-Knuth equivalenti.
+    le parole ridotte associate a $v$ e a $f_i(v)$ sono Coxeter--Knuth equivalenti.
 \end{lemma}
 
 \begin{proof}
     Ripercorriamo la dimostrazione della
     Proposizione~\ref{prop:ms_f_coxeter_equivalenza}, che dimostrava la
     Coxeter equivalenza tra $v$ e $f_i(v)$.
-    Vogliamo introdurre opportune modifiche in modo da usare solo operazioni di Coxeter-Knuth.
+    Vogliamo introdurre opportune modifiche in modo da usare solo operazioni di Coxeter--Knuth.
     % Si osserva, anche grazie al Lemma~\ref{lem:divisione_in_3}, che tutte le operazioni
-    % di Coxeter utilizzate sono gi\`a operazioni di Coxeter-Knuth.
+    % di Coxeter utilizzate sono gi\`a operazioni di Coxeter--Knuth.
 
     Per le propriet\`a dell'operatore $f_i$ descritte nella
     Sezione~\ref{sec:cristallo_morse_schilling}, basta guardare il caso con due fattori.
@@ -1001,8 +1003,8 @@ Ritorniamo ora al cristallo di Morse e Schilling $B(\w)$ per ogni $\w \in \sym_n
         ( 12, 13 \mid \mathbf{15}, 18 \text{-} 16).
     \]
 
-    Poi, si verifica che tutte le operazioni di Coxeter richieste dal Lemma~\ref{lem:parole_equiv}
-    sono gi\`a operazioni di Coxeter-Knuth, quindi ottengo:
+    Poi, si verifica che tutte le operazioni di Coxeter utilizzate nel
+    Lemma~\ref{lem:parole_equiv} sono gi\`a operazioni di Coxeter--Knuth, quindi ottengo:
     \[
         ( \mathbf{1}, 2 \text{-} 1, \mathbf{3}, 9 \text{-} 5,
         11 \text{-} 8\mid  13, 14  ) \,
@@ -1024,8 +1026,8 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     % [Dimostrazione del Teorema~\ref{thm:eg_isomorfismo}]
     Prima dimostriamo il punto~\ref{item:thm_pt1}.
     Per il Lemma~\ref{lem:ms_f_ck_equivalenza}, le parole ridotte $v$ e $f_i(v)$ sono 
-    Coxeter-Knuth equivalenti e, per il Lemma~\ref{lem:ptab_ck_equiv_doppia_freccia},
-    parole Coxeter-Knuth equivalenti hanno lo stesso $P$-tableau e questo conclude
+    Coxeter--Knuth equivalenti e, per il Lemma~\ref{lem:ptab_ck_equiv_doppia_freccia},
+    parole Coxeter--Knuth equivalenti hanno lo stesso $P$-tableau e questo conclude
     il punto~\ref{item:thm_pt1}.
 
     Prima di dimostrare il punto~\ref{item:thm_pt2}, introduciamo un po' di notazione.
@@ -1047,7 +1049,7 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     con maggiore generalit\`a di quella dell'enunciato originale.
     Infatti il lemma rimane valido anche se la seconda lettera non \`e la lettera
     inserita immediatamente dopo, a patto che il percorso d'inserimento della prima
-    lettera non sia stato ``toccato'' dall'inserimento di altre lettere intermedie.
+    lettera non sia stato ``toccato'' dall'inserimento delle altre lettere intermedie.
 
     Mostriamo subito questo ragionamento in azione.
 
@@ -1062,12 +1064,12 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
         \`e minore della lettera $x_{j-k}$.
         I percorsi d'inserimento delle lettere di $v^i$ a destra di $x_{j-k}$ sono strettamente
         a destra del percorso di $x_{j-k}$ per il Lemma~\ref{lem:percorsi_strict},
-        quindi non lo hanno ``toccato'' e il percorso di inserimento di $y_1$ sar\`a
+        quindi non lo hanno toccato e il percorso di inserimento di $y_1$ sar\`a
         debolmente a sinistra di quello di $x_{j-k}$.
 
-        Successivamente, devo inserire la lettera $y_2 $, che per lo stesso lemma
+        Successivamente devo inserire la lettera $y_2 $, che per lo stesso lemma
         \`e minore della lettera $x_{j-k+1}$.
-        Il percorso d'inserimento di $x_{j-k+1}$ non pu\`o essere stato ``toccato'' n\'e dalle
+        Il percorso d'inserimento di $x_{j-k+1}$ non pu\`o essere stato toccato n\'e dalle
         successive lettere di $v^i$, n\'e da $y_1$, in quanto il suo percorso \`e a sinistra
         di quello di $x_{j-k}$.
         Allora concludo che il percorso d'inserimento di $y_2$ \`e debolmente a sinistra
@@ -1256,6 +1258,8 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     Nel seguito dimostriamo che la deviazione avviene 
     alla prima riga $r$ in cui $a_{r+1} > b_r$.
 
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % TODO questo \`e di un greve
     Assumiamo prima che non avvengano inserimenti speciali.
     Prima degli inserimenti, la lettera $a_{r+1}$ si trovava nella riga $r$
     assieme a $b_{r+1}$.
@@ -1276,10 +1280,11 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
 
     Anche per mostrare il viceversa, (ovvero se $a_{r+1} \leq b_r$ allora
     non c'\`e deviazione), le eventuali diminuzioni delle lettere non causano
-    problemi nella dimostrazione (che \`e immediata nel caso senza inserimenti
+    problemi nella dimostrazione (che \`e chiara nel caso senza inserimenti
     speciali).
     % NOTE boia, questo proprio non \`e stato dimostrato. Pondera se aggiungere
     % un esempio,  :,(
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     Chiaramente lo stesso discorso si pu\`o applicare anche per 
     i percorsi di inserimento successivi a quello di $x_{j+1}$ e quindi caratterizza
@@ -1603,7 +1608,7 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
                     line join=round
                 },
                 blPath/.style={
-                    blue!30,
+                    blue!20,
                     opacity=1,
                     line width=7pt,
                     line cap=round,
@@ -1705,7 +1710,7 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     in cui dimostro che la ``$\lparen$'' di $y_{r}$ compare prima della
     ``$)$'' di $x_{j-k+r-1}$ per ogni $r = 1, \dots , k$.
 
-    Successivamente abbiamo dimostrato che, per ogni $r = 1, \dots, s$, dato
+    Abbiamo gi\`a dimostrato che, per ogni $r = 1, \dots, s$, dato
     che c'\`e una buca tra i percorsi di $x_{j+r-1}$ e $x_{j+r}$, il percorso
     di $y_{k+r}$ scavalca e quindi la sua parentesi aperta compare prima di quella
     chiusa di $x_{j+r-1}$, da cui anche tutte quelle sono appaiate.
@@ -1717,7 +1722,7 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     di quella di $y_{k+s+1}$.
     Allora la parentesi chiusa associata a $x_{j+s}$ \emph{non} \`e appaiata.
 
-    Verifichiamo infine che tutte le parentesi chiuse corrispondenti a
+    Verifichiamo infine che tutte le parentesi aperte corrispondenti a
     $x_{j+s+1}, \dots, x_{\alpha_i}$ sono appaiate con parentesi chiuse tra quelle
     di $y_{k+s+1}, \dots, y_{\alpha_{i+1}}$.
     Per ogni $r = s+1, \dots, \alpha_i - j$, per il Lemma~\ref{lem:divisione_sgravo_comparativo}
@@ -1725,7 +1730,8 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     compare quella aperta di $y_{k+r}$.
 
     Questo dimostra che l'ultima parentesi chiusa non appaiata \`e proprio quella
-    di $x_{j+s}$, dimostrando che l'operatore $f_i$ di Kashiwara commuta con
+    di $x_{j+s}$, ultima lettera il cui percorso devia,
+    dimostrando che l'operatore $f_i$ di Kashiwara commuta con
     la mappa $Q$ di Edelman e Greene.
 
     Per dimostrare il teorema, bisognerebbe ripetere il tutto per dimostrare

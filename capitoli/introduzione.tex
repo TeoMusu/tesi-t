@@ -3,11 +3,11 @@
 \chapter*{Introduzione}
 \addcontentsline{toc}{chapter}{Introduzione}
 
-Il gruppo simmetrico $\sym_n$ pu\`o essere come un gruppo di Coxeter,
+Il gruppo simmetrico $\sym_n$ pu\`o essere visto come un gruppo di Coxeter
 generato dalle trasposizioni semplici $s_i = (i, i+1)$, ovvero quelle che scambiano
 due elementi ``vicini''.
-Una parola ridotta per una permutazione $\w \in \sym_n$ \`e una scrittura
-di $\w$ come prodotto di trasposizioni semplici di lunghezza minima.
+Una \emph{parola ridotta} per una permutazione $\w \in \sym_n$ \`e una scrittura
+di $\w$ come prodotto di trasposizioni semplici, di lunghezza minima.
 \`E naturale chiedersi, fissato $\w$, quante siano le sue parole ridotte.
 % Il problema viene spesso formulato in termini di numero di catene massimali
 % nel poset del weak Bruhat order.
@@ -19,7 +19,7 @@ In questo caso Stanley riesce a congetturare
 e successivamente dimostrare in \cite{stanley-84} una formula esatta:
 il numero di parole ridotte di $\w_0$ \`e pari al numero di tableaux di Young
 standard di forma ``a scala'' con $\binom n 2$ blocchi,
-che per la hook-lenght formula vale
+che per la hook-lenght formula \`e uguale a
 \[
     f^{(n-1,n-2,\dots,1)} =
     {\binom n 2 !} \bigg/ 1^{n-1} 3^{n-2} 5^{n-3} \dots (2n-3)^1.
@@ -34,8 +34,8 @@ Stanley.
 Un approccio puramente combinatorio allo stesso problema \`e stato trovato
 successivamente da Edelman e Greene in \cite{edelman-greene-87}.
 Nella loro dimostrazione, gli autori inventano una variante della
-pi\`u famosa corrispondenza Robinson-Schensted-Knuth (RSK) che verr\`a successivamente
-chiamata corrispondenza Edelman-Greene (EG).
+pi\`u famosa corrispondenza Robinson--Schensted--Knuth (RSK) che verr\`a successivamente
+chiamata corrispondenza Edelman--Greene (EG).
 La loro \`e una variante specializzata all'inserimento di parole ridotte, e il
 risultato dell'inserimento \`e un \emph{tableau ridotto}, ovvero semistandard
 e tale che, concatenando le righe dall'ultima alla prima, si ottiene una parola ridotta.
@@ -51,7 +51,7 @@ diretto con archi colorati detto \emph{grafo cristallo}, estratta da rappresenta
 quantum group $U_q(\frakg)$ facendo tendere $q$ a $0$.
 Il quantum group $U_q(\frakg)$ \`e
 una deformazione della universal enveloping algebra $U(\frakg)$ ottenuta aggiungendo
-un parametro $q$ in modo che mettendo $q$ uguale a $1$ si ottenga la struttura originale.
+un parametro complesso $q$ in modo che mettendo $q$ uguale a $1$ si ottenga la struttura originale.
 
 Nel tempo si sono consolidati degli ``assiomi di cristallo'', come quelli in
 \cite{bump-schilling-17},
@@ -63,11 +63,11 @@ chiamati \emph{cristalli normali} quelli che lo fanno.
 In \cite{morse-schilling-15}, Morse e Schilling introducono per ogni permutazione
 $\w \in \sym_n$ un cristallo normale, strettamente correlato alle parole ridotte di $\w$,
 il cui carattere \`e proprio la funzione simmetrica di Stanley di $\w$.
-Inoltre, la corrispondenza di Edelman-Greene, che si pu\`o applicare agli elementi
+Inoltre, la corrispondenza Edelman--Greene, che si pu\`o applicare agli elementi
 di questo cristallo, si scopre essere un isomorfismo di cristalli,
 mettendo sull'immagine una naturale struttura di cristallo.
 In particolare, questo isomorfismo  esplicita la decomposizione
-del cristallo di Morse-Schilling come somma diretta di cristalli di tableaux,
+del cristallo di Morse--Schilling come somma diretta di cristalli di tableaux,
 che nella teoria dei cristalli normali giocano il ruolo di cristalli ``irriducibili''.
 
 Nel Capitolo~\ref{ch:basics} introduciamo alcune nozioni essenziali per la discussione
@@ -79,10 +79,10 @@ seguendo principalmente il libro \cite{bump-schilling-17} e parzialmente le note
 \cite{shimozono2005crystals}.
 
 Nel Capitolo~\ref{ch:stanley_symm} introduciamo le funzioni simmetriche di Stanley.
-Successivamente definiamo il cristallo di Morse-Schilling seguendo la loro
+Successivamente definiamo il cristallo di Morse--Schilling seguendo la loro
 fonte principale \cite{morse-schilling-15}.
 
-Nel Capitolo~\ref{ch:edelman_greene} descriviamo la corrispondenza Edelman-Greene
+Nel Capitolo~\ref{ch:edelman_greene} descriviamo la corrispondenza Edelman--Greene
 e ne dimostriamo le propriet\`a principali seguendo la fonte originale
 \cite{edelman-greene-87}.
 Questo ci permette immediatamente di dimostrare
@@ -94,9 +94,9 @@ delle Schur, dimostrandone la Schur-positivit\`a.
 Concludiamo dimostrando il Teorema~\ref{thm:eg_isomorfismo}, ovvero che la
 mappa di Edelman e Greene \`e un isomorfismo di cristalli.
 
-Tra gli argomenti che \emph{non} rietrano in questa tesi c'\`e il molto importante
-prodotto tensore di cristalli e la sua regola di Littlewood-Richardson.
+Tra gli argomenti che \emph{non} rientrano in questa tesi c'\`e il molto importante
+prodotto tensore di cristalli e la sua regola di Littlewood--Richardson.
 Non parleremo nemmeno dell'isomorfismo, discusso in \cite[Proposition~4.3]{morse-schilling-15},
-che c'\`e tra il cristallo di Morse-Schilling
+che c'\`e tra il cristallo di Morse--Schilling
 per permutazioni $321$-avoiding e cristalli di tableaux di forma skew,
 la cui forma si ricava dal diagramma di Rothe della permutazione.

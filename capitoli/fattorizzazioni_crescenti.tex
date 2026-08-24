@@ -1,6 +1,6 @@
 % !TeX root = ../tesi.tex
 
-\chapter{Funzioni simmetriche di Stanley e cristallo di Morse-Schilling}
+\chapter{Funzioni simmetriche di Stanley e cristallo di Morse--Schilling}
 \label{ch:stanley_symm}
 
 In questo capitolo introduciamo le funzioni simmetriche di Stanley,
@@ -14,7 +14,7 @@ fattorizzazioni crescenti, introdotto da Morse e Schilling in
 \section{Fattorizzazioni crescenti}
 \label{sec:incr_fact}
 
-In questo capitolo fissiamo un intero $\ell \geq 2$.
+Fissiamo un intero $\ell \geq 2$.
 Iniziamo definendo le fattorizzazioni crescenti.
 
 
@@ -32,7 +32,7 @@ Iniziamo definendo le fattorizzazioni crescenti.
 Dato che una parola crescente \`e ridotta, la condizione 
 che $v$ sia una parola ridotta \`e equivalente a:
 \[
-    \len(\w) = \len(v^1) + \len(v^2) + \cdots + \len(v^\ell).
+    \len(\w) = \len\bigl(v^1\bigr) + \len\bigl(v^2\bigr) + \cdots + \len\bigl(v^\ell\bigr).
     % = \lvert \wt(v) \rvert.
 \]
 
@@ -51,11 +51,11 @@ crescenti di $\w$ ottenute lasciando tendere a infinito il numero $\ell$ di fatt
     componente $i$-esima  \`e il numero di lettere nel fattore $v^i$.
     In simboli:
     \[
-        \wt(v)_i = \len(v^i), \qquad \text{per ogni $i = 1, \dots, \ell$.}
+        \wt(v)_i = \len\bigl(v^i\bigr), \qquad \text{per ogni $i = 1, \dots, \ell$.}
     \]
 
-    Chiamiamo $\incrfact_\lambda(\w)$ l'insieme (finito) delle fattorizzazioni
-    crescenti di $\w$ con peso $\lambda$.
+    Chiamiamo $\incrfact_\mu(\w)$ l'insieme (finito) delle fattorizzazioni
+    crescenti di $\w$ con peso $\mu \in \Lambda$.
 \end{definition}
 
 
@@ -64,18 +64,18 @@ crescenti di $\w$ ottenute lasciando tendere a infinito il numero $\ell$ di fatt
     Per esempio, 
     $v = (2\,3)(2)()(1\,2)(3)$ \`e una fattorizzazione crescente di 
     $\w = s_2 s_3 s_2 s_1 s_2 s_3 = 4321 \in \sym_4$, con peso
-    $\lambda = (2, 1, 0, 2, 1)$, in quanto 
+    $\mu = (2, 1, 0, 2, 1)$, in quanto 
     $\len(\w) = 6 $.
 \end{example}
 
 
-\section{Funzioni quasi-simmetriche di Stanley}
+\section{Funzioni quasisimmetriche di Stanley}
 \label{sec:funzioni_stanley}
 
 
 Siano $\xx = (x_1, x_2, \dots)$ infinite variabili. 
 
-Iniziamo definendo le funzioni quasi-simmetriche e le funzioni
+Iniziamo definendo le funzioni quasisimmetriche e le funzioni
 simmetriche.
 
 \begin{definition}
@@ -83,8 +83,8 @@ simmetriche.
     formale in infinite variabili i cui monomi hanno grado (uniformemente) limitato.
 
     \begin{itemize}
-        \item Diciamo che $f(\xx)$ \`e una \emph{funzione quasi-simmetrica} se, per ogni 
-            $k$ e per $k$-upla di interi positivi
+        \item Diciamo che $f(\xx)$ \`e una \emph{funzione quasisimmetrica} se, per ogni 
+            $k$ e per ogni $k$-upla di interi positivi
             $\alpha = (\alpha_1, \dots, \alpha_k)$, i monomi nella forma
             $x_{i_1}^{\alpha_1} x_{i_2}^{\alpha_2} \cdots x_{i_k}^{\alpha_k}$
             per qualche $i_1 < i_2 < \cdots < i_k$
@@ -93,11 +93,11 @@ simmetriche.
             partizione $\lambda$ e per ogni bigezione $\sigma \colon \ZZ^{+}\to \ZZ^+$,
             vale
             \[
-                \bigl[x_1^{\lambda_1} x_2^{\lambda_2} 
-                \cdots x_k^{\lambda_k}\bigr]    
+                \Bigl[x_1^{\lambda_1} x_2^{\lambda_2} 
+                \cdots x_k^{\lambda_k}\Bigr]    
                 f(\xx) =
-                \bigl[x_{\sigma(1)}^{\lambda_1} x_{\sigma(2)}^{\lambda_2}
-                \cdots x_{\sigma(k)}^{\lambda_k}\bigr]
+                \Bigl[x_{\sigma(1)}^{\lambda_1} x_{\sigma(2)}^{\lambda_2}
+                \cdots x_{\sigma(k)}^{\lambda_k}\Bigr]
                 f(\xx),
             \]
             ovvero i due monomi tra le parentesi quadre hanno lo stesso coefficiente.
@@ -105,15 +105,23 @@ simmetriche.
 \end{definition}
 
 
+Prima degli esempi, introduciamo brevemente una notazione compatta per scrivere i monomi:
+per ogni $k$-upla di interi non-negativi
+$\alpha = (\alpha_1, \alpha_2, \dots \alpha_k) \in \NN^k$,
+utilizziamo la notazione
+\[
+    \xx^\alpha \coloneq x_1^{\alpha_1} x_2^{\alpha_2} \cdots x_k^{\alpha_k}.
+\]
+
 \begin{example}
-    Le \emph{funzioni quasi-simmetriche monomiali}, definite da
+    Le \emph{funzioni quasisimmetriche monomiali}, definite da
     \[
         M_\alpha \coloneq \sum_{i_1 < i_2 < \cdots < i_k}
         x_{i_1}^{\alpha_1} x_{i_2}^{\alpha_2} \cdots  x_{i_k}^{\alpha_k}
     \]
     al variare di $k$ e di $\alpha = (\alpha_1, \alpha_2, \dots , \alpha_k)$ tra le
     $k$-uple di interi positivi,
-    sono una base dello spazio vettoriale delle funzioni quasi-simmetriche.
+    sono una base dello spazio vettoriale delle funzioni quasisimmetriche.
 \end{example}
 
 \begin{example}
@@ -132,15 +140,7 @@ simmetriche.
     affinch\'e la serie formale con infinite variabili sia una funzione simmetrica.
 \end{example}
 
-Introduciamo brevemente una notazione compatta per scrivere i monomi:
-per ogni $k$-upla di interi non-negativi
-$\alpha = (\alpha_1, \alpha_2, \dots \alpha_k) \in \NN^k$,
-utilizziamo la notazione
-\[
-    \xx^\alpha \coloneq x_1^{\alpha_1} x_2^{\alpha_2} \cdots x_k^{\alpha_k}.
-\]
-
-Introduciamo ora le funzioni quasi-simmetriche di Stanley, che successivamente dimostreremo
+Introduciamo ora le funzioni quasisimmetriche di Stanley, che successivamente dimostreremo
 essere funzioni simmetriche.
 Sono state definite
 per la prima volta da Stanley in \cite{stanley-84}%
@@ -153,9 +153,9 @@ proprio con lo scopo di studiare le parole ridotte di $\w \in \sym_n$.
 % NOTE questo è fuori contesto: specificare meglio o togliere
 
 \begin{definition}
-    % [Funzione quasi-simmetrica di Stanley]
+    % [Funzione quasisimmetrica di Stanley]
     \label{def:stanley_f_qsimm}
-    Per ogni permutazione $\w \in \sym_n$, definisco la \emph{funzione quasi-simmetrica
+    Per ogni permutazione $\w \in \sym_n$, definisco la \emph{funzione quasisimmetrica
     di Stanley} associata a $\w^{-1}$ come 
     \[ 
         \stan_{\w^{-1}}(\xx)
@@ -169,21 +169,21 @@ proprio con lo scopo di studiare le parole ridotte di $\w \in \sym_n$.
     \]
 \end{definition}
 
-Chiaramente le funzioni di Stanley sono quasi-simmetriche perch\'e posso
+Chiaramente le funzioni di Stanley sono quasisimmetriche perch\'e posso
 liberamente aggiungere o togliere fattori ``vuoti'' a una fattorizzazione 
 crescente, mantenendola tale.
-Questa operazione corrisponde a cambiare i pedici del monomio corrispondente, 
-mantenendone l'ordine.
+Questa operazione corrisponde a cambiare i pedici delle variabili 
+nel monomio corrispondente, mantenendone l'ordine.
 
 Si noti che nella definizione compare $\w^{-1}$. 
-Avremmo potuto eliminare questa inversione descrivendo le funzioni quasi-simmetriche
+Avremmo potuto eliminare questa inversione descrivendo le funzioni quasisimmetriche
 di Stanley in termini di fattorizzazioni \emph{decrescenti},
 tuttavia quelle crescenti si comportano meglio nella corrispondenza EG, che
 approfondiremo nel Capitolo~\ref{ch:edelman_greene}.
 
 \begin{remark}
     Ogni parola ridotta pu\`o essere interpretata in un solo modo come una
-    fattorizzazione in cui tutti i fattori hanno una sola lettera.
+    fattorizzazione crescente in cui tutti i fattori hanno una sola lettera.
     Questo significa che il numero di parole ridotte di $\w$ \`e il coefficiente
     del monomio $x_1 x_2 \cdots x_\ell$, dove $\ell = \len(\w)$ \`e la 
     lunghezza delle parole ridotte.
@@ -194,7 +194,7 @@ approfondiremo nel Capitolo~\ref{ch:edelman_greene}.
 \end{remark}
 
 
-% Se $\ell$ \`e la lunghezza di $\w$, la funzione quasi-simmetrica di Stanley
+% Se $\ell$ \`e la lunghezza di $\w$, la funzione quasisimmetrica di Stanley
 % \`e omogenea di grado $\ell$.
 
 
@@ -202,11 +202,12 @@ approfondiremo nel Capitolo~\ref{ch:edelman_greene}.
 \label{sec:cristallo_morse_schilling}
 
 
-In questa sezione definiamo, per ogni permutazione $\w \in \sym_n$, 
+
+Seguendo il lavoro di Morse e Schilling in \cite[Section~3]{morse-schilling-15},
+definiamo, per ogni permutazione $\w \in \sym_n$, 
 una struttura di cristallo $B(\w)$ di tipo $A_{\ell-1}$ su
 sull'insieme $\incrfact^\ell(\w)$ delle fattorizzazioni crescenti di $\w$.
-Chiameremo il cristallo cos\`\i\ ottenuto ``cristallo di Morse e Schilling'',
-che lo hanno introdotto in \cite{morse-schilling-15}.
+Chiameremo il cristallo cos\`\i\ ottenuto ``cristallo di Morse e Schilling''.
 
 Siano, come nell'Esempio~\ref{ex:sist_rad_A},
 $I = [\ell-1]$ un insieme di indici e, al variare di $i \in I$,
@@ -217,7 +218,7 @@ $\Lambda = \ZZ^\ell$ il reticolo dei pesi e $f_i$ ed $e_i$ gli operatori di Kash
 Per ogni $v = v^1 v^2 \cdots v^\ell \in \incrfact^\ell(\w)$ la funzione peso \`e esattamente
 quella della Definizione~\ref{def:peso_if}:
 \[
-    \wt(v) = ( \len(v^1), \len(v^2), \dots, \len(v^\ell) ).
+    \wt(v) = \bigl( \len\bigl(v^1\bigr), \len\bigl(v^2\bigr), \dots, \len\bigl(v^\ell\bigr) \bigr).
 \]
 Per l'assioma di cristallo \ref{item:axiom_2},
 deve valere
@@ -233,8 +234,8 @@ Inoltre, l'azione su $v^i v^{i+1}$ non dipende da tutti gli altri fattori,
 n\'e dall'indice $i$ (a parte per la scelta dei fattori su cui agire).
 In simboli:
 \begin{align*}
-    f_i ( v^1 \cdots v^\ell ) &= v^1 \cdots f_1( v^i v^{i+1} ) \cdots v^\ell, \\
-    e_i ( v^1 \cdots v^\ell ) &= v^1 \cdots e_1( v^i v^{i+1} ) \cdots v^\ell.
+    f_i \bigl( v^1 \cdots v^\ell \bigr) &= v^1 \cdots f_1\bigl( v^i v^{i+1} \bigr) \cdots v^\ell, \\
+    e_i \bigl( v^1 \cdots v^\ell \bigr) &= v^1 \cdots e_1\bigl( v^i v^{i+1} \bigr) \cdots v^\ell.
 \end{align*}
 Pertanto, ci \`e sufficiente definire $f_1$ ed $e_1$ per fattorizzazioni crescenti
 con due fattori.
@@ -261,11 +262,11 @@ alcune lettere che non verranno toccate da $f_i$ e da $e_i$.
 
     Definisco inoltre gli insiemi di lettere spaiate rispetto a questo pairing:
     \begin{align*}
-        L_i(v) &= \{ a \in \cont(v^i) \mid \text{$a$ \`e spaiata
-        nel pairing tra i fattori $v^i$ e $v^{i+1}$} \},
+        L_i(v) &= \bigl\{ a \in \cont\bigl(v^i\bigr) \mid \text{$a$ \`e spaiata
+        nel pairing tra i fattori $v^i$ e $v^{i+1}$} \bigr\},
         \\
-        R_i(v) &= \{ b \in \cont(v^{i+1}) \mid \text{$b$ \`e spaiata
-        nel pairing tra i fattori $v^i$ e $v^{i+1}$} \}.
+        R_i(v) &= \bigl\{ b \in \cont\bigl(v^{i+1}\bigr) \mid \text{$b$ \`e spaiata
+        nel pairing tra i fattori $v^i$ e $v^{i+1}$} \bigr\}.
     \end{align*}
 \end{definition}
 
@@ -491,8 +492,8 @@ Possiamo finalmente definire l'azione dell'operatore di Kashiwara $f_i$.
     \]
     dove $\tilde{v}^i$ e $ \tilde{v}^{i+1} $ sono tali che 
     \begin{align*}
-        \cont ( \tilde{v}^i ) &= \cont (v^i) \setminus \{ a \}, \\
-        \cont ( \tilde{v}^{i+1}) &= \cont (v^{i+1}) \sqcup \{ a + s \},
+        \cont \bigl( \tilde{v}^i \bigr) &= \cont \bigl(v^i\bigr) \setminus \{ a \}, \\
+        \cont \bigl( \tilde{v}^{i+1}\bigr) &= \cont \bigl(v^{i+1}\bigr) \sqcup \{ a + s \},
     \end{align*}
     con $a$ e $s$ come da Definizione~\ref{def:a_s} e dove, per ogni parola
     $v$, con $\cont(v)$ indico l'insieme delle lettere in $v$ che, per parole
@@ -618,7 +619,7 @@ Vediamo rapidamente i passaggi principali.
 
     Definisco inoltre $t$ come il numero di cifre \emph{consecutive} che 
     precedono $b$ in $v^{i+1}$, ovvero $t$ \`e il minimo intero non-negativo tale che
-    $ b-t-1 \notin \cont(v^{i+1})$.
+    $ b-t-1 \notin \cont\bigl(v^{i+1}\bigr)$.
 \end{definition}
 
 % TODO regolare dimensioni parentesi
@@ -673,8 +674,8 @@ Vale un analogo del Lemma~\ref{lem:divisione_in_3}, che non dimostreremo.
     \]
     dove $\tilde{v}^i$ e $ \tilde{v}^{i+1} $ sono tali che 
     \begin{align*}
-        \cont ( \tilde{v}^i ) &= \cont (v^i) \sqcup \{ b -t \}, \\
-        \cont ( \tilde{v}^{i+1}) &= \cont (v^{i+1}) \setminus \{ b \},
+        \cont \bigl( \tilde{v}^i \bigr) &= \cont \bigl(v^i\bigr) \sqcup \{ b -t \}, \\
+        \cont \bigl( \tilde{v}^{i+1}\bigr) &= \cont \bigl(v^{i+1}\bigr) \setminus \{ b \},
     \end{align*}
     con $b$ e $t$ come da Definizione~\ref{def:b_t}.
 \end{definition}
@@ -697,7 +698,7 @@ Vale un analogo del Lemma~\ref{lem:divisione_in_3}, che non dimostreremo.
     
 Mettendo assieme i risultati di questa sezione, si dimostra che 
 quanto definito  \`e effettivamente una struttura di cristallo 
-semi-normale.
+seminormale.
 
 
 \begin{definition}
@@ -705,12 +706,12 @@ semi-normale.
     le funzioni $\wt$, $f_i$, $e_i$, $\varphi_i$, $\varepsilon_i$ definite in questa
     sezione definiscono sull'insieme $\incrfact ^\ell ( \w )$
     delle fattorizzazioni crescenti di $\w$ con $\ell$ fattori
-    una struttura di cristallo semi-normale
+    una struttura di cristallo seminormale
     di tipo $A_{\ell-1}$, che indichiamo con $B(\w)$ e chiamiamo
     \emph{cristallo di Morse e Schilling}.
     % 
     % Per ogni permutazione $\w \in \sym_n$,
-    % definiamo il \emph{cristallo di Morse-Schilling} $B(\w)$ come il cristallo di 
+    % definiamo il \emph{cristallo di Morse--Schilling} $B(\w)$ come il cristallo di 
     % tipo $A$ sull'insieme $\incrfact(\w)$ delle fattorizzazioni crescenti di $\w$,
     % la cui buona definizione \`e garantita dal Teorema~\ref{thm:cristallo_ms},
     % per qualche $\ell$ sufficientemente grande.
@@ -752,14 +753,14 @@ semi-normale.
 \`E facile verificare che il carattere del cristallo $B(\w)$ definito nella sezione
 precedente \`e proprio 
 il polinomio di Stanley 
-% la funzione quasi-simmetrica di Stanley $\stan_{\w^{-1}}$ 
-definito nella Sezione~\ref{sec:funzioni_stanley}.
+% la funzione quasisimmetrica di Stanley $\stan_{\w^{-1}}$ 
+della Definizione~\ref{def:stanley_f_qsimm}.
+% definito nella Sezione~\ref{sec:funzioni_stanley}.
 
 \begin{proposition}
     Il carattere $\chi_{B(\w)}$ del cristallo  $B(\w)$ 
     di tipo $A_{\ell-1}$
-    \`e il polinomio di Stanley $\stan_{\w^{-1}}$ in $\ell$ variabili.
-    $\ell$ variabili:
+    \`e il polinomio di Stanley $\stan_{\w^{-1}}$ in $\ell$ variabili:
     \[
         \chi_{B(\w)} (x_1, \dots, x_\ell) = \stan_{\w^{-1}} (x_1, \dots, x_\ell).
     \]
@@ -769,8 +770,11 @@ definito nella Sezione~\ref{sec:funzioni_stanley}.
     % \]
 \end{proposition}
 
+L'interpretazione come carattere di un cristallo ci permette di dimostrare facilmente
+il seguente teorema.
+
 \begin{theorem}
-    Le funzioni quasi-simmetriche di Stanley sono funzioni simmetriche.
+    Le funzioni quasisimmetriche di Stanley sono funzioni simmetriche.
 \end{theorem}
 
 \begin{proof}
@@ -798,7 +802,7 @@ modo:
     \label{eq:crystal_iso_eg_1}
     B(\w) \cong \bigoplus_{\lambda} B(\lambda)^{\oplus a_w^\lambda},
 \end{equation}
-dove $\lambda$ varia fra le permutazioni e $a_\w^\lambda$ sono interi non negativi
+dove $\lambda$ varia fra le partizioni e $a_\w^\lambda$ sono interi non negativi
 che contano gli elementi di $B(\w)$ highest-weight di peso $\lambda$:
 \[
     a_\w^\lambda = \lvert \{ v \in \incrfact_\lambda(\w) \mid
