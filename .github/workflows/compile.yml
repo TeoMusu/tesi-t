@@ -20,3 +20,4 @@ jobs:
         with:
           name: compiled-pdf
           path: tesi.pdf
+          archive: false
