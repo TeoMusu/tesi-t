@@ -1,0 +1,62 @@
+\documentclass[aspectratio=169]{beamer}
+% \usetheme{dmpisa}
+% \titlebackground*{assets/background}
+
+\usetheme{Copenhagen}
+\setbeamertemplate{navigation symbols}{}
+
+% font settings
+\usepackage{caladea}    % Cambria clone
+\usepackage{carlito}    % Calibri clone
+\renewcommand{\familydefault}{\sfdefault}
+\usefonttheme[onlymath]{serif}
+
+% This command is not strictly necessary but it allows you to add
+% links in a nice color without having to set them each time
+\newcommand{\hrefcol}[2]{\textcolor{cyan}{\href{#1}{#2}}}
+
+% custom packages
+\usepackage[italian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\title{Basi cristallo}
+\subtitle{Un'applicazione alla corrispondenza  di Edelman--Greene}
+% \course{Bachelor, master, Ph.D., and Research}
+\author{\href{mailto:m.musumeci5@studenti.unipi.it}{Matteo Musumeci} \and Prof.~Michele D'Adderio}
+% \IDnumber{0.57721$\ldots$}
+\date{25 settembre 2026}
+
+\begin{document}
+
+\maketitle
+
+% \section{Introduction}
+
+\begin{frame}{Parole ridotte}
+    \begin{columns}
+        \column{.5\textwidth}
+        \column{.5\textwidth}
+        \begin{itemize}
+            \item Posso solo scambiare due pedine vicine
+            \item Devo usare il minimo numero di mosse
+                (ovvero non posso scambiare le stesse due pedine più di una volta)
+        \end{itemize}
+
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Parole ridotte}
+    Ad ogni passo, annoto la posizione in cui è avvenuto lo scambio.
+
+\end{frame}
+
+
+\begin{frame}
+    \begin{block}{Il problema}
+        Fissata una permutazione,
+        quante sono le sue parole ridotte?
+    \end{block}
+
+\end{frame}
+\end{document}

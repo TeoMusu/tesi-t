@@ -22,6 +22,10 @@
 *.cb2
 .*.lb
 
+## beamer auxiliary files:
+*.nav
+*.snm
+
 ## Intermediate documents:
 *.dvi
 *.xdv
