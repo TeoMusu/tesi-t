@@ -14,7 +14,8 @@ fattorizzazioni crescenti, introdotto da Morse e Schilling in
 \section{Fattorizzazioni crescenti}
 \label{sec:incr_fact}
 
-Fissiamo un intero $\ell \geq 2$.
+Fissiamo un intero $\ell$ che ipotizzeremo essere ``sufficientemente grande''
+per i nostri scopi.
 Prima di definire le fattorizzazioni crescenti, parliamo brevemente
 di parole (strettamente) crescenti.
 
@@ -52,7 +53,7 @@ Possiamo ora definire le fattorizzazioni crescenti.
 \end{definition}
 
 Dato che una parola crescente \`e ridotta, la condizione 
-che $v$ sia una parola ridotta \`e equivalente a:
+che la parola $v$ sia ridotta \`e equivalente a:
 \[
     \len(\w) = \len\bigl(v^1\bigr) + \len\bigl(v^2\bigr) + \cdots + \len\bigl(v^\ell\bigr).
     % = \lvert \wt(v) \rvert.
@@ -228,15 +229,18 @@ approfondiremo nel Capitolo~\ref{ch:edelman_greene}.
 
 Seguendo il lavoro di Morse e Schilling in \cite[Section~3]{morse-schilling-15},
 definiamo, per ogni permutazione $\w \in \sym_n$, 
-una struttura di cristallo $B(\w)$ di tipo $A_{\ell-1}$ su
+una struttura di cristallo $B(\w)$ di tipo $A_{\ell-1}$
 sull'insieme $\incrfact^\ell(\w)$ delle fattorizzazioni crescenti di $\w$.
 Chiameremo il cristallo cos\`\i\ ottenuto \emph{cristallo di Morse--Schilling}.
 
-Siano, come nell'Esempio~\ref{ex:sist_rad_A},
-$I = [\ell-1]$ un insieme di indici e, al variare di $i \in I$,
-$\ee_i$ la base canonica di $\RR^\ell$,
-$\alpha_i = \ee_i - \ee_{i+1}$ le radici semplici, 
-$\Lambda = \ZZ^\ell$ il reticolo dei pesi e $f_i$ ed $e_i$ gli operatori di Kashiwara.
+Ricordiamo la notazione utilizzata nell'Esempio~\ref{ex:sist_rad_A}
+per definire il sistema di radici $\Phi$ di tipo $A_{\ell-1}$.
+Chiamiamo $\ee_1, \ee_2, \dots, \ee_\ell$ la base canonica di $\RR^\ell$,
+scegliamo $I = [\ell-1]$ come insieme di indici e, 
+al variare di $i \in I$, 
+fissiamo le radici semplici $\alpha_i = \ee_i - \ee_{i+1}$,
+il reticolo dei pesi $\Lambda = \ZZ^\ell$
+e chiamiamo $f_i$ ed $e_i$ gli operatori di Kashiwara.
 
 Per ogni $v = v^1 v^2 \cdots v^\ell \in \incrfact^\ell(\w)$ la funzione peso \`e esattamente
 quella della Definizione~\ref{def:peso_if}:
@@ -343,7 +347,7 @@ intanto le statistiche $\varphi_i$ e $\varepsilon_i$.
 
 \begin{remark}
     Si verifica facilmente che questa definizione delle statistiche 
-    $\varphi_i$ e $\varepsilon_i$ soddisfano l'assioma \ref{item:axiom_4}, infatti:
+    $\varphi_i$ e $\varepsilon_i$ soddisfa l'assioma \ref{item:axiom_4}, infatti:
     \[
         \begin{split}
             \bigl\langle \wt(v) , \alpha_i^\vee \bigr\rangle
@@ -356,7 +360,7 @@ intanto le statistiche $\varphi_i$ e $\varepsilon_i$.
 \end{remark}
 
 Vediamo alcune ulteriori propriet\`a di questo bracketing, che serviranno
-per definire l'operatore di $f_i$ di Kashiwara.
+per definire l'operatore $f_i$ di Kashiwara.
 
 \begin{definition}
     \label{def:a_s}
@@ -364,7 +368,7 @@ per definire l'operatore di $f_i$ di Kashiwara.
     $a$ come il pi\`u grande elemento in $v^i$ spaiato.
     Nell'Esempio~\ref{ex:accoppiamento} vale $a = 12$.
 
-    Definisco inoltre $s$ come il numero di cifre \emph{consecutive} che seguono $a$ in $v^i$, 
+    Definisco inoltre $s$ come il numero di interi \emph{consecutivi} che seguono $a$ in $v^i$, 
     ovvero $s$ \`e il minimo intero non-negativo tale che $a+s+1 \notin \cont(v^i)$.
     Nell'esempio vale $s = 2$ in quanto $12$ \`e seguito da $13$ e $14$, ma non $15$.
 \end{definition}
@@ -621,7 +625,7 @@ Bisogna ancora verificare che $f_i$ sia ben definito.
     I blocchi $u^i_r$ e $u^{i+1}_r$ non vengono modificati, quindi le coppie appaiate
     tra di loro rimangono tali.
 
-    La lettera $a+s$ in $\tilde{v}^{i+1}$ \`e spaiato perch\'e tutte le lettere in $u^i_r$ sono 
+    La lettera $a+s$ in $\tilde{v}^{i+1}$ \`e spaiata perch\'e tutte le lettere in $u^i_r$ sono 
     gi\`a appaiate.
 
     Le lettere tra $a$ e $a+s-1$ in $\tilde{v}^{i+1}$ rimangono appaiate con le lettere 
@@ -736,7 +740,7 @@ seminormale.
     \emph{cristallo di Morse--Schilling}\footnote{
         Siccome Morse e Schilling 
         lavorano con fattorizzazioni \emph{decrescenti}, la struttura di cristallo
-        $B(\w)$ definita da loro in \cite[Chapter~3]{morse-schilling-15}
+        $B(\w)$ definita da loro in \cite[Section~3]{morse-schilling-15}
         si ottiene da quella esposta in questa sezione sostituendo $\w$ con $\w^{-1}$.
         % o, equivalentemente, invertendo le parole destra--sinistra.
     }.
@@ -812,7 +816,7 @@ il seguente teorema.
     Grazie al Corollario~\ref{cor:caratteri_simmetrici} sui caratteri di cristalli
     di tipo $A$, i polinomi di Stanley sono polinomi simmetrici.
     Vale inoltre che, per verificare che $\stan_{\w^{-1}}$ sia una funzione
-    simmetrica, basta verificare i polinomi in $\ell$ variabili corrispondenti
+    simmetrica, basta verificare che polinomi in $\ell$ variabili corrispondenti
     siano simmetrici per valori arbitrariamente grandi di $\ell$.
     % 
     % Il teorema segue immediatamente dall'interpretazione delle funzioni
@@ -831,18 +835,18 @@ si pu\`o scrivere come somma diretta di cristalli di tableaux nel seguente
 modo:
 \begin{equation}
     \label{eq:crystal_iso_eg_1}
-    B(\w) \cong \bigoplus_{\lambda} B(\lambda)^{\oplus a_w^\lambda},
+    B(\w) \cong \bigoplus_{\lambda} B(\lambda)^{\oplus \tilde{a}_w^\lambda},
 \end{equation}
-dove $\lambda$ varia fra le partizioni e $a_\w^\lambda$ sono interi non negativi
+dove $\lambda$ varia fra le partizioni e $\tilde{a}_\w^\lambda$ sono interi non negativi
 che contano gli elementi di $B(\w)$ highest-weight di peso $\lambda$:
 \[
-    a_\w^\lambda = \lvert \{ v \in \incrfact_\lambda(\w) \mid
+    \tilde{a}_\w^\lambda = \lvert \{ v \in \incrfact_\lambda(\w) \mid
         % \forall i \in [\ell-1],
     e_i(v) = \zero \text{ per ogni $i\in I$}\} \rvert.
 \]
 
 Nel capitolo successivo daremo un'interpretazione combinatoria ai coefficienti
-$a_\w^\lambda$ ed espliciteremo l'isomorfismo in \eqref{eq:crystal_iso_eg_1}
+$\tilde{a}_\w^\lambda$ ed espliciteremo l'isomorfismo \eqref{eq:crystal_iso_eg_1}
 tramite una variante della corrispondenza RSK dovuta a Edelman e Greene in 
 \cite{edelman-greene-87}.
 

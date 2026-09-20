@@ -6,7 +6,7 @@
 
 I cristalli sono oggetti combinatori la cui invenzione \`e dovuta
 a Kashiwara in \cite{kashiwara1990}
-e \cite{kashiwara1991} e indipententemente a Lusztig in
+e \cite{kashiwara1991} e indipendentemente a Lusztig in
 \cite{lusztig1990a} e \cite{lusztig1990b}.
 Originariamente sono nati dallo studio delle rappresentazioni del 
 quantum group $U_q(\frakg)$, in particolare nel limite in cui il parametro $q$
@@ -166,7 +166,7 @@ e $\alpha_i = \ee_i - \ee_{i+1}$ come radici semplici, dove $\ee_1, \dots, \ee_\
             \draw[->] (np) -- node[above] {$\scriptstyle 1$} (nl);
         \end{tikzpicture};
     \end{center}
-    dove definisco, per ogni $j \in [k]$,
+    dove definisco, per ogni $j \in \{0, 1, \dots, k \}$,
     \begin{align*}
         \wt(v_j) &= (j, k-j) \in \ZZ^2, \\
         \varphi_1(v_j) &= j, \\
@@ -212,9 +212,10 @@ e $\alpha_i = \ee_i - \ee_{i+1}$ come radici semplici, dove $\ee_1, \dots, \ee_\
 
 \begin{remark}
     \label{rmk:crys_unione_istringhe}
-    Per l'Assioma~\ref{item:axiom_1}, se si prende un grafo cristallo e si dimenticano
+    Per gli assiomi \ref{item:axiom_1} e \ref{item:axiom_2},
+    se si prende un grafo cristallo e si dimenticano
     tutti gli archi tranne quelli con etichetta $i$, per qualche $i \in I$ fissata,
-    si ottiene un'unione disgiunta di cammini diretti, che chiamiamo \emph{$i$-strighe}
+    si ottiene un'unione disgiunta di cammini diretti, che chiamiamo \emph{$i$-stringhe}
     e che possiamo vedere come 
     cristalli di tipo $A_1$ con la struttura dell'Esempio~\ref{ex:crys_Bk_A1}.
 \end{remark}
@@ -252,7 +253,7 @@ e $\alpha_i = \ee_i - \ee_{i+1}$ come radici semplici, dove $\ee_1, \dots, \ee_\
 
 \begin{example}[Cristallo di parole]
     \label{ex:crys_word}
-    Definiamo un cristallo di tipo $A_\ell$ sull'insieme delle parole
+    Definiamo un cristallo di tipo $A_{\ell-1}$ sull'insieme delle parole
     con $k$ lettere nell'alfabeto $[\ell]$, che indicheremo con $B(1)^k$.
 
     Definiamo il peso di una parola $b$ come il suo contenuto, ovvero 
@@ -486,7 +487,7 @@ scontata, verr\`a verificata nel Lemma~\ref{lem:chiusura_rowreading}.
     L'insieme dei row-reading di tableaux in $B(\lambda / \mu )$ \`e chiuso per azioni
     di $f_i$ e di $e_i$.
     
-    In altre parole, applicare $f_i$ ed $e_i$ a un tableau semistandard, restituisce un
+    In altre parole, applicare $f_i$ ed $e_i$ a un tableau semistandard restituisce un
     tableau ancora semistandard.
 \end{lemma}
 
@@ -524,6 +525,8 @@ scontata, verr\`a verificata nel Lemma~\ref{lem:chiusura_rowreading}.
     Quando si applica $f_i$ al tableau $T$, quella lettera $i$ diventa un $i+1$ e,
     per quanto detto sopra sulle lettere nelle caselle subito sopra e subito a destra,
     il tableau ottenuto \`e ancora semistandard.
+
+    L'argomento per $e_i$ \`e analogo.
 \end{proof}
 
 \begin{remark}
@@ -531,8 +534,12 @@ scontata, verr\`a verificata nel Lemma~\ref{lem:chiusura_rowreading}.
     Ripercorrendo la dimostrazione del Lemma~\ref{lem:chiusura_rowreading}, \`e facile 
     verificare che la stessa struttura di cristallo si sarebbe ottenuta 
     se, al posto di usare il row-reading, avessimo usato la lettura delle lettere del tableau
-    in un qualsiasi ordine fissato che estende la relazione d'ordine parziale data da 
-    ``essere debolmente pi\`u in basso e pi\`u a destra''.
+    in un qualsiasi ordine fissato 
+    % che estende la relazione d'ordine parziale data da 
+    % ``essere debolmente pi\`u in basso e pi\`u a destra''.
+    tale che
+    una lettera debolmente più in alto e debolmente più a sinistra
+    di un’altra viene letta prima di quest’ultima.
 \end{remark}
 
 % NOTE qui puoi mettere che B(`l) ha un unico highest weight e che sono connessi...
@@ -561,10 +568,10 @@ che indichiamo con $B \oplus B'$ e che chiamiamo la loro \emph{somma diretta}.
 
 Si noti che le componenti connesse di un cristallo sono ancora cristalli, con la struttura
 di cristallo indotta dall'inclusione.
-Per questo, ogni cristallo si pu\`o scrive come somma diretta delle proprie componenti connesse.
+Per questo, ogni cristallo si pu\`o scrivere come somma diretta delle proprie componenti connesse.
 
 Vediamo adesso alcune nozioni che ci porteranno a dimostrare che i cristalli
-di tableaux descritti nella Sezione~\ref{sec:crys_tableaux} sono connessi.
+di tableaux di forma non-skew descritti nella Sezione~\ref{sec:crys_tableaux} sono connessi.
 
 \begin{definition}
     Un elemento $b$ in un cristallo $B$ si dice \emph{highest-weight}, 

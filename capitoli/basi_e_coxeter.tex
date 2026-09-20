@@ -31,8 +31,8 @@ che si pu\`o scrivere come segue:
 \end{remark}
 
 \begin{definition}[Sistema di radici]
-    Un \emph{sistema di radici} $\Phi$ in $V$ \`e un sottoinsieme non-vuoto finito di $V$ 
-    tale che:
+    Un \emph{sistema di radici} $\Phi$ in $V$ \`e un sottoinsieme non-vuoto finito di 
+    $V \setminus \{ 0 \}$ tale che:
     \begin{enumerate}
         \item $r_\alpha(\Phi) = \Phi$ per ogni $\alpha \in \Phi$;
         \item \label{item:sist_rad_2}
@@ -404,3 +404,125 @@ capitoli, ma la enunciamo qui.
 % partizioni/compositioni
 % tableaux standard/semistandard
 % funzioni simmetriche / schur (questo gi\`a aggiunto dopo)
+
+\section{Partizioni e tableaux}
+
+% In questa sezione introduciamo oggetti
+
+\begin{definition}[Partizione]
+    Per ogni intero positivo $n$, una \emph{partizione} $\lambda$ di $n$ 
+    \`e una sequenza $\lambda = (\lambda_1, \lambda_2, \dots, \lambda_k)$
+    debolmente decrescente di interi positivi che sommano a $n$.
+    In simboli, devono valere
+    \[
+        \lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_k > 0
+        \qquad \text{e} \qquad
+        \sum_{i=1}^k \lambda_i = n.
+    \]
+    L'intero $k$ prende il nome di \emph{lunghezza} della partizione.
+\end{definition}
+
+\begin{example}
+    Per esempio, le partizioni di $5$ sono
+    \[
+        (5)         ,\;
+        (4,1)       ,\;
+        (3,2)       ,\;
+        (3,1,1)     ,\;
+        (2,2,1)     ,\;
+        (2,1,1,1)   ,\;
+        (1,1,1,1,1).
+    \]
+\end{example}
+
+\begin{definition}
+    Una partizione $\lambda$ di lunghezza $k$ pu\`o essere identificata con il suo
+    \emph{diagramma di Ferrer} (o \emph{di Young}) $D_\lambda$, ottenuto impilando
+    $k$ righe di caselle quadrate, allineate a sinistra, in cui la $i$-esima
+    riga \`e composta da $\lambda_i$ caselle affiancate.
+
+    Si veda la Figura~\ref{fig:ex_y_diagram} per un esempio.
+\end{definition}
+
+\begin{remark}
+    Esistono due diverse convenzioni per disegnare i diagrammi associati alle partizioni.
+    Quella esposta qui, in cui le righe pi\`u lunghe sono le pi\`u in basso,
+    prende il nome di ``notazione francese''.
+    La ``notazione inglese'', molto pi\`u diffusa in letteratura, si ottiene specchiando
+    il diagramma rispetto all'asse $x$.
+
+    Noi useremo in tutto il testo la notazione francese.
+\end{remark}
+
+% TODO metti forme skew
+
+\begin{figure}[htbp]
+    \centering
+    \ydiagram{2,2,4,5}
+    \qquad
+    \ydiagram{1,3}
+    \qquad
+    \ytableaushort{
+        {}{},
+        {}{},
+        {\none}{}{}{},
+        {\none}{\none}{\none}{}{}
+    }
+    \caption{I diagrammi di Ferrer delle partizioni $\lambda=(5,4,2,2)$ e
+    $\mu=(3,1)$ e il diagramma di forma skew $\lambda/\mu$.}
+    \label{fig:ex_y_diagram}
+\end{figure}
+
+Siamo particolarmente interessati ai \emph{tableaux di Young}, ovvero
+diagrammi di Ferrer riempiti scrivendo un intero positivo in ogni casella.
+Nel seguito definiamo alcuni tipi di tableaux di Young che soddisfano 
+ulteriori vincoli e che compaiono spesso in combinatoria.
+
+\begin{definition}[Tableau di Young standard]
+    % Per ogni partizione $\lambda$, un \emph{tableau di Young} di forma $\lambda$
+    % \`e un diagramma di Ferrer in cui *in ogni casella c'\`e scritto un intero
+    % positivo.
+    % 
+    Per ogni partizione $\lambda$ di $n$,
+    un \emph{tableau di Young standard} di forma $\lambda$ \`e un riempimento
+    del diagramma di Ferrer di forma $\lambda$ con i numeri da $1$ a $n$, ciascuno
+    che compare esattamente una volta, in modo che i numeri siano crescenti lungo ogni
+    riga (da sinistra a destra) e lungo ogni colonna (dal basso all'alto).
+
+    Per ogni partizione $\lambda$, denoto con $f^\lambda$ il numero di tableaux di
+    Young standard di forma $\lambda$.
+    Come vedremo pi\`u avanti, questi numeri saranno importanti nel problema del
+    conteggio delle parole ridotte di una permutazione.
+\end{definition}
+
+\begin{figure}
+    \centering
+    \ytableaunumber{5, 34, 12}
+    \qquad
+    \ytableaunumber{4, 35, 12}
+    \qquad
+    \ytableaunumber{5, 24, 13}
+    \qquad
+    \ytableaunumber{4, 25, 13}
+    \qquad
+    \ytableaunumber{3, 25, 14}
+    \caption{Tutti i $5$ tableaux di Young standard di forma $\lambda = (2, 2, 1)$.}
+    \label{fig:ex_syt}
+\end{figure}
+
+\begin{definition}[Tableau di Young semistandard]
+    Per ogni partizione $\lambda$, un \emph{tableau di Young semistandard}
+    \`e un riempimento del diagramma di Ferrer di forma $\lambda$ con interi positivi,
+    eventualmente ripetuti, in modo che i numeri siano \emph{debolmente}
+    crescenti lungo le righe e \emph{strettamente} crescenti lungo le colonne.
+
+    Per ogni partizione $\lambda$, denot
+    % TODO finisci
+\end{definition}
+
+\begin{figure}
+    \centering
+    \caption{}
+    \label{fig:ex_ssyt}
+\end{figure}
+

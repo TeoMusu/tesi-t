@@ -57,7 +57,7 @@ Iniziamo definendo i tableaux ridotti.
     Un tableau ridotto, oltre che avere le colonne \emph{strettamente} crescenti, 
     in quanto semistandard, ha anche le righe \emph{strettamente} crescenti.
     Infatti, altrimenti, il suo row-reading avrebbe due lettere consecutive
-    e non sarebbe una parola ridotta.
+    uguali e non sarebbe una parola ridotta.
 \end{remark}
     
 
@@ -237,6 +237,12 @@ una riga precedentemente vuota.
     \begin{align*}
         \ytableausetup{aligntableaux=center}
         &\ytableaushort 
+        { \none \none {\scriptstyle >b} \none \none {\none[\leftarrow b]}, 
+        {\scriptstyle <a} {\scriptstyle <a} {*(yellow) a}  }
+        * {4,5}
+        &&\text{ se $a < b$.}
+        \\[1em]
+        &\ytableaushort 
         { \none \none \none {
                 % \scriptstyle {> \atop a+1}
                 \substack{> \\ a+1}
@@ -244,19 +250,25 @@ una riga precedentemente vuota.
         {\scriptstyle <a} {\scriptstyle <a} { a} {*(yellow) \scriptstyle a+1} }
         * {4,5}
         &&\text{ se $a=b$; } 
-        \\[1em]
-        &\ytableaushort 
-        { \none \none {\scriptstyle >b} \none \none {\none[\leftarrow b]}, 
-        {\scriptstyle <a} {\scriptstyle <a} {*(yellow) a}  }
-        * {4,5}
-        &&\text{ se $a < b$.}
         \ytableausetup{aligntableaux=bottom}
     \end{align*}
 
-    In entrambi i casi l'inserimento nella riga successiva avverr\`a in una casella
-    debolmente a sinistra della casella contenente $a$, ovvero l'inserimento
-    preserver\`a la crescenza delle colonne e il percorso di inserimento
-    si muover\`a debolmente a sinistra.
+    Nel primo caso (inserimento regolare) \`e facile verificare che l'inserimento
+    di $b$ nella riga successiva avverr\`a in una casella
+    debolmente a sinistra della casella contenente $a$, la crescenza delle
+    colonne verr\`a preservata e il percorso di inserimento si muover\`a debolmente
+    a sinistra.
+
+    Il secondo caso (inserimento speciale) deve essere ulteriormente diviso in due sottocasi:
+    se sopra la casella di $a+1$ c\`e la lettera $a+2$, allora anche l'inserimento
+    di $a+1$ sar\`a speciale e la riga sopra non varia;
+    altrimenti, si conclude come nel caso dell'inserimento regolare.
+    % TODO continua da qui
+
+    % In entrambi i casi l'inserimento nella riga successiva avverr\`a in una casella
+    % debolmente a sinistra della casella contenente $a$, ovvero l'inserimento
+    % preserver\`a la crescenza delle colonne e il percorso di inserimento
+    % si muover\`a debolmente a sinistra.
 
     Per mostrare che $v' = \rowreading(T \leftarrow k) \in \rw(\w)$, basta iterare
     per ogni riga l'Osservazione~\ref{rmk:coxeter_righe}.
@@ -483,6 +495,7 @@ ovvero quante siano le parole ridotte di una permutazione $\w$.
 \begin{corollary}
     Per ogni permutazione $\w \in \sym_n$, vale
     \begin{equation}
+        \label{eq:number_reduced_words}
         \lvert \rw(\w) \rvert = \sum_{\lambda} a_\w^\lambda f^\lambda,
     \end{equation}
     con $a_\w^\lambda$ e $f^\lambda$ come definiti subito sopra.
@@ -1150,7 +1163,7 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
                     \ytableaunumber{
                         {\tmn{B51}{15}} {\tmn{B52}{19}},
                         {\tmn{B41}{ 8}} {\tmn{B42}{13}} {\tmn{B43}{18}} {\none[\bullet]},
-                        {\tmn{B31}{ 6}} {\tmn{B32}{ 9}} {\tmn{B33}{14}} {\tmn{B34}{15}} {\tmn{B35}{22}} {\tmn{B36}{14}},
+                        {\tmn{B31}{ 6}} {\tmn{B32}{ 9}} {\tmn{B33}{14}} {\tmn{B34}{15}} {\tmn{B35}{22}} {\tmn{B36}{24}},
                         {\tmn{B21}{ 2}} {\tmn{B22}{ 3}} {\tmn{B23}{ 7}} {\tmn{B24}{12}} {\tmn{B25}{16}} {\tmn{B26}{17}} {\tmn{B27}{18}},
                         {\tmn{B11}{ 1}} {\tmn{B12}{ 2}} {\tmn{B13}{ 5}} {\tmn{B14}{ 6}} {\tmn{B15}{ 8}} {\tmn{B16}{10}} {\tmn{B17}{13}} {\tmn{B18}{16}}
                     }
