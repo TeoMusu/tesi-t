@@ -312,6 +312,7 @@ viceversa, ovvero due parole che rappresentano la stessa permutazione
 sono Coxeter equivalenti.
 
 \begin{definition}
+    \label{def:red_word}
     Per ogni permutazione $\w \in \sym_n$, definisco la sua \emph{lunghezza}
     $\len(\w)$ come la lunghezza della pi\`u corta parola $v$ tale che $\perm(v) = \w$.
 
@@ -326,7 +327,7 @@ Vale una semplice caratterizzazione della lunghezza di una permutazione.
 
 \begin{proposition}
     Per ogni permutazione $\w \in \sym_n$, la sua lunghezza $\len(\w)$
-    \`e uguale al suo numero di inversioni $\inv(\w)$, dove
+    \`e uguale al suo numero di \emph{inversioni} $\inv(\w)$, dove
     \[
         \inv(\w) \coloneq \lvert \{
             (i, j) \mid i<j \text{ e } \w(i) > \w(j)

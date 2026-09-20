@@ -17,7 +17,7 @@ riducendo al minimo la teoria delle rappresentazioni, ed \`e quello che
 faremo noi.
 
 In questo capitolo seguiremo il libro \cite{bump-schilling-17}
-e le note di Schimozono \cite{shimozono2005crystals}.
+e le note di Shimozono \cite{shimozono2005crystals}.
 
 \section{Definizioni}
 
@@ -107,7 +107,7 @@ con ``cristallo'' intendiamo \emph{sempre} ``cristallo seminormale''.
 
 \begin{definition}[Grafo cristallo]
     Per ogni cristallo $B$, possiamo definire il suo \emph{grafo cristallo} come il grafo
-    orientato con archi etichettati con colori in $I$ che ha come vertici gli elementi di 
+    orientato con archi etichettati con \emph{colori} in $I$ che ha come vertici gli elementi di 
     $B$ e in cui c'\`e un arco da $x \in B$ a $y \in B$ con etichetta $i \in I$ 
     se e solo se $y = f_i (x)$.
 \end{definition}
@@ -211,6 +211,7 @@ e $\alpha_i = \ee_i - \ee_{i+1}$ come radici semplici, dove $\ee_1, \dots, \ee_\
 \end{example}
 
 \begin{remark}
+    \label{rmk:crys_unione_istringhe}
     Per l'Assioma~\ref{item:axiom_1}, se si prende un grafo cristallo e si dimenticano
     tutti gli archi tranne quelli con etichetta $i$, per qualche $i \in I$ fissata,
     si ottiene un'unione disgiunta di cammini diretti, che chiamiamo \emph{$i$-strighe}
@@ -368,7 +369,9 @@ all'insieme delle parole con $k$ lettere tra $1$ e $\ell$, dove $k$ \`e la
 taglia del tableau, ovvero $ k = \lvert \lambda \rvert - \lvert \mu \rvert$.
 
 Definiamo inoltre il peso $\wt(T)$ di un tableau come il peso del 
-suo row-reading $\wt(\rowreading(T))$.
+suo row-reading, visto come elemento nel cristallo di parole
+dell'Esempio~\ref{ex:crys_word}.
+In simboli, $\wt(T) = \wt(\rowreading(T))$.
 Se $T$ \`e il tableau nell'esempio sopra, abbiamo 
 \[
     \wt(T) = (2, 2, 2, 3, 1).
@@ -561,7 +564,7 @@ di cristallo indotta dall'inclusione.
 Per questo, ogni cristallo si pu\`o scrive come somma diretta delle proprie componenti connesse.
 
 Vediamo adesso alcune nozioni che ci porteranno a dimostrare che i cristalli
-di tableaux descritti nella Sezioni~\ref{sec:crys_tableaux} sono connessi.
+di tableaux descritti nella Sezione~\ref{sec:crys_tableaux} sono connessi.
 
 \begin{definition}
     Un elemento $b$ in un cristallo $B$ si dice \emph{highest-weight}, 
@@ -670,10 +673,34 @@ Esiste anche una nozione pi\`u debole di morfismo di cristalli, che per\`o non u
 in cui $\Psi(x)$ pu\`o essere $\zero$ e in cui posso avere
 $\Psi (f_i(x)) \neq f_i ( \Psi(x))$ se uno dei due termini \`e zero.
 
+% NOTE questo fa abbastanza schifo, si potrebbe anche togliere.
+% \begin{proposition}
+%     Morfismi di cristalli mandano componenti connesse in componenti connesse.
+%     Inoltre, la restrizione a ogni componente connessa \`e un isomorfismo con l'immagine.
+% \end{proposition}
 \begin{proposition}
-    Morfismi di cristalli mandano componenti connesse in componenti connesse.
-    Inoltre, la restrizione a ogni componente connessa \`e un isomorfismo con l'immagine.
+    Morfismi di cristalli mandano componenti connesse in intere componenti connesse.
+    Ovvero, se $\Psi \colon B \to B'$ \`e un morfismo di cristalli e $C$ \`e una
+    componente connessa di $B$, allora $\Psi(C)$ è una delle componenti connesse
+    di $B'$.
 \end{proposition}
+
+\begin{proof}
+    Segue facilmente dalla definizione di morfismo.
+    Infatti, se due vertici $x$ e $y$ sono collegati da un arco nel grafo
+    cristallo di $B$, anche le loro immagini lo sono nel grafo cristallo di $B'$.
+    Inoltre, per ogni $x' = \Psi(x)$ nell'immagine di $\Psi$, se 
+    $y' = f_i(x')$ \`e diverso da $\zero$, allora $y'$ \`e l'immagine di $f_i(x) \neq \zero$.
+    % 
+    % $\in B'$ \`e nell'immagine di $\Psi$ e $y' = f_i(x')$
+    % \`e diverso da $\zero$, allora
+    % allora $y = f_i(x)$ per qualche $i \in I$ e 
+    % $\Psi(y) = f_i(\Psi(x))$.
+    % Se $x'$ nell'immagine di $\Psi$ \`e collegato da un arco 
+    % a $y'$ nel grafo cristallo di 
+    % Infatti vertici $x$ e $y$ nel grafo cristallo di $B$ sono collegati da
+    % un arco se e solo se le loro immagini lo sono nel grafo cristallo di $B'$.
+\end{proof}
 
 
 \subsection{Operatori riflessione di Kashiwara}
@@ -685,8 +712,12 @@ riflessioni semplici $s_i = r_{\alpha_i}$, per ogni $i \in I$, definite da
 \]
 per ogni $\mu \in \Lambda$.
 
-Ricordiamo anche che un cristallo $B$ si pu\`o vedere come unione disgiunta delle sue
-$i$-stringhe.
+Ricordiamo anche l'Osservazione~\ref{rmk:crys_unione_istringhe}:
+se in un grafo cristallo $B$ si dimenticano tutte le frecce tranne quelle
+con etichetta $i$, per un qualche $i \in I$, otteniamo una unione disgiunta
+di cammini orientati, che prendono il nome di \emph{$i$-stringhe}.
+% un cristallo $B$ si pu\`o vedere come unione disgiunta delle sue
+% $i$-stringhe.
 
 Vogliamo definire, per ogni $i\in I$, la bigezione $\sigma_i$ dal cristallo in s\'e 
 stesso che inverte ogni $i$-stringa.
@@ -859,12 +890,18 @@ Corrispondono ai cristalli inizialmente introdotti da Kashiwara e spiegati in
 Per una visione pi\`u ampia sull'argomento, si veda 
 \cite[Section~5.7]{bump-schilling-17}.
 
-Enunciamo, invece, una caratterizzazione dei cristalli normali di tipo $A$.
+% Enunciamo, invece, una caratterizzazione dei cristalli normali di tipo $A$.
+Enunciamo, invece, una caratterizzazione dei cristalli normali connessi di tipo $A$.
 
 \begin{theorem}
-    Un cristallo di tipo $A$ \`e normale se e solo se \`e isomorfo a una somma diretta
-    di cristalli di tableaux di forma non-skew $B(\lambda)$.
+    % Un cristallo di tipo $A$ \`e normale se e solo se \`e isomorfo a una somma diretta
+    % di cristalli di tableaux di forma non-skew $B(\lambda)$.
     % 
+    Per ogni partizione $\lambda$, il cristallo di tableaux $B(\lambda)$ di tipo $A$
+    (definito nella Sezione~\ref{sec:crys_tableaux})
+    \`e un cristallo normale.
+    Inoltre, ogni cristallo normale connesso di tipo $A$ \`e isomorfo a un
+    cristallo di tableaux $B(\lambda)$ per qualche partizione $\lambda$.
     % Un cristallo normale connesso di tipo $A$ \`e isomorfo a un cristallo di tableaux $B(\lambda)$,
     % per qualche partizione $\lambda$.
     % 
@@ -872,15 +909,24 @@ Enunciamo, invece, una caratterizzazione dei cristalli normali di tipo $A$.
     % se e solo se \`e isomorfo a una somma diretta di cristalli di tableaux di forma non-skew.
 \end{theorem}
 
+\begin{proof}
+    Si veda \cite[Theorem~4.11]{bump-schilling-17} e \cite[Theorem~6.1]{bump-schilling-17}.
+\end{proof}
+
+Affermiamo anche che le componenti connesse di cristalli normali sono normali.
+
 Come visto nella Sezione~\ref{sec:connessione_morfismi}, i cristalli di tableaux
 non-skew hanno un solo
 elemento di peso massimo, e il suo peso determina la forma dei tableaux.
 Allora, in un qualsiasi cristallo normale $B$, le sue componenti connesse
 sono indicizzate dai suoi elementi di peso massimo e il peso di questo
-elemento determina la classe di isomorfismo della propria componente connessa.
-Questo permette di dare una scrittura pi\`u esplicita alla somma diretta del
-teorema precedente.
+elemento determina la classe di isomorfismo della componente connessa.
+% Questo permette di dare una scrittura pi\`u esplicita alla somma diretta del
+% teorema precedente.
+Questo permette di scrivere un cristallo normale come somma diretta
+di cristalli di tableaux nel seguente modo.
 
+% NOTE pondera se mettere questa intro dopo, come dimostrazione.
 \begin{theorem}
     Per ogni cristallo normale $B$ di tipo $A$, vale 
     \[
@@ -905,18 +951,18 @@ i due elementi con lo stesso peso nel cristallo dell'Esempio~\ref{ex:crys_tab_21
 
 \begin{figure}[htbp]
     \centering
-    \begin{tikzcd}
+    \begin{tikzcd}[row sep=tiny]
     & \bullet && \bullet & \\
         \bullet && \bullet && \bullet \\
                 & \bullet && \bullet
                 \arrow[blue, "2", from=1-2, to=2-3]
                 \arrow["1", from=1-4, to=2-5]
                 \arrow["1", from=2-1, to=1-2]
-                \arrow[blue, "2", from=2-1, to=3-2]
+                \arrow[blue, "2"', from=2-1, to=3-2]
                 \arrow[blue, "2", from=2-3, to=1-4]
-                \arrow["1", from=2-3, to=3-4]
-                \arrow["1", from=3-2, to=2-3]
-                \arrow[blue, "2", from=3-4, to=2-5]
+                \arrow["1"', from=2-3, to=3-4]
+                \arrow["1"', from=3-2, to=2-3]
+                \arrow[blue, "2"', from=3-4, to=2-5]
     \end{tikzcd}
     \caption{Il grafo cristallo di un cristallo non normale.}
     \label{fig:crys_non_norm}

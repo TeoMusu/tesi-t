@@ -14,8 +14,8 @@ possibile tra tutte le parole associate a $\w$.
 Questa lunghezza minima viene chiamata \emph{lunghezza} di $\w$, denotata con $\len(\w)$,
 e si dimostra essere uguale al numero di inversioni di $\w$.
 Per ogni permutazione $\w \in \sym_n$, chiamo $\rw(\w)$ l'insieme delle 
-parole ridotte di $\w$,
-l'obiettivo rimane trovare un modo per calcolare la cardinalit\`a di questo insieme.
+parole ridotte di $\w$.
+L'obiettivo rimane trovare un modo per calcolare la cardinalit\`a di questo insieme.
 
 In questo capitolo descriviamo la corrispondenza di Edelman--Greene (EG), 
 introdotta da loro in \cite[Section~6]{edelman-greene-87} come una variante
@@ -187,11 +187,11 @@ una riga precedentemente vuota.
     \[ 
         \ytableaunumber{4, 3 4 5, 1 2 4 6 \none {\none[\leftarrow 3]}}
         \qquad
-        \ytableaunumber{4, 3 4 5 \none {\none[\leftarrow 4]}, 1 2 {*(green) 3} 6 }
+        \ytableaunumber{4, 3 4 5 \none {\none[\leftarrow 4]}, 1 2 {*(yellow) 3} 6 }
         \qquad
-        \ytableaunumber{4 \none {\none[\leftarrow 5]}, 3  4 {*(green) 5}, 1 2 {*(green) 3} 6 }
+        \ytableaunumber{4 \none {\none[\leftarrow 5]}, 3  4 {*(yellow) 5}, 1 2 {*(yellow) 3} 6 }
         \qquad
-        \ytableaunumber{4 {*(green) 5}, 3 4 {*(green) 5} , 1 2 {*(green) 3} 6 }.
+        \ytableaunumber{4 {*(yellow) 5}, 3 4 {*(yellow) 5} , 1 2 {*(yellow) 3} 6 }.
     \]
     
 \end{example}
@@ -241,13 +241,13 @@ una riga precedentemente vuota.
                 % \scriptstyle {> \atop a+1}
                 \substack{> \\ a+1}
             } \none {\none[\leftarrow a+1]}, 
-        {\scriptstyle <a} {\scriptstyle <a} { a} {*(green) \scriptstyle a+1} }
+        {\scriptstyle <a} {\scriptstyle <a} { a} {*(yellow) \scriptstyle a+1} }
         * {4,5}
         &&\text{ se $a=b$; } 
         \\[1em]
         &\ytableaushort 
         { \none \none {\scriptstyle >b} \none \none {\none[\leftarrow b]}, 
-        {\scriptstyle <a} {\scriptstyle <a} {*(green) a}  }
+        {\scriptstyle <a} {\scriptstyle <a} {*(yellow) a}  }
         * {4,5}
         &&\text{ se $a < b$.}
         \ytableausetup{aligntableaux=bottom}
@@ -422,7 +422,7 @@ e permette di invertire il processo.
     Il $Q$-tableau \`e un tableau \emph{standard}.
 \end{remark}
 
-\begin{theorem}[{\cite[Theorem~6.25]{edelman-greene-87}}]
+\begin{theorem}{\cite[Theorem~6.25]{edelman-greene-87}}
     \label{thm:eg1}
     Fissata una permutazione $\w \in \sym_n$, la corrispondenza EG definita da
     \[
@@ -497,7 +497,7 @@ Il seguente teorema, sempre dovuto a Stanley, risolve il problema per la
 permutazione con la lunghezza pi\`u lunga.
 
 \begin{theorem}
-    [{\cite[Theorem~6.26]{edelman-greene-87}}]
+    {\cite[Theorem~6.26]{edelman-greene-87}}
     \label{thm:stanley_og}
     Sia $\w_0$ la permutazione in $\sym_n$ che inverte l'ordine di $[n]$, ovvero
     $\w_0 = n, n-1, \dots , 1 $ in one-line notation.
@@ -579,11 +579,11 @@ permutazione con la lunghezza pi\`u lunga.
     %     \ytableaushort{
     %         \none,
     %         \none,
-    %         \none      \none      {*(green)},
-    %         \none      {*(green)} {*(green)},
-    %         \none      {*(green)},
-    %         {*(green)} {*(green)},
-    %         {*(green)}
+    %         \none      \none      {*(yellow)},
+    %         \none      {*(yellow)} {*(yellow)},
+    %         \none      {*(yellow)},
+    %         {*(yellow)} {*(yellow)},
+    %         {*(yellow)}
     %     }
     %     *{1,2,3,4,5,6,7}
     %     \ytableausetup{nosmalltableaux}
@@ -610,7 +610,7 @@ chiamo $\incrfact_\mu(\w)$ l'insieme delle fattorizzazioni
 crescenti di $\w$ con peso $\mu$.
 
 \begin{example}
-    Per esempio, $v = (23)(2)(12)(3)$ \`e una fattorizzazione crescente di 
+    Per esempio, $v = (23)(2)()(12)(3)$ \`e una fattorizzazione crescente di 
     $\w = s_2 s_3 s_2 s_1 s_2 s_3 = 4321 \in \sym_4$, con peso
     $\mu = (2, 1, 0, 2, 1)$.
 \end{example}
@@ -850,7 +850,7 @@ Il fatto sorprendente \`e che la corrispondenza EG tra questi due insiemi, oltre
 essere una bigezione che preserva il peso, \`e anche un isomorfismo di cristalli.
 
 \begin{theorem}
-    [{\cite[Theorem~4.11]{morse-schilling-15}}]
+    {\cite[Theorem~4.11]{morse-schilling-15}}
     \label{thm:eg_isomorfismo}
     Per ogni permutazione $\w \in \sym_n$, la mappa di Edelman--Greene
     \[
@@ -908,7 +908,7 @@ da Edelman e Greene in \cite[Definition~6.19]{edelman-greene-87}.
 In sostanza, posso scambiare due lettere che commutano $x$ e $z$ solo se,
 da uno dei due lati, c'\`e una lettera $y$ numericamente compresa tra le due.
 
-\begin{lemma}[{\cite[Lemma~6.23]{edelman-greene-87}}]
+\begin{lemma}{\cite[Lemma~6.23]{edelman-greene-87}}
     \label{lem:ptab_ck_equiv}
     Ogni parola ridotta $v$ \`e Coxeter--Knuth equivalente al row-reading del suo
     $P$-tableau, in simboli:
@@ -923,7 +923,7 @@ da uno dei due lati, c'\`e una lettera $y$ numericamente compresa tra le due.
 \end{proof}
 
 \begin{lemma}
-    [{\cite[Theorem~6.24]{edelman-greene-87}}]
+    {\cite[Theorem~6.24]{edelman-greene-87}}
     \label{lem:ptab_ck_equiv_doppia_freccia}
     Due parole ridotte $v$ e $v'$ sono Coxeter--Knuth equivalenti se e solo se
     i loro $P$-tableaux sono uguali. In simboli:
@@ -1160,7 +1160,7 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
                 on background layer,
                 overlay,
                 bpath/.style={
-                    green,
+                    yellow,
                     opacity=0.7,
                     line width=11pt,
                     line cap=round,
@@ -1276,7 +1276,7 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     in una riga sia la lettera che leggiamo nel percorso \emph{diminuita di uno}.
     Bisogna quindi ripetere il ragionamento sostituendo alcune delle lettere
     con $b_r-1$, $a_{r+1}-1$ o $b_{r+1}-1$.
-    i vari casi portano allo stesso risultato oppure ad assurdi.
+    I vari casi portano allo stesso risultato oppure ad assurdi.
 
     Anche per mostrare il viceversa, (ovvero se $a_{r+1} \leq b_r$ allora
     non c'\`e deviazione), le eventuali diminuzioni delle lettere non causano
@@ -1322,7 +1322,7 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
                 on background layer,
                 overlay,
                 grPath/.style={
-                    green,
+                    yellow,
                     opacity=0.7,
                     line width=11pt,
                     line cap=round,
@@ -1454,7 +1454,7 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
                 on background layer,
                 overlay,
                 grPath/.style={
-                    green,
+                    yellow,
                     opacity=0.7,
                     line width=11pt,
                     line cap=round,
@@ -1522,7 +1522,7 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
                 on background layer,
                 overlay,
                 grPath/.style={
-                    green,
+                    yellow,
                     opacity=0.7,
                     line width=11pt,
                     line cap=round,
@@ -1601,7 +1601,7 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
                 on background layer,
                 overlay,
                 grPath/.style={
-                    green,
+                    yellow,
                     opacity=0.7,
                     line width=11pt,
                     line cap=round,
@@ -1737,6 +1737,4 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     Per dimostrare il teorema, bisognerebbe ripetere il tutto per dimostrare
     che anche l'operatore $e_i$ commuta, ma qui non lo faremo.
 \end{proof}
-
-
 

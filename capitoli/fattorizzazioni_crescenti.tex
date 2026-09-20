@@ -15,14 +15,36 @@ fattorizzazioni crescenti, introdotto da Morse e Schilling in
 \label{sec:incr_fact}
 
 Fissiamo un intero $\ell \geq 2$.
-Iniziamo definendo le fattorizzazioni crescenti.
+Prima di definire le fattorizzazioni crescenti, parliamo brevemente
+di parole (strettamente) crescenti.
 
+\begin{definition}
+    \label{def:incr_word}
+    Una parola $v$ nell'alfabeto $[n-1] = \{1, 2, \dots, n-1\}$ si dice
+    \emph{strettamente crescente} se le sue lettere sono in ordine strettamente
+    crescente.
+
+    Una parola strettamente crescente $v$ \`e univocamente determinata dall'insieme delle lettere
+    che vi compaiono.
+    Chiamiamo questo insieme \emph{contenuto} di $v$ e lo denotiamo
+    con $\cont(v)$.
+\end{definition}
+
+Per esempio, la parola $v = 24568$ \`e strettamente crescente e 
+$\cont(v) = \{2, 4, 5, 6, 8\}$, mentre $2445$ e $2453$ non lo sono.
+
+\begin{remark}
+    Si verifica facilmente che le parole strettamente crescenti sono
+    parole ridotte, secondo la Definizione~\ref{def:red_word}.
+\end{remark}
+
+Possiamo ora definire le fattorizzazioni crescenti.
 
 \begin{definition}[Fattorizzazione crescente]
     Data una permutazione $\w \in \sym_n$, diciamo che la $\ell$-upla 
     $( v^1, v^2 , \dots , v^\ell )$ \`e una \emph{fattorizzazione crescente} di 
-    $\w$ se ciascun $v^i$ \`e una parola crescente nell'alfabeto
-    $\{ 1, 2, \dots , n-1 \}$ e la loro concatenazione $v = v^1 v^2 \cdots v^\ell$
+    $\w$ se ciascun $v^i$ \`e una parola strettamente crescente nell'alfabeto
+    $[n-1]$ e la loro concatenazione $v = v^1 v^2 \cdots v^\ell$
     \`e una parola ridotta per $\w$.
 
     Le parole crescenti $v^i$ prendono il nome di \emph{fattori} e possono anche 
@@ -440,8 +462,9 @@ Il seguente lemma sar\`a fondamentale per definire $f_i$.
     Il quarto punto deriva dal fatto che $a$ \`e la pi\`u grande lettera non appaiata.
 
     Per il quinto punto: una lettera in $u^{i+1}_l$ \`e minore di $a$, quindi se
-    non \`e appaiata con $a$ deve essere perch\'e c'era una lettera in pi\`u piccola 
+    non \`e appaiata con $a$ deve essere perch\'e c'era una lettera pi\`u piccola 
     in $v^i$ con cui \`e stata appaiata.
+    % NOTE forse questo non \`e molto chiaro
 \end{proof}
 
 \begin{lemma}
@@ -496,11 +519,12 @@ Possiamo finalmente definire l'azione dell'operatore di Kashiwara $f_i$.
         \cont \bigl( \tilde{v}^i \bigr) &= \cont \bigl(v^i\bigr) \setminus \{ a \}, \\
         \cont \bigl( \tilde{v}^{i+1}\bigr) &= \cont \bigl(v^{i+1}\bigr) \sqcup \{ a + s \},
     \end{align*}
+    % con $a$ e $s$ come da Definizione~\ref{def:a_s} e dove, per ogni parola
+    % $v$, con $\cont(v)$ indico l'insieme delle lettere in $v$ che, per parole
+    % crescenti, identifica la parola.
     con $a$ e $s$ come da Definizione~\ref{def:a_s} e dove, per ogni parola
-    $v$, con $\cont(v)$ indico l'insieme delle lettere in $v$ che, per parole
-    crescenti, identifica la parola.
-
-
+    $v$, con $\cont(v)$ indico l'insieme delle lettere in $v$,
+    come da Definizione~\ref{def:incr_word}.
 \end{definition}
 
 \begin{example}
