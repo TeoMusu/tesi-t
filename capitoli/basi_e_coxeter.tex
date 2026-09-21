@@ -419,7 +419,8 @@ capitoli, ma la enunciamo qui.
         \qquad \text{e} \qquad
         \sum_{i=1}^k \lambda_i = n.
     \]
-    L'intero $k$ prende il nome di \emph{lunghezza} della partizione.
+    L'intero $k$ prende il nome di \emph{lunghezza} della partizione e si indica
+    con $\ell(\lambda)$.
 \end{definition}
 
 \begin{example}
@@ -437,24 +438,46 @@ capitoli, ma la enunciamo qui.
 
 \begin{definition}
     Una partizione $\lambda$ di lunghezza $k$ pu\`o essere identificata con il suo
-    \emph{diagramma di Ferrer} (o \emph{di Young}) $D_\lambda$, ottenuto impilando
+    \emph{diagramma di Ferrers} (o \emph{di Young}) $D_\lambda$, ottenuto impilando
     $k$ righe di caselle quadrate, allineate a sinistra, in cui la $i$-esima
     riga \`e composta da $\lambda_i$ caselle affiancate.
-
-    Si veda la Figura~\ref{fig:ex_y_diagram} per un esempio.
+    % 
+    % Si veda la Figura~\ref{fig:ex_y_diagram} per alcuni esempi.
 \end{definition}
+
+L'Esempio~\ref{ex:y_diagram} mostra i diagrammi di Ferrers di alcune partizioni.
+
 
 \begin{remark}
     Esistono due diverse convenzioni per disegnare i diagrammi associati alle partizioni.
     Quella esposta qui, in cui le righe pi\`u lunghe sono le pi\`u in basso,
     prende il nome di ``notazione francese''.
     La ``notazione inglese'', molto pi\`u diffusa in letteratura, si ottiene specchiando
-    il diagramma rispetto all'asse $x$.
+    il diagramma rispetto all'asse orizzontale.
 
     Noi useremo in tutto il testo la notazione francese.
 \end{remark}
 
-% TODO metti forme skew
+\begin{definition}
+    Una \emph{forma skew} $\lambda/\mu$ \`e una coppia di partizioni $(\lambda, \mu)$
+    tali che il diagramma di $\mu$ \`e interamente contenuto in
+    quello di $\lambda$.
+    Pi\`u formalmente, deve valere $\ell(\mu) \leq \ell(\lambda)$ e 
+    $\mu_i \leq \lambda_i$ per ogni $i$.
+
+    Per ogni forma skew $\lambda/\mu$, definisco il 
+    \emph{diagramma di Ferrers di forma skew $\lambda/\mu$} come l'insieme delle caselle
+    che appartengono al diagramma di $\lambda$ ma non a quello di $\mu$.
+\end{definition}
+
+
+% Si veda la Figura~\ref{fig:ex_y_diagram} per un esempio di
+% due partizioni una contenuta nell'altra 
+% e il diagramma di forma skew associato.
+\begin{example}
+    \label{ex:y_diagram}
+    La Figura~\ref{fig:ex_y_diagram} mostra i diagrammi di Ferrers
+    di due partizioni e quello della forma skew associata.
 
 \begin{figure}[htbp]
     \centering
@@ -468,24 +491,25 @@ capitoli, ma la enunciamo qui.
         {\none}{}{}{},
         {\none}{\none}{\none}{}{}
     }
-    \caption{I diagrammi di Ferrer delle partizioni $\lambda=(5,4,2,2)$ e
+    \caption{I diagrammi di Ferrers delle partizioni $\lambda=(5,4,2,2)$ e
     $\mu=(3,1)$ e il diagramma di forma skew $\lambda/\mu$.}
     \label{fig:ex_y_diagram}
 \end{figure}
+\end{example}
 
 Siamo particolarmente interessati ai \emph{tableaux di Young}, ovvero
-diagrammi di Ferrer riempiti scrivendo un intero positivo in ogni casella.
+diagrammi di Ferrers riempiti scrivendo un intero positivo in ogni casella.
 Nel seguito definiamo alcuni tipi di tableaux di Young che soddisfano 
 ulteriori vincoli e che compaiono spesso in combinatoria.
 
 \begin{definition}[Tableau di Young standard]
     % Per ogni partizione $\lambda$, un \emph{tableau di Young} di forma $\lambda$
-    % \`e un diagramma di Ferrer in cui *in ogni casella c'\`e scritto un intero
+    % \`e un diagramma di Ferrers in cui *in ogni casella c'\`e scritto un intero
     % positivo.
     % 
     Per ogni partizione $\lambda$ di $n$,
     un \emph{tableau di Young standard} di forma $\lambda$ \`e un riempimento
-    del diagramma di Ferrer di forma $\lambda$ con i numeri da $1$ a $n$, ciascuno
+    del diagramma di Ferrers di forma $\lambda$ con i numeri da $1$ a $n$, ciascuno
     che compare esattamente una volta, in modo che i numeri siano crescenti lungo ogni
     riga (da sinistra a destra) e lungo ogni colonna (dal basso all'alto).
 
@@ -495,34 +519,64 @@ ulteriori vincoli e che compaiono spesso in combinatoria.
     conteggio delle parole ridotte di una permutazione.
 \end{definition}
 
-\begin{figure}
-    \centering
-    \ytableaunumber{5, 34, 12}
-    \qquad
-    \ytableaunumber{4, 35, 12}
-    \qquad
-    \ytableaunumber{5, 24, 13}
-    \qquad
-    \ytableaunumber{4, 25, 13}
-    \qquad
-    \ytableaunumber{3, 25, 14}
-    \caption{Tutti i $5$ tableaux di Young standard di forma $\lambda = (2, 2, 1)$.}
-    \label{fig:ex_syt}
-\end{figure}
+\begin{example}
+    Per esempio, se $\lambda = (2, 2, 1)$, vale $f^\lambda = 5$. 
+    I $5$ tableaux di Young standard di questa forma sono illustrati nella
+    Figura~\ref{fig:ex_syt}.
+
+    \begin{figure}[htbp]
+        \centering
+        \ytableaunumber{5, 34, 12}
+        \qquad
+        \ytableaunumber{4, 35, 12}
+        \qquad
+        \ytableaunumber{5, 24, 13}
+        \qquad
+        \ytableaunumber{4, 25, 13}
+        \qquad
+        \ytableaunumber{3, 25, 14}
+        \caption{Tutti i $5$ tableaux di Young standard di forma $\lambda = (2, 2, 1)$.}
+        \label{fig:ex_syt}
+    \end{figure}
+\end{example}
+
 
 \begin{definition}[Tableau di Young semistandard]
     Per ogni partizione $\lambda$, un \emph{tableau di Young semistandard}
-    \`e un riempimento del diagramma di Ferrer di forma $\lambda$ con interi positivi,
+    di forma $\lambda$
+    \`e un riempimento del diagramma di Ferrers di forma $\lambda$ con interi positivi,
     eventualmente ripetuti, in modo che i numeri siano \emph{debolmente}
     crescenti lungo le righe e \emph{strettamente} crescenti lungo le colonne.
 
-    Per ogni partizione $\lambda$, denot
-    % TODO finisci
+    Per ogni partizione $\lambda$, denotiamo con $\ssyt(\lambda)$ l'insieme
+    (infinito) dei tableaux di Young semistandard di forma $\lambda$ e,
+    per ogni intero $\ell$ maggiore o uguale alla lunghezza di $\lambda$,
+    denotiamo con $\ssyt^\ell(\lambda)$ l'insieme (finito) dei tableaux di Young semistandard
+    in cui compaiono solo numeri da $1$ a $\ell$.
+
+    Definiamo anche i tableaux semistandard di forma skew $\lambda/\mu$
+    e gli insiemi $\ssyt(\lambda/\mu)$ e $\ssyt^\ell(\lambda/\mu)$,
+    ottenuti in modo analogo, ma partendo da un diagramma di forma skew $\lambda/\mu$.
+    % La stessa definizione si pu\`o applicare partendo da diagrammi di forma
+    % skew $\lambda/\mu$, ottenendo cos\`\i\ tableaux semistandard di forma skew $\lambda/\mu$
+    % e gli insiemi $\ssyt(\lambda/\mu)$ e $\ssyt^\ell(\lambda/\mu)$.
 \end{definition}
 
-\begin{figure}
-    \centering
-    \caption{}
-    \label{fig:ex_ssyt}
-\end{figure}
 
+\begin{example}
+    Nella Figura~\ref{fig:ex_ssyt} si vedono due esempi di tableaux di Young semistandard,
+    uno dei quali \`e di forma skew.
+
+    \begin{figure}[htbp]
+        \centering
+        \ytableaunumber{66, 45, 2344, 12237}
+        \qquad
+        \ytableaunumber{46, 33, \none 136, \none \none \none 22}
+        \caption{Due tableaux di Young semistandard, rispettivamente di forma
+        $\lambda = (5, 4, 2, 2, )$ e $\lambda/\mu$, con $\mu = (3,1)$.}
+        \label{fig:ex_ssyt}
+    \end{figure}
+\end{example}
+
+Infine, per ogni tableau $T$, indichiamo con $\shape(T)$ la sua \emph{forma},
+ovvero la partizione o la forma skew associata al suo diagramma.

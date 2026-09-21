@@ -243,7 +243,7 @@ una riga precedentemente vuota.
         &&\text{ se $a < b$.}
         \\[1em]
         &\ytableaushort 
-        { \none \none \none {
+        { \none \none {\scriptstyle >a} {
                 % \scriptstyle {> \atop a+1}
                 \substack{> \\ a+1}
             } \none {\none[\leftarrow a+1]}, 
@@ -260,10 +260,10 @@ una riga precedentemente vuota.
     a sinistra.
 
     Il secondo caso (inserimento speciale) deve essere ulteriormente diviso in due sottocasi:
-    se sopra la casella di $a+1$ c\`e la lettera $a+2$, allora anche l'inserimento
+    se sopra la casella di $a$ c'\`e la lettera $a+1$, allora anche l'inserimento
     di $a+1$ sar\`a speciale e la riga sopra non varia;
-    altrimenti, si conclude come nel caso dell'inserimento regolare.
-    % TODO continua da qui
+    altrimenti, se la lettera sopra la casella di $a$ \`e maggiore di $a+1$,
+    si conclude come nel caso dell'inserimento regolare.
 
     % In entrambi i casi l'inserimento nella riga successiva avverr\`a in una casella
     % debolmente a sinistra della casella contenente $a$, ovvero l'inserimento
@@ -451,6 +451,7 @@ e permette di invertire il processo.
 \end{theorem}
 
 \begin{proof}
+    % TODO MODIFICA qui
     Basta mostrare che, conoscendo la posizione dell'ultima casella
     inserita, l'algoritmo di inserimento EG pu\`o sempre essere invertito in modo univoco.
 
@@ -507,7 +508,7 @@ affinch\'e $a_\w^\lambda$ sia diverso da zero.
 
 In alcuni casi particolari, invece, \`e possibile dare una risposta pi\`u precisa.
 Il seguente teorema, sempre dovuto a Stanley, risolve il problema per la 
-permutazione con la lunghezza pi\`u lunga.
+permutazione di lunghezza massima.
 
 \begin{theorem}
     {\cite[Theorem~6.26]{edelman-greene-87}}
@@ -519,14 +520,14 @@ permutazione con la lunghezza pi\`u lunga.
         \lvert \rw(\w_0) \rvert = f^{\lambda_0},
     \]
     dove $\lambda_0 = (n-1, n-2, \dots, 1)$ \`e la partizione il cui diagramma di
-    Young \`e una ``scala'' con $\binom{n}{2}$ blocchi.
+    Young \`e una ``scala'' con $\binom{n}{2}$ caselle.
 \end{theorem}
 
 \begin{proof}
     Si verifica che il tableau $T_0$
     rappresentato in Figura~\ref{fig:tableau_scala} \`e un tableau ridotto per $\w_0$.
     Basta allora verificare che non ce ne siano altri, ovvero che se
-    $T$ \`e un tableaux ridotto per $\w_0$, allora $T = T_0$.
+    $T$ \`e un tableau ridotto per $\w_0$, allora $T = T_0$.
     \begin{figure}[htbp]
         \centering
         \[
@@ -555,23 +556,35 @@ permutazione con la lunghezza pi\`u lunga.
         \label{fig:tableau_scala}
     \end{figure}
 
-    % NOTE accorcia...
-    Per ogni casella di $T$, consideriamo un percorso che parte dalla casella pi\`u
-    in basso a sinistra e arriva a quella casella, muovendosi solo di una casella alla
-    volta verso destra o verso l'alto.
-    Ricordando l'Osservazione~\ref{rmk:tab_ridotto_crescenza},
-    i numeri lungo questo percorso sono strettamente crescenti.
+    Per ogni casella $(i,j)$ nel tableau $T$, chiamiamo $t_{ij}$ la lettera
+    contenuta in quella casella.
+    Utilizzando l'Osservazione~\ref{rmk:tab_ridotto_crescenza} sulla crescenza stretta
+    di righe e colonne di un tableau ridotto, otteniamo
+    che $t_{ij} \geq i+j-1$.
+    Siccome $T$ contiene solo lettere da $1$ a $n-1$, deve valere
+    $i+j \le n$ per ogni casella $(i,j)$ di $T$, ovvero la forma di $T$ \`e contenuta
+    nella forma ``a scala'' di $T_0$, che ha esattamente $\binom n 2$ caselle.
 
-    Siccome $T$ contiene solo numeri da $1$ a $n-1$, il percorso sar\`a lungo al pi\`u
-    $n-1$ caselle, da cui ogni casella di $T$ ha una distanza di Manhattan dalla 
-    casella pi\`u in basso a sinistra minore o uguale a $n-1$.
+    Poich\'e $\len(\w_0) = \binom n 2$, il tableau $T$ deve contenere $\binom n 2$ caselle,
+    ovvero \emph{tutte} quelle della forma $\lambda_0$ in cui \`e contenuta,
+    da cui $\shape(T) = \lambda_0$.
 
-    Le possibili caselle a distanza minore o uguale a $n-1$ sono esattamente 
-    $\binom n 2$, ovvero quelle che compongono il diagramma ``a scala''.
+    % Per ogni casella di $T$, consideriamo un percorso che parte dalla casella pi\`u
+    % in basso a sinistra e arriva a quella casella, muovendosi solo di una casella alla
+    % volta verso destra o verso l'alto.
+    % Ricordando l'Osservazione~\ref{rmk:tab_ridotto_crescenza},
+    % i numeri lungo questo percorso sono strettamente crescenti.
 
-    Poich\'e $\len(\w_0) = \binom n 2$, $T$ deve contenere $\binom n 2$ caselle,
-    ovvero \emph{tutte} quelle a distanza minore o uguale a $n-1$, da cui 
-    $\shape(T) = \lambda_0$.
+    % Siccome $T$ contiene solo numeri da $1$ a $n-1$, il percorso sar\`a lungo al pi\`u
+    % $n-1$ caselle, da cui ogni casella di $T$ ha una distanza di Manhattan dalla 
+    % casella pi\`u in basso a sinistra minore o uguale a $n-1$.
+
+    % Le possibili caselle a distanza minore o uguale a $n-1$ sono esattamente 
+    % $\binom n 2$, ovvero quelle che compongono il diagramma ``a scala''.
+
+    % Poich\'e $\len(\w_0) = \binom n 2$, $T$ deve contenere $\binom n 2$ caselle,
+    % ovvero \emph{tutte} quelle a distanza minore o uguale a $n-1$, da cui 
+    % $\shape(T) = \lambda_0$.
 
     Per concludere che $T$ \`e uguale a $T_0$, basta osservare che $T_0$ \`e l'unico tableau 
     di quella forma con righe e colonne strettamente crescenti,
@@ -702,7 +715,7 @@ $k$ nella casella $(i,j)$ di $Q(v)$.
 \end{example}
 
 \begin{proposition}
-    Per ogni una fattorizzazione crescente $v$, il tableau $Q(v)$ definito sopra \`e un 
+    Per ogni fattorizzazione crescente $v$, il tableau $Q(v)$ definito sopra \`e un 
     tableau semistandard.
 \end{proposition}
 
@@ -724,7 +737,7 @@ $k$ nella casella $(i,j)$ di $Q(v)$.
 \end{remark}
 
 Vale quindi una versione pi\`u generale del Teorema~\ref{thm:eg1}.
-Ricordiamo che il peso di un tableaux semistandard $T$ \`e il vettore di interi
+Ricordiamo che il peso di un tableau semistandard $T$ \`e il vettore di interi
 la cui componente $i$-esima conta quante lettere $i$ compaiono in $T$.
 
 \begin{theorem}
@@ -751,7 +764,7 @@ la cui componente $i$-esima conta quante lettere $i$ compaiono in $T$.
     $Q$ sia semistandard anzich\'e standard.
     Ma so gi\`a che le lettere di ogni fattore sono state inserite in ordine 
     crescente, quindi per il Lemma~\ref{lem:percorsi_strict} le caselle corrispondenti
-    a quel fattore sono state aggiunte da quella pi\`u sinistra a quella pi\`u a destra.
+    a quel fattore sono state aggiunte da quella pi\`u a sinistra a quella pi\`u a destra.
     
     Allora, per invertire l'inserimento, si guarda la lettera pi\`u alta tra quelle che compaiono
     in $Q$ e tra le caselle in cui compare si sceglie quella pi\`u a destra, 
@@ -948,7 +961,7 @@ da uno dei due lati, c'\`e una lettera $y$ numericamente compresa tra le due.
 \begin{proof}
     Se $P(v) = P(v')$, allora, per il Lemma~\ref{lem:ptab_ck_equiv},
     \[
-        v \approx P(v) = P(v') \approx v'.
+        v \approx \rowreading(P(v)) = \rowreading(P(v')) \approx v'.
     \]
 
     Per l'altra implicazione, che si riconduce a una lunga casistica,
@@ -1098,7 +1111,7 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     Studiamo ora i percorsi di inserimento delle lettere di $v^i$ e come cambiano
     rimuovendo $x_j$.
 
-    Per il Lemma~\ref{lem:percorsi_strict}, per ogni $r = 1, \dots, \alpha_i$
+    Per il Lemma~\ref{lem:percorsi_strict}, per ogni $r = 1, \dots, \alpha_i-1$
     il percorso di inserimento di $x_{r+1}$ \`e disgiunto e strettamente
     a destra del percorso di $x_r$.
 
@@ -1606,7 +1619,7 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
                         {\tmn{A41}{ 8}} {\tmn{A42}{ 9}} {\tmn{A43}{14}} {\tmn{A44}{22}} {\tmn{A45}{24}},
                         {\tmn{A31}{ 6}} {\tmn{A32}{ 7}} {\tmn{A33}{12}} {\tmn{A34}{15}} {\tmn{A35}{16}} {\tmn{A36}{17}} {\tmn{A37}{18}},
                         {\tmn{A21}{ 2}} {\tmn{A22}{ 3}} {\tmn{A23}{ 5}} {\tmn{A24}{ 6}} {\tmn{A25}{ 8}} {\tmn{A26}{13}} {\tmn{A27}{16}},
-                        {\tmn{A11}{ 1}} {\tmn{A12}{ 2}} {\tmn{A13}{ 4}} {\tmn{A14}{ 5}} {\tmn{A15}{ 7}} {\tmn{A16}{10}} {\tmn{A17}{13}} {\tmn{A18}{15}}
+                        {\tmn{A11}{ 1}} {\tmn{A12}{ 2}} {\tmn{A13}{ 4}} {\tmn{A14}{ 5}} {\tmn{A15}{ 7}} {\tmn{A16}{10}} {\tmn{A17}{12}} {\tmn{A18}{15}}
                     }
                 };
 
@@ -1684,7 +1697,7 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     scavalca quello di $x_j$ alla propria sinistra esattamente in corrispondenza
     della buca tra $x_j$ e $x_{j+1}$ e che, se non c'\`e alcuna buca, non lo scavalca.
 
-    Se, lo scavalca, la stessa dimostrazione si pu\`o adattare per il percorso
+    Se lo scavalca, la stessa dimostrazione si pu\`o adattare per il percorso
     successivo ed eventualmente quelli dopo.
     Guardiamo per esempio il percorso di $y_{k+2}$.
 
@@ -1696,7 +1709,7 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     a \emph{destra} della buca tra $x_j$ e $x_{j+1}$.
     Da quel punto in poi, invece, ci si ritrova nella stessa identica situazione del
     percorso di $y_{k+1}$, per cui si dimostra che il percorso di $y_{k+2}$ scavalca
-    quello di $x_{k+1}$ se e solo se c'\`e una buca.
+    quello di $x_{j+1}$ se e solo se c'\`e una buca.
 
     Per concludere la dimostrazione, scriviamo una parentesi chiusa ``$)$'' alle estremit\`a
     dei percorsi di inserimento delle lettere del fattore $v^i$ e una parentesi
@@ -1735,8 +1748,8 @@ Possiamo ora procedere con la dimostrazione del Teorema~\ref{thm:eg_isomorfismo}
     di quella di $y_{k+s+1}$.
     Allora la parentesi chiusa associata a $x_{j+s}$ \emph{non} \`e appaiata.
 
-    Verifichiamo infine che tutte le parentesi aperte corrispondenti a
-    $x_{j+s+1}, \dots, x_{\alpha_i}$ sono appaiate con parentesi chiuse tra quelle
+    Verifichiamo infine che tutte le parentesi chiuse corrispondenti a
+    $x_{j+s+1}, \dots, x_{\alpha_i}$ sono appaiate con parentesi aperte tra quelle
     di $y_{k+s+1}, \dots, y_{\alpha_{i+1}}$.
     Per ogni $r = s+1, \dots, \alpha_i - j$, per il Lemma~\ref{lem:divisione_sgravo_comparativo}
     vale $ y_{k+r} < x_{j+r} $, da cui prima della parentesi chiusa di $x_{j+r}$
