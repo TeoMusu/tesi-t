@@ -452,8 +452,24 @@ e permette di invertire il processo.
 
 \begin{proof}
     % TODO MODIFICA qui
-    Basta mostrare che, conoscendo la posizione dell'ultima casella
-    inserita, l'algoritmo di inserimento EG pu\`o sempre essere invertito in modo univoco.
+    Bisogna dimostrare che, per ogni coppia di tableaux $(P,Q)$ come nell'enunciato
+    del teorema,
+    \`e sempre possibile trovare un'unica parola ridotta $v\in \rw(\w)$ che restituisce
+    $(P,Q)$ tramite la corrispondenza EG.
+
+    % La parola $v$ verr\`a costruita a partire dall'ultima lettera, tramite un
+    % algoritmo che, conoscendo la posizione finale dell'ultima lettera inserita,
+    % inverte l'
+
+    \`E sufficiente mostrare che, per ogni casella angolare di $P$, \`e sempre possibile
+    rimuovere quella casella invertendo un qualche inserimento EG.
+    Allora l'ultima lettera di $v$ si pu\`o determinare invertendo l'inserimento
+    che corrisponde alla casella di $Q$ con il numero pi\`u alto.
+    % invertire l'algoritmo di inserimento EG, conoscendo la posizione dell'ultima casella
+    % inserita, l'algoritmo di inserimento EG pu\`o sempre essere invertito in modo univoco,
+    % determinando cos\`\i\ l'ultima lettera di $v$.
+    In seguito mostriamo come ricavare  questo inserimento inverso.
+    Per tutti i dettagli rimandiamo a \cite[Theorem~6.25]{edelman-greene-87}.
 
     Sia $k$ la lettera che \`e stata spinta che vogliamo riposizionare nella riga
     sottostante. 
@@ -992,12 +1008,13 @@ Ritorniamo ora al cristallo di Morse--Schilling $B(\w)$ per ogni $\w \in \sym_n$
     del Lemma~\ref{lem:divisione_in_3}.
     
     Mostriamo come ottenere $f_1(v)$ da $v = v^1v^2$, utilizzando come esempio la parola
-    ridotta dell'Esempio~\ref{ex:f_agisce_su_incrfact}, dove le lettere in 
-    grassetto sono quelle non appaiate:
+    ridotta dell'Esempio~\ref{ex:f_agisce_su_incrfact}:
+    % dove la lettera in 
+    % grassetto \`e l'ultima lettera non appaiata di $v^1$.
     \[
         v = v^1  v^2 = 
-        ( \mathbf{1}, 2, \mathbf{3}, 9, 11 \mid \mathbf{12}, 13, 14 \mid 18 ) \,
-        ( 1, 5, 8 \mid 12, 13 \mid \mathbf{15}, 16).
+        ( 1, 2, 3, 9, 11 \mid \mathbf{12}, 13, 14 \mid 18 ) \,
+        ( 1, 5, 8 \mid 12, 13 \mid 15, 16).
     \]
 
     % TODO: emoji del teschio + rifai con lem:divisione_sgravo_comparativo
@@ -1005,43 +1022,49 @@ Ritorniamo ora al cristallo di Morse--Schilling $B(\w)$ per ogni $\w \in \sym_n$
     
     Per prima cosa voglio spostare a sinistra le lettere del primo blocco del
     secondo fattore.
-    Per il Lemma~\ref{lem:lett_appaiate_ordinate}, queste lettere
-    sono ordinatamente minori delle lettere appaiate nel primo blocco del primo
+    Per il Lemma~\ref{lem:divisione_sgravo_comparativo}, queste lettere
+    sono ordinatamente minori delle ultime lettere nel primo blocco del primo
     fattore.
+    % Per il Lemma~\ref{lem:lett_appaiate_ordinate}, queste lettere
+    % sono ordinatamente minori delle lettere appaiate nel primo blocco del primo
+    % fattore.
     Allora posso muoverle (una alla volta) verso sinistra fino a raggiungere
     ciascuna la propria lettera corrispondente (che pu\`o anche non essere quella
     con cui erano appaiate), ottenendo:
     \[
-        ( \mathbf{1}, 2 \text{-} 1, \mathbf{3}, 9 \text{-} 5,
+        ( 1, 2 , 3\text{-} 1, 9 \text{-} 5,
         11 \text{-} 8\mid \mathbf{12}, 13, 14 \mid 18 ) \,
-        ( 12, 13 \mid \mathbf{15}, 16).
+        ( 12, 13 \mid 15, 16).
     \]
     Nel muovere ogni lettera, il primo scambio \`e  della forma in
     \eqref{subeq:ck_dx}, tutti i successivi sono della forma in 
     \eqref{subeq:ck_sx}.
 
     Nello stesso modo, tutte le lettere del terzo blocco del primo fattore si
-    possono spostare a destra, fino alla lettera ordinatamente corrispondente tra
-    quelle appaiate, ottenendo:
+    possono spostare a destra, fino alla lettera ordinatamente corrispondente 
+    nell'ultimo blocco, ottenendo:
     \[
-        ( \mathbf{1}, 2 \text{-} 1, \mathbf{3}, 9 \text{-} 5,
+        % ( 1, 2 \text{-} 1, 3, 9 \text{-} 5,
+        ( 1, 2 , 3\text{-} 1, 9 \text{-} 5,
         11 \text{-} 8\mid \mathbf{12}, 13, 14  ) \,
-        ( 12, 13 \mid \mathbf{15}, 18 \text{-} 16).
+        ( 12, 13 \mid 18 \text{-}15,  16).
     \]
 
     Poi, si verifica che tutte le operazioni di Coxeter utilizzate nel
     Lemma~\ref{lem:parole_equiv} sono gi\`a operazioni di Coxeter--Knuth, quindi ottengo:
     \[
-        ( \mathbf{1}, 2 \text{-} 1, \mathbf{3}, 9 \text{-} 5,
+        % ( \mathbf{1}, 2 \text{-} 1, \mathbf{3}, 9 \text{-} 5,
+        ( 1, 2 , 3\text{-} 1, 9 \text{-} 5,
         11 \text{-} 8\mid  13, 14  ) \,
-        ( 12, 13, \mathbf{14} \mid \mathbf{15}, 18 \text{-} 16).
+        % ( 12, 13, \mathbf{14} \mid \mathbf{15}, 18 \text{-} 16).
+        ( 12, 13, \mathbf{14} \mid 18 \text{-}15,  16).
     \]
     Alla fine, tutte le lettere spostate durante i primi step
     possono ritornare alle loro posizioni originali, ottenendo
     \[
         f_1(v) = 
-        ( \mathbf{1}, 2, \mathbf{3}, 9, 11 \mid 13, 14 \mid 18 ) \,
-        ( 1, 5, 8 \mid 12, 13, \mathbf{14} \mid \mathbf{15}, 16).
+        ( 1, 2, 3, 9, 11 \mid 13, 14 \mid 18 ) \,
+        ( 1, 5, 8 \mid 12, 13, \mathbf{14} \mid 15, 16).
         \qedhere
     \]
 \end{proof}
