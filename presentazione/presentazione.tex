@@ -25,6 +25,8 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{ytableau}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
 
 % custom commands
 \newcommand{\ytableaunumber}[1]{%
@@ -32,6 +34,30 @@
     \ytableaushort{#1}
     \ytableausetup{baseline}
 }
+
+
+% custom tikz styles
+\tikzset{
+    myNode/.style={
+        shape=circle,
+        thick,
+        draw
+    },
+    myArrow/.style={
+        ->,
+        >=stealth,
+        ultra thick
+    },
+    Anode/.style={myNode, fill=blue!40},
+    Bnode/.style={myNode, fill=green!75!blue},
+    Cnode/.style={myNode, fill=yellow},
+    Dnode/.style={myNode, fill=red!70},
+    Aarrow/.style={myArrow, blue!50},
+    Barrow/.style={myArrow, green!75!blue!90!black},
+    Carrow/.style={myArrow, yellow!80!black},
+    Darrow/.style={myArrow, red!70}
+}
+
 
 \title{Basi cristallo}
 \subtitle{Un'applicazione alla corrispondenza  di Edelman--Greene}
@@ -49,6 +75,66 @@
 \begin{frame}{Parole ridotte}
     \begin{columns}
         \column{.5\textwidth}
+        \centering
+        \begin{tikzpicture}[
+            scale=0.8
+            ]
+
+            % First row
+            \node[Anode]    (A1) at (0,2)   {A};
+            \node[Bnode]    (B1) at (2,2)   {B};
+            \node[Cnode]    (C1) at (4,2)   {C};
+            \node[Dnode]    (D1) at (6,2)   {D};
+
+            \node[Bnode]    (B2) at (0,.5)   {B};
+            \node[Anode]    (A2) at (2,.5)   {A};
+            \node[Cnode]    (C2) at (4,.5)   {C};
+            \node[Dnode]    (D2) at (6,.5)   {D};
+             
+            \node[Bnode]    (B3) at (0,-1)   {B};
+            \node[Anode]    (A3) at (2,-1)   {A};
+            \node[Dnode]    (D3) at (4,-1)   {D};
+            \node[Cnode]    (C3) at (6,-1)   {C};
+             
+            \node[Bnode]    (B4) at (0,-2.5)   {B};
+            \node[Dnode]    (D4) at (2,-2.5)   {D};
+            \node[Anode]    (A4) at (4,-2.5)   {A};
+            \node[Cnode]    (C4) at (6,-2.5)   {C};
+
+            \node[Bnode]    (B5) at (0,-4)   {B};
+            \node[Dnode]    (D5) at (2,-4)   {D};
+            \node[Cnode]    (C5) at (4,-4)   {C};
+            \node[Anode]    (A5) at (6,-4)   {A};
+            % tutima riga BDCA
+            % parola ridotta 1323
+
+            \draw[Aarrow]   (A1) -- (A2);
+            \draw[Barrow]   (B1) -- (B2);
+            \draw[Carrow]   (C1) -- (C2);
+            \draw[Darrow]   (D1) -- (D2);
+
+            \draw[Aarrow]   (A2) -- (A3);
+            \draw[Barrow]   (B2) -- (B3);
+            \draw[Carrow]   (C2) -- (C3);
+            \draw[Darrow]   (D2) -- (D3);
+
+            \draw[Aarrow]   (A3) -- (A4);
+            \draw[Barrow]   (B3) -- (B4);
+            \draw[Carrow]   (C3) -- (C4);
+            \draw[Darrow]   (D3) -- (D4);
+
+            \draw[Aarrow]   (A4) -- (A5);
+            \draw[Barrow]   (B4) -- (B5);
+            \draw[Carrow]   (C4) -- (C5);
+            \draw[Darrow]   (D4) -- (D5);
+
+            % \draw[Aarrow]   (A1) -- (A5);
+            % \draw[Barrow]   (B1) -- (B5);
+            % \draw[Carrow]   (C1) -- (C5);
+            % \draw[Darrow]   (D1) -- (D5);
+
+
+        \end{tikzpicture}
         \column{.5\textwidth}
         \begin{itemize}
             \item Posso solo scambiare due pedine vicine
@@ -314,6 +400,109 @@
 \end{frame}
 
 \begin{frame}{Cristalli}
+    \begin{columns}
+        \column{.5\textwidth}
+        % questo è fatto dall'AI
+        \begin{tikzpicture}[
+            >=Stealth,
+            scale=0.9,
+            % All vertices black
+            vertex/.style={
+                circle,
+                fill=black,
+                % minimum size=6.5mm,
+                inner sep=0pt
+            },
+            % Edges
+            blueedge/.style={
+                draw=blue!80,
+                line width=0.9pt,
+                -{Stealth[length=3.5mm,width=2.2mm]}
+            },
+            rededge/.style={
+                draw=red!75!black,
+                line width=0.9pt,
+                -{Stealth[length=3.5mm,width=2.2mm]}
+            }
+            ]
+
+            % ------------------------------------------------------------
+            % Vertices
+            % ------------------------------------------------------------
+
+            % Top row
+            \node[vertex] (A) at (4,8) {$\bullet$};
+            \node[vertex] (B) at (6,8) {$\bullet$};
+
+            % Second row
+            \node[vertex] (C) at (3,6) {$\bullet$};
+            \node[vertex] (D) at (5.2,6.2) {$\bullet$};
+            \node[vertex] (E) at (7,6) {$\bullet$};
+            \node[vertex] (F) at (4.8,5.8) {$\bullet$};
+
+            % Third row
+            \node[vertex] (K) at (2,4) {$\bullet$};
+            \node[vertex] (G) at (4.2,4.2) {$\bullet$};
+            \node[vertex] (H) at (6.2,4.2) {$\bullet$};
+            \node[vertex] (I) at (8,4) {$\bullet$};
+            \node[vertex] (J) at (5.8,3.8) {$\bullet$};
+            \node[vertex] (L) at (3.8,3.8) {$\bullet$};
+
+            % Bottom row
+            \node[vertex] (M) at (3,2) {$\bullet$};
+            \node[vertex] (N) at (5,2) {$\bullet$};
+            \node[vertex] (O) at (7,2) {$\bullet$};
+
+            % ------------------------------------------------------------
+            % Black directed edges
+            % ------------------------------------------------------------
+
+            % Top
+            \draw[blueedge] (B) -- (A);
+
+            % Upper diamond
+            \draw[blueedge] (E) -- (F);
+            \draw[blueedge] (F) -- (C);
+
+            % Middle
+            \draw[blueedge] (H) -- (G);
+            \draw[blueedge] (I) -- (J);
+            \draw[blueedge] (J) -- (L);
+            \draw[blueedge] (L) -- (K);
+
+            % Bottom
+            \draw[blueedge] (O) -- (N);
+            \draw[blueedge] (N) -- (M);
+
+            % ------------------------------------------------------------
+            % Red directed edges
+            % ------------------------------------------------------------
+
+            % Upper part
+            \draw[rededge] (A) -- (D);
+            \draw[rededge] (B) -- (E);
+
+            % Middle part
+            \draw[rededge] (D) -- (H);
+            \draw[rededge] (E) -- (I);
+            \draw[rededge] (C) -- (G);
+            \draw[rededge] (F) -- (J);
+
+            % Lower part
+            \draw[rededge] (G) -- (N);
+            \draw[rededge] (H) -- (O);
+            \draw[rededge] (K) -- (M);
+
+        \end{tikzpicture}
+        \column{.5\textwidth}
+        1995: Kashiwara introduce i \emph{cristalli}.
+    \end{columns}
+
+\end{frame}
+
+\begin{frame}
+    {Cristalli di tableaux}
+
 \end{frame}
 
 \end{document}
