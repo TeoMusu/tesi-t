@@ -30,32 +30,27 @@
 \usetikzlibrary{shapes.geometric} % forma diamante
 \usepackage{graphicx}
 
+%% DAL TEMPLATE DM
 % set colors
 \usepackage{xcolor}
-
 % Main colour
 \definecolor{maincolor}{RGB/cmyk}{0,53,118/100,55,0,54}
-
 % "Warm grey"
 \definecolor{sintefgrey}{RGB/cmyk}{235,235,230/0,0,0,.1}
 \colorlet{sintefgray}{sintefgrey}
-
 % Greens
 \definecolorset{RGB/cmyk}{sintef}{}{lightgreen, 205,250,225/.23, 0,.20, 0;%
                                     green,       20,185,120/.73, 0,.67, 0;%
                                     darkgreen,    0, 70, 40/.93,.43,.92,.52}
-
 % Additional colours
 \definecolorset{RGB/cmyk}{sintef}{}{yellow, 200,155,20/20, 36,98, 8;%
                                     red,    190, 60,55/19, 86,77, 8;%
                                     lilla,  120,  0,80/48,100,27,31}
-
 % Deprecated colours for backward compatibility
 \definecolorset{HTML}{sintef}{}{cyan,      22A7E5;%
                                 magenta,   EC008C;%
                                 lightgrey, D8D0C7}
 \colorlet{sinteflightgray}{sinteflightgrey}
-
 \newcommand{\themecolor}[1]{
         \ifstrequal{#1}{main}{%
         \setbeamercolor{footline}{fg=white}
@@ -74,14 +69,50 @@
         }
 }
 \themecolor{white} % Default: white theme
-
 % \setbeamercolor{title}{fg=maincolor,bg=white}
 \setbeamercolor{alerted text}{fg=sintefred}
 \setbeamercolor{author}{fg=black}
 \setbeamercolor{date}{fg=black}
 
 
-% custom commands
+%% SLOP:
+% Add "Current Frame / Total Frames" to the right footline box
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{author in head/foot}%
+      \usebeamerfont{author in head/foot}%
+      % \insertshortauthor~~(\insertshortinstitute)
+      % HARDCODED AUTHOR
+      Matteo Musumeci
+      \hspace*{2ex}
+      %\hspace*{2em}
+    \end{beamercolorbox}%
+    %\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    %  \usebeamerfont{title in head/foot}\insertshorttitle\hspace*{2em}%
+    %  \hfill
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex]{title in head/foot}%
+      \usebeamerfont{title in head/foot}%
+      \hspace*{2ex}% Left padding
+      \insertshorttitle%
+      \hfill% Pushes everything after this to the far right
+      [\insertframenumber{} / \inserttotalframenumber]\hspace*{2ex} 
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+%% comando sloppato per usare \only
+\newcommand{\zerospace}[1]{\rlap{\vbox to 0pt{#1\vss}}}
+
+%% comandi per i colori
+\newcommand<>{\cx}[1]{\textcolor#2{orange}{#1}}
+\newcommand<>{\cy}[1]{\textcolor#2{blue}{#1}}
+
+% togli header
+\setbeamertemplate{headline}{}
+
+%% custom commands
 \newcommand{\ytableaunumber}[1]{%
     \ytableausetup{centerboxes}
     \ytableaushort{#1}
@@ -112,7 +143,7 @@
 }
 
 
-\title{Basi cristallo}
+\title{Cristalli di Kashiwara}
 \subtitle{Un'applicazione alla corrispondenza  di Edelman--Greene}
 % \course{Bachelor, master, Ph.D., and Research}
 \author{\href{mailto:m.musumeci5@studenti.unipi.it}{Matteo Musumeci}\\Prof.~Michele D'Adderio}
@@ -126,7 +157,17 @@
 
 \maketitle
 
-% \section{Introduction}
+\begin{frame}{Contenuti}
+    \Large
+    \begin{enumerate}[<+->]
+        \item Parole ridotte di permutazioni
+        \item Corrispondenza di Edelman--Greene
+        \item Cristalli di Kashiwara
+    \end{enumerate}
+
+\end{frame}
+
+\section{Parole Ridotte}
 
 \begin{frame}{Parole ridotte}
     \begin{columns}
@@ -137,26 +178,35 @@
             ]
 
             % First row
+            \onslide<+->
             \node[Anode]    (A1) at (0,2)   {A};
             \node[Bnode]    (B1) at (2,2)   {B};
             \node[Cnode]    (C1) at (4,2)   {C};
             \node[Dnode]    (D1) at (6,2)   {D};
 
+            \pause
+            \pause
+            \onslide<+->
             \node[Bnode]    (B2) at (0,.5)   {B};
             \node[Anode]    (A2) at (2,.5)   {A};
             \node[Cnode]    (C2) at (4,.5)   {C};
             \node[Dnode]    (D2) at (6,.5)   {D};
-             
+
+            \onslide<+->
             \node[Bnode]    (B3) at (0,-1)   {B};
             \node[Anode]    (A3) at (2,-1)   {A};
             \node[Dnode]    (D3) at (4,-1)   {D};
             \node[Cnode]    (C3) at (6,-1)   {C};
-             
+
+            \onslide<+->
             \node[Bnode]    (B4) at (0,-2.5)   {B};
             \node[Dnode]    (D4) at (2,-2.5)   {D};
             \node[Anode]    (A4) at (4,-2.5)   {A};
             \node[Cnode]    (C4) at (6,-2.5)   {C};
 
+            \setcounter{beamerpauses}{1}
+            \pause
+            \onslide<+->
             \node[Bnode]    (B5) at (0,-4)   {B};
             \node[Dnode]    (D5) at (2,-4)   {D};
             \node[Cnode]    (C5) at (4,-4)   {C};
@@ -164,43 +214,61 @@
             % tutima riga BDCA
             % parola ridotta 1323
 
+            \pause
+            \onslide<+->
             \draw[Aarrow]   (A1) -- (A2);
             \draw[Barrow]   (B1) -- (B2);
             \draw[Carrow]   (C1) -- (C2);
             \draw[Darrow]   (D1) -- (D2);
 
+            \onslide<+->
             \draw[Aarrow]   (A2) -- (A3);
             \draw[Barrow]   (B2) -- (B3);
             \draw[Carrow]   (C2) -- (C3);
             \draw[Darrow]   (D2) -- (D3);
 
+            \onslide<+->
             \draw[Aarrow]   (A3) -- (A4);
             \draw[Barrow]   (B3) -- (B4);
             \draw[Carrow]   (C3) -- (C4);
             \draw[Darrow]   (D3) -- (D4);
 
+            \onslide<+->
             \draw[Aarrow]   (A4) -- (A5);
             \draw[Barrow]   (B4) -- (B5);
             \draw[Carrow]   (C4) -- (C5);
             \draw[Darrow]   (D4) -- (D5);
 
-            % \draw[Aarrow]   (A1) -- (A5);
-            % \draw[Barrow]   (B1) -- (B5);
-            % \draw[Carrow]   (C1) -- (C5);
-            % \draw[Darrow]   (D1) -- (D5);
+            
+            \setcounter{beamerpauses}{1}
+            \pause
+            \onslide<+-+(1)>
+                \draw[Aarrow]   (A1) -- (A5);
+                \draw[Barrow]   (B1) -- (B5);
+                \draw[Carrow]   (C1) -- (C5);
+                \draw[Darrow]   (D1) -- (D5);
+            
 
 
+                \onslide<1->
         \end{tikzpicture}
         \column{.5\textwidth}
-        \begin{itemize}
-            \item Posso solo scambiare due pedine vicine
-            \item Devo usare il minimo numero di mosse
-                (ovvero due colori non si possono scambiare più di
-                una volta.)
-        \end{itemize}
+        \onslide<+->
+        \begin{block}{ \centering Regole}
+            \begin{itemize}
+                \item Posso solo scambiare due palline vicine
+                    \addtocounter{beamerpauses}{4}
+                    \onslide<+->
+                \item Devo usare il minimo numero di mosse
+                    \onslide<+->
+                    (ovvero due colori non si possono scambiare più di
+                    una volta.)
+            \end{itemize}
+        \end{block}
 
         \smallskip
 
+        \onslide<+->
         \begin{center}
             \begin{tikzpicture}[
                 scale=0.6
@@ -257,34 +325,41 @@
 \begin{frame}{Parole ridotte}
     \begin{columns}
         \column{.5\textwidth}
+        \centering
         \begin{tikzpicture}[
             scale=0.75
             ]
 
-            \node[shape=diamond, draw, thick] (n1) at (1,3) {$1$};
-            \node[shape=diamond, draw, thick] (n2) at (3,3) {$2$};
-            \node[shape=diamond, draw, thick] (n3) at (5,3) {$3$};
 
+            \onslide<+->
             \node[Anode]    (A1) at (0,2)   {A};
             \node[Bnode]    (B1) at (2,2)   {B};
             \node[Cnode]    (C1) at (4,2)   {C};
             \node[Dnode]    (D1) at (6,2)   {D};
 
+            \node[shape=diamond, draw, thick] (n1) at (1,3) {$1$};
+            \node[shape=diamond, draw, thick] (n2) at (3,3) {$2$};
+            \node[shape=diamond, draw, thick] (n3) at (5,3) {$3$};
+
+            \onslide<+->
             \node[Bnode]    (B2) at (0,.5)   {B};
             \node[Anode]    (A2) at (2,.5)   {A};
             \node[Cnode]    (C2) at (4,.5)   {C};
             \node[Dnode]    (D2) at (6,.5)   {D};
 
+            \onslide<+->
             \node[Bnode]    (B3) at (0,-1)   {B};
             \node[Anode]    (A3) at (2,-1)   {A};
             \node[Dnode]    (D3) at (4,-1)   {D};
             \node[Cnode]    (C3) at (6,-1)   {C};
 
+            \onslide<+->
             \node[Bnode]    (B4) at (0,-2.5)   {B};
             \node[Dnode]    (D4) at (2,-2.5)   {D};
             \node[Anode]    (A4) at (4,-2.5)   {A};
             \node[Cnode]    (C4) at (6,-2.5)   {C};
 
+            \onslide<+->
             \node[Bnode]    (B5) at (0,-4)   {B};
             \node[Dnode]    (D5) at (2,-4)   {D};
             \node[Cnode]    (C5) at (4,-4)   {C};
@@ -292,44 +367,132 @@
             % tutima riga BDCA
             % parola ridotta 1323
 
+            \setcounter{beamerpauses}{1}
+            \pause
+            \onslide<+->
             \draw[Aarrow]   (A1) -- (A2);
             \draw[Barrow]   (B1) -- (B2);
             \draw[Carrow]   (C1) -- (C2);
             \draw[Darrow]   (D1) -- (D2);
 
+            \onslide<+->
             \draw[Aarrow]   (A2) -- (A3);
             \draw[Barrow]   (B2) -- (B3);
             \draw[Carrow]   (C2) -- (C3);
             \draw[Darrow]   (D2) -- (D3);
 
+            \onslide<+->
             \draw[Aarrow]   (A3) -- (A4);
             \draw[Barrow]   (B3) -- (B4);
             \draw[Carrow]   (C3) -- (C4);
             \draw[Darrow]   (D3) -- (D4);
 
+            \onslide<+->
             \draw[Aarrow]   (A4) -- (A5);
             \draw[Barrow]   (B4) -- (B5);
             \draw[Carrow]   (C4) -- (C5);
             \draw[Darrow]   (D4) -- (D5);
 
 
+            \onslide<1->
         \end{tikzpicture}
-        \column{.5\textwidth}
-        Ad ogni passo, annoto la posizione in cui è avvenuto lo scambio.
 
-        \[
-            1 \, 3 \, 2 \, 3
-        \]
+        \setcounter{beamerpauses}{1}
+
+        \column{.5\textwidth}
+        \onslide<+->
+        Per \emph{scrivere} la parola ridotta
+        \begin{itemize}
+            \item Numero le posizioni degli scambi
+                \onslide<+->
+            \item A ogni passo, annoto la posizione in cui è avvenuto lo scambio
+        \end{itemize}
+
+        \begin{center}
+            {
+                \Large
+                $
+                \textcolor<.>{blue}{
+                    1
+                } 
+                \onslide<+->
+                \textcolor<.>{blue}{
+                    \, 3 
+                } 
+                \onslide<+->
+                \textcolor<.>{blue}{
+                    \, 2 
+                } 
+                \onslide<+->
+                \textcolor<.>{blue}{
+                    \, 3
+                } 
+                $
+            }
+            \onslide<+->
+            \\
+            è una parola ridotta per la permutazione\\[3pt]
+            \begin{tikzpicture}[scale=0.4]
+                \small
+                % \node[Anode]    (A1) at (0,2)   {A};
+                % \node[Bnode]    (B1) at (2,2)   {B};
+                % \node[Cnode]    (C1) at (4,2)   {C};
+                % \node[Dnode]    (D1) at (6,2)   {D};
+                \node[Bnode]    (B5) at (0,0)   {B};
+                \node[Dnode]    (D5) at (2,0)   {D};
+                \node[Cnode]    (C5) at (4,0)   {C};
+                \node[Anode]    (A5) at (6,0)   {A};
+                % \draw[Aarrow]   (A1) -- (A5);
+                % \draw[Barrow]   (B1) -- (B5);
+                % \draw[Carrow]   (C1) -- (C5);
+                % \draw[Darrow]   (D1) -- (D5);
+            \end{tikzpicture}\\
+            \onslide<+->
+            (a meno di convenzioni...)
+        \end{center}
+
     \end{columns}
 
 \end{frame}
 
 
 \begin{frame}
-    \begin{block}{Il problema}
-        Fissata una permutazione,
-        quante sono le sue parole ridotte?
-    \end{block}
+    \begin{columns}
+        \column{0.4\textwidth}
+        \centering
+        \begin{block}{\centering Il problema}
+            Fissata una permutazione,
+            quante sono le sue parole ridotte?
+        \end{block}
+
+        \smallskip
+        \begin{block}{\centering Caso particolare}
+            Quante sono le parole ridotte del
+            \emph{longest element} in $S_n$?
+        \end{block}
+
+        \column{0.6\textwidth}
+        La permutazione che inverte l'ordine delle palline
+        si chiama \emph{longest element}
+
+        Lunghezza delle parole: $\binom n 2$
+        \begin{tikzpicture}[scale=0.8]
+            \node[Anode]    (A1) at (0,2)   {A};
+            \node[Bnode]    (B1) at (2,2)   {B};
+            \node[Cnode]    (C1) at (4,2)   {C};
+            \node[Dnode]    (D1) at (6,2)   {D};
+
+            \node[Dnode]    (D2) at (0,.5)   {D};
+            \node[Cnode]    (C2) at (2,.5)   {C};
+            \node[Bnode]    (B2) at (4,.5)   {B};
+            \node[Anode]    (A2) at (6,.5)   {A};
+
+            \draw[Aarrow]   (A1) -- (A2);
+            \draw[Barrow]   (B1) -- (B2);
+            \draw[Carrow]   (C1) -- (C2);
+            \draw[Darrow]   (D1) -- (D2);
+        \end{tikzpicture}
+    \end{columns}
 
 \end{frame}
 
@@ -382,7 +545,6 @@
 \begin{frame}{Standard Young tableaux}
     \begin{columns}
         \column{.5\textwidth}
-
         \centering
         \ytableaushort{134, 26, 5} 
 
@@ -435,35 +597,58 @@
 \end{frame}
 
 \begin{frame}
-    \[
+    \onslide<+->
+    \begin{center}
         \text{Parola ridotta: $132312$}
-    \]
+    \end{center}
+    \vspace{3pt}
 
-    \[
+    \begin{center}
+        $
         \ytableausetup{aligntableaux=top}
+        \onslide<+->
         \ytableaunumber{1}
+        \onslide<+->
+        \xrightarrow{\leftarrow \cx<.-.(1)>{3}}
+        \onslide<+->
+        \ytableaunumber{1 {\cy<.(2)>{\cx<.>{3}}}}
+        \onslide<+->
+        \xrightarrow{\leftarrow \cx<.->{2}}
+        \pause
+        \onslide<+>
+        \ytableaunumber{1 {\cx<.->2}, {\none} {\none[\leftarrow \cy<.->3]}}
+        \onslide<+->
         \xrightarrow{\leftarrow 3}
-        \ytableaunumber{1 3}
-        \xrightarrow{\leftarrow 2}
-        \ytableaunumber{1 2, 3}
-        \xrightarrow{\leftarrow 3}
+        \onslide<+->
         \ytableaunumber{1 2 3, 3}
+        \onslide<+->
         \xrightarrow{\leftarrow 1}
+        \onslide<+->
         \ytableaunumber{1 2 3, 2, 3}
+        \onslide<+->
         \xrightarrow{\leftarrow 2}
+        \onslide<+->
         \ytableaunumber{1 2 3, 2 3, 3}
         % = P(v).
-    \]
+        $
+    \end{center}
 
-    Inserimento della lettera $x$:
-    \begin{itemize}
-        \item se $x$ è più grande di tutta la riga, aggiungi $x$ in fondo alla riga;
-        \item altrimenti se $y$ è la prima lettera maggiore di $x$,
-            $y$ viene \emph{spinta} nella riga successiva e $x$ prende il suo posto,
-            \emph{a meno che\dots}
-        \item \emph{eccezione:} se $x$ compariva già nella riga e $y = x+1$,
-            allora viene spinto $y$, ma la riga rimane \emph{invariata}.
-    \end{itemize}
+    \setcounter{beamerpauses}{1}
+    \onslide<+->
+    \begin{block} { \centering Inserimento della lettera $x$}
+        \begin{itemize}
+            \item Se $\textcolor{red}{x}$ è più grande di tutta la riga,
+                aggiungi $\textcolor{red}{x}$ in fondo alla riga.
+            \item Se $\textcolor{blue}{y}$ è la prima lettera maggiore di $\textcolor{red}{x}$:
+                $\textcolor{blue}{y}$ viene \emph{spinta} nella riga successiva e 
+                $\textcolor{red}{x}$ prende il suo posto,
+                \emph{a meno che\dots}
+            \item \emph{Inserimento speciale} se $\textcolor{red}{x}$ compariva
+                già nella riga e $\textcolor{blue}{y} = \textcolor{red}{x}+1$,
+                allora viene spinto $\textcolor{blue}{y}$,
+                ma la riga rimane \emph{invariata}.
+        \end{itemize}
+    \end{block}
 
 
 \end{frame}
@@ -669,7 +854,7 @@
 
         \end{tikzpicture}
         \column{.5\textwidth}
-        1995: Kashiwara introduce i \emph{cristalli}.
+        1990: Kashiwara introduce i \emph{cristalli}.
     \end{columns}
 
 \end{frame}
@@ -684,14 +869,14 @@
             ]
             \ytableausetup{smalltableaux}
             % \node (n0) {$B(2) \colon$};
-            \node (n2) {\ytableaunumber {2,11}};
-            \node (n3su) [right of=n2, yshift=2em] {\ytableaunumber {2,12}};
-            \node (n3giu) [right of=n2, yshift=-2em] {\ytableaunumber {3,11}};
-            \node (n4su) [right of=n3su] {\ytableaunumber {2,13}};
-            \node (n4giu) [right of=n3giu] {\ytableaunumber {3,12}};
-            \node (n5su) [right of=n4su] {\ytableaunumber {3,13}};
-            \node (n5giu) [right of=n4giu] {\ytableaunumber {3,22}};
-            \node (n6) [right of=n5su, yshift=-2em] {\ytableaunumber {3,23}};
+            \node (n2) {\ytableaunumber {11,2}};
+            \node (n3su) [right of=n2, yshift=2em] {\ytableaunumber {12,2}};
+            \node (n3giu) [right of=n2, yshift=-2em] {\ytableaunumber {11,3}};
+            \node (n4su) [right of=n3su] {\ytableaunumber {13,2}};
+            \node (n4giu) [right of=n3giu] {\ytableaunumber {12,3}};
+            \node (n5su) [right of=n4su] {\ytableaunumber {13,3}};
+            \node (n5giu) [right of=n4giu] {\ytableaunumber {22,3}};
+            \node (n6) [right of=n5su, yshift=-2em] {\ytableaunumber {23,3}};
 
             \ytableausetup{nosmalltableaux}
 
@@ -728,11 +913,14 @@
         ()(23)(12)(13)
     \end{gather*}
 
-    \begin{tikzpicture}
-        \node[align=center] (sx) at (0,0) {Cristallo\\di Morse--Schilling};
-        \node[align=center] (dx) at (10,0) {Unione disgiunta\\di cristalli di tableaux};
-        \draw[<->] (sx) -- node[above, align=center] {Corrispondenza EG\\isomorfismo\\di cristalli} (dx);
-    \end{tikzpicture}
+    \begin{center}
+        \begin{tikzpicture}
+            \node[align=center] (sx) at (0,0) {Cristallo\\di Morse--Schilling};
+            \node[align=center] (dx) at (8,0) {Unione disgiunta\\di cristalli di tableaux};
+            \draw[<->] (sx) -- node[above, align=center] {Corrispondenza EG}
+                node[below,align=center] {Isomorfismo\\di cristalli} (dx);
+        \end{tikzpicture}
+    \end{center}
 
 \end{frame}
 
