@@ -1,5 +1,4 @@
 \documentclass[aspectratio=169]{beamer}
-\includeonlyframes{frame}
 % \usetheme{dmpisa}
 % \titlebackground*{assets/background}
 
@@ -152,9 +151,10 @@
 % \IDnumber{0.57721$\ldots$}
 % \institute{Dipartimento\\di Matematica\\Università di Pisa}
 % \institute{\includegraphics{matematica_unipi_dx_blue.png}}
-\institute{\includegraphics[width=.3\textwidth]{matematica_unipi_dx_blu.png}}
+\institute{\includegraphics[width=.3\textwidth]{img/matematica_unipi_dx_blu.png}}
 \date{25 settembre 2026}
 
+% \includeonlyframes[myframe]
 \begin{document}
 
 \maketitle
@@ -171,7 +171,7 @@
 
 \section{Parole Ridotte}
 
-\begin{frame}{Parole ridotte}
+\begin{frame}[fragile]{Parole ridotte}
     \begin{columns}
         \column{.5\textwidth}
         \centering
@@ -324,7 +324,7 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Parole ridotte}
+\begin{frame}[fragile]{Parole ridotte}
     \begin{columns}
         \column{.5\textwidth}
         \centering
@@ -498,77 +498,96 @@
 
 \end{frame}
 
-\begin{frame}{Sono 16}
-    Per la permutazione che inverte l'ordine di 4 elementi 
-    (elemento più lungo):
+% \begin{frame}{Sono 16}
+%     Per la permutazione che inverte l'ordine di 4 elementi 
+%     (elemento più lungo):
+% 
+%     \[
+%         \renewcommand{\arraystretch}{2} 
+%         \setlength{\arraycolsep}{20pt}
+%         \begin{array}{cccc}
+%             312312 &  121321 &  132132 &  213231 \\
+%             213213 &  321323 &  323123 &  231231 \\
+%             321232 &  123212 &  231213 &  232123 \\
+%             312132 &  123121 &  212321 &  132312 
+%         \end{array}
+%     \]
+% 
+%     Ci sono \textbf{16} parole ridotte.
+% \end{frame}
 
-    \[
-        \renewcommand{\arraystretch}{2} 
-        \setlength{\arraycolsep}{20pt}
-        \begin{array}{cccc}
-            312312 &  121321 &  132132 &  213231 \\
-            213213 &  321323 &  323123 &  231231 \\
-            321232 &  123212 &  231213 &  232123 \\
-            312132 &  123121 &  212321 &  132312 
-        \end{array}
-    \]
+% \begin{frame}
+%     \[
+%         \renewcommand{\arraystretch}{3} 
+%         \setlength{\arraycolsep}{20pt}
+%         \begin{array}{cccc}
+%             \ytableausetup{smalltableaux, centertableaux}
+%             \ytableaushort{134, 26, 5} &
+%             \ytableaushort{136, 24, 5} &
+%             \ytableaushort{145, 26, 3} &
+%             \ytableaushort{135, 26, 4} \\
+%             \ytableaushort{125, 36, 4} &
+%             \ytableaushort{136, 25, 4} &
+%             \ytableaushort{126, 34, 5} &
+%             \ytableaushort{134, 25, 6} \\
+%             \ytableaushort{124, 35, 6} &
+%             \ytableaushort{146, 25, 3} &
+%             \ytableaushort{123, 46, 5} &
+%             \ytableaushort{123, 45, 6} \\
+%             \ytableaushort{135, 24, 6} &
+%             \ytableaushort{125, 34, 6} &
+%             \ytableaushort{126, 35, 4} &
+%             \ytableaushort{124, 36, 5} 
+%             \ytableausetup{nosmalltableaux}
+%         \end{array}
+%     \]
+% 
+% \end{frame}
 
-    Ci sono \textbf{16} parole ridotte.
-\end{frame}
-
-\begin{frame}
-    \[
-        \renewcommand{\arraystretch}{3} 
-        \setlength{\arraycolsep}{20pt}
-        \begin{array}{cccc}
-            \ytableausetup{smalltableaux, centertableaux}
-            \ytableaushort{134, 26, 5} &
-            \ytableaushort{136, 24, 5} &
-            \ytableaushort{145, 26, 3} &
-            \ytableaushort{135, 26, 4} \\
-            \ytableaushort{125, 36, 4} &
-            \ytableaushort{136, 25, 4} &
-            \ytableaushort{126, 34, 5} &
-            \ytableaushort{134, 25, 6} \\
-            \ytableaushort{124, 35, 6} &
-            \ytableaushort{146, 25, 3} &
-            \ytableaushort{123, 46, 5} &
-            \ytableaushort{123, 45, 6} \\
-            \ytableaushort{135, 24, 6} &
-            \ytableaushort{125, 34, 6} &
-            \ytableaushort{126, 35, 4} &
-            \ytableaushort{124, 36, 5} 
-            \ytableausetup{nosmalltableaux}
-        \end{array}
-    \]
-
-\end{frame}
-
-\begin{frame}{Standard Young tableaux}
+\begin{frame}{Standard Young tableaux (SYT)}
     \begin{columns}
-        \column{.5\textwidth}
+        \column{.3\textwidth}
         \centering
-        \ytableaushort{134, 26, 5} 
+        \only<+>{\ydiagram{5,3,3,2}}
+        \only<+>{\ytableaunumber{31243,246,342,31}}
+        \only<+->{\ytableaunumber{1257{10},369,4{11}{13},8{12}} }
 
-        \column{.5\textwidth}
+        \column{.7\textwidth}
+        % \begin{tabular}{cc}
+        %     Young Diagram  & Solo le caselle \\
+        %     Young Tableau & Diagramma riepito di numeri \\
+        %     Standard Young Tableau & Tutti i numeri da $1$ a $n$ Righe e colonne crescenti
+        % \end{tabular}
+        \setcounter{beamerpauses}{1}
         \begin{itemize}
-            \item Righe e colonne crescenti
-            \item Tutti i numeri da $1$ a $n$.
+            \item \emph{Diagramma di Young:} solo le caselle
+                \pause
+            \item \emph{Tableau di Young:} riempimento con numeri
+                \pause
+            \item \emph{Tableau di Young Standard}: tableau tale che
+                \begin{itemize}
+                    \item Righe e Colonne crescenti
+                    \item Tutti i numeri da $1$ a $n$
+                \end{itemize}
         \end{itemize}
     \end{columns}
 
 \end{frame}
 
 \begin{frame}{La dimostrazione di Stanley}
-    Richard Stanley dimostra
-
     \[
         \#
         \Biggl\{
             \text{
                 \begin{tabular}{c}
-                    Parole ridotte dell'elemento\\
-                    più lungo in $S_n$
+                    Parole ridotte del longest element\\
+            \begin{tikzpicture}[scale=0.4]
+                \small
+                \node[Dnode]    (D5) at (0,0)   {D};
+                \node[Cnode]    (C5) at (2,0)   {C};
+                \node[Bnode]    (B5) at (4,0)   {B};
+                \node[Anode]    (A5) at (6,0)   {A};
+            \end{tikzpicture}\\
                 \end{tabular}
             }
         \Biggr\}
@@ -576,71 +595,115 @@
         \#
         \Biggl\{
             \text{
-                \begin{tabular}{c}
-                    SYT di forma ``a scala'', \\
-                    alti $n-1$ caselle
-                \end{tabular}
+                % \begin{tabular}{c}
+                %     SYT di forma ``a scala'', \\
+                %     alti $n-1$ caselle
+                % \end{tabular}
+                SYT di forma
+                \ytableausetup{smalltableaux}
+                \ydiagram{3,2,1}
+                \ytableausetup{nosmalltableaux}
             }
         \Biggr\}
     \]
 
-    \begin{itemize}
-        \item Funzioni simmetriche di Stanley
-        \item NO bigezione esplicita
-    \end{itemize}
+    \begin{columns}
+        \column{.3\textwidth}
+
+        \centering
+        \includegraphics[width=.6\textwidth]{img/stanley.png}\\
+        R. Stanley
+        \column{.7\textwidth}
+        \onslide<+->
+        \begin{itemize}[<+->]
+            \item \emph{Hook Lenght formula}: per calcolare \#SYT 
+            \item Funzioni simmetriche di Stanley
+            \item \textbf{NO bigezione esplicita}
+        \end{itemize}
+    \end{columns}
 \end{frame}
 
 \begin{frame}{Il lavoro di Edelman e Greene}
-    Corrispondenza di Edelman--Greene (EG)
+    \begin{columns}
+        \column{.3\textwidth}
+        \centering
+        \includegraphics[width=.5\textwidth]{img/edelman.jpg}\\
+        P. Edelman
 
-    Variante della corrispondenza RSK che dà una risposta
-    bigettiva al problema delle parole ridotte.
+        \vspace{14pt}
+        \includegraphics[width=.5\textwidth]{img/greene.jpg}\\
+        C. Greene
+        \column{.6\textwidth}
+        \begin{block}{ \centering Corrispondenza di Edelman--Greene (EG)}
+            \begin{itemize}
+                \onslide<+->
+                \item Variante della corrispondenza RSK
+                \onslide<+->
+                \item \emph{Bigezione} per contare le parole ridotte
+            \end{itemize}
+        \end{block}
+
+                \onslide<+->
+        Inserimento EG:
+        \[
+            \text{Parola ridotta}
+            \mapsto
+            \text{Tableau \emph{ridotto}}
+        \]
+
+    \end{columns}
 
 \end{frame}
-\begin{frame}
-    \begin{tikzpicture}[
-        s/.style={yshift=-15pt},
-        tab/.style={
-            anchor=north west,
-            xshift=20pt
-        },
-        >=stealth
-        ]
-    
-    % Define each tableau as a separate node
-    \node [tab] (t1)         {\ytableaushort{1}};
-    \node [tab] (t2) at (t1.north east) {\ytableaushort{1 3}};
-    \node [tab] (t3) at (t2.north east) {\ytableaushort{1 2, 3}};
-    \node [tab] (t4) at (t3.north east) {\ytableaushort{1 2 3, 3}};
-    \node [tab] (t5) at (t4.north east) {\ytableaushort{1 2 3, 2, 3}};
-    \node [tab] (t6) at (t5.north east) {\ytableaushort{1 2 3, 2 3, 3}};
-    
-    % Draw the arrows between the nodes
-    \draw[->] ([s]t1.north east) -- node[above] {$\scriptstyle \leftarrow 3$} ([s]t2.north west);
-    \draw[->] ([s]t2.north east) -- node[above] {$\scriptstyle \leftarrow 2$} ([s]t3.north west);
-    \draw[->] ([s]t3.north east) -- node[above] {$\scriptstyle \leftarrow 3$} ([s]t4.north west);
-    \draw[->] ([s]t4.north east) -- node[above] {$\scriptstyle \leftarrow 1$} ([s]t5.north west);
-    \draw[->] ([s]t5.north east) -- node[above] {$\scriptstyle \leftarrow 2$} ([s]t6.north west);
-\end{tikzpicture}
-    \begin{tikzpicture}[
-        node distance=18pt,
-        s/.style={yshift=-15pt},
-        tab/.style={
-            anchor=north west,
-            xshift=20pt
-        }
-        ]
-    
-    % Define each tableau as a separate node
-    \node [anchor=north west] (t2)  {$\ytableaushort{1 3}$};
-    \node [anchor=north west, xshift=20pt] (t3) at (t2.north east) {$\ytableaushort{1 2, 3}$};
 
-    % Draw the arrows between the nodes
-    \draw [->] ([s]t2.north east) -- ([s]t3.north west);
-\end{tikzpicture}
-\end{frame}
 
-\begin{frame}[label=frame]
+
+% \begin{frame}
+%     \begin{tikzpicture}[
+%         s/.style={yshift=-15pt},
+%         tab/.style={
+%             anchor=north west,
+%             xshift=20pt
+%         },
+%         >=stealth
+%         ]
+% 
+%         % Define each tableau as a separate node
+%         \node [tab] (t1)         {\ytableaushort{1}};
+%         \node [tab] (t2) at (t1.north east) {\ytableaushort{1 3}};
+%         \node [tab] (t3) at (t2.north east) {\ytableaushort{1 2, 3}};
+%         \node [tab] (t4) at (t3.north east) {\ytableaushort{1 2 3, 3}};
+%         \node [tab] (t5) at (t4.north east) {\ytableaushort{1 2 3, 2, 3}};
+%         \node [tab] (t6) at (t5.north east) {\ytableaushort{1 2 3, 2 3, 3}};
+% 
+%         % Draw the arrows between the nodes
+%         \draw[->] ([s]t1.north east) -- node[above] {$\scriptstyle \leftarrow 3$} ([s]t2.north west);
+%         \draw[->] ([s]t2.north east) -- node[above] {$\scriptstyle \leftarrow 2$} ([s]t3.north west);
+%         \draw[->] ([s]t3.north east) -- node[above] {$\scriptstyle \leftarrow 3$} ([s]t4.north west);
+%         \draw[->] ([s]t4.north east) -- node[above] {$\scriptstyle \leftarrow 1$} ([s]t5.north west);
+%         \draw[->] ([s]t5.north east) -- node[above] {$\scriptstyle \leftarrow 2$} ([s]t6.north west);
+%     \end{tikzpicture}
+%     \begin{tikzpicture}[
+%         node distance=18pt,
+%         s/.style={yshift=-15pt},
+%         tab/.style={
+%             anchor=north west,
+%             xshift=20pt
+%         }
+%         ]
+% 
+%         % Define each tableau as a separate node
+%         \node [anchor=north west] (t2)  {$\ytableaushort{1 3}$};
+%         \node [anchor=north west, xshift=20pt] (t3) at (t2.north east) {$\ytableaushort{1 2, 3}$};
+% 
+%         % Draw the arrows between the nodes
+%         \draw [->] ([s]t2.north east) -- ([s]t3.north west);
+%     \end{tikzpicture}
+% \end{frame}
+
+
+
+
+\begin{frame}[fragile,label=myframe]
     \onslide<+->
     \begin{center}
         \text{Parola ridotta: $132312$}
@@ -692,7 +755,7 @@
             \node [tab] (t1)         {\ytableaushort{1}};
             \pause
             \onslide<+->
-            \node [tab] (t2) at (t1.north east) {\ytableaushort{1 {\cy<.(2)>{\cx<.>3}}}};
+            \node [tab] (t2) at (t1.north east) {\ytableaushort{1 {\cy<.(2)-.(3)>{\cx<.>3}}}};
             \pause
             \pause
             \onslide<+-.(2)>
@@ -702,25 +765,31 @@
             \node [tab] (t3) at (t2.north east) {\ytableaushort{1 2, {\cx<.>3}}};
             \pause
             \onslide<+->
-            \node [tab] (t4) at (t3.north east) {\ytableaushort{{\cx<.(2)>1} {\cy<.(2)>2} {\cx<.>3}, 3}};
+            \node [tab] (t4) at (t3.north east) {\ytableaushort{{\cx<.(2)-.(3)>1} {\cy<.(2)-.(3)>2} {\cx<.>3}, 3}};
             \pause
             \pause
             \onslide<+-.(2)>
-            \node [tab] (t5) at (t4.north east) {\ytableaushort{1 2 3, {\cy<.(1)>3} {\none[\scriptstyle \leftarrow \cx<.(1)>{\cy<.>2}]}}};
+            \node [tab] (t5) at (t4.north east) {\ytableaushort{{\cx<.>1} {\cy<.>2} 3, {\cy<.(1)>3} {\none[\scriptstyle \leftarrow \cx<.(1)>{\cy<.>2}]}}};
             \pause
             \onslide<+-.(2)>
-            \node [tab] (t5) at (t4.north east) {\ytableaushort{1 2 3, 2, 3}};
+            \node [tab] (t5) at (t4.north east) {\ytableaushort{1 2 3, {\cx<.>2}, {\none[\scriptstyle \leftarrow \cx<.(1)>{\cy<.>3}]}}};
             \pause
             \onslide<+->
-            \node [tab] (t5) at (t4.north east) {\ytableaushort{1 2 3, 2, 3}};
+            \node [tab] (t5) at (t4.north east) {\ytableaushort{1 {\cx<.(2)-.(3)>2} {\cy<.(2)-.(3)>3}, 2, {\cx<.>3}}};
+            \pause
+            \pause
+            \onslide<+-.(2)>
+            \node [tab] (t6) at (t5.north east) {\ytableaushort{1 {\cx<.>2} {\cy<.>3}, 2 {\none} {\none[\scriptstyle \leftarrow \cx<.(1)>{\cy<.>3}]}, 3}};
+            \pause
             \onslide<+->
-            \node [tab] (t6) at (t5.north east) {\ytableaushort{1 2 3, 2 3, 3}};
+            \node [tab] (t6) at (t5.north east) {\ytableaushort{1 2 3, 2 {\cx<.>3}, 3}};
+            \onslide<+->
 
             % arrows
             \setcounter{beamerpauses}{1}
             \pause
             \onslide<+->
-            \draw[->] ([s]t1.north east) -- node[above] {$\scriptstyle \leftarrow \cx<.-(1)>3$} ([s]t2.north west);
+            \draw[->] ([s]t1.north east) -- node[above] {$\scriptstyle \leftarrow \cx<.-.(1)>3$} ([s]t2.north west);
             \pause
             \onslide<+->
             \draw[->] ([s]t2.north east) -- node[above] {$\scriptstyle \leftarrow \cx<.-.(2)>2$} ([s]t3.north west);
@@ -736,25 +805,28 @@
             \pause
             \pause
             \pause
+            \pause
+            \pause
+            \pause
             \onslide<+->
-            \draw[->] ([s]t5.north east) -- node[above] {$\scriptstyle \leftarrow 2$} ([s]t6.north west);
+            \draw[->] ([s]t5.north east) -- node[above] {$\scriptstyle \leftarrow \cx<.-.(2)>2$} ([s]t6.north west);
             \onslide<1->
         \end{tikzpicture}
     \end{center}
 
     \setcounter{beamerpauses}{1}
-    \onslide<+->
+    \onslide<2->
     \begin{block} { \centering Inserimento della lettera $x$}
         \begin{itemize}
             \item Se $\textcolor{orange}{x}$ è più grande di tutta la riga,
                 aggiungi $\textcolor{orange}{x}$ in fondo alla riga.
-                \onslide<+->
+                \onslide<5->
             \item Se $\textcolor{blue}{y}$ è la prima lettera maggiore di $\textcolor{orange}{x}$:
                 $\textcolor{blue}{y}$ viene \emph{spinta} nella riga successiva e 
                 $\textcolor{orange}{x}$ prende il suo posto,
                 \emph{a meno che\dots}
-                \onslide<+->
-            \item \emph{Inserimento speciale} se $\textcolor{orange}{x}$ compariva
+                \onslide<12->
+            \item \emph{Inserimento speciale}: se $\textcolor{orange}{x}$ compariva
                 già nella riga e $\textcolor{blue}{y} = \textcolor{orange}{x}+1$,
                 allora viene spinto $\textcolor{blue}{y}$,
                 ma la riga rimane \emph{invariata}.
@@ -786,55 +858,69 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{$Q$-tableau}
+\begin{frame}[fragile]{$Q$-tableau}
+    \onslide<+->
     Il $Q$-tableau tiene traccia dell'ordine in cui ho aggiunto le caselle.
 
     \[
         \ytableausetup{aligntableaux=top}
         \begin{array}{*{6}{l@{\;}}l}
-            \ytableaunumber{1}
+            P\colon \quad
+            \ytableaunumber{{*(blue!17)1}}
+            \onslide<+->
             \longrightarrow
             &
-            \ytableaunumber{1 3}
+            \ytableaunumber{1 {*(blue!17)3}}
+            \onslide<+->
             \longrightarrow
             &
-            \ytableaunumber{1 2, 3}
+            \ytableaunumber{1 2, {*(blue!17)3}}
+            \onslide<+->
             \longrightarrow
             &
-            \ytableaunumber{1 2 3, 3}
+            \ytableaunumber{1 2 {*(blue!17)3}, 3}
+            \onslide<+->
             \longrightarrow
             &
-            \ytableaunumber{1 2 3, 2, 3}
+            \ytableaunumber{1 2 3, 2, {*(blue!17)3}}
+            \onslide<+->
             \longrightarrow
             &
-            \ytableaunumber{1 2 3, 2 3, 3}
-            = P
+            \ytableaunumber{1 2 3, 2 {*(blue!17)3}, 3}
             \\
             \noalign{\vskip 10pt}
-            \ytableaunumber{1}
+            \setcounter{beamerpauses}{1}
+            \onslide<+->
+            Q\colon \quad
+            \ytableaunumber{{*(blue!17)1}}
+            \onslide<+->
             \longrightarrow
             &
-            \ytableaunumber{1 2}
+            \ytableaunumber{1 {*(blue!17)2}}
+            \onslide<+->
             \longrightarrow
             &
-            \ytableaunumber{1 2, 3}
+            \ytableaunumber{1 2, {*(blue!17)3}}
+            \onslide<+->
             \longrightarrow
             &
-            \ytableaunumber{1 2 4, 3}
+            \ytableaunumber{1 2 {*(blue!17)4}, 3}
+            \onslide<+->
             \longrightarrow
             &
-            \ytableaunumber{1 2 4, 3, 5}
+            \ytableaunumber{1 2 4, 3, {*(blue!17)5}}
+            \onslide<+->
             \longrightarrow
             &
-            \ytableaunumber{1 2 4, 3 6, 5}
-            =Q
+            \ytableaunumber{1 2 4, 3 {*(blue!17)6}, 5}
+            \onslide<1->
         \end{array}
     \]
 
 \end{frame}
 
 \begin{frame}{Corrispondenza di Edelman--Greene}
-    \[
+    \begin{align*}
         \Biggl\{
             \text{
                 \begin{tabular}{c}
@@ -844,7 +930,7 @@
                 \end{tabular}
             }
         \Biggr\}
-        \; \longleftrightarrow \;
+        \; &\longleftrightarrow \;
         \Biggl\{
             (P, Q)
             \Biggm\vert
@@ -855,8 +941,19 @@
                     $Q$ è SYT
                 \end{tabular}
             }
-        \Biggr\}
-    \]
+        \Biggr\}\\[1.5\jot]
+        132312
+        \; &\longleftrightarrow \;
+        \Biggl(
+            \,
+            \ytableausetup{smalltableaux, aligntableaux=center}
+            \ytableaunumber{1 2 3, 2 {3}, 3}
+            \; , \;
+            \ytableaunumber{1 2 4, 3 {6}, 5}
+            \ytableausetup{nosmalltableaux, aligntableaux=top}
+            \,
+        \Biggr)
+    \end{align*}
 
     \begin{columns}
         \column{.4\textwidth}
@@ -1037,7 +1134,18 @@
 \end{frame}
 
 \begin{frame}
+    \begin{center}
+        \huge
+        Grazie per l'attenzione!
+    \end{center}
     
+
+    \vspace{20pt}
+    \nocite{edelman-greene-87}
+    \nocite{stanley-84}
+    \nocite{morse-schilling-15}
+    \bibliographystyle{amsalpha}
+    \bibliography{../biblio}
 
 \end{frame}
 

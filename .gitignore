@@ -25,6 +25,7 @@
 ## beamer auxiliary files:
 *.nav
 *.snm
+*.vrb
 
 ## Intermediate documents:
 *.dvi
