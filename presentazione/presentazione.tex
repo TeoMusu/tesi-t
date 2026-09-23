@@ -1,4 +1,5 @@
 \documentclass[aspectratio=169]{beamer}
+\includeonlyframes{frame}
 % \usetheme{dmpisa}
 % \titlebackground*{assets/background}
 
@@ -28,6 +29,7 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta} % il clanker voleva questo
 \usetikzlibrary{shapes.geometric} % forma diamante
+\usetikzlibrary{positioning}
 \usepackage{graphicx}
 
 %% DAL TEMPLATE DM
@@ -595,59 +597,169 @@
     bigettiva al problema delle parole ridotte.
 
 \end{frame}
-
 \begin{frame}
+    \begin{tikzpicture}[
+        s/.style={yshift=-15pt},
+        tab/.style={
+            anchor=north west,
+            xshift=20pt
+        },
+        >=stealth
+        ]
+    
+    % Define each tableau as a separate node
+    \node [tab] (t1)         {\ytableaushort{1}};
+    \node [tab] (t2) at (t1.north east) {\ytableaushort{1 3}};
+    \node [tab] (t3) at (t2.north east) {\ytableaushort{1 2, 3}};
+    \node [tab] (t4) at (t3.north east) {\ytableaushort{1 2 3, 3}};
+    \node [tab] (t5) at (t4.north east) {\ytableaushort{1 2 3, 2, 3}};
+    \node [tab] (t6) at (t5.north east) {\ytableaushort{1 2 3, 2 3, 3}};
+    
+    % Draw the arrows between the nodes
+    \draw[->] ([s]t1.north east) -- node[above] {$\scriptstyle \leftarrow 3$} ([s]t2.north west);
+    \draw[->] ([s]t2.north east) -- node[above] {$\scriptstyle \leftarrow 2$} ([s]t3.north west);
+    \draw[->] ([s]t3.north east) -- node[above] {$\scriptstyle \leftarrow 3$} ([s]t4.north west);
+    \draw[->] ([s]t4.north east) -- node[above] {$\scriptstyle \leftarrow 1$} ([s]t5.north west);
+    \draw[->] ([s]t5.north east) -- node[above] {$\scriptstyle \leftarrow 2$} ([s]t6.north west);
+\end{tikzpicture}
+    \begin{tikzpicture}[
+        node distance=18pt,
+        s/.style={yshift=-15pt},
+        tab/.style={
+            anchor=north west,
+            xshift=20pt
+        }
+        ]
+    
+    % Define each tableau as a separate node
+    \node [anchor=north west] (t2)  {$\ytableaushort{1 3}$};
+    \node [anchor=north west, xshift=20pt] (t3) at (t2.north east) {$\ytableaushort{1 2, 3}$};
+
+    % Draw the arrows between the nodes
+    \draw [->] ([s]t2.north east) -- ([s]t3.north west);
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[label=frame]
     \onslide<+->
     \begin{center}
         \text{Parola ridotta: $132312$}
     \end{center}
     \vspace{3pt}
 
+    % \begin{center}
+    %     $
+    %     \ytableausetup{aligntableaux=top}
+    %     \onslide<+->
+    %     \ytableaunumber{1}
+    %     \onslide<+->
+    %     \xrightarrow{\leftarrow \cx<.-.(1)>{3}}
+    %     \onslide<+->
+    %     \ytableaunumber{1 {\cy<.(2)>{\cx<.>{3}}}}
+    %     \onslide<+->
+    %     \xrightarrow{\leftarrow \cx<.>{2}}
+    %     \pause
+    %     \onslide<+>
+    %     \zerospace{\ytableaunumber{1 {\cx<.->2}, {\none} {\none[\leftarrow \cy<.->3]}}}
+    %     \onslide<+->
+    %     \ytableaunumber{1 2, 3}
+    %     \onslide<+->
+    %     \xrightarrow{\leftarrow 3}
+    %     \onslide<+->
+    %     \ytableaunumber{1 2 3, 3}
+    %     \onslide<+->
+    %     \xrightarrow{\leftarrow 1}
+    %     \onslide<+->
+    %     \ytableaunumber{1 2 3, 2, 3}
+    %     \onslide<+->
+    %     \xrightarrow{\leftarrow 2}
+    %     \onslide<+->
+    %     \ytableaunumber{1 2 3, 2 3, 3}
+    %     % = P(v).
+    %     $
+    % \end{center}
     \begin{center}
-        $
-        \ytableausetup{aligntableaux=top}
-        \onslide<+->
-        \ytableaunumber{1}
-        \onslide<+->
-        \xrightarrow{\leftarrow \cx<.-.(1)>{3}}
-        \onslide<+->
-        \ytableaunumber{1 {\cy<.(2)>{\cx<.>{3}}}}
-        \onslide<+->
-        \xrightarrow{\leftarrow \cx<.->{2}}
-        \pause
-        \onslide<+>
-        \ytableaunumber{1 {\cx<.->2}, {\none} {\none[\leftarrow \cy<.->3]}}
-        \onslide<+->
-        \xrightarrow{\leftarrow 3}
-        \onslide<+->
-        \ytableaunumber{1 2 3, 3}
-        \onslide<+->
-        \xrightarrow{\leftarrow 1}
-        \onslide<+->
-        \ytableaunumber{1 2 3, 2, 3}
-        \onslide<+->
-        \xrightarrow{\leftarrow 2}
-        \onslide<+->
-        \ytableaunumber{1 2 3, 2 3, 3}
-        % = P(v).
-        $
+        \begin{tikzpicture}[
+            s/.style={yshift=-15pt},
+            tab/.style={
+                anchor=north west,
+                xshift=20pt
+            },
+            >=stealth
+            ]
+
+            % tableaux
+            \node [tab] (t1)         {\ytableaushort{1}};
+            \pause
+            \onslide<+->
+            \node [tab] (t2) at (t1.north east) {\ytableaushort{1 {\cy<.(2)>{\cx<.>3}}}};
+            \pause
+            \pause
+            \onslide<+-.(2)>
+            \node [tab] (t3) at (t2.north east) {\ytableaushort{1 {\cx<.>2}, {\none} {\none[\scriptstyle \leftarrow \cx<.(1)>{\cy<.>3}]}}};
+            \pause
+            \onslide<+->
+            \node [tab] (t3) at (t2.north east) {\ytableaushort{1 2, {\cx<.>3}}};
+            \pause
+            \onslide<+->
+            \node [tab] (t4) at (t3.north east) {\ytableaushort{{\cx<.(2)>1} {\cy<.(2)>2} {\cx<.>3}, 3}};
+            \pause
+            \pause
+            \onslide<+-.(2)>
+            \node [tab] (t5) at (t4.north east) {\ytableaushort{1 2 3, {\cy<.(1)>3} {\none[\scriptstyle \leftarrow \cx<.(1)>{\cy<.>2}]}}};
+            \pause
+            \onslide<+-.(2)>
+            \node [tab] (t5) at (t4.north east) {\ytableaushort{1 2 3, 2, 3}};
+            \pause
+            \onslide<+->
+            \node [tab] (t5) at (t4.north east) {\ytableaushort{1 2 3, 2, 3}};
+            \onslide<+->
+            \node [tab] (t6) at (t5.north east) {\ytableaushort{1 2 3, 2 3, 3}};
+
+            % arrows
+            \setcounter{beamerpauses}{1}
+            \pause
+            \onslide<+->
+            \draw[->] ([s]t1.north east) -- node[above] {$\scriptstyle \leftarrow \cx<.-(1)>3$} ([s]t2.north west);
+            \pause
+            \onslide<+->
+            \draw[->] ([s]t2.north east) -- node[above] {$\scriptstyle \leftarrow \cx<.-.(2)>2$} ([s]t3.north west);
+            \pause
+            \pause
+            \pause
+            \pause
+            \onslide<+->
+            \draw[->] ([s]t3.north east) -- node[above] {$\scriptstyle \leftarrow \cx<.-.(1)>3$} ([s]t4.north west);
+            \pause
+            \onslide<+->
+            \draw[->] ([s]t4.north east) -- node[above] {$\scriptstyle \leftarrow \cx<.-.(2)>1$} ([s]t5.north west);
+            \pause
+            \pause
+            \pause
+            \onslide<+->
+            \draw[->] ([s]t5.north east) -- node[above] {$\scriptstyle \leftarrow 2$} ([s]t6.north west);
+            \onslide<1->
+        \end{tikzpicture}
     \end{center}
 
     \setcounter{beamerpauses}{1}
     \onslide<+->
     \begin{block} { \centering Inserimento della lettera $x$}
         \begin{itemize}
-            \item Se $\textcolor{red}{x}$ è più grande di tutta la riga,
-                aggiungi $\textcolor{red}{x}$ in fondo alla riga.
-            \item Se $\textcolor{blue}{y}$ è la prima lettera maggiore di $\textcolor{red}{x}$:
+            \item Se $\textcolor{orange}{x}$ è più grande di tutta la riga,
+                aggiungi $\textcolor{orange}{x}$ in fondo alla riga.
+                \onslide<+->
+            \item Se $\textcolor{blue}{y}$ è la prima lettera maggiore di $\textcolor{orange}{x}$:
                 $\textcolor{blue}{y}$ viene \emph{spinta} nella riga successiva e 
-                $\textcolor{red}{x}$ prende il suo posto,
+                $\textcolor{orange}{x}$ prende il suo posto,
                 \emph{a meno che\dots}
-            \item \emph{Inserimento speciale} se $\textcolor{red}{x}$ compariva
-                già nella riga e $\textcolor{blue}{y} = \textcolor{red}{x}+1$,
+                \onslide<+->
+            \item \emph{Inserimento speciale} se $\textcolor{orange}{x}$ compariva
+                già nella riga e $\textcolor{blue}{y} = \textcolor{orange}{x}+1$,
                 allora viene spinto $\textcolor{blue}{y}$,
                 ma la riga rimane \emph{invariata}.
         \end{itemize}
+        \onslide<1->
     \end{block}
 
 
@@ -769,7 +881,7 @@
             vertex/.style={
                 circle,
                 fill=black,
-                % minimum size=6.5mm,
+                minimum size=3mm,
                 inner sep=0pt
             },
             % Edges
@@ -790,27 +902,27 @@
             % ------------------------------------------------------------
 
             % Top row
-            \node[vertex] (A) at (4,8) {$\bullet$};
-            \node[vertex] (B) at (6,8) {$\bullet$};
+            \node[vertex] (A) at (4,8) {};
+            \node[vertex] (B) at (6,8) {};
 
             % Second row
-            \node[vertex] (C) at (3,6) {$\bullet$};
-            \node[vertex] (D) at (5.2,6.2) {$\bullet$};
-            \node[vertex] (E) at (7,6) {$\bullet$};
-            \node[vertex] (F) at (4.8,5.8) {$\bullet$};
+            \node[vertex] (C) at (3,6) {};
+            \node[vertex] (D) at (5.2,6.2) {};
+            \node[vertex] (E) at (7,6) {};
+            \node[vertex] (F) at (4.8,5.8) {};
 
             % Third row
-            \node[vertex] (K) at (2,4) {$\bullet$};
-            \node[vertex] (G) at (4.2,4.2) {$\bullet$};
-            \node[vertex] (H) at (6.2,4.2) {$\bullet$};
-            \node[vertex] (I) at (8,4) {$\bullet$};
-            \node[vertex] (J) at (5.8,3.8) {$\bullet$};
-            \node[vertex] (L) at (3.8,3.8) {$\bullet$};
+            \node[vertex] (K) at (2,4) {};
+            \node[vertex] (G) at (4.2,4.2) {};
+            \node[vertex] (H) at (6.2,4.2) {};
+            \node[vertex] (I) at (8,4) {};
+            \node[vertex] (J) at (5.8,3.8) {};
+            \node[vertex] (L) at (3.8,3.8) {};
 
             % Bottom row
-            \node[vertex] (M) at (3,2) {$\bullet$};
-            \node[vertex] (N) at (5,2) {$\bullet$};
-            \node[vertex] (O) at (7,2) {$\bullet$};
+            \node[vertex] (M) at (3,2) {};
+            \node[vertex] (N) at (5,2) {};
+            \node[vertex] (O) at (7,2) {};
 
             % ------------------------------------------------------------
             % Black directed edges
