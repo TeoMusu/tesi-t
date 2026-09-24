@@ -645,6 +645,8 @@
     \end{columns}
 \end{frame}
 
+\section{Corrispondenza EG}
+
 \begin{frame}{Il lavoro di Edelman e Greene}
     \begin{columns}
         \column{.3\textwidth}
@@ -666,11 +668,12 @@
         \end{block}
 
                 \onslide<+->
+                \vspace{5pt}
         Inserimento EG:
         \[
             \text{Parola ridotta}
             \mapsto
-            \text{Tableau \emph{ridotto}}
+            \text{$P$-tableau}
         \]
 
     \end{columns}
@@ -1011,18 +1014,60 @@
             \,
         \Biggr)
     \end{align*}
-
+    \vspace{-20pt}
+    \pause
     \begin{columns}
-        \column{.4\textwidth}
+        \column{.25\textwidth}
         \begin{center}
             \ytableaunumber{1 2 3, 2 3, 3}
         \end{center}
-        \column{.6\textwidth}
-        C'è solo \emph{un} tableau ridotto per l'elemento più 
-        lungo in $S_n$.
+        \column{.5\textwidth}
+        Unico tableau \emph{ridotto} per il longest element
+        \centering
+        \column{.25\textwidth}
+        \begin{tikzpicture}[scale=0.4] \small
+            \node[Dnode]    (D5) at (0,0)   {D};
+            \node[Cnode]    (C5) at (2,0)   {C};
+            \node[Bnode]    (B5) at (4,0)   {B};
+            \node[Anode]    (A5) at (6,0)   {A};
+        \end{tikzpicture}
+        % Allora $Q$ è una bigezione 
     \end{columns}
-
+    \vspace{-10pt}
+    \pause
+    \[
+        Q\colon \quad
+        \Biggl\{
+            \text{
+                \begin{tabular}{c}
+                    Parole ridotte\\ del longest element\\
+            \begin{tikzpicture}[scale=0.4]
+                \small
+                \node[Dnode]    (D5) at (0,0)   {D};
+                \node[Cnode]    (C5) at (2,0)   {C};
+                \node[Bnode]    (B5) at (4,0)   {B};
+                \node[Anode]    (A5) at (6,0)   {A};
+            \end{tikzpicture}\\
+                \end{tabular}
+            }
+        \Biggr\}
+        \; \longleftrightarrow \;
+        \Biggl\{
+            \text{
+                % \begin{tabular}{c}
+                %     SYT di forma ``a scala'', \\
+                %     alti $n-1$ caselle
+                % \end{tabular}
+                SYT di forma
+                \ytableausetup{smalltableaux,aligntableaux=center}
+                \ydiagram{3,2,1}
+                \ytableausetup{nosmalltableaux,aligntableaux=top}
+            }
+        \Biggr\}
+    \]
 \end{frame}
+
+\section{Cristalli di Kashiwara}
 
 \begin{frame}{Cristalli di Kashiwara}
     \begin{columns}
@@ -1256,7 +1301,7 @@
     \nocite{stanley-84}
     \nocite{morse-schilling-15}
     \bibliographystyle{amsalpha}
-    \bibliography{../biblio}
+    \bibliography{../biblio.bib}
 
 \end{frame}
 
