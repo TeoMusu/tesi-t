@@ -462,39 +462,58 @@
     \begin{columns}
         \column{0.4\textwidth}
         \centering
+        \onslide<1->
         \begin{block}{\centering Il problema}
             Fissata una permutazione,
             quante sono le sue parole ridotte?
         \end{block}
 
         \smallskip
+        \onslide<2->
         \begin{block}{\centering Caso particolare}
+            \onslide<5->
             Quante sono le parole ridotte del
             \emph{longest element} in $S_n$?
         \end{block}
 
         \column{0.6\textwidth}
-        La permutazione che inverte l'ordine delle palline
-        si chiama \emph{longest element}
 
-        Lunghezza delle parole: $\binom n 2$
-        \begin{tikzpicture}[scale=0.8]
-            \node[Anode]    (A1) at (0,2)   {A};
-            \node[Bnode]    (B1) at (2,2)   {B};
-            \node[Cnode]    (C1) at (4,2)   {C};
-            \node[Dnode]    (D1) at (6,2)   {D};
+        \setcounter{beamerpauses}{1}
+        \pause
+        \onslide<+->
+        \begin{center}
+            \begin{tikzpicture}[scale=0.8]
+                \node[Anode]    (A1) at (0,2)   {A};
+                \node[Bnode]    (B1) at (2,2)   {B};
+                \node[Cnode]    (C1) at (4,2)   {C};
+                \node[Dnode]    (D1) at (6,2)   {D};
 
-            \node[Dnode]    (D2) at (0,.5)   {D};
-            \node[Cnode]    (C2) at (2,.5)   {C};
-            \node[Bnode]    (B2) at (4,.5)   {B};
-            \node[Anode]    (A2) at (6,.5)   {A};
+                \node[Dnode]    (D2) at (0,0)   {D};
+                \node[Cnode]    (C2) at (2,0)   {C};
+                \node[Bnode]    (B2) at (4,0)   {B};
+                \node[Anode]    (A2) at (6,0)   {A};
 
-            \draw[Aarrow]   (A1) -- (A2);
-            \draw[Barrow]   (B1) -- (B2);
-            \draw[Carrow]   (C1) -- (C2);
-            \draw[Darrow]   (D1) -- (D2);
-        \end{tikzpicture}
+                \draw[Aarrow]   (A1) -- (A2);
+                \draw[Barrow]   (B1) -- (B2);
+                \draw[Carrow]   (C1) -- (C2);
+                \draw[Darrow]   (D1) -- (D2);
+            \end{tikzpicture}
+        \end{center}
+        \onslide<+->
+        \begin{itemize}
+            \item La permutazione che inverte l'ordine delle palline
+                si chiama \emph{longest element}
+                \onslide<+->
+            \item Lunghezza delle parole: $\binom n 2$
+        \end{itemize}
     \end{columns}
+
+    \vspace{10pt}
+    \pause
+    \onslide<+->
+    {\large
+        Breve digressione sui Tableaux...
+    }
 
 \end{frame}
 
@@ -548,11 +567,14 @@
     \begin{columns}
         \column{.3\textwidth}
         \centering
-        \only<+>{\ydiagram{5,3,3,2}}
-        \only<+>{\ytableaunumber{31243,246,342,31}}
-        \only<+->{\ytableaunumber{1257{10},369,4{11}{13},8{12}} }
+        % \only<+>{\ydiagram{5,3,3,2}}
+        \begin{tikzpicture}
+            \only<+> {\node (a) {\ytableaunumber{{}{}{}{}{},{}{}{},{}{}{},{}{}}};}
+            \only<+> {\node (b) {\ytableaunumber{31243,246,342,31}};}
+            \only<+->{\node (c) {\ytableaunumber{1257{10},369,4{11}{13},8{12}} };}
+    \end{tikzpicture}
 
-        \column{.7\textwidth}
+        \column{.65\textwidth}
         % \begin{tabular}{cc}
         %     Young Diagram  & Solo le caselle \\
         %     Young Tableau & Diagramma riepito di numeri \\
@@ -600,9 +622,9 @@
                 %     alti $n-1$ caselle
                 % \end{tabular}
                 SYT di forma
-                \ytableausetup{smalltableaux}
+                \ytableausetup{smalltableaux,aligntableaux=center}
                 \ydiagram{3,2,1}
-                \ytableausetup{nosmalltableaux}
+                \ytableausetup{nosmalltableaux,aligntableaux=top}
             }
         \Biggr\}
     \]
@@ -839,28 +861,62 @@
 
 \begin{frame}{$P$-tableau}
     \begin{columns}
-        \column{.4\textwidth}
+        \column{.35\textwidth}
+        \onslide<+->
         \begin{center}
             \ytableaunumber{1 2 3, 2 3, 3}
+
+            \vspace{20pt}
+            Il $P$-tableau della parola\\
+            ridotta $132312$
         \end{center}
 
         \column{.6\textwidth}
-        Il $P$-tableau della parola ridotta $132312$.
-        \begin{itemize}
-            \item Righe e colonne crescenti.
-            \item Il suo \emph{row-reading}
-                \[
-                    3 \, 23 \, 123
-                \]
-                è una parola ridotta per la stessa permutazione.
-            \item Un tableau di questo tipo si dice \emph{ridotto}.
-        \end{itemize}
+        \onslide<+->
+        Il $P$-tableau è un tableau \emph{ridotto}
+        % per la stessa permutazione
+        \begin{block}{\centering Tableaux \emph{ridotto} per $w \in S_n$}
+            \begin{itemize}
+        \onslide<+->
+                \item Righe e colonne strettamente crescenti
+        \onslide<+->
+                \item Il suo \emph{row-reading}
+                    è una parola ridotta per $w$
+            \end{itemize}
+        \end{block}
+
+        \onslide<+->
+        Nel nostro esempio:
+        \begin{center}
+            $\text{row-reading} = 3 \, 23 \, 123$
+        \end{center}
+        \onslide<+->
+        \begin{columns}
+            \column{0.5\textwidth}
+            \centering
+            $132312$ e $323123$ sono parole ridotte per la stessa permutazione
+            \column{0.5\textwidth}
+            \begin{center}
+                \begin{tikzpicture}[scale=0.4]
+                    \small
+                    \node[Dnode]    (D5) at (0,0)   {D};
+                    \node[Cnode]    (C5) at (2,0)   {C};
+                    \node[Bnode]    (B5) at (4,0)   {B};
+                    \node[Anode]    (A5) at (6,0)   {A};
+                \end{tikzpicture}\\
+            \end{center}
+        \end{columns}
     \end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{$Q$-tableau}
+    \begin{itemize}
     \onslide<+->
-    Il $Q$-tableau tiene traccia dell'ordine in cui ho aggiunto le caselle.
+    \item Il $P$-tableau \emph{non} è iniettivo...
+
+    \onslide<+->
+\item Il $Q$-tableau tiene traccia dell'ordine in cui ho aggiunto le caselle.
+\end{itemize}
 
     \[
         \ytableausetup{aligntableaux=top}
@@ -890,6 +946,7 @@
             \\
             \noalign{\vskip 10pt}
             \setcounter{beamerpauses}{1}
+            \pause
             \onslide<+->
             Q\colon \quad
             \ytableaunumber{{*(blue!17)1}}
@@ -967,7 +1024,7 @@
 
 \end{frame}
 
-\begin{frame}{Cristalli}
+\begin{frame}{Cristalli di Kashiwara}
     \begin{columns}
         \column{.5\textwidth}
         % questo è fatto dall'AI
@@ -1063,13 +1120,25 @@
 
         \end{tikzpicture}
         \column{.5\textwidth}
-        1990: Kashiwara introduce i \emph{cristalli}.
+        \onslide<+->
+        \begin{center}
+            \includegraphics[width=0.35\textwidth]{img/kashiwara.jpg}\\
+            M. Kashiwara
+        \end{center}
+        \begin{itemize}
+        \onslide<+->
+            \item \emph{Grafo Cristallo}
+        \onslide<+->
+            \item \emph{String Property}
+        \onslide<+->
+            \item Componenti connesse sono Cristalli 
+        \end{itemize}
     \end{columns}
 
 \end{frame}
 
 \begin{frame}
-    {Cristalli di tableaux}
+    {Cristalli di tableaux (tipo $A$)}
     \begin{center}
         \begin{tikzpicture}[
             node distance=5em,
@@ -1100,36 +1169,78 @@
 
         \end{tikzpicture}
     \end{center}
+    \vspace{10pt}
 
-    Tableaux \emph{semistandard}:
-    \begin{itemize}
-        \item righe debolmente crescenti,
-        \item colonne strettamente crescenti.
-    \end{itemize}
+    \pause
+    \begin{columns}
+        \column{.5\textwidth}
+        Tableaux \emph{semistandard}:
+        \begin{itemize}
+            \item righe debolmente crescenti,
+            \item colonne strettamente crescenti.
+        \end{itemize}
+    \pause
 
-    I cristalli di tableaux sono \emph{connessi}.
+        \column{.5\textwidth}
+        \begin{block}{\centering Teoremone}
+            \centering
+            Cristalli \textbf{normali} \emph{connessi} di tipo $A$ sono
+            Cristalli di Tableaux
+        \end{block}
+    \end{columns}
+
 
 
 \end{frame}
 
 \begin{frame}{Il lavoro di Morse e Schilling}
-    Cristallo sulle \emph{fattorizzazioni crescenti}
+    \begin{columns}
+        \column{0.2\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/morse.jpg}\\
+        J. Morse
 
-    Esempi di fattorizzazioni crescenti:
-    \begin{gather*}
-        (23)(123)()(1) \\
-        (23)(1)(23)(1) \\
-        ()(23)(12)(13)
-    \end{gather*}
+        \vspace{10pt}
+        \includegraphics[width=0.8\textwidth]{img/schilling.jpg}\\
+        A. Schilling
+        
 
+        \column{0.8\textwidth}
+        \begin{columns}
+            \column{.5\textwidth}
+            \begin{block}{\centering Fattorizzazione crescente}
+                \centering
+                Suddivisione di \emph{parola ridotta} in blocchi crescenti
+            \end{block}
+            \pause
+            \column{.5\textwidth}
+            \begin{center}
+                \textbf{Esempi:}\\[7pt]
+                $\begin{array}{ccc}
+                    231231 &\rightsquigarrow& (23)(1)(23)(1)\\
+                    231213 &\rightsquigarrow& ()(23)()(12)(13)\\
+                    323123 &\rightsquigarrow& (3)(23)(123)
+                \end{array}$
+            \end{center}
+        \end{columns}
+        \pause
+        \begin{block}{\centering Cristallo di Morse--Schilling}
+            \centering
+            Definito sull'insieme delle fattorizzazioni crescenti\\
+            di una permutazione $w \in S_n$
+        \end{block}
+
+
+        \pause
     \begin{center}
-        \begin{tikzpicture}
+        \begin{tikzpicture}[scale=0.9]
             \node[align=center] (sx) at (0,0) {Cristallo\\di Morse--Schilling};
             \node[align=center] (dx) at (8,0) {Unione disgiunta\\di cristalli di tableaux};
             \draw[<->] (sx) -- node[above, align=center] {Corrispondenza EG}
                 node[below,align=center] {Isomorfismo\\di cristalli} (dx);
         \end{tikzpicture}
     \end{center}
+\end{columns}
 
 \end{frame}
 
@@ -1140,7 +1251,7 @@
     \end{center}
     
 
-    \vspace{20pt}
+    \vspace{15pt}
     \nocite{edelman-greene-87}
     \nocite{stanley-84}
     \nocite{morse-schilling-15}
